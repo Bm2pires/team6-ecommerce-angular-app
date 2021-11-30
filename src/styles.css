@@ -3,3 +3,8 @@
 .carousel-inner .carousel-item .sr-only {
     display: none;
 }
+
+.carousel-control-prev .sr-only,
+.carousel-control-next .sr-only {
+    display: none;
+}

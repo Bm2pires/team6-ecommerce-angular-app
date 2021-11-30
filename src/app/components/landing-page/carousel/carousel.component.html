@@ -1,8 +1,10 @@
 <div class="container">
-    <ngb-carousel *ngIf="images" [interval]="1000">
+    <ngb-carousel *ngIf="images" [interval]="10000" [showNavigationArrows]="true" [showNavigationIndicators]="false" [keyboard]="true" [wrap]="true">
         <ng-template ngbSlide>
             <div class="picsum-img-wrapper">
-                <img [src]="images[0]" alt="Random first slide">
+                <a href="#">
+                    <img [src]="images[0]" alt="Random first slide">
+                </a>
             </div>
             <div class="carousel-caption">
                 <h3>First slide label</h3>
@@ -11,7 +13,9 @@
         </ng-template>
         <ng-template ngbSlide>
             <div class="picsum-img-wrapper">
-                <img [src]="images[1]" alt="Random second slide">
+                <a href="#">
+                    <img [src]="images[1]" alt="Random second slide">
+                </a>
             </div>
             <div class="carousel-caption">
                 <h3>Second slide label</h3>
@@ -20,7 +24,9 @@
         </ng-template>
         <ng-template ngbSlide>
             <div class="picsum-img-wrapper">
-                <img [src]="images[2]" alt="Random third slide">
+                <a href="#">
+                    <img [src]="images[2]" alt="Random third slide">
+                </a>
             </div>
             <div class="carousel-caption">
                 <h3>Third slide label</h3>
