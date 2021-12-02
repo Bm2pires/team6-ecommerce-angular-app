@@ -5,6 +5,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { NgbdCarouselBasic } from './components/landing-page/carousel/carousel.component';
 import { NgbCarouselModule, NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AppComponent,
     LandingPageComponent,
     NgbdCarouselBasic,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
