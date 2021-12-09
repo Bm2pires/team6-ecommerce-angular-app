@@ -5,20 +5,27 @@
         <h2 class="card-title text-white text-center">Welcome</h2>
         <p class="text-white text-center text-muted">Sign in by entering the information below</p>
 
-        <form>
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
             <!-- start of form groups -->
             <div class="form-group">
-                <input type="text" name="username" class="form-control mb-3 mx-auto bg-dark text-light"
-                    placeholder="Username" ngModel>
+                <input type="email" name="email" class="form-control mb-3 mx-auto bg-dark text-light"
+                    placeholder="Email" ngModel autocomplete="email" required email #email="ngModel">
             </div>
+            <span class="help-block text-white" *ngIf="!email.valid && email.touched">Please enter a valid
+                email!</span>
 
             <div class="form-group">
                 <input type="password" name="password" class="form-control mb-3 mx-auto bg-dark text-light"
-                    placeholder="Password" ngModel>
+                    placeholder="Password" ngModel autocomplete="current-password" required>
             </div>
 
             <a href="#" class="float-end mb-3 text-white">Forgot Password</a>
-            <button type="submit" style="width: 320px;" class="btn mx-auto bg-light">Login</button>
+
+            <!-- submit button -->
+            <button type="submit" style="width: 320px;" class="btn mx-auto bg-light"
+                [disabled]="!f.valid">Login</button>
+
+            <!-- registration info -->
             <p class="text-white mt-3 text-center-mb-1">Don't have an account?</p>
             <a href="#" class="text-white text-center mb-5">SIGN UP</a>
         </form>
