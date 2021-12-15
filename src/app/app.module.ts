@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { NgbdCarouselBasic } from './components/landing-page/carousel/carousel.component';
 import { NgbCarouselModule, NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,14 +16,16 @@ import { FooterComponent } from './components/footer/footer.component';
     LandingPageComponent,
     NgbdCarouselBasic,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     NgbCarouselModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
