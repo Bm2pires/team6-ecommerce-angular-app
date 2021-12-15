@@ -5,10 +5,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { NgbdCarouselBasic } from './components/landing-page/carousel/carousel.component';
-import { NgbCarouselModule, NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbCarouselModule,
+  NgbDropdown,
+  NgbDropdownModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-
 
 @NgModule({
   declarations: [
@@ -17,14 +20,9 @@ import { FooterComponent } from './components/footer/footer.component';
     NgbdCarouselBasic,
     NavbarComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
   ],
-  imports: [
-    BrowserModule,
-    NgbCarouselModule,
-    NgbDropdownModule,
-    FormsModule
-  ],
+  imports: [BrowserModule, NgbCarouselModule, NgbDropdownModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
