@@ -1,0 +1,33 @@
+<h3 class="text-center mt mb-5">PLACEHOLDER FOR ECOMMERCE APP</h3>
+<div class="card bg-dark mx-auto mt-4 mb-2" style="width: 22rem;">
+    <div class="card-body text-center">
+        <!-- insert img here if necessary -->
+        <h2 class="card-title text-white text-center">Welcome</h2>
+        <p class="text-white text-center text-muted">Sign in by entering the information below</p>
+
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <!-- start of form groups -->
+            <div class="form-group">
+                <input type="email" name="email" class="form-control mb-3 mx-auto bg-dark text-light"
+                    placeholder="Email" ngModel autocomplete="email" required email #email="ngModel">
+            </div>
+            <span class="help-block text-white" *ngIf="!email.valid && email.touched">Please enter a valid
+                email!</span>
+
+            <div class="form-group">
+                <input type="password" name="password" class="form-control mb-3 mx-auto bg-dark text-light"
+                    placeholder="Password" ngModel autocomplete="current-password" required>
+            </div>
+
+            <a href="#" class="float-end mb-3 text-white">Forgot Password</a>
+
+            <!-- submit button -->
+            <button type="submit" style="width: 320px;" class="btn mx-auto bg-light"
+                [disabled]="!f.valid">Login</button>
+
+            <!-- registration info -->
+            <p class="text-white mt-3 text-center-mb-1">Don't have an account?</p>
+            <a href="#" class="text-white text-center mb-5">SIGN UP</a>
+        </form>
+    </div>
+</div> <!-- End of Login card -->
