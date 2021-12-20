@@ -1,102 +1,99 @@
-<div class="card">
-  <h1 class="text-center">Registration</h1>
-  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-<div class="mb-3">
-      <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input name="email" placeholder="E-Mail Address" class="form-control"  type="email" 
-  ngModel required email #email="ngModel"
-  autocomplete="off"
-  >
+<h3 class="text-center mt mb-5">PLACEHOLDER FOR ECOMMERCE APP</h3>
+<div class="card bg-dark mx-auto mt-4 mb-2" style="width: 22rem;">
+    <div class="card-body text-center">
+        <!-- insert img here if necessary -->
+        <h2 class="card-title text-white text-center">Welcome</h2>
+        <p class="text-white text-center text-muted">Register in by entering the information below</p>
+
+        <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+            <!-- start of form groups -->
+
+            <!-- email id as user name  -->
+            <div class="form-group">
+              <input name="email" placeholder="E-Mail Address / User Name" class="form-control mb-3 mx-auto bg-dark text-light"  type="email" 
+              ngModel required email #email="ngModel"
+              autocomplete="off"
+              >
+            </div>
+            <span class="help-block text-white" *ngIf="!email.valid && email.touched">Please enter a valid
+                email!</span>
+
+                <!-- title  -->
+                <div class="form-group"> 
+               <!-- <select class="form-control mb-3 mx-auto bg-dark text-light"  name="title" ngModel title required #title="ngModel" >  -->
+                <select class="form-control mb-3 mx-auto bg-dark text-light"  name="title"> 
+                <option value="Mr."> Mr.</option>
+              <option value="Mrs."> Mrs.</option>
+              <option value="Miss"> Miss</option>
+              <option value="Ms."> Ms.</option>
+              </select>
+              </div>
+              <div class="form-group">
+           
+                <!-- first name  -->
+            <input type="text" name="firstName" placeholder="Enter First Name" 
+            class="form-control mb-3 mx-auto bg-dark text-light" 
+             ngModel required firstName #firstName="ngModel"
+             autocomplete="off">
+            </div>
+
+            <!-- last name  -->
+            <div class="form-group">
+            <input type="text" name="lastName" placeholder="Enter Last Name" 
+          class="form-control mb-3 mx-auto bg-dark text-light" 
+          ngModel required lastName #lastName="ngModel"
+          autocomplete="off">
+          </div>
+
+            <!-- date of birth  -->
+            <div class="form-group">
+          <input type="date" name="dob"  
+          class="form-control mb-3 mx-auto bg-dark text-light" 
+          ngModel required dob #dob="ngModel" >
+          </div>
+          <p class="help-block text-white" *ngIf="!dob.valid && dob.touched">Not eligible</p>
+
+          <!-- contact no  -->
+          <div class="form-group">
+        <input type="tel" name="contactNo"  placeholder="Enter Contact Number" 
+        class="form-control mb-3 mx-auto bg-dark text-light" 
+        ngModel required contactNo #contactNo="ngModel" 
+        autocomplete="off">
+        
+        </div>
+         <!-- <p class="help-block text-white"  *ngIf="!(contactNo.value.length===10)  &&contactNo.touched">Wrong Number</p> -->
+          
+         <!-- password -->
+         <div class="form-group">  
+      <input type="password" name="password" placeholder="Enter Password" 
+      class="form-control mb-3 mx-auto bg-dark text-light"
+       ngModel required password #password="ngModel"
+       autocomplete="off"
+       >
+      </div>
+
+      <!-- confirm password -->
+      <div class="form-group">
+           <input type="password" name="conPassword" placeholder="Confirm Password" 
+    class="form-control mb-3 mx-auto bg-dark text-light" 
+    ngModel required passwordCon #passwordCon="ngModel">
     </div>
-       </div>
-       <p class="help-block text-white" *ngIf="!email.valid && email.touched">Please enter a valid
-        email!</p>
-
-<div class="mb-3">
+    <span class="help-block text-white" *ngIf="!(password.value===passwordCon.value) && passwordCon.touched">Password is not match</span>
+    <span class="help-block" *ngIf=></span>
   
-   <div class="input-group"> 
-    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
- <!-- <select class="form-control"  name="title" ngModel title required #title="ngModel" >  -->
-  <select class="form-control"  name="title"> 
-  <option value="Mr."> Mr.</option>
-<option value="Mrs."> Mrs.</option>
-<option value="Miss"> Miss</option>
-<option value="Ms."> Ms.</option>
-</select>
-</div>
-</div>
-
-<div class="mb-3">
-  <div class="input-group">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-<input type="text" name="firstName" placeholder="Enter First Name" class="form-control" 
- ngModel required firstName #firstName="ngModel"
- autocomplete="off">
-</div>
-</div>
-
-<div class="mb-3">
-  <div class="input-group">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-<input type="text" name="lastName" placeholder="Enter Last Name" class="form-control" 
-ngModel required lastName #lastName="ngModel"
-autocomplete="off">
-</div>
-</div>
-
-<div class="mb-3">
-  <div class="input-group">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-<input type="date" name="dob"  class="form-control" ngModel required dob #dob="ngModel" >
-</div>
-</div>
-<p class="help-block text-white" *ngIf="!dob.valid && dob.touched">Not eligible</p>
-<div class="mb-3">
-  <div class="input-group">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-<input type="tel" name="contactNo"  placeholder="Enter Contact Number" class="form-control" 
-ngModel required contactNo #contactNo="ngModel" 
-autocomplete="off">
-</div>
-</div>
- <!-- <p class="help-block text-white"  *ngIf="!(contactNo.value.length===10)  &&contactNo.touched">Wrong Number</p> -->
-
-<div class="mb-3">
-  <div class="input-group">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-<input type="password" name="password" placeholder="Enter Password" class="form-control"
- ngModel required password #password="ngModel"
- autocomplete="off"
- >
-</div>
-</div>
-
-<div class="mb-3">
-  <div class="input-group">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-<input type="password" name="conPassword" placeholder="Confirm Password" class="form-control" ngModel required passwordCon #passwordCon="ngModel">
-</div>
-</div>
-<p class="help-block" *ngIf="!(password.value===passwordCon.value) && passwordCon.touched">Password is not match</p>
-
-<div class="mb-3">
-  <div class="input-group">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-<textarea rows=3 name="address" placeholder="Enter Address ..." class="form-control" ngModel  #address="ngModel" ></textarea>
-</div>
-</div>
-
-
-  <div class="input-group">
-   
-</div>
-<button class="btn btn-warning btn-block" [disabled]="!form.valid">Submit</button>
-<div class="input-group">
-
- <a href="#">Already have account? Login here</a>  
-</div>
+    <!-- address  -->
+    <div class="form-group">
+  <textarea rows=3 name="address" placeholder="Enter Address ..." 
+  class="form-control mb-3 mx-auto bg-dark text-light" 
+  ngModel  #address="ngModel" ></textarea>
+  </div>
+            <!-- submit button -->
+                <button class="btn btn-warning btn-block" style="width:320px" [disabled]="!form.valid">Submit</button>
   
-</form>
 
-</div>
+            <!-- login info -->
+            <p class="text-white mt-3 text-center-mb-1">Already have account</p>
+            <a href="#" class="text-white text-center mb-5">SIGN IN</a>
+        </form>
+    </div>
+</div> <!-- End of registration card -->
