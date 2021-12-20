@@ -1,137 +1,102 @@
-
-
-<!--
-  <div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form>
-        <div style="text-align: center; padding-bottom: 25px; font-weight: bolder;"><h2>Registration Page</h2></div>
-        <div id="user-data">
-                 
-          <div class="form-group">
-            <label for="email">Email Id/User Name</label>
-            <input type="email" id="email" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="firstname">First Name</label>
-            <input type="text" id="Firstname" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="lastname">Last Name</label>
-            <input type="text" id="Lastname" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="dob">Date Of Birth</label>
-            <input type="date" id="dob" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="contactno">Contact No</label>
-            <input type="number" id="Contactno" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="Password" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="password">Confirm Password</label>
-            <input type="password" id="Conpassword" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="password">Address</label>
-          <textarea id="address" rows="3" class="form-control"></textarea>
-          </div>
-        
-
-
-        </div>
-               <button class="btn btn-primary" type="submit">Submit</button>
-               <button class="btn btn-primary" type="reset">Reset</button>
-      </form>
+<div class="card">
+  <h1 class="text-center">Registration</h1>
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+<div class="mb-3">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+  <input name="email" placeholder="E-Mail Address" class="form-control"  type="email" 
+  ngModel required email #email="ngModel"
+  autocomplete="off"
+  >
     </div>
-  </div>
+       </div>
+       <p class="help-block text-white" *ngIf="!email.valid && email.touched">Please enter a valid
+        email!</p>
+
+<div class="mb-3">
+  
+   <div class="input-group"> 
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+ <!-- <select class="form-control"  name="title" ngModel title required #title="ngModel" >  -->
+  <select class="form-control"  name="title"> 
+  <option value="Mr."> Mr.</option>
+<option value="Mrs."> Mrs.</option>
+<option value="Miss"> Miss</option>
+<option value="Ms."> Ms.</option>
+</select>
+</div>
+</div>
+
+<div class="mb-3">
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+<input type="text" name="firstName" placeholder="Enter First Name" class="form-control" 
+ ngModel required firstName #firstName="ngModel"
+ autocomplete="off">
+</div>
+</div>
+
+<div class="mb-3">
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+<input type="text" name="lastName" placeholder="Enter Last Name" class="form-control" 
+ngModel required lastName #lastName="ngModel"
+autocomplete="off">
+</div>
+</div>
+
+<div class="mb-3">
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+<input type="date" name="dob"  class="form-control" ngModel required dob #dob="ngModel" >
+</div>
+</div>
+<p class="help-block text-white" *ngIf="!dob.valid && dob.touched">Not eligible</p>
+<div class="mb-3">
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+<input type="tel" name="contactNo"  placeholder="Enter Contact Number" class="form-control" 
+ngModel required contactNo #contactNo="ngModel" 
+autocomplete="off">
+</div>
+</div>
+ <!-- <p class="help-block text-white"  *ngIf="!(contactNo.value.length===10)  &&contactNo.touched">Wrong Number</p> -->
+
+<div class="mb-3">
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+<input type="password" name="password" placeholder="Enter Password" class="form-control"
+ ngModel required password #password="ngModel"
+ autocomplete="off"
+ >
+</div>
+</div>
+
+<div class="mb-3">
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+<input type="password" name="conPassword" placeholder="Confirm Password" class="form-control" ngModel required passwordCon #passwordCon="ngModel">
+</div>
+</div>
+<p class="help-block" *ngIf="!(password.value===passwordCon.value) && passwordCon.touched">Password is not match</p>
+
+<div class="mb-3">
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+<textarea rows=3 name="address" placeholder="Enter Address ..." class="form-control" ngModel  #address="ngModel" ></textarea>
+</div>
 </div>
 
 
-<app-register></app-register>-->
+  <div class="input-group">
+   
+</div>
+<button class="btn btn-warning btn-block" [disabled]="!form.valid">Submit</button>
+<div class="input-group">
 
+ <a href="#">Already have account? Login here</a>  
+</div>
+  
+</form>
 
-<div class="card">
-    <h1 class="text-center">Register</h1>
-    <form>
-  <div class="mb-3">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-    <input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
-      </div>
-    </div>
-  
-  <div class="mb-3">
-    
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <select class="form-control">
-  <option value="Mr."> Mr.</option>
-  <option value="Mrs."> Mrs.</option>
-  <option value="Miss"> Miss</option>
-  <option value="Ms."> Ms.</option>
-  </select>
-  </div>
-  </div>
-  
-  <div class="mb-3">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input type="text" name="firstName" placeholder="Enter First Name" class="form-control"  >
-  </div>
-  </div>
-  
-  <div class="mb-3">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input type="text" name="lastName" placeholder="Enter Last Name" class="form-control"  >
-  </div>
-  </div>
-  
-  <div class="mb-3">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-  <input type="date" name="dob"  class="form-control"  >
-  </div>
-  </div>
-  
-  <div class="mb-3">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-  <input type="number" name="contactNo" placeholder="Enter Contact Number" class="form-control"  >
-  </div>
-  </div>
-  
-  <div class="mb-3">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-  <input type="password" name="password" placeholder="Enter Password" class="form-control"  >
-  </div>
-  </div>
-  
-  <div class="mb-3">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-  <input type="password" name="conPassword" placeholder="Confirm Password" class="form-control"  >
-  </div>
-  </div>
-  
-  <div class="mb-3">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <textarea rows=3 name="address" placeholder="Enter Address ..." class="form-control"  ></textarea>
-  </div>
-  </div>
-  
-  <div class="mb-3">
-    <div class="input-group">
-      <button class="btn btn-secondary" >Register</button>
-    </div>
-  </div>
-  
-  </form>
-  </div>
+</div>
