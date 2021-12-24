@@ -12,6 +12,12 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: '', component:  LandingPageComponent},
+  { path: 'login', component:  LoginComponent}
+];
 
 @NgModule({
   declarations: [
@@ -22,8 +28,9 @@ import { FooterComponent } from './components/footer/footer.component';
     FooterComponent,
     LoginComponent,
   ],
-  imports: [BrowserModule, NgbCarouselModule, NgbDropdownModule, FormsModule],
+  imports: [BrowserModule, NgbCarouselModule, NgbDropdownModule, FormsModule, RouterModule.forRoot(appRoutes)],
   providers: [],
   bootstrap: [AppComponent],
+
 })
 export class AppModule {}
