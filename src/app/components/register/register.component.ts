@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
   constructor() {}
   ngOnInit(): void {}
 
+
   onSubmit(form: NgForm) {
     // code to execute after form is submitted
     console.log('Submitted');
