@@ -1,0 +1,16 @@
+ 
+  input {
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+  }
+  
+  input.ng-invalid.ng-touched {
+    border-bottom: 1px solid red;
+  }
+  ::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+  p{
+    color: solid red;
+  }
