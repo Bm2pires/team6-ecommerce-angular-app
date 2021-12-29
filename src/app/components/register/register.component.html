@@ -1,57 +1,86 @@
 <div class="card bg-dark mx-auto mt-4 mb-2" style="width: 22rem;">
   <div class="card-body text-center">
-    <!-- insert img here if necessary -->
+        <!-- insert img here if necessary -->
     <h2 class="card-title text-white text-center">Welcome</h2>
     <p class="text-white text-center text-muted">Register in by entering the information below</p>
 
-    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-      <!-- start of form groups -->
+    <form class="form-group" #postForm="ngForm" (submit)="onAddUsers(postForm)">      <!-- start of form groups -->
+
+<!-- start of form groups -->
 
       <!-- email id as user name  -->
       <div class="form-group">
-        <input name="email" placeholder="E-Mail Address / User Name"
-          class="form-control mb-3 mx-auto bg-dark text-light" type="email" ngModel required email #email="ngModel"
+        <input 
+        name="email"
+        id="email"
+         placeholder="Email"
+          class="form-control mb-3 mx-auto bg-dark text-light" 
+          type="email" ngModel required email
+           #email="ngModel"
           autocomplete="off">
       </div>
+     
       <span class="help-block text-white" *ngIf="!email.valid && email.touched">Please enter a valid
         email!</span>
 
       <!-- title  -->
       <div class="form-group">
+       
         <!-- <select class="form-control mb-3 mx-auto bg-dark text-light"  name="title" ngModel title required #title="ngModel" >  -->
-        <select class="form-control mb-3 mx-auto bg-dark text-light" name="title">
-          <option value="Mr."> Mr.</option>
-          <option value="Mrs."> Mrs.</option>
-          <option value="Miss"> Miss</option>
-          <option value="Ms."> Ms.</option>
-        </select>
+          <select
+          class="form-control mb-3 mx-auto bg-dark text-light" 
+          id="title"
+          ngModel
+          name="title"
+          required
+        >
+          <option value="" disabled>Select Title</option>
+          <option value="Mr">Mr</option>
+          <option value="Miss">Miss</option>
+          <option value="Mrs">Mrs</option>
+          <option value="Ms">Ms</option>
+          </select>
       </div>
+              <!-- first name  -->
       <div class="form-group">
-
-        <!-- first name  -->
-        <input type="text" name="firstName" placeholder="Enter First Name"
-          class="form-control mb-3 mx-auto bg-dark text-light" ngModel required firstName #firstName="ngModel"
+        <input type="text" 
+        name="firstname" 
+        id="firstname"
+        placeholder="Enter First Name"
+          class="form-control mb-3 mx-auto bg-dark text-light" 
+          ngModel required firstName 
           autocomplete="off">
       </div>
 
       <!-- last name  -->
       <div class="form-group">
-        <input type="text" name="lastName" placeholder="Enter Last Name"
-          class="form-control mb-3 mx-auto bg-dark text-light" ngModel required lastName #lastName="ngModel"
+        <input type="text" 
+        name="lastname" 
+        id="lastname"
+        placeholder="Enter Last Name"
+          class="form-control mb-3 mx-auto bg-dark text-light" 
+          ngModel required lastName
           autocomplete="off">
       </div>
 
       <!-- date of birth  -->
       <div class="form-group">
-        <input type="date" name="dob" class="form-control mb-3 mx-auto bg-dark text-light" ngModel required dob
-          #dob="ngModel">
+        <input type="date" 
+        name="dob" 
+        id="dob" 
+        class="form-control mb-3 mx-auto bg-dark text-light" 
+        ngModel required dob
+        >
       </div>
-      <p class="help-block text-white" *ngIf="!dob.valid && dob.touched">Not eligible</p>
-
+      
       <!-- contact no  -->
       <div class="form-group">
-        <input type="tel" name="contactNo" placeholder="Enter Contact Number"
-          class="form-control mb-3 mx-auto bg-dark text-light" ngModel required contactNo #contactNo="ngModel"
+        <input type="tel" 
+        name="contactNo"
+        id="contactNo"
+         placeholder="Enter Contact Number"
+          class="form-control mb-3 mx-auto bg-dark text-light" 
+          ngModel required maxlength="10" minlength="10"  contactNo 
           autocomplete="off">
 
       </div>
@@ -59,27 +88,47 @@
 
       <!-- password -->
       <div class="form-group">
-        <input type="password" name="password" placeholder="Enter Password"
-          class="form-control mb-3 mx-auto bg-dark text-light" ngModel required password #password="ngModel"
+        <input type="password" 
+        name="password" 
+        id="password"
+        placeholder="Enter Password"
+          class="form-control mb-3 mx-auto bg-dark text-light" 
+          ngModel  required
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" password 
+          #password="ngModel"
           autocomplete="off">
       </div>
+      <span class="help-block text-white" *ngIf="(!password.valid && password.touched)">Enter Strong Password(Must contain one upper case, lower case, special char & number) </span>
+      
 
       <!-- confirm password -->
       <div class="form-group">
-        <input type="password" name="conPassword" placeholder="Confirm Password"
-          class="form-control mb-3 mx-auto bg-dark text-light" ngModel required passwordCon #passwordCon="ngModel">
+        <input type="password" 
+        name="conPassword" 
+        placeholder="Confirm Password"
+          class="form-control mb-3 mx-auto bg-dark text-light" 
+          ngModel required conPassword 
+          #conPassword="ngModel" 
+          pattern="{{password.value}}">
       </div>
-      <span class="help-block text-white" *ngIf="!(password.value===passwordCon.value) && passwordCon.touched">Password
-        is not match</span>
-      <span class="help-block" *ngIf=></span>
+      <span class="help-block text-white" *ngIf="!conPassword.valid && conPassword.touched && password.dirty">
+        Password
+        not match</span>
+      
 
       <!-- address  -->
       <div class="form-group">
-        <textarea rows=3 name="address" placeholder="Enter Address ..."
-          class="form-control mb-3 mx-auto bg-dark text-light" ngModel #address="ngModel"></textarea>
+        <textarea rows=3 
+        name="address" 
+        id="address"
+        placeholder="Enter Address ..."
+          class="form-control mb-3 mx-auto bg-dark text-light" 
+          ngModel address
+          required 
+           ></textarea>
       </div>
       <!-- submit button -->
-      <button class="btn bg-light btn-block" style="width:320px" [disabled]="!form.valid">Submit</button>
+      <button class="btn bg-light btn-block" style="width:320px" [disabled]="!postForm.valid">Submit</button>
 
 
       <!-- login info -->

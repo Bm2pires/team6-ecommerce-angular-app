@@ -8,6 +8,7 @@
   input.ng-invalid.ng-touched {
     border-bottom: 1px solid red;
   }
+  
   ::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }

@@ -14,6 +14,7 @@ import {
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: '', component:  LandingPageComponent},
@@ -31,7 +32,7 @@ const appRoutes: Routes = [
     FooterComponent,
     LoginComponent,
   ],
-  imports: [BrowserModule, NgbCarouselModule, NgbDropdownModule, FormsModule, RouterModule.forRoot(appRoutes)],
+  imports: [BrowserModule, NgbCarouselModule, HttpClientModule, NgbDropdownModule, FormsModule, RouterModule.forRoot(appRoutes)],
   providers: [],
   bootstrap: [AppComponent],
 
