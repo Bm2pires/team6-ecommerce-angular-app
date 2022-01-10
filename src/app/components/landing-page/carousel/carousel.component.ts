@@ -8,5 +8,4 @@ import { Component } from '@angular/core';
 export class NgbdCarouselBasic {
 
   images = ["../../../../assets/images/placeholderOne.jpg", "../../../../assets/images/placeholderTwo.jpg", "../../../../assets/images/placeholderThree.jpg"];
-
 }
