@@ -10,8 +10,6 @@ app.use(cors(), bodyParser.json());
 
 app.post("/login", db.getUser);
 
-app.post("/registration", db.postUsers);
-
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Server app listening at http://localhost:${port}`);
 });

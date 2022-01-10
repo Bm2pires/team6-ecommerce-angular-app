@@ -14,11 +14,12 @@ import {
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
-  { path: '', component:  LandingPageComponent},
-  { path: 'login', component:  LoginComponent},
-  { path: 'registration', component:  RegisterComponent}
+  { path: '', component: LandingPageComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'registration', component: RegisterComponent },
 ];
 
 @NgModule({
@@ -31,9 +32,15 @@ const appRoutes: Routes = [
     FooterComponent,
     LoginComponent,
   ],
-  imports: [BrowserModule, NgbCarouselModule, NgbDropdownModule, FormsModule, RouterModule.forRoot(appRoutes)],
+  imports: [
+    BrowserModule,
+    NgbCarouselModule,
+    NgbDropdownModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
-
 })
 export class AppModule {}

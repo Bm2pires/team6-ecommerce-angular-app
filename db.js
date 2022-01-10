@@ -12,7 +12,7 @@ const db = new Pool({
 const getUser = (req, res) => {
   const { email, password } = req.body;
   db.query(
-    "SELECT * FROM users WHERE email = $1 AND password = $2",
+    "SELECT * FROM users WHERE email_address = $1 AND password = $2",
     [email, password],
     (error, result) => {
       if (error) {
@@ -27,20 +27,4 @@ const getUser = (req, res) => {
   );
 };
 
-// database query to insert new record in the table
-// read data from the request body
-const postUsers = (req, res) => {
-  const { title, fname, lname, email, dob, contactno, pword } = req.body;
-  db.query(
-    "INSERT INTO users (title, firstname, lastname, email, dob, contactno, password) VALUES ($1, $2, $3, $4, $5, $6, $7)",
-    [title, fname, lname, email, dob, contactno, pword],
-    (error, result) => {
-      if (error) {
-        throw error;
-      }
-      res.status(201).json({ message: "New User added" });
-    }
-  );
-};
-
-module.exports = { postUsers, getUser };
+module.exports = { getUser };
