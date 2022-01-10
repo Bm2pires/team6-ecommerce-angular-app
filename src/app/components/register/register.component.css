@@ -12,6 +12,6 @@
   ::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }
-  p{
-    color: solid red;
+  textarea.ng-invalid.ng-touched {
+    border-bottom: 1px solid red;
   }

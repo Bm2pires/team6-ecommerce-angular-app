@@ -13,11 +13,7 @@ export class UsersService {
      this.http = http;
   }
 
-  //  getAllUsers(){
-  //    console.log("within service")
-  //    return this.http.get(`${this.baseUrl}/api/users`);
-  //  }
-
+ 
 addNewUsers(newUser: User)
 {
    return this.http.post(`${this.baseUrl}/ecomdb/users`, newUser);

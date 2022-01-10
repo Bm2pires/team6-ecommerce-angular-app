@@ -12,13 +12,13 @@
       <div class="form-group">
         <input 
         name="email"
-        id="email"
          placeholder="Email"
           class="form-control mb-3 mx-auto bg-dark text-light" 
-          type="email" ngModel required email
+          type="email" 
+          ngModel required email
            #email="ngModel"
           autocomplete="off">
-      </div>
+        </div>
      
       <span class="help-block text-white" *ngIf="!email.valid && email.touched">Please enter a valid
         email!</span>
@@ -26,13 +26,11 @@
       <!-- title  -->
       <div class="form-group">
        
-        <!-- <select class="form-control mb-3 mx-auto bg-dark text-light"  name="title" ngModel title required #title="ngModel" >  -->
           <select
           class="form-control mb-3 mx-auto bg-dark text-light" 
-          id="title"
-          ngModel
           name="title"
-          required
+          required ngModel
+          title
         >
           <option value="" disabled>Select Title</option>
           <option value="Mr">Mr</option>
@@ -48,57 +46,70 @@
         id="firstname"
         placeholder="Enter First Name"
           class="form-control mb-3 mx-auto bg-dark text-light" 
-          ngModel required firstName 
-          autocomplete="off">
+          ngModel required firstName
+          #firstname="ngModel"
+          pattern="^[a-z A-Z a-z]*$" 
+          maxlength="12"
+        >
       </div>
-
+      <span class="help-block text-white" *ngIf="(!firstname.dirty && firstname.touched )">Please Enter First Name </span>
+      <span class="help-block text-white" *ngIf="(!firstname.valid && firstname.dirty)">Enter valid data </span>
+      
       <!-- last name  -->
       <div class="form-group">
         <input type="text" 
         name="lastname" 
         id="lastname"
         placeholder="Enter Last Name"
-          class="form-control mb-3 mx-auto bg-dark text-light" 
-          ngModel required lastName
-          autocomplete="off">
+          class="form-control mb-3 mx-auto bg-dark text-light"
+          ngModel required lastName    
+          #lastname="ngModel"
+          pattern="^[a-z A-Z a-z]*$"
+          maxlength="12">
       </div>
-
+      <span class="help-block text-white" *ngIf="(lastname.touched && !lastname.dirty)">Please Enter Last Name </span>
+      <span class="help-block text-white" *ngIf="(!lastname.valid && lastname.dirty)">Enter valid data </span>
       <!-- date of birth  -->
       <div class="form-group">
         <input type="date" 
         name="dob" 
-        id="dob" 
         class="form-control mb-3 mx-auto bg-dark text-light" 
-        ngModel required dob
+         required ngModel dob
+      #dob="ngModel"   
+      max={{todaysDate}}
         >
       </div>
+      <span class="help-block text-white" *ngIf="(dob.touched && !dob.valid)">Please Select Date Of Birth </span> 
       
       <!-- contact no  -->
       <div class="form-group">
         <input type="tel" 
         name="contactNo"
-        id="contactNo"
-         placeholder="Enter Contact Number"
+          placeholder="Enter Contact Number"
           class="form-control mb-3 mx-auto bg-dark text-light" 
-          ngModel required maxlength="10" minlength="10"  contactNo 
-          autocomplete="off">
+           required ngModel contactNo
+            maxlength="10" minlength="10"
+            pattern="^[0-9]*$"  
+            #contactNo="ngModel"
+            >
 
       </div>
-      <!-- <p class="help-block text-white"  *ngIf="!(contactNo.value.length===10)  &&contactNo.touched">Wrong Number</p> -->
-
+      <span class="help-block text-white" *ngIf="(contactNo.touched && !contactNo.dirty)">Please Enter Contact Number </span>
+      <span class="help-block text-white" *ngIf="(!contactNo.valid && contactNo.dirty)">Enter valid data </span>
       <!-- password -->
       <div class="form-group">
         <input type="password" 
         name="password" 
-        id="password"
-        placeholder="Enter Password"
+          placeholder="Enter Password"
           class="form-control mb-3 mx-auto bg-dark text-light" 
           ngModel  required
-          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" password 
+          pattern="(?=.*[!@#$%&*])(?=.*[a-z])(?=.*[A-Z]).{6,}" 
+          password 
           #password="ngModel"
-          autocomplete="off">
+          maxlength="10">
       </div>
-      <span class="help-block text-white" *ngIf="(!password.valid && password.touched)">Enter Strong Password(Must contain one upper case, lower case, special char & number) </span>
+      <span class="help-block text-white" *ngIf="(password.touched && !password.dirty)">Please Enter Password </span>
+      <span class="help-block text-white" *ngIf="(!password.valid && password.dirty)">Enter Strong Password(Must contain one upper case, lower case, special char(!@#$%&*) & number) </span>
       
 
       <!-- confirm password -->
@@ -109,24 +120,29 @@
           class="form-control mb-3 mx-auto bg-dark text-light" 
           ngModel required conPassword 
           #conPassword="ngModel" 
-          pattern="{{password.value}}">
+          pattern="{{ password.value }}"
+          
+          >
       </div>
-      <span class="help-block text-white" *ngIf="!conPassword.valid && conPassword.touched && password.dirty">
+      <span class="help-block text-white" *ngIf="(!conPassword.valid && conPassword.touched && password.dirty)">
         Password
         not match</span>
-      
+        <span class="help-block text-white" *ngIf="(conPassword.touched && !conPassword.dirty)">
+          Please Enter Confirm Password</span>
 
       <!-- address  -->
       <div class="form-group">
         <textarea rows=3 
         name="address" 
-        id="address"
-        placeholder="Enter Address ..."
-          class="form-control mb-3 mx-auto bg-dark text-light" 
+                placeholder="Enter Address ..."
+                class="form-control mb-3 mx-auto bg-dark text-light" 
           ngModel address
           required 
+          #address="ngModel"
            ></textarea>
       </div>
+      <span class="help-block text-white" *ngIf="(address.touched && !address.dirty)">
+        Please Enter Address</span>
       <!-- submit button -->
       <button class="btn bg-light btn-block" style="width:320px" [disabled]="!postForm.valid">Submit</button>
 
