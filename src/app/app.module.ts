@@ -15,6 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UserInformationComponent } from './components/user-information/user-information.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: '', component:  LandingPageComponent},
@@ -34,9 +35,15 @@ const appRoutes: Routes = [
     LoginComponent,
     UserInformationComponent,
   ],
-  imports: [BrowserModule, NgbCarouselModule, NgbDropdownModule, FormsModule, RouterModule.forRoot(appRoutes)],
+  imports: [
+    BrowserModule,
+    NgbCarouselModule,
+    NgbDropdownModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
-
 })
 export class AppModule {}
