@@ -14,12 +14,16 @@ import { UserInformationComponent } from './components/user-information/user-inf
 import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './components/admin/admin.component';
 import { ModalComponent } from './components/admin/modal/modal.component';
+import { CustomerComponent } from './components/navbar/navbar-customer/navbar-customer.component';
+import { NavbarAdminComponent } from './components/navbar/navbar-admin/navbar-admin.component';
 
 const appRoutes: Routes = [
   { path: '', component:  LandingPageComponent},
   { path: 'login', component:  LoginComponent},
   { path: 'registration', component:  RegisterComponent},
-  { path: 'userInfo', component: UserInformationComponent}
+  { path: 'userInfo', component: UserInformationComponent},
+  { path: 'adminProds', component: AdminComponent}
+
 ];
 
 @NgModule({
@@ -34,6 +38,8 @@ const appRoutes: Routes = [
     UserInformationComponent,
     AdminComponent,
     ModalComponent,
+    CustomerComponent,
+    NavbarAdminComponent,
   ],
   imports: [
     BrowserModule,
