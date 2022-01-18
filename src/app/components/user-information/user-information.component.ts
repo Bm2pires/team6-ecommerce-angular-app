@@ -13,6 +13,7 @@ export class UserInformationComponent implements OnInit {
   dateofbirth: String = "new Date()"
   contactnumber: string = "akjahskd"
   address:string = "akjahskd"
+
   usernameOld: string = "akjahskd";
   titleOld: string = "akjahskd"
   firstnameOld: string = "akjahskd"
