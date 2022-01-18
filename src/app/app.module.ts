@@ -6,16 +6,14 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { NgbdCarouselBasic } from './components/landing-page/carousel/carousel.component';
-import {
-  NgbCarouselModule,
-  NgbDropdown,
-  NgbDropdownModule,
-} from '@ng-bootstrap/ng-bootstrap';
+import {  NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UserInformationComponent } from './components/user-information/user-information.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminComponent } from './components/admin/admin.component';
+import { ModalComponent } from './components/admin/modal/modal.component';
 
 const appRoutes: Routes = [
   { path: '', component:  LandingPageComponent},
@@ -34,11 +32,12 @@ const appRoutes: Routes = [
     FooterComponent,
     LoginComponent,
     UserInformationComponent,
+    AdminComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
-    NgbCarouselModule,
-    NgbDropdownModule,
+    NgbModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
