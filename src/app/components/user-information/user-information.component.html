@@ -1,0 +1,16 @@
+<div class="card" style="width: 30rem; margin: auto;">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item mh-100">Username: <input type="text" [disabled]=disabledFields [(ngModel)]="username"></li>
+        <li class="list-group-item mh-100">Title: <input type="text" [disabled]=disabledFields [(ngModel)]="title"></li>
+        <li class="list-group-item">First Name: <input type="text" [disabled]=disabledFields [(ngModel)]="firstname"></li>
+        <li class="list-group-item">Last Name: <input type="text" [disabled]=disabledFields [(ngModel)]="lastname"></li>
+        <li class="list-group-item">Date Of Birth: <input type="text" [disabled]=disabledFields [(ngModel)]="dateofbirth"></li>
+        <li class="list-group-item">Contact Number: <input type="text" [disabled]=disabledFields [(ngModel)]="contactnumber"></li>
+        <li class="list-group-item">Address: <input type="text" [disabled]=disabledFields [(ngModel)]="address"></li>
+        <div class="">
+            <button type="button" class="btn btn-warning" style="margin: 1em;" (click)="disableFunc()" [disabled]="!disabledFields">Edit</button>
+            <button type="button" class="btn btn-warning" style="margin: 1em;" (click)="saveEdits()" [disabled]="disabledFields">Save Edits</button>
+            <button type="button" class="btn btn-warning" style="margin: 1em;" (click)="reset()" [disabled]="disabledFields">Reset</button>
+        </div>
+    </ul>
+</div>
