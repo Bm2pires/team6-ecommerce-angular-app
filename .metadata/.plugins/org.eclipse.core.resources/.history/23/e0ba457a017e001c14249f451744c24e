@@ -1,0 +1,9 @@
+package com.team6.ecommercebackend.repositries;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.team6.ecommercebackend.entities.OrderDetails;
+
+public interface OrderDetails extends CrudRepository<OrderDetails, Integer>{
+
+}
