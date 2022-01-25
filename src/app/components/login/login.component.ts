@@ -13,6 +13,7 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
+  // Inject the login service dependency
   constructor(service: LoginService) {
     console.log('Login Component Loaded');
     this.loginService = service;
@@ -20,7 +21,7 @@ export class LoginComponent {
 
   onSubmit(form: NgForm) {
     // code to execute after form is submitted
-    console.log('Submitted');
+    // console.log('Submitted');
     // console.log(form);
 
     this.email = form.value.email;
@@ -28,11 +29,12 @@ export class LoginComponent {
 
     const user: User = { email: this.email, password: this.password };
 
-    console.log(user);
-    this.loginService.getUserFromDB(user).subscribe(
-      (response) => console.log(response),
-      (err) => console.log(err)
-    );
+    this.loginService.authenticate(user);
+
+    // this.loginService.getUserFromDB(user).subscribe(
+    //   (response) => console.log(response),
+    //   (err) => console.log(err)
+    // );
 
     // console.log(this.email);
     // console.log(this.password);
