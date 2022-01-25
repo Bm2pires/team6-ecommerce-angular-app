@@ -1,0 +1,5 @@
+package com.team6.ecommercebackend.entities;
+
+public class User {
+
+}

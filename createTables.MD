@@ -21,7 +21,7 @@ CREATE TABLE users (
 	dob date NOT NULL,
 	phone_number VARCHAR(10) NOT NULL,
 	address VARCHAR(150) NOT NULL,
-	isAdmin boolean NOT NULL
+	isadmin boolean NOT NULL
 )
 ```
 
