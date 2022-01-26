@@ -15,12 +15,71 @@ public class Orders {
 	@Column(name = "orders_id")
 	private Integer id;
 	
-	@Column(name = "order_details_id")
+	@Column(name = "order_details_id", nullable=false)
 	private Integer orderDetailsId;
 	
-	@Column(name = "product_id")
+	@Column(name = "product_id", nullable=false)
 	private Integer productId;
 	
-	@Column(name = "quantity")
+	@Column(name = "quantity", nullable=false)
 	private Integer quantity;
+
+	public Orders() {
+		super();
+	}
+
+	public Orders(Integer id, Integer orderDetailsId, Integer productId, Integer quantity) {
+		super();
+		this.id = id;
+		this.orderDetailsId = orderDetailsId;
+		this.productId = productId;
+		this.quantity = quantity;
+	}
+
+	public Orders(Integer orderDetailsId, Integer productId, Integer quantity) {
+		super();
+		this.orderDetailsId = orderDetailsId;
+		this.productId = productId;
+		this.quantity = quantity;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getOrderDetailsId() {
+		return orderDetailsId;
+	}
+
+	public void setOrderDetailsId(Integer orderDetailsId) {
+		this.orderDetailsId = orderDetailsId;
+	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	@Override
+	public String toString() {
+		return "Orders [id=" + id + ", orderDetailsId=" + orderDetailsId + ", productId=" + productId + ", quantity="
+				+ quantity + "]";
+	}
+	
+	
 }

@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
@@ -16,46 +15,50 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private Integer id;
-
-	@Column(name = "email_address", length = 50)
-	@NotNull
+	
+	@Column(name = "email_address", length = 50, nullable=false)
 	private String email;
 	
-	@Column(name = "password", length = 20)
-	@NotNull
+	@Column(name = "password", length = 20, nullable=false)
 	private String password;
 	
-	@Column(name = "title", length = 5)
-	@NotNull
+	@Column(name = "title", length = 5, nullable=false)
 	private String title;
 	
-	@Column(name = "firstname", length = 20)
-	@NotNull
+	@Column(name = "firstname", length = 20, nullable=false)
 	private String firstName;
 	
-	@Column(name = "lastname", length = 20)
-	@NotNull
+	@Column(name = "lastname", length = 20, nullable=false)
 	private String lastName;
 	
-	@Column(name = "dob")
-	@NotNull
+	@Column(name = "dob", nullable=false)
 	private LocalDate dob;
 	
-	@Column(name = "phone_number", length = 10)
-	@NotNull
+	@Column(name = "phone_number", length = 10, nullable=false)
 	private String phoneNumber;
 	
-	@Column(name = "address", length = 150)
-	@NotNull
+	@Column(name = "address", length = 150, nullable=false)
 	private String address;
 	
-	@Column(name = "isadmin")
-	@NotNull
+	@Column(name = "isadmin", nullable=false)
 	private boolean isAdmin;
 
-	public User(Integer id, @NotNull String email, @NotNull String password, @NotNull String title,
-			@NotNull String firstName, @NotNull String lastName, @NotNull LocalDate dob, @NotNull String phoneNumber,
-			@NotNull String address, @NotNull boolean isAdmin) {
+	public User(String email, String password, String title, String firstName, String lastName, LocalDate dob,
+			String phoneNumber, String address, boolean isAdmin) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.title = title;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dob = dob;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.isAdmin = isAdmin;
+	}
+
+	public User(Integer id, String email, String password, String title, String firstName, String lastName,
+			LocalDate dob, String phoneNumber, String address, boolean isAdmin) {
 		super();
 		this.id = id;
 		this.email = email;

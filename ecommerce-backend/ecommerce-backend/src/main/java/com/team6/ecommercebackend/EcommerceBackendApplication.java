@@ -18,14 +18,5 @@ public class EcommerceBackendApplication {
 	@Autowired
 	UserRepository userRepository;
 	
-	//Works but only when you specefic the id - want to find a way where you dont have to speceify id
-//	@PostConstruct 
-//	public void addUser() {
-//		LocalDate y =  LocalDate.of(2019, 2, 4);
-//		User x = new User("test@eamil.com", "testPass", "Mr", "testFname", "testLname", y, "1234567899", "testAddress", false);
-//
-//		userRepository.save(x);
-//
-//	}
 
 }

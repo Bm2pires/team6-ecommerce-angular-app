@@ -1,0 +1,20 @@
+package com.team6.ecommercebackend;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.team6.ecommercebackend.entities.User;
+
+@SpringBootTest
+class EcommerceBackendApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+	
+	@Test
+	public void testAddUser() {
+		User user = new User(1, "test@eamil.com", "testPass", "Mr", "testFname", "testLname", y, "1234567899", "testAddress", false);
+	}
+
+}
