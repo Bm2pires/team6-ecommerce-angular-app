@@ -1,11 +1,20 @@
 package com.team6.ecommercebackend.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="order_details")
@@ -14,45 +23,39 @@ public class OrderDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_details_id")
-	private Integer id;
-	
-	@Column(name = "user_id", nullable=false)
-	private Integer userId;
+	private Long id;
 	
 	@Column(name = "total_price", nullable=false)
 	private double totalPrice;
+	
+	//Has a One to one relationship with user 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	private User user;
 
+	//has a one to many relationship with orders
+	@OneToMany(mappedBy="orderDetails", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	List<Orders> ordersListOD;
+	
 	public OrderDetails() {
 		super();
 	}
 
-	public OrderDetails(Integer id, Integer userId, double totalPrice) {
+	public OrderDetails(double totalPrice, User user, List<Orders> ordersListOD) {
 		super();
-		this.id = id;
-		this.userId = userId;
 		this.totalPrice = totalPrice;
+		this.user = user;
+		this.ordersListOD = ordersListOD;
 	}
 
-	public OrderDetails(Integer userId, double totalPrice) {
-		super();
-		this.userId = userId;
-		this.totalPrice = totalPrice;
-	}
 
-	public Integer getId() {
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
 	}
 
 	public double getTotalPrice() {
@@ -63,10 +66,54 @@ public class OrderDetails {
 		this.totalPrice = totalPrice;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<Orders> getOrdersListOD() {
+		return ordersListOD;
+	}
+
+	public void setOrdersListOD(List<Orders> ordersListOD) {
+		this.ordersListOD = ordersListOD;
+	}
+	
+	
+
 	@Override
 	public String toString() {
-		return "OrderDetails [id=" + id + ", userId=" + userId + ", totalPrice=" + totalPrice + "]";
+		return "OrderDetails [id=" + id + ", totalPrice=" + totalPrice + ", user=" + user + ", ordersListOD="
+				+ ordersListOD + "]";
 	}
+
+	public void addOrder(Orders order) {
+		if(order != null) {
+			if(ordersListOD == null) {
+				ordersListOD = new ArrayList<>();
+			}
+			order.setOrderDetails(this);
+			ordersListOD.add(order);
+			
+		}
+	}
+	
+	
+	
+
+	
+
+	
+
+
+	
+	
+
+	
+
 	
 	
 }

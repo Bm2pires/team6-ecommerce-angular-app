@@ -2,3 +2,8 @@
 1643130712950	Rename type 'Products'
 1643130721386	Rename type 'Orders'
 1643130727998	Rename type 'OrderDetails'
+1643384978262	Extract local variable 'ordersList'
+1643385056585	Extract local variable 'e'
+1643385092408	Rename local variable 'e'
+1643390636170	Rename local variable 'od'
+1643475410742	Extract local variable 'user'

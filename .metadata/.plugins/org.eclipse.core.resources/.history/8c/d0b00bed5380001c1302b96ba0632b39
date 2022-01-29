@@ -1,0 +1,107 @@
+package com.team6.ecommercebackend.entities;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="orders")
+public class Orders {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "orders_id")
+	private Long id;
+	
+	//Has a many to one realtionship with order details
+	@ManyToOne
+	@JoinColumn(name="order_details_id", nullable=false)
+	OrderDetails orderDetailsObj;
+	 
+	//Has a many to one realtionship with products
+//	@ManyToOne
+//	@JoinColumn(name="product_id", nullable=false)
+//	Products productsObj;
+	
+	@Column(name = "product_id", nullable=false)
+	private Long prod_id;
+	
+	public Long getProd_id() {
+		return prod_id;
+	}
+
+
+	public void setProd_id(Long prod_id) {
+		this.prod_id = prod_id;
+	}
+
+
+	@Column(name = "quantity", nullable=false)
+	private Integer quantity;
+
+
+	public Orders() {
+		super();
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public OrderDetails getOrderDetailsObj() {
+		return orderDetailsObj;
+	}
+
+
+	public void setOrderDetailsObj(OrderDetails orderDetailsObj) {
+		this.orderDetailsObj = orderDetailsObj;
+	}
+
+
+//	public Products getProductsObj() {
+//		return productsObj;
+//	}
+//
+//
+//	public void setProductsObj(Products productsObj) {
+//		this.productsObj = productsObj;
+//	}
+
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+	
+	
+	
+
+
+
+
+	
+
+	
+
+	
+	
+}

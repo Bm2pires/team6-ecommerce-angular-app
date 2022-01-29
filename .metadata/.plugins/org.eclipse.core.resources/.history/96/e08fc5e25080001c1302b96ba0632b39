@@ -1,0 +1,52 @@
+package com.team6.ecommercebackend.entities;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="products")
+public class Products {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "product_id", nullable=false)
+	private Long id;
+	
+	@Column(name = "product_type", nullable=false)
+	private Integer prodType;
+	
+	@Column(name = "product_name", nullable=false)
+	private Integer prodName;
+	
+	@Column(name = "product_description", nullable=false)
+	private Integer prodDescription;
+	
+	@Column(name = "product_price", nullable=false)
+	private Integer prodPrice;
+	
+	
+	
+	//has a one to many realtionship with orders
+	@OneToMany
+	List<Orders> ordersList;
+
+	
+	
+
+	public Products() {
+		super();
+	}
+
+	
+
+	
+}

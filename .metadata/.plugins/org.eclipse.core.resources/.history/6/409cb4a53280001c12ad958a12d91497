@@ -1,0 +1,51 @@
+package com.team6.ecommercebackend.entities;
+
+import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "users")
+public class User {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id")
+	private Long id;
+	
+	@Column(name = "email_address", length = 50, nullable=false)
+	private String email;
+	
+	@Column(name = "password", length = 20, nullable=false)
+	private String password;
+	
+	@Column(name = "title", length = 5, nullable=false)
+	private String title;
+	
+	@Column(name = "firstname", length = 20, nullable=false)
+	private String firstName;
+	
+	@Column(name = "lastname", length = 20, nullable=false)
+	private String lastName;
+	
+	@Column(name = "dob", nullable=false)
+	private LocalDate dob;
+	
+	@Column(name = "phone_number", length = 10, nullable=false)
+	private String phoneNumber;
+	
+	@Column(name = "address", length = 150, nullable=false)
+	private String address;
+	
+	@Column(name = "isadmin", nullable=false)
+	private boolean isAdmin;
+
+
+	
+	
+	
+}

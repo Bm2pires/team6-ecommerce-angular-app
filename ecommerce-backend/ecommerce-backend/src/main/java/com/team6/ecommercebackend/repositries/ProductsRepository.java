@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.team6.ecommercebackend.entities.Products;
 
 @Repository
-public interface ProductsRepository extends CrudRepository<Products, Integer>{
+public interface ProductsRepository extends CrudRepository<Products, Long>{
 
 }

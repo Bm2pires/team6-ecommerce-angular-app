@@ -1,0 +1,40 @@
+package com.team6.ecommercebackend;
+
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.team6.ecommercebackend.entities.OrderDetails;
+import com.team6.ecommercebackend.entities.User;
+import com.team6.ecommercebackend.repositries.OrderDetailsRepository;
+import com.team6.ecommercebackend.repositries.OrdersRepository;
+import com.team6.ecommercebackend.repositries.ProductsRepository;
+import com.team6.ecommercebackend.repositries.UserRepository;
+
+@SpringBootTest
+class EcommerceBackendApplicationTests {
+	
+	@Autowired
+	UserRepository userRepo;
+	@Autowired
+	OrderDetailsRepository orderDetailsRepo;
+	@Autowired
+	OrdersRepository orderRepo;
+	@Autowired
+	ProductsRepository productRepo;
+
+	@Test
+	void contextLoads() {
+	}
+	
+	@Test
+	public void testAddUser() {
+		LocalDate date =  LocalDate.of(2019, 2, 4);
+		OrderDetails od = new OrderDetails(4L, 500);
+
+		orderDetailsRepo.save(od);
+	}
+
+}

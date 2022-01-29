@@ -6,15 +6,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "users")
 public class User {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-	private Integer id;
+	private Long id;
 	
 	@Column(name = "email_address", length = 50, nullable=false)
 	private String email;
@@ -43,6 +46,14 @@ public class User {
 	@Column(name = "isadmin", nullable=false)
 	private boolean isAdmin;
 
+	//Has a One to one relationship with orderdetails 
+	@OneToOne(mappedBy="user")
+	private OrderDetails orderDetails;
+	
+	public User() {
+		super();
+	}
+
 	public User(String email, String password, String title, String firstName, String lastName, LocalDate dob,
 			String phoneNumber, String address, boolean isAdmin) {
 		super();
@@ -57,30 +68,11 @@ public class User {
 		this.isAdmin = isAdmin;
 	}
 
-	public User(Integer id, String email, String password, String title, String firstName, String lastName,
-			LocalDate dob, String phoneNumber, String address, boolean isAdmin) {
-		super();
-		this.id = id;
-		this.email = email;
-		this.password = password;
-		this.title = title;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dob = dob;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-		this.isAdmin = isAdmin;
-	}
-
-	public User() {
-		super();
-	}
-
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -156,12 +148,26 @@ public class User {
 		this.isAdmin = isAdmin;
 	}
 
+	public OrderDetails getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(OrderDetails orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + ", title=" + title + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", dob=" + dob + ", phoneNumber=" + phoneNumber + ", address="
-				+ address + ", isAdmin=" + isAdmin + "]";
+				+ address + ", isAdmin=" + isAdmin + ", orderDetails=" + orderDetails + "]";
 	}
+	
+	
+
+	
+
+	
 	
 	
 	

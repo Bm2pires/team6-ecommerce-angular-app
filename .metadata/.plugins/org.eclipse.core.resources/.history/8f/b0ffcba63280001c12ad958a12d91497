@@ -1,0 +1,32 @@
+package com.team6.ecommercebackend.entities;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="orders")
+public class Orders {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "orders_id")
+	private Long id;
+	
+	@Column(name = "order_details_id", nullable=false)
+	private List<Long> orderDetailsId;
+	
+	@Column(name = "product_id", nullable=false)
+	private List<Long> productId;
+	
+	@Column(name = "quantity", nullable=false)
+	private Integer quantity;
+
+	
+	
+}

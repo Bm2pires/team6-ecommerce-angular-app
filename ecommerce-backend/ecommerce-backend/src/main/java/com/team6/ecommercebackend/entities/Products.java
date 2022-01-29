@@ -1,99 +1,123 @@
 package com.team6.ecommercebackend.entities;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="products")
 public class Products {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id", nullable=false)
-	private Integer id;
+	private Long id;
 	
 	@Column(name = "product_type", nullable=false)
-	private Integer prodType;
+	private String prodType;
 	
 	@Column(name = "product_name", nullable=false)
-	private Integer prodName;
+	private String prodName;
 	
 	@Column(name = "product_description", nullable=false)
-	private Integer prodDescription;
+	private String prodDescription;
 	
 	@Column(name = "product_price", nullable=false)
-	private Integer prodPrice;
+	private Double prodPrice;
+	
+	//has a One to One relationship with orders
+	@OneToOne(mappedBy="products")
+	private Orders orders;
 
+	
 	public Products() {
 		super();
 	}
 
-	public Products(Integer id, Integer prodType, Integer prodName, Integer prodDescription, Integer prodPrice) {
-		super();
-		this.id = id;
-		this.prodType = prodType;
-		this.prodName = prodName;
-		this.prodDescription = prodDescription;
-		this.prodPrice = prodPrice;
-	}
 
-	public Products(Integer prodType, Integer prodName, Integer prodDescription, Integer prodPrice) {
+	public Products(String prodType, String prodName, String prodDescription, Double prodPrice, Orders orders) {
 		super();
 		this.prodType = prodType;
 		this.prodName = prodName;
 		this.prodDescription = prodDescription;
 		this.prodPrice = prodPrice;
+		this.orders = orders;
 	}
 
-	public Integer getId() {
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Integer getProdType() {
+
+	public String getProdType() {
 		return prodType;
 	}
 
-	public void setProdType(Integer prodType) {
+
+	public void setProdType(String prodType) {
 		this.prodType = prodType;
 	}
 
-	public Integer getProdName() {
+
+	public String getProdName() {
 		return prodName;
 	}
 
-	public void setProdName(Integer prodName) {
+
+	public void setProdName(String prodName) {
 		this.prodName = prodName;
 	}
 
-	public Integer getProdDescription() {
+
+	public String getProdDescription() {
 		return prodDescription;
 	}
 
-	public void setProdDescription(Integer prodDescription) {
+
+	public void setProdDescription(String prodDescription) {
 		this.prodDescription = prodDescription;
 	}
 
-	public Integer getProdPrice() {
+
+	public Double getProdPrice() {
 		return prodPrice;
 	}
 
-	public void setProdPrice(Integer prodPrice) {
+
+	public void setProdPrice(Double prodPrice) {
 		this.prodPrice = prodPrice;
 	}
+
+
+	public Orders getOrders() {
+		return orders;
+	}
+
+
+	public void setOrders(Orders orders) {
+		this.orders = orders;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Products [id=" + id + ", prodType=" + prodType + ", prodName=" + prodName + ", prodDescription="
-				+ prodDescription + ", prodPrice=" + prodPrice + "]";
+				+ prodDescription + ", prodPrice=" + prodPrice + ", orders=" + orders + "]";
 	}
-	
-	
+
+
+
+
 	
 }

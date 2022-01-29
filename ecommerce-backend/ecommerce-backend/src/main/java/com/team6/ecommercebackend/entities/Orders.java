@@ -1,85 +1,121 @@
 package com.team6.ecommercebackend.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="orders")
 public class Orders {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "orders_id")
-	private Integer id;
+	private Long id;
 	
-	@Column(name = "order_details_id", nullable=false)
-	private Integer orderDetailsId;
-	
-	@Column(name = "product_id", nullable=false)
-	private Integer productId;
-	
+	//Has a many to one relationship with order details
+	@ManyToOne
+	@JoinColumn(name="order_details_id", nullable=false)
+	OrderDetails orderDetails;
+	 
+	//Has a One to One relationship with products
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="product_id")
+	private Products products;
+
 	@Column(name = "quantity", nullable=false)
 	private Integer quantity;
+
 
 	public Orders() {
 		super();
 	}
 
-	public Orders(Integer id, Integer orderDetailsId, Integer productId, Integer quantity) {
+
+	public Orders(OrderDetails orderDetails, Products products, Integer quantity) {
 		super();
-		this.id = id;
-		this.orderDetailsId = orderDetailsId;
-		this.productId = productId;
+		this.orderDetails = orderDetails;
+		this.products = products;
 		this.quantity = quantity;
 	}
 
-	public Orders(Integer orderDetailsId, Integer productId, Integer quantity) {
-		super();
-		this.orderDetailsId = orderDetailsId;
-		this.productId = productId;
-		this.quantity = quantity;
-	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Integer getOrderDetailsId() {
-		return orderDetailsId;
+
+	public OrderDetails getOrderDetails() {
+		return orderDetails;
 	}
 
-	public void setOrderDetailsId(Integer orderDetailsId) {
-		this.orderDetailsId = orderDetailsId;
+
+	public void setOrderDetails(OrderDetails orderDetails) {
+		this.orderDetails = orderDetails;
 	}
 
-	public Integer getProductId() {
-		return productId;
+
+	public Products getProducts() {
+		return products;
 	}
 
-	public void setProductId(Integer productId) {
-		this.productId = productId;
+
+	public void setProducts(Products products) {
+		this.products = products;
 	}
+
 
 	public Integer getQuantity() {
 		return quantity;
 	}
 
+
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Orders [id=" + id + ", orderDetailsId=" + orderDetailsId + ", productId=" + productId + ", quantity="
+		return "Orders [id=" + id + ", orderDetails=" + orderDetails + ", products=" + products + ", quantity="
 				+ quantity + "]";
 	}
+	
+	
+
+
+	
+
+
+
+
+
+
+
+	
+	
+	
+	
+
+
+
+
+	
+
+	
+
 	
 	
 }
