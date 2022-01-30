@@ -1,8 +1,11 @@
 package com.team6.ecommercebackend.entities;
 
 import java.time.LocalDate;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,8 +19,8 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_id")
-	private Long id;
+	@Column(name = "user_id", nullable=false)
+	private long id;
 	
 	@Column(name = "email_address", length = 50, nullable=false)
 	private String email;
@@ -47,7 +50,7 @@ public class User {
 	private boolean isAdmin;
 
 	//Has a One to one relationship with orderdetails 
-	@OneToOne(mappedBy="user")
+	@OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private OrderDetails orderDetails;
 	
 	public User() {
@@ -67,12 +70,29 @@ public class User {
 		this.address = address;
 		this.isAdmin = isAdmin;
 	}
+	
+	
 
-	public Long getId() {
+	public User(long id, String email, String password, String title, String firstName, String lastName, LocalDate dob,
+			String phoneNumber, String address, boolean isAdmin) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.title = title;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dob = dob;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.isAdmin = isAdmin;
+	}
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -160,7 +180,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + ", title=" + title + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", dob=" + dob + ", phoneNumber=" + phoneNumber + ", address="
-				+ address + ", isAdmin=" + isAdmin + ", orderDetails=" + orderDetails + "]";
+				+ address + ", isAdmin=" + isAdmin + "]";
 	}
 	
 	

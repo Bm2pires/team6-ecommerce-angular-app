@@ -22,15 +22,15 @@ public class OrderDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "order_details_id")
-	private Long id;
+	@Column(name = "order_details_id",nullable=false)
+	private long id;
 	
 	@Column(name = "total_price", nullable=false)
 	private double totalPrice;
 	
 	//Has a One to one relationship with user 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="user_id")
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="user_id", nullable=false)
 	private User user;
 
 	//has a one to many relationship with orders
@@ -48,13 +48,19 @@ public class OrderDetails {
 		this.ordersListOD = ordersListOD;
 	}
 
+	public OrderDetails(long id, double totalPrice, User user, List<Orders> ordersListOD) {
+		super();
+		this.id = id;
+		this.totalPrice = totalPrice;
+		this.user = user;
+		this.ordersListOD = ordersListOD;
+	}
 
-
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -86,8 +92,7 @@ public class OrderDetails {
 
 	@Override
 	public String toString() {
-		return "OrderDetails [id=" + id + ", totalPrice=" + totalPrice + ", user=" + user + ", ordersListOD="
-				+ ordersListOD + "]";
+		return "OrderDetails [id=" + id + ", totalPrice=" + totalPrice + "]";
 	}
 
 	public void addOrder(Orders order) {

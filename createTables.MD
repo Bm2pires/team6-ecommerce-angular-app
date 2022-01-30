@@ -43,7 +43,7 @@ CREATE TABLE order_details (
 ```sql
 CREATE TABLE orders (
 	orders_id SERIAL PRIMARY KEY NOT NULL,
-	order_details_id INT REFERENCES order_details(order_details_id) NOT NULL,
+	order_details_id INT REFERENCES order_details(order_details_id) NOT NULL ON DELETE CASCADE,
 	product_id INT REFERENCES products(product_id) NOT NULL,
 	quantity INT NOT NULL
 )

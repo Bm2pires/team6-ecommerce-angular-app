@@ -1,11 +1,18 @@
 package com.team6.ecommercebackend.entities;
 
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -16,7 +23,7 @@ public class Products {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id", nullable=false)
-	private Long id;
+	private long id;
 	
 	@Column(name = "product_type", nullable=false)
 	private String prodType;
@@ -31,8 +38,12 @@ public class Products {
 	private Double prodPrice;
 	
 	//has a One to One relationship with orders
-	@OneToOne(mappedBy="products")
-	private Orders orders;
+//	@OneToOne(mappedBy="products", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+//	private Orders orders;
+
+	
+	@OneToMany(mappedBy="products", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	List<Orders> orderListProd;
 
 	
 	public Products() {
@@ -40,22 +51,33 @@ public class Products {
 	}
 
 
-	public Products(String prodType, String prodName, String prodDescription, Double prodPrice, Orders orders) {
+	public Products(String prodType, String prodName, String prodDescription, Double prodPrice) {
 		super();
 		this.prodType = prodType;
 		this.prodName = prodName;
 		this.prodDescription = prodDescription;
 		this.prodPrice = prodPrice;
-		this.orders = orders;
+	}
+	
+	
+
+
+	public Products(long id, String prodType, String prodName, String prodDescription, Double prodPrice) {
+		super();
+		this.id = id;
+		this.prodType = prodType;
+		this.prodName = prodName;
+		this.prodDescription = prodDescription;
+		this.prodPrice = prodPrice;
 	}
 
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -100,20 +122,31 @@ public class Products {
 	}
 
 
-	public Orders getOrders() {
-		return orders;
+	
+//	public Orders getOrders() {
+//		return orders;
+//	}
+//
+//
+//	public void setOrders(Orders orders) {
+//		this.orders = orders;
+//	}
+
+
+	public List<Orders> getOrderListProd() {
+		return orderListProd;
 	}
 
 
-	public void setOrders(Orders orders) {
-		this.orders = orders;
+	public void setOrderListProd(List<Orders> orderListProd) {
+		this.orderListProd = orderListProd;
 	}
 
 
 	@Override
 	public String toString() {
 		return "Products [id=" + id + ", prodType=" + prodType + ", prodName=" + prodName + ", prodDescription="
-				+ prodDescription + ", prodPrice=" + prodPrice + ", orders=" + orders + "]";
+				+ prodDescription + ", prodPrice=" + prodPrice + "]";
 	}
 
 
