@@ -1,8 +1,5 @@
 package com.team6.ecommercebackend.entities;
 
-
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +7,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,13 +32,9 @@ public class Products {
 	private Double prodPrice;
 	
 	//has a One to One relationship with orders
-//	@OneToOne(mappedBy="products", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-//	private Orders orders;
-
-	
-	@OneToMany(mappedBy="products", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	List<Orders> orderListProd;
-
+//	@OneToOne(mappedBy="products", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
+	@OneToOne(mappedBy="products", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
+	private Orders orders;
 	
 	public Products() {
 		super();
@@ -123,34 +113,19 @@ public class Products {
 
 
 	
-//	public Orders getOrders() {
-//		return orders;
-//	}
-//
-//
-//	public void setOrders(Orders orders) {
-//		this.orders = orders;
-//	}
-
-
-	public List<Orders> getOrderListProd() {
-		return orderListProd;
+	public Orders getOrders() {
+		return orders;
 	}
 
 
-	public void setOrderListProd(List<Orders> orderListProd) {
-		this.orderListProd = orderListProd;
+	public void setOrders(Orders orders) {
+		this.orders = orders;
 	}
-
 
 	@Override
 	public String toString() {
 		return "Products [id=" + id + ", prodType=" + prodType + ", prodName=" + prodName + ", prodDescription="
 				+ prodDescription + ", prodPrice=" + prodPrice + "]";
 	}
-
-
-
-
 	
 }

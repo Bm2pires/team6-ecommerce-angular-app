@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="EcommerceBackendApplicationTests.testUpdateOrder" project="ecommerce-backend" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.team6.ecommercebackend.EcommerceBackendApplicationTests" time="0.301" displayname="EcommerceBackendApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.team6.ecommercebackend.EcommerceBackendApplicationTests]">
-    <testcase name="testUpdateOrder" classname="com.team6.ecommercebackend.EcommerceBackendApplicationTests" time="0.301" displayname="testUpdateOrder()" uniqueid="[engine:junit-jupiter]/[class:com.team6.ecommercebackend.EcommerceBackendApplicationTests]/[method:testUpdateOrder()]"/>
-  </testsuite>
-</testrun>

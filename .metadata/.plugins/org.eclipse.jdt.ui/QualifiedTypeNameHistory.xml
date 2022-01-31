@@ -27,11 +27,16 @@
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="org.hibernate.criterion.Order"/>
     <fullyQualifiedTypeName name="javax.persistence.FetchType"/>
-    <fullyQualifiedTypeName name="javax.persistence.Transient"/>
     <fullyQualifiedTypeName name="javax.persistence.Temporal"/>
     <fullyQualifiedTypeName name="javax.persistence.TemporalType"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
     <fullyQualifiedTypeName name="javax.persistence.OneToOne"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="javax.transaction.Transactional"/>
+    <fullyQualifiedTypeName name="org.hibernate.mapping.Set"/>
+    <fullyQualifiedTypeName name="java.util.Set"/>
+    <fullyQualifiedTypeName name="java.util.HashSet"/>
+    <fullyQualifiedTypeName name="javax.persistence.Transient"/>
+    <fullyQualifiedTypeName name="org.springframework.data.annotation.Transient"/>
+    <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
 </qualifiedTypeNameHistroy>

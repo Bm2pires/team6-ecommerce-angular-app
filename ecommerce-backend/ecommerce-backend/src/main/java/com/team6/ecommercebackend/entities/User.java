@@ -1,7 +1,6 @@
 package com.team6.ecommercebackend.entities;
 
 import java.time.LocalDate;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "users")
@@ -49,8 +47,8 @@ public class User {
 	@Column(name = "isadmin", nullable=false)
 	private boolean isAdmin;
 
-	//Has a One to one relationship with orderdetails 
-	@OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+//	Has a One to one relationship with orderdetails 
+	@OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
 	private OrderDetails orderDetails;
 	
 	public User() {

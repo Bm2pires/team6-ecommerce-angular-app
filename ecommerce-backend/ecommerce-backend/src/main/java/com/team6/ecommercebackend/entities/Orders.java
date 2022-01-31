@@ -1,6 +1,5 @@
 package com.team6.ecommercebackend.entities;
 
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,10 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name="orders")
@@ -26,18 +23,16 @@ public class Orders {
 	private long id;
 	
 	//Has a many to one relationship with order details
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="order_details_id", nullable=false)
+	@ManyToOne
+	@JoinColumn(name="order_details_id")
 	OrderDetails orderDetails;
 	 
 	//Has a One to One relationship with products
-//	@OneToOne(fetch=FetchType.EAGER)
-//	@JoinColumn(name="product_id", nullable=false)
-//	private Products products;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
+//	@OneToOne(fetch=FetchType.LAZY, orphanRemoval = true)
+//	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(fetch=FetchType.LAZY, orphanRemoval = false)
 	@JoinColumn(name="product_id", nullable=false)
-	Products products;
+	private Products products;
 	
 	@Column(name = "quantity", nullable=false)
 	private Integer quantity;
@@ -46,7 +41,6 @@ public class Orders {
 	public Orders() {
 		super();
 	}
-
 
 	public Orders(OrderDetails orderDetails, Products products, Integer quantity) {
 		super();
@@ -106,8 +100,12 @@ public class Orders {
 
 	@Override
 	public String toString() {
-		return "Orders [id=" + id  + ", quantity="
+		return "Orders [id=" + id  + ", Products=" +products.toString()+", quantity="
 				+ quantity + "]";
+	}
+
+	public void setParent(OrderDetails od) {
+		this.orderDetails = od;
 	}
 	
 	

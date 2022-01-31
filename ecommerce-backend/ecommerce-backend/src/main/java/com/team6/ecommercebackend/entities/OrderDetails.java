@@ -1,8 +1,7 @@
 package com.team6.ecommercebackend.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,38 +21,45 @@ public class OrderDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "order_details_id",nullable=false)
+	@Column(name = "order_details_id", nullable=false)
 	private long id;
 	
 	@Column(name = "total_price", nullable=false)
 	private double totalPrice;
 	
 	//Has a One to one relationship with user 
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="user_id", nullable=false)
+	@OneToOne
+	@JoinColumn(name="user_id")
 	private User user;
-
+		
 	//has a one to many relationship with orders
-	@OneToMany(mappedBy="orderDetails", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	List<Orders> ordersListOD;
+//	@OneToMany(mappedBy="orderDetails", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval = true)
+	@OneToMany(mappedBy="orderDetails", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval = false)
+	Set<Orders> ordersList;
 	
 	public OrderDetails() {
 		super();
 	}
 
-	public OrderDetails(double totalPrice, User user, List<Orders> ordersListOD) {
+	public OrderDetails(double totalPrice, User user, Set<Orders> ordersListOD) {
 		super();
 		this.totalPrice = totalPrice;
 		this.user = user;
-		this.ordersListOD = ordersListOD;
+		this.ordersList = ordersListOD;
+	}
+	
+	public OrderDetails(double totalPrice, User user) {
+		super();
+		this.totalPrice = totalPrice;
+		this.user = user;
 	}
 
-	public OrderDetails(long id, double totalPrice, User user, List<Orders> ordersListOD) {
+	public OrderDetails(long id, double totalPrice, User user, Set<Orders> ordersListOD) {
 		super();
 		this.id = id;
 		this.totalPrice = totalPrice;
 		this.user = user;
-		this.ordersListOD = ordersListOD;
+		this.ordersList = ordersListOD;
 	}
 
 	public long getId() {
@@ -80,15 +86,15 @@ public class OrderDetails {
 		this.user = user;
 	}
 
-	public List<Orders> getOrdersListOD() {
-		return ordersListOD;
+	public Set<Orders> getOrdersList() {
+		return ordersList;
 	}
 
-	public void setOrdersListOD(List<Orders> ordersListOD) {
-		this.ordersListOD = ordersListOD;
+	public void setOrdersList(Set<Orders> ordersList) {
+		this.ordersList = ordersList;
+        this.ordersList.forEach(order -> order.setParent(this));
+
 	}
-	
-	
 
 	@Override
 	public String toString() {
@@ -97,11 +103,11 @@ public class OrderDetails {
 
 	public void addOrder(Orders order) {
 		if(order != null) {
-			if(ordersListOD == null) {
-				ordersListOD = new ArrayList<>();
+			if(ordersList == null) {
+				ordersList = new HashSet<>();
 			}
 			order.setOrderDetails(this);
-			ordersListOD.add(order);
+			ordersList.add(order);
 			
 		}
 	}
