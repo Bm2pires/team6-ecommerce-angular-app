@@ -28,15 +28,6 @@ CREATE TABLE users (
 ### Order Details table
 
 ```sql
--- CREATE TABLE order_details (
--- 	order_details_id SERIAL PRIMARY KEY NOT NULL,
--- 	user_id INT REFERENCES users(user_id) NOT NULL,
--- 	total_price FLOAT NOT NULL,
--- 	-- CONSTRAINT fk_order_details_users
--- 	-- 	FOREIGN KEY (userid)
--- 	-- 		REFERENCES users(userid)
--- )
-
 CREATE TABLE order_details (
 	order_details_id SERIAL PRIMARY KEY NOT NULL,
 	user_id INT REFERENCES users(user_id) ON DELETE CASCADE NOT NULL,
@@ -47,17 +38,10 @@ CREATE TABLE order_details (
 ### Orders
 
 ```sql
--- CREATE TABLE orders (
--- 	orders_id SERIAL PRIMARY KEY NOT NULL,
--- 	order_details_id INT REFERENCES order_details(order_details_id) NOT NULL ON DELETE CASCADE,
--- 	product_id INT REFERENCES products(product_id) NOT NULL,
--- 	quantity INT NOT NULL
--- )
-
 CREATE TABLE orders (
 	orders_id SERIAL PRIMARY KEY NOT NULL,
 	order_details_id INT REFERENCES order_details(order_details_id) ON DELETE CASCADE NOT NULL,
-	product_id INT REFERENCES products(product_id) NOT NULL,
+	product_id INT REFERENCES products(product_id) ON DELETE CASCADE NOT NULL,
 	quantity INT NOT NULL
 );
 ```
