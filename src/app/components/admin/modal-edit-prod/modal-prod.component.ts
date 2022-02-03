@@ -3,14 +3,16 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css']
+  templateUrl: './modal-prod.component.html',
+  styleUrls: ['./modal-prod.component.css']
 })
 export class ModalComponent implements OnInit {
   @Input()
-  item!: { productId: Number; productType: String; productName: String; productDesc: String; productPrice: Number; };
+  item!: { productId: Number; productType: String; productName: String; productDesc: String; productPrice: Number};
 
-
+  newProductName: String = "";
+  newProductDesc: String = "";
+  newProductPrice: Number = 0;
 
   closeResult = '';
 
@@ -21,6 +23,9 @@ export class ModalComponent implements OnInit {
   editProduct(modal: { close: () => void; }) {
     modal.close();
     console.log("Edit product Function")
+    console.log(this.newProductName)
+    console.log(this.newProductDesc)
+    console.log(this.newProductPrice)
   }
 
   open(content: any) {
@@ -30,6 +35,9 @@ export class ModalComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     console.log(this.item)
+    this.newProductName = "";
+    this.newProductDesc = "";
+    this.newProductPrice = 0;
   }
 
   private getDismissReason(reason: any): string {
