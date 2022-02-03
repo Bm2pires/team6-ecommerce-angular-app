@@ -1,0 +1,80 @@
+<ng-template #content let-modal id="modalUser">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">User Updates</h4>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="userfName">User First Name</label>
+                <div class="input-group">
+                    <input id="userfName" class="form-control" placeholder={{itemUser.firstname}} type="text" [(ngModel)]='newUserFName' [ngModelOptions]="{standalone: true}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="userlName">User Last Name</label>
+                <div class="input-group">
+                    <input id="userlName" class="form-control" placeholder={{itemUser.lastname}} type="text" [(ngModel)]='newUserLName' [ngModelOptions]="{standalone: true}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="userEmail">User Email</label>
+                <div class="input-group">
+                    <input id="userEmail" class="form-control" placeholder={{itemUser.email}} type="text" [(ngModel)]='newUserEmail' [ngModelOptions]="{standalone: true}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="userPass">User password</label>
+                <div class="input-group">
+                    <input id="userPass" class="form-control" placeholder={{itemUser.password}} type="text" [(ngModel)]='newUserPassword' [ngModelOptions]="{standalone: true}">
+                </div>
+                <!-- <div class="form-group">
+                    <label for="userTitle">User Title</label>
+                    <div class="input-group">
+                        <input id="userTitle" class="form-control" placeholder={{itemUser.title}} type="text" [(ngModel)]='newUserTitle' [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div> -->
+                <div class="form-group mt-2">
+                    <label for="userTitle">User Title</label>
+                    <!-- <select class="form-control" name="title" type="text" [(ngModel)]='newUserTitle' [ngModelOptions]="{standalone: true}"> -->
+                    <select id="userTitleNew" class="form-control" name="title" type="text">
+                      <option value="Mr" selected>Mr</option>
+                      <option value="Mrs">Mrs</option>
+                      <option value="Miss">Miss</option>
+                      <option value="Ms">Ms</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="userDOB">User DOB</label>
+                    <div class="input-group">
+                        <!-- <input id="userDOB" class="form-control" type="text" placeholder="DOB" [(ngModel)]='itemUser.dob' [ngModelOptions]="{standalone: true}"> -->
+                        <!-- <input id="userDOB" class="form-control" type="date" [ngModel]="itemUser.dob | date" (ngModelChange)="itemUser.dob=$event" [ngModelOptions]="{standalone: true}"> -->
+                        <input id="userDOB" class="form-control" type="date" [defaultValue]="itemUser.dob" [(ngModel)]='newUserDOB' [ngModelOptions]="{standalone: true}">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="userPhone">User phone number</label>
+                    <div class="input-group">
+                        <input id="userPhone" class="form-control" placeholder={{itemUser.phonenumber}} type="text" [(ngModel)]='newUserPhonenumebr' [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="userAddress">User Address</label>
+                    <div class="input-group">
+                        <input id="userAddress" class="form-control" placeholder={{itemUser.address}} type="text" [(ngModel)]='newUserAddress' [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="editUser(modal)">Edit User</button>
+        <button type="button" aria-label="Close" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Close</button>
+
+    </div>
+</ng-template>
+
+<button class="btn btn-primary" (click)="open(content)">Edit</button>
+
+
+<hr>

@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  isAdmin = true;
+
+
   collapsed = true;
      toggleCollapsed(): void {
        this.collapsed = !this.collapsed;

@@ -1,0 +1,37 @@
+<ng-template #content let-modal id="modalProd">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Product Updates</h4>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="prodName">Product Name</label>
+                <div class="input-group">
+                    <input id="prodName" class="form-control" placeholder={{item.productName}} [(ngModel)]='newProductName' [ngModelOptions]="{standalone: true}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="prodDescription">Product Description</label>
+                <div class="input-group">
+                    <input id="prodDescription" class="form-control" placeholder={{item.productDesc}} [(ngModel)]='newProductDesc' [ngModelOptions]="{standalone: true}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="prodPrice">Product Price</label>
+                <div class="input-group">
+                    <input id="prodPrice" class="form-control" placeholder={{item.productPrice}} type="number" [(ngModel)]='newProductPrice' [ngModelOptions]="{standalone: true}">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="editProduct(modal)">Edit Product</button>
+        <button type="button" aria-label="Close" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Close</button>
+
+    </div>
+</ng-template>
+
+<button class="btn btn-primary" (click)="open(content)">Edit</button>
+
+
+<hr>
