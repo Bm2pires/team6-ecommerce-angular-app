@@ -69,6 +69,17 @@ export class ModalAddUserComponent implements OnInit {
     if(this.userDetails.phoneNumber.length != 11){
       this.errors.push("Phone number must be 11 digitis");
     }
+    const emailCheck = Array.from(this.userDetails.email);
+    let emailValid = false;
+    emailCheck.forEach((letter) => {
+      if(letter === '@'){
+        emailValid = true;
+      }
+    })
+    if(!emailValid){
+      this.errors.push("Email must contain an @");
+    }
+
     const dateCheck = this.userDetails.dob.toString();
     let today = this.datePipe.transform(Date.now(),'yyyy-MM-dd')!;
 
@@ -82,6 +93,7 @@ export class ModalAddUserComponent implements OnInit {
     if (m < 0 || (m === 0 && today2.getDate() < birthDate.getDate())) {
         age--;
     }
+
     if(age < 18){
       this.errors.push("Age must be 18 or older");
     }
