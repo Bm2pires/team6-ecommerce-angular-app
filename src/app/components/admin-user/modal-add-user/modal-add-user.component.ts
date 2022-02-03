@@ -116,6 +116,7 @@ export class ModalAddUserComponent implements OnInit {
   }
 
   private getDismissReason(reason: any): string {
+    this.reset();
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
