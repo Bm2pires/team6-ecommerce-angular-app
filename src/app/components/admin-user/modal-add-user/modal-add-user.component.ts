@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserDetails } from 'src/app/services/userDetails';
@@ -8,6 +9,8 @@ import { UserDetails } from 'src/app/services/userDetails';
   styleUrls: ['./modal-add-user.component.css']
 })
 export class ModalAddUserComponent implements OnInit {
+
+
 
   errors: Array<string> = [];
   valid = true
@@ -40,8 +43,7 @@ export class ModalAddUserComponent implements OnInit {
 
   closeResult = '';
 
-  constructor(private modalService: NgbModal) {
-    console.log(this.submitted)
+  constructor(private modalService: NgbModal, private datePipe: DatePipe) {
   }
   ngOnInit(): void {
   }
@@ -54,20 +56,35 @@ export class ModalAddUserComponent implements OnInit {
       modal.close();
       this.reset();
     }else{
-      alert(this.errors.forEach((el)=>el))
+      alert(this.errors)
+      this.errors = [];
     }
   }
 
   validate() {
     const phoneNumberCheck = Number(this.userDetails.phoneNumber);
-    if(phoneNumberCheck == NaN){
+    if(Number.isNaN(phoneNumberCheck)){
       this.errors.push("Phone number must be digitis");
     }
-    const dateCheck = this.userDetails.dob;
-    if(dateCheck > new Date()){
+    if(this.userDetails.phoneNumber.length != 11){
+      this.errors.push("Phone number must be 11 digitis");
+    }
+    const dateCheck = this.userDetails.dob.toString();
+    let today = this.datePipe.transform(Date.now(),'yyyy-MM-dd')!;
+
+    if(dateCheck > today){
       this.errors.push("Date of birth cannot be in the future");
     }
-    //Need to add must be 18
+    let today2 = new Date();
+    var birthDate = new Date(this.userDetails.dob);
+    var age = today2.getFullYear() - birthDate.getFullYear();
+    var m = today2.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today2.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    if(age < 18){
+      this.errors.push("Age must be 18 or older");
+    }
 
 
     if(this.errors.length != 0){
