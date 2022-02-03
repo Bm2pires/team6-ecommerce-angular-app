@@ -1,8 +1,6 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserDetails } from 'src/app/services/userDetails';
-import { UserInformationComponent } from '../../user-information/user-information.component';
 
 @Component({
   selector: 'app-modal-add-user',

@@ -48,7 +48,7 @@ const appRoutes: Routes = [
     AdminUserComponent,
     ModalUserComponent,
     ModalAddUserComponent,
-    ModalAddProdComponent,
+    ModalAddProdComponent
   ],
   imports: [
     BrowserModule,
