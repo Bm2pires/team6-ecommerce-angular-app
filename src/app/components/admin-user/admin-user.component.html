@@ -1,0 +1,19 @@
+<app-modal-add-user></app-modal-add-user>
+<div class="card-deck m-5" style="display: inline-block" *ngFor="let user of users">
+    <div class="card" style="width: 17rem;">
+        <img class="card-img-top" src="../../../assets/images/placeholderOne.jpg" alt="Card image cap">
+        <div class="card-body">
+            <p class="card-text">User Name: {{user.firstname}} {{user.lastname}}</p>
+            <p class="card-text">User Email: {{user.email}}</p>
+            <p class="card-text">User Password: {{user.password}}</p>
+            <p class="card-text">User Title: {{user.title}}</p>
+            <p class="card-text">User D.O.B: {{user.dob | date:"dd/MM/yy"}}</p>
+            <p class="card-text">User Phonenumber: {{user.phonenumber}}</p>
+            <p class="card-text">User Address: {{user.address}}</p>
+
+            <app-modal-user [itemUser]="user"></app-modal-user>
+            <button type="button" class="btn btn-warning" (click)="delUser(user.userId)">Delete</button>
+        </div>
+    </div>
+
+</div>
