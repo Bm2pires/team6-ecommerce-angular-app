@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ProductDetails } from 'src/app/services/productDetails';
 
 @Component({
   selector: 'app-modal-add-prod',
@@ -8,26 +9,60 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalAddProdComponent implements OnInit {
 
+  errors: Array<string> = [];
+  valid = true
 
   prodName:String = "";
   prodDescription:String = "";
   prodPrice:Number = 0;
 
+  productDetails: ProductDetails = {
+    productName: this.prodName,
+    productDesc: this.prodDescription,
+    productPrice: this.prodPrice
+  };
+
+  submitted = false;
+
+
   closeResult = '';
 
   constructor(private modalService: NgbModal) {
-
   }
+
   ngOnInit(): void {
   }
 
-  addProd(modal: { close: () => void; }) {
-    modal.close();
-    console.log("Add Product Function")
-    console.log(this.prodName)
-    console.log(this.prodDescription)
-    console.log(this.prodPrice)
+  onSubmit(modal: { close: () => void; }) {
+    this.submitted = true;
+    this.validate();
+    if(this.valid){
+      modal.close();
+      this.reset();
+    }else{
+      alert(this.errors)
+      this.errors = [];
+    }
+  }
 
+  validate() {
+    if(this.productDetails.productName.length < 3){
+      this.errors.push("Product name must be greater than 3 characters");
+    }
+
+    if(this.productDetails.productDesc.length < 10){
+      this.errors.push("Product description must be greater than 10 characters");
+    }
+
+    if(this.productDetails.productPrice === 0){
+      this.errors.push("Product price must not be 0.00");
+    }
+
+    if(this.errors.length != 0){
+      this.valid = false;
+    }else{
+      this.valid = true;
+    }
   }
 
   open(content: any) {
@@ -36,12 +71,10 @@ export class ModalAddProdComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-    this.prodName = "";
-    this.prodDescription = "";
-    this.prodPrice = 0;
   }
 
   private getDismissReason(reason: any): string {
+    this.reset();
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -49,6 +82,25 @@ export class ModalAddProdComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  onClose(modal: { close: () => void; }){
+    modal.close();
+    this.reset();
+  }
+
+  reset() {
+    this.prodName = "";
+    this.prodDescription = "";
+    this.prodPrice = 0.0;
+
+    this.productDetails = {
+      productName: this.prodName,
+      productDesc: this.prodDescription,
+      productPrice: this.prodPrice
+    };
+
+    this.submitted = false;
   }
 
 }
