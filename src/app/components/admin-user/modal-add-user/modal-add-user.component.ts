@@ -23,12 +23,11 @@ export class ModalAddUserComponent implements OnInit {
   dob:Date = new Date;
   phonenumber:String = "";
   address:String = "";
-  password:String = "";
 
   userDetails: UserDetails = { firstName: this.userFname,
     lastName: this.userLname,
     email: this.userEmail,
-    password: this.password,
+    password: this.userPass,
     title: this.userTitle,
     dob: this.dob,
     phoneNumber: this.phonenumber,
@@ -64,10 +63,10 @@ export class ModalAddUserComponent implements OnInit {
   validate() {
     const phoneNumberCheck = Number(this.userDetails.phoneNumber);
     if(Number.isNaN(phoneNumberCheck)){
-      this.errors.push("Phone number must be digitis");
+      this.errors.push("Phone number must be digits");
     }
     if(this.userDetails.phoneNumber.length != 11){
-      this.errors.push("Phone number must be 11 digitis");
+      this.errors.push("Phone number must be 11 digits");
     }
     const emailCheck = Array.from(this.userDetails.email);
     let emailValid = false;
@@ -112,7 +111,6 @@ export class ModalAddUserComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-
   }
 
   private getDismissReason(reason: any): string {
@@ -129,8 +127,6 @@ export class ModalAddUserComponent implements OnInit {
   onClose(modal: { close: () => void; }) {
     modal.close();
     this.reset();
-
-
   }
 
   reset(){
@@ -142,12 +138,11 @@ export class ModalAddUserComponent implements OnInit {
     this.dob = new Date;
     this.phonenumber = "";
     this.address = "";
-    this.password = "";
 
     this.userDetails = { firstName: this.userFname,
       lastName: this.userLname,
       email: this.userEmail,
-      password: this.password,
+      password: this.userPass,
       title: this.userTitle,
       dob: this.dob,
       phoneNumber: this.phonenumber,

@@ -3,78 +3,88 @@
         <h4 class="modal-title" id="modal-basic-title">User Updates</h4>
     </div>
     <div class="modal-body">
-        <form>
+        <form #editUserForm="ngForm">
             <div class="form-group">
                 <label for="userfName">User First Name</label>
                 <div class="input-group">
-                    <input id="userfName" class="form-control" placeholder={{itemUser.firstname}} type="text" [(ngModel)]='newUserFName' [ngModelOptions]="{standalone: true}">
+                    <input id="userfName" class="form-control" placeholder={{itemUser.firstname}} type="text" [(ngModel)]="newUserDetails.firstName" [ngModelOptions]="{standalone: true}" required name="fName" #fName="ngModel">
+                </div>
+                <div [hidden]="fName.valid || fName.pristine" class="alert alert-danger">
+                    First Name is required
                 </div>
             </div>
             <div class="form-group">
                 <label for="userlName">User Last Name</label>
                 <div class="input-group">
-                    <input id="userlName" class="form-control" placeholder={{itemUser.lastname}} type="text" [(ngModel)]='newUserLName' [ngModelOptions]="{standalone: true}">
+                    <input id="userlName" class="form-control" placeholder={{itemUser.lastname}} type="text" [(ngModel)]='newUserDetails.lastName' [ngModelOptions]="{standalone: true}" required name="lName" #lName="ngModel">
+                </div>
+                <div [hidden]="lName.valid || lName.pristine" class="alert alert-danger">
+                    Last Name is required
                 </div>
             </div>
             <div class="form-group">
                 <label for="userEmail">User Email</label>
                 <div class="input-group">
-                    <input id="userEmail" class="form-control" placeholder={{itemUser.email}} type="text" [(ngModel)]='newUserEmail' [ngModelOptions]="{standalone: true}">
+                    <input id="userEmail" class="form-control" placeholder={{itemUser.email}} type="text" [(ngModel)]='newUserDetails.email' [ngModelOptions]="{standalone: true}" required name="email" #email="ngModel">
+                </div>
+                <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                    Email is required
                 </div>
             </div>
             <div class="form-group">
                 <label for="userPass">User password</label>
                 <div class="input-group">
-                    <input id="userPass" class="form-control" placeholder={{itemUser.password}} type="text" [(ngModel)]='newUserPassword' [ngModelOptions]="{standalone: true}">
+                    <input id="userPass" class="form-control" placeholder={{itemUser.password}} type="text" [(ngModel)]='newUserDetails.password' [ngModelOptions]="{standalone: true}" required name="password" #password="ngModel">
                 </div>
-                <!-- <div class="form-group">
-                    <label for="userTitle">User Title</label>
-                    <div class="input-group">
-                        <input id="userTitle" class="form-control" placeholder={{itemUser.title}} type="text" [(ngModel)]='newUserTitle' [ngModelOptions]="{standalone: true}">
-                    </div>
-                </div> -->
-                <div class="form-group mt-2">
-                    <label for="userTitle">User Title</label>
-                    <!-- <select class="form-control" name="title" type="text" [(ngModel)]='newUserTitle' [ngModelOptions]="{standalone: true}"> -->
-                    <select id="userTitleNew" class="form-control" name="title" type="text">
-                      <option value="Mr" selected>Mr</option>
-                      <option value="Mrs">Mrs</option>
-                      <option value="Miss">Miss</option>
-                      <option value="Ms">Ms</option>
-                    </select>
+                <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+                    Password is required
                 </div>
-                <div class="form-group">
-                    <label for="userDOB">User DOB</label>
-                    <div class="input-group">
-                        <!-- <input id="userDOB" class="form-control" type="text" placeholder="DOB" [(ngModel)]='itemUser.dob' [ngModelOptions]="{standalone: true}"> -->
-                        <!-- <input id="userDOB" class="form-control" type="date" [ngModel]="itemUser.dob | date" (ngModelChange)="itemUser.dob=$event" [ngModelOptions]="{standalone: true}"> -->
-                        <input id="userDOB" class="form-control" type="date" [defaultValue]="itemUser.dob" [(ngModel)]='newUserDOB' [ngModelOptions]="{standalone: true}">
-
-                    </div>
+            </div>
+            <div class="form-group mt-2">
+                <label for="userTitle">User Title</label>
+                <select class="form-control" id="title" required name="title" [(ngModel)]='newUserDetails.title' #title="ngModel" required>
+                  <option *ngFor="let t of titles" [value]="t">{{t}}</option>
+                </select>
+            </div>
+            <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+                Title is required
+            </div>
+            <div class="form-group">
+                <label for="userDOB">User DOB</label>
+                <div class="input-group">
+                    <input id="userDOB" class="form-control" type="date" [defaultValue]="itemUser.dob" [(ngModel)]='newUserDetails.dob' [ngModelOptions]="{standalone: true}" required name="dob" #dob="ngModel">
                 </div>
-                <div class="form-group">
-                    <label for="userPhone">User phone number</label>
-                    <div class="input-group">
-                        <input id="userPhone" class="form-control" placeholder={{itemUser.phonenumber}} type="text" [(ngModel)]='newUserPhonenumebr' [ngModelOptions]="{standalone: true}">
-                    </div>
+                <div [hidden]="dob.valid || dob.pristine" class="alert alert-danger">
+                    D.O.B is required
                 </div>
-                <div class="form-group">
-                    <label for="userAddress">User Address</label>
-                    <div class="input-group">
-                        <input id="userAddress" class="form-control" placeholder={{itemUser.address}} type="text" [(ngModel)]='newUserAddress' [ngModelOptions]="{standalone: true}">
-                    </div>
+            </div>
+            <div class="form-group">
+                <label for="userPhone">User phone number</label>
+                <div class="input-group">
+                    <input id="userPhone" class="form-control" placeholder={{itemUser.phonenumber}} type="text" [(ngModel)]='newUserDetails.phoneNumber' [ngModelOptions]="{standalone: true}" required name="phoneNumber" #phoneNumber="ngModel">
+                </div>
+                <div [hidden]="phoneNumber.valid || phoneNumber.pristine" class="alert alert-danger">
+                    Phone Number is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="userAddress">User Address</label>
+                <div class="input-group">
+                    <input id="userAddress" class="form-control" placeholder={{itemUser.address}} type="text" [(ngModel)]='newUserDetails.address' [ngModelOptions]="{standalone: true}" required name="address" #address="ngModel">
+                </div>
+                <div [hidden]="address.valid || address.pristine" class="alert alert-danger">
+                    Address is required
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="editUser(modal)">Edit User</button>
-        <button type="button" aria-label="Close" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Close</button>
-
+        <button type="button" class="btn btn-outline-dark" [disabled]="!editUserForm.form.valid" (click)="onSubmit(modal)">Add User</button>
+        <button type="button" aria-label="Close" class="btn btn-outline-dark" (click)="onClose(modal)">Close</button>
     </div>
 </ng-template>
 
-<button class="btn btn-primary" (click)="open(content)">Edit</button>
+<button class="btn btn-primary" (click)="open(content)">Edit User</button>
 
 
 <hr>
