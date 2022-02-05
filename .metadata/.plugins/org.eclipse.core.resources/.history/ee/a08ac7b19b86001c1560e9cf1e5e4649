@@ -1,0 +1,46 @@
+package com.ecommerce.spring.reqresmodels;
+
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+
+import com.ecommerce.spring.entities.Brand;
+import com.ecommerce.spring.entities.Categories;
+
+import lombok.Data;
+
+@Data
+public class ProductGetRequestModel {
+	private long productId;
+
+	private String productName;
+
+	private String productDescription;
+
+	private String productPrice;
+	
+	private Categories categories;
+    
+	private Brand brand;
+	
+
+	public ProductGetRequestModel() {
+		super();
+	}
+
+
+	public ProductGetRequestModel(long productId, String productName, String productDescription, String productPrice,
+			Categories categories, Brand brand) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productDescription = productDescription;
+		this.productPrice = productPrice;
+		this.categories = categories;
+		this.brand = brand;
+	}
+
+	
+
+	
+	
+}

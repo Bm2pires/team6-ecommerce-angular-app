@@ -15,7 +15,6 @@ import com.ecommerce.spring.reqresmodels.ProductAddRequestModel;
 import com.ecommerce.spring.reqresmodels.ProductAddResponseModel;
 import com.ecommerce.spring.reqresmodels.ProductEditRequestModel;
 import com.ecommerce.spring.reqresmodels.ProductEditResponseModel;
-import com.ecommerce.spring.reqresmodels.ProductGetResponseModel;
 import com.ecommerce.spring.reqresmodels.UserDetailRequestModel;
 import com.ecommerce.spring.reqresmodels.UserDetailResponseModel;
 
@@ -171,37 +170,30 @@ public class ProductService {
 
 	}
 
-	public ProductGetResponseModel getProdById(long id) {
+	public ProductEditResponseModel getProdById(long id) {
 		ModelMapper mapper = new ModelMapper();
 		Optional<Products> product = prodRepo.findById(id);
 		if(product.isPresent()) {
-			ProductGetResponseModel response = mapper.map(product.get(), ProductGetResponseModel.class);
-				response.setBrand(product.get().getBrand().getBrandName());
-				response.setCategory(product.get().getCategories().getCategoryName());
-				return response;			
+			ProductEditResponseModel response = mapper.map(product, ProductEditResponseModel.class);
+			return response;
 		}else {
 		return null;
 		}
 	}
 
-	public List<ProductGetResponseModel> getAllProd() {
+	public List<ProductEditResponseModel> getAllProd() {
 		ModelMapper mapper = new ModelMapper();
-		List<ProductGetResponseModel> responseList = new ArrayList<>();
+		List<ProductEditResponseModel> responseList = new ArrayList<>();
 		
 		List<Products> list = prodRepo.findAll();
-		
-		if(!list.isEmpty()) {
-			for (Products product : list) {
-				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
-				modelObject.setBrand(product.getBrand().getBrandName());
-				modelObject.setCategory(product.getCategories().getCategoryName());
-				responseList.add(modelObject);
-			}
-			return responseList;
+
+
+		if(product.isPresent()) {
+			ProductEditResponseModel response = mapper.map(product, ProductEditResponseModel.class);
+			return response;
 		}else {
-			return null;
+		return null;
 		}
-		
 	}
 	
 	

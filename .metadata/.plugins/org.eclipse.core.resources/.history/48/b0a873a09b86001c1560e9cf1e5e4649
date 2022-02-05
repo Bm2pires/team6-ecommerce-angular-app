@@ -20,7 +20,6 @@ import com.ecommerce.spring.reqresmodels.ProductAddRequestModel;
 import com.ecommerce.spring.reqresmodels.ProductAddResponseModel;
 import com.ecommerce.spring.reqresmodels.ProductEditRequestModel;
 import com.ecommerce.spring.reqresmodels.ProductEditResponseModel;
-import com.ecommerce.spring.reqresmodels.ProductGetResponseModel;
 import com.ecommerce.spring.reqresmodels.UserLoginRequestModel;
 import com.ecommerce.spring.reqresmodels.UserLoginResponseModel;
 import com.ecommerce.spring.services.ProductService;
@@ -63,22 +62,22 @@ public class ProductController {
 	}
 	
 	@GetMapping(value = "/getProd", produces = "application/json")
-	public ResponseEntity<ProductGetResponseModel> getProdById(@RequestParam(name = "id") long id) {
-		ProductGetResponseModel response = prodService.getProdById(id);
+	public ResponseEntity<ProductEditResponseModel> getProdById(@RequestParam(name = "id") long id) {
+		ProductEditResponseModel response = prodService.getProdById(id);
 		if(response != null) {
-			return new ResponseEntity<ProductGetResponseModel>(response ,HttpStatus.OK);
+			return new ResponseEntity<ProductEditResponseModel>(response ,HttpStatus.OK);
 		}else {
-			return new ResponseEntity<ProductGetResponseModel>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<ProductEditResponseModel>(HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping(value = "/getAllProd", produces = "application/json")
-	public ResponseEntity<List<ProductGetResponseModel>> getAllProd() {
-		List<ProductGetResponseModel> response = prodService.getAllProd();
+	public ResponseEntity<List<ProductEditResponseModel>> getAllProd() {
+		List<ProductEditResponseModel> response = prodService.getAllProd();
 		if(!response.isEmpty()) {
-			return new ResponseEntity<List<ProductGetResponseModel>>(response, HttpStatus.OK);
+			return new ResponseEntity<List<ProductEditResponseModel>>(response, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<List<ProductGetResponseModel>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<List<ProductEditResponseModel>>(HttpStatus.NOT_FOUND);
 		}
 	}
 
