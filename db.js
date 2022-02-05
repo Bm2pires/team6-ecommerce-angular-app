@@ -26,5 +26,19 @@ const getUser = (req, res) => {
     }
   );
 };
+const postUsers = (req, res) => {
+  const {email, password, title, firstname, lastname, dob, contactNo,  address } = req.body;
+  db.query(
+    "INSERT INTO users (email_address, password, title, firstname, lastname, dob, phone_number, address) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+    [email, password, title, firstname, lastname, dob, contactNo,  address],
+    (error, result) => {
+      if (error) {
+        throw error;
+      }
+      res.status(201).json({ message: "New User Added Successfully ..." });
+      
+    }
+  );
+};
 
-module.exports = { getUser };
+module.exports = { getUser, postUsers };

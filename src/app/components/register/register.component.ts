@@ -1,44 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { UserService } from 'src/app/services/register.service';
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
-  email: string = '';
-  title:string='';
-  firstName:string='';
-  lastName:string='';
-  dob:string='';
-  contactNo:string='';
-  password: string = '';
-  address:string='';
-  constructor() {}
-  ngOnInit(): void {}
+export class RegisterComponent  {
+  @ViewChild('form', { static: false })
+  signupForm: NgForm;
+  newUser = {
+    email:'',
+    title: '',
+    firstname: '',
+    lastname: '',
+    dob: '',
+    contactNo: '',
+    password: '',
+    address:'',
+  };
+  date=new Date();
+  todaysDate= formatDate(this.date, 'yyyy-MM-dd', 'en-US');
+    constructor(private user: UserService) {}
 
-
-  onSubmit(form: NgForm) {
-    // code to execute after form is submitted
-    console.log('Submitted');
-    console.log(form);
-
-    this.email = form.value.email;
-    this.title=form.value.title;
-    this.firstName = form.value.firstName;
-    this.lastName = form.value.lastName;
-    this.dob = form.value.dob;
-    this.contactNo=form.value.contactNo;
-    this.password = form.value.password;
-    this.address=form.value.address;
-
-    console.log(this.email);
-    // console.log(this.title);
-    console.log(this.firstName);
-    console.log(this.lastName);
-    console.log(this.dob);
-    console.log(this.contactNo);
-    console.log(this.password);
-    console.log(this.address);
-  }}
+    onSubmit() {
+      this.newUser.email = this.signupForm.value.email;
+      this.newUser.title = this.signupForm.value.title;
+      this.newUser.firstname = this.signupForm.value.firstname;
+      this.newUser.lastname = this.signupForm.value.lastname;
+      this.newUser.dob = this.signupForm.value.dob;
+      this.newUser.contactNo = this.signupForm.value.contactNo;
+      this.newUser.password = this.signupForm.value.password;
+      this.newUser.address = this.signupForm.value.address;
+      this.signupForm.reset();
+  
+      this.user.addUsers(this.newUser);
+    }
+}

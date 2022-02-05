@@ -16,10 +16,12 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
+
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'registration', component: RegisterComponent },
+ { path: 'registration', component: RegisterComponent },
+
 ];
 
 @NgModule({

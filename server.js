@@ -9,6 +9,7 @@ const port = 3000;
 app.use(cors(), bodyParser.json());
 
 app.post("/login", db.getUser);
+app.post("/register", db.postUsers);
 
 app.listen(port, () => {
   console.log(`Server app listening at http://localhost:${port}`);
