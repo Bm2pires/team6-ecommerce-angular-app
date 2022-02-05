@@ -67,8 +67,8 @@ export class ModalUserComponent implements OnInit {
     if(Number.isNaN(phoneNumberCheck)){
       this.errors.push("Phone number must be digitis");
     }
-    if(this.newUserDetails.phoneNumber.length != 11){
-      this.errors.push("Phone number must be 11 digitis");
+    if(this.newUserDetails.phoneNumber.length != 10){
+      this.errors.push("Phone number must be 10 digitis");
     }
     const emailCheck = Array.from(this.newUserDetails.email);
     let emailValid = false;

@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="prodName">Product Name</label>
                 <div class="input-group">
-                    <input id="prodName" class="form-control" placeholder={{item.productName}} type="text" [(ngModel)]="productDetails.productName" [ngModelOptions]="{standalone: true}" required name="prodName" #prodName="ngModel">
+                    <input id="prodName" maxLength="50" class="form-control" placeholder={{item.productName}} type="text" [(ngModel)]="productDetails.productName" [ngModelOptions]="{standalone: true}" required name="prodName" #prodName="ngModel">
                 </div>
                 <div [hidden]="prodName.valid || prodName.pristine" class="alert alert-danger">
                     Product Name is required
@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="prodDescription">Product Description</label>
                 <div class="input-group">
-                    <input id="prodDescription" class="form-control" placeholder={{item.productDesc}} [(ngModel)]='productDetails.productDesc' [ngModelOptions]="{standalone: true}" required name="prodDesc" #prodDesc="ngModel">
+                    <input id="prodDescription" maxLength="250" class="form-control" placeholder={{item.productDesc}} [(ngModel)]='productDetails.productDesc' [ngModelOptions]="{standalone: true}" required name="prodDesc" #prodDesc="ngModel">
                 </div>
                 <div [hidden]="prodDesc.valid || prodDesc.pristine" class="alert alert-danger">
                     Product Description is required
@@ -43,7 +43,7 @@
             <div class="form-group">
                 <label for="prodPrice">Product Price</label>
                 <div class="input-group">
-                    <input id="prodPrice" class="form-control" value={{item.productPrice}} type="number" [(ngModel)]='productDetails.productPrice' [ngModelOptions]="{standalone: true}" required name="prodPrice" #prodPrice="ngModel">
+                    <input id="prodPrice" class="form-control" min=0 value={{item.productPrice}} type="number" [(ngModel)]='productDetails.productPrice' [ngModelOptions]="{standalone: true}" required name="prodPrice" #prodPrice="ngModel">
                 </div>
                 <!-- <div [hidden]="prodPrice.valid || prodPrice.pristine" class="alert alert-danger">
                     Product Price is required
