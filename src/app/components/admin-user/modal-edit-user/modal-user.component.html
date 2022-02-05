@@ -52,7 +52,7 @@
             <div class="form-group">
                 <label for="userDOB">User DOB</label>
                 <div class="input-group">
-                    <input id="userDOB" class="form-control" type="date" [defaultValue]="itemUser.dob" [(ngModel)]='newUserDetails.dob' [ngModelOptions]="{standalone: true}" required name="dob" #dob="ngModel">
+                    <input id="userDOB" class="form-control" type="date" [(ngModel)]='newUserDetails.dob' [ngModelOptions]="{standalone: true}" required name="dob" #dob="ngModel">
                 </div>
                 <div [hidden]="dob.valid || dob.pristine" class="alert alert-danger">
                     D.O.B is required

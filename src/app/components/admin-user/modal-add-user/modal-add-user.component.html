@@ -52,7 +52,7 @@
             <div class="form-group">
                 <label for="userDOB">User DOB</label>
                 <div class="input-group">
-                    <input id="userDOB" class="form-control" type="date" placeholder="DOB" [(ngModel)]='userDetails.dob' [ngModelOptions]="{standalone: true}" required name="dob" #dob="ngModel">
+                    <input id="userDOB" class="form-control" type="date" [(ngModel)]='userDetails.dob' [ngModelOptions]="{standalone: true}" required name="dob" #dob="ngModel">
                 </div>
                 <div [hidden]="dob.valid || dob.pristine" class="alert alert-danger">
                     D.O.B is required
@@ -61,7 +61,7 @@
             <div class="form-group">
                 <label for="userPhone">User phone number</label>
                 <div class="input-group">
-                    <input id="userPhone" maxlength="10" class="form-control" placeholder="Phonenumber" type="text" [(ngModel)]='userDetails.phoneNumber' [ngModelOptions]="{standalone: true}" required name="phoneNumber" #phoneNumber="ngModel">
+                    <input id="userPhone" maxlength="10" class="form-control" placeholder="Phonenumber" type="text" [(ngModel)]='userDetails.phoneNumber ' [ngModelOptions]="{standalone: true}" required name="phoneNumber" #phoneNumber="ngModel">
                 </div>
                 <div [hidden]="phoneNumber.valid || phoneNumber.pristine" class="alert alert-danger">
                     Phone Number is required
@@ -70,7 +70,7 @@
             <div class="form-group">
                 <label for="userAddress">User Address</label>
                 <div class="input-group">
-                    <input id="userAddress" maxlength="150" class="form-control" placeholder="Address" type="text" [(ngModel)]='userDetails.address' [ngModelOptions]="{standalone: true}" required name="address" #address="ngModel">
+                    <input id="userAddress" maxlength="150" class="form-control" placeholder="Address" type="text" [(ngModel)]='userDetails.address ' [ngModelOptions]="{standalone: true}" required name="address" #address="ngModel">
                 </div>
                 <div [hidden]="address.valid || address.pristine" class="alert alert-danger">
                     Address is required

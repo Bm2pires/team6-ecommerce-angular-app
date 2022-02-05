@@ -5,7 +5,7 @@ export interface UserDetails {
     email: String,
     password: String,
     title: String,
-    dob: Date,
+    dob: string|null,
     phoneNumber: String,
     address: String
 

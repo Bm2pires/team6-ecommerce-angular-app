@@ -17,10 +17,10 @@ export class ModalAddUserComponent implements OnInit {
 
   userEmail:String = "";
   userPass:String = "";
-  userTitle:String = "";
+  userTitle:String = "Mr";
   userFname: String = "";
   userLname:String = "";
-  dob:Date = new Date;
+  dob:string|null = new Date().toLocaleDateString();
   phonenumber:String = "";
   address:String = "";
 
@@ -29,7 +29,7 @@ export class ModalAddUserComponent implements OnInit {
     email: this.userEmail,
     password: this.userPass,
     title: this.userTitle,
-    dob: this.dob,
+    dob: new Date().toLocaleDateString(),
     phoneNumber: this.phonenumber,
     address: this.address };
 
@@ -43,6 +43,9 @@ export class ModalAddUserComponent implements OnInit {
   closeResult = '';
 
   constructor(private modalService: NgbModal, private datePipe: DatePipe) {
+    // "2000-04-10"
+    var date = new Date();
+    this.userDetails.dob = this.datePipe.transform(date,"yyyy-MM-dd")
   }
   ngOnInit(): void {
   }
@@ -79,14 +82,14 @@ export class ModalAddUserComponent implements OnInit {
       this.errors.push("Email must contain an @");
     }
 
-    const dateCheck = this.userDetails.dob.toString();
+    const dateCheck = this.userDetails.dob!.toString();
     let today = this.datePipe.transform(Date.now(),'yyyy-MM-dd')!;
 
     if(dateCheck > today){
       this.errors.push("Date of birth cannot be in the future");
     }
     let today2 = new Date();
-    var birthDate = new Date(this.userDetails.dob);
+    var birthDate = new Date(this.userDetails.dob!);
     var age = today2.getFullYear() - birthDate.getFullYear();
     var m = today2.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today2.getDate() < birthDate.getDate())) {
@@ -135,7 +138,7 @@ export class ModalAddUserComponent implements OnInit {
     this.userTitle = "";
     this.userFname = "";
     this.userLname = "";
-    this.dob = new Date;
+    this.dob = new Date().toLocaleDateString();
     this.phonenumber = "";
     this.address = "";
 
@@ -144,7 +147,7 @@ export class ModalAddUserComponent implements OnInit {
       email: this.userEmail,
       password: this.userPass,
       title: this.userTitle,
-      dob: this.dob,
+      dob: new Date().toLocaleDateString(),
       phoneNumber: this.phonenumber,
       address: this.address
     };

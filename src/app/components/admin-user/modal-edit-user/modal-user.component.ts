@@ -21,8 +21,8 @@ export class ModalUserComponent implements OnInit {
   newUserLName: String = "";
   newUserEmail: String = "";
   newUserPassword: String = "";
-  newUserTitle: String = "";
-  newUserDOB: Date = new Date;
+  newUserTitle: String = "Mr";
+  newUserDOB: string | null = new Date().toLocaleDateString();
   newUserPhonenumebr: String = "";
   newUserAddress: String = "";
 
@@ -44,6 +44,7 @@ export class ModalUserComponent implements OnInit {
   closeResult = '';
 
   constructor(private modalService: NgbModal, private datePipe: DatePipe) {
+
 
   }
   ngOnInit(): void {
@@ -81,14 +82,14 @@ export class ModalUserComponent implements OnInit {
       this.errors.push("Email must contain an @");
     }
 
-    const dateCheck = this.newUserDetails.dob.toString();
+    const dateCheck = this.newUserDetails.dob!.toString();
     let today = this.datePipe.transform(Date.now(),'yyyy-MM-dd')!;
 
     if(dateCheck > today){
       this.errors.push("Date of birth cannot be in the future");
     }
     let today2 = new Date();
-    var birthDate = new Date(this.newUserDetails.dob);
+    var birthDate = new Date(this.newUserDetails.dob!);
     var age = today2.getFullYear() - birthDate.getFullYear();
     var m = today2.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today2.getDate() < birthDate.getDate())) {
@@ -128,6 +129,10 @@ export class ModalUserComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+
+    var date = this.itemUser.dob;
+    this.newUserDetails.dob = this.datePipe.transform(date,"yyyy-MM-dd")
+    this.newUserDetails.title = this.itemUser.title;
   }
 
   private getDismissReason(reason: any): string {
@@ -151,7 +156,7 @@ export class ModalUserComponent implements OnInit {
     this.newUserTitle = "";
     this.newUserFName = "";
     this.newUserLName = "";
-    this.newUserDOB = new Date;
+    this.newUserDOB = new Date().toLocaleDateString();
     this.newUserPhonenumebr = "";
     this.newUserAddress = "";
 

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { UserDetails } from 'src/app/services/userDetails';
 
@@ -29,10 +30,10 @@ export class UserInformationComponent implements OnInit {
   // };
 
     emailNew: string = "Current";
-    titleNew: string = "Current"
+    titleNew: string = "Mr"
     firstnameNew: string = "Current"
     lastnameNew:string  = "Current"
-    dateofbirthNew: Date = new Date
+    dateofbirthNew: string | null = new Date().toLocaleDateString();
     contactnumberNew: string = "Current"
     addressNew:string = "Current"
     passwordNew:string = "Current"
@@ -53,7 +54,7 @@ export class UserInformationComponent implements OnInit {
       email: '',
       password: '',
       title: '',
-      dob: new Date,
+      dob: new Date().toLocaleDateString(),
       phoneNumber: '',
       address: ''
     };
@@ -68,7 +69,10 @@ export class UserInformationComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(private datePipe: DatePipe) {
+    this.newUserDetails.dob = this.datePipe.transform(this.newUserDetails.dob,"yyyy-MM-dd")
+
+  }
 
   ngOnInit(): void {
   }
@@ -110,7 +114,7 @@ export class UserInformationComponent implements OnInit {
     this.oldUserDetails.title = '';
     this.oldUserDetails.firstName = '';
     this.oldUserDetails.lastName = '';
-    this.oldUserDetails.dob = new Date;
+    this.oldUserDetails.dob = new Date().toLocaleDateString();
     this.oldUserDetails.phoneNumber = '';
     this.oldUserDetails.address = '';
 
@@ -142,13 +146,15 @@ export class UserInformationComponent implements OnInit {
   }
 
   onSubmit() {
+
+
     this.disabledFields = true;
 
     this.oldUserDetails.email = '';
     this.oldUserDetails.title = '';
     this.oldUserDetails.firstName = '';
     this.oldUserDetails.lastName = '';
-    this.oldUserDetails.dob = new Date;
+    this.oldUserDetails.dob = new Date().toLocaleDateString();
     this.oldUserDetails.phoneNumber = '';
     this.oldUserDetails.address = '';
 
