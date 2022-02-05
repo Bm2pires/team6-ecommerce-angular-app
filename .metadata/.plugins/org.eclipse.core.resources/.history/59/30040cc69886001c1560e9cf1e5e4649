@@ -152,7 +152,7 @@ public class ProductService {
 	}
 
 	//Need to check wheather anyone has this product in their order_items table
-	public boolean delProd(long id) {
+	public ProductEditResponseModel delProd(long id) {
 		ModelMapper mapper = new ModelMapper();
 		Optional<Products> product = prodRepo.findById(id);
 		if(product.isPresent()) {
@@ -161,9 +161,9 @@ public class ProductService {
 			ProductEditResponseModel response = mapper.map(product, ProductEditResponseModel.class);
 			prodRepo.save(product.get());
 			prodRepo.deleteById(id);
-			return true;
+			return response;
 		}else {
-		return false;
+		return null;
 		}
 
 	}

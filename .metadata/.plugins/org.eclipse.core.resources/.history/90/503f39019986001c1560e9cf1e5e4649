@@ -49,12 +49,12 @@ public class ProductController {
 	}
 	
 	@DeleteMapping(value = "/delProd", produces = "application/json")
-	public ResponseEntity<String> delProd(@RequestParam(name = "id") long id) {
+	public ResponseEntity<ProductEditResponseModel> delProd(@RequestParam(name = "id") long id) {
 		boolean deleted = prodService.delProd(id);
 		if(deleted) {
-			return new ResponseEntity<String>("Product Deleted",HttpStatus.OK);
+			return new ResponseEntity<ProductEditResponseModel>(predm, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<String>("Deletion unsuccesfull", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<ProductEditResponseModel>(HttpStatus.NOT_FOUND);
 		}
 	}
 
