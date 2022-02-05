@@ -29,7 +29,7 @@ public class UserLoginService {
 				"012349567", "Paris, France", false);
 		userRepository.save(u2);
 		// try to find the requested user in the repository
-		User user = userRepository.findByEmail(requestModel.getEmail());
+		User user = userRepository.findByEmail(requestModel.getEmail()).get();
 		System.out.println(user);
 		if (user == null) {
 			System.out.println("Error");

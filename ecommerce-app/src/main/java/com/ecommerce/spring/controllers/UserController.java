@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.spring.repositories.UserRepository;
+import com.ecommerce.spring.reqresmodels.UserAddingRequestModel;
+import com.ecommerce.spring.reqresmodels.UserAddingResponseModel;
 import com.ecommerce.spring.reqresmodels.UserDetailRequestModel;
 import com.ecommerce.spring.reqresmodels.UserDetailResponseModel;
 import com.ecommerce.spring.reqresmodels.UserLoginRequestModel;
 import com.ecommerce.spring.reqresmodels.UserLoginResponseModel;
-import com.ecommerce.spring.services.UserEditService;
+import com.ecommerce.spring.services.UserService;
 import com.ecommerce.spring.services.UserLoginService;
 
 @RestController
@@ -29,7 +31,7 @@ public class UserController {
 	UserLoginService userLoginService;
 	
 	@Autowired
-	UserEditService userEditService;
+	UserService userEditService;
 	
 
 	@PostMapping(value = "/login", produces = "application/json")
@@ -46,6 +48,16 @@ public class UserController {
 			return new ResponseEntity<UserDetailResponseModel>(udrm, HttpStatus.OK);
 		}else {
 			return new ResponseEntity<UserDetailResponseModel>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@PostMapping(value = "/addUser", produces = "application/json")
+	public ResponseEntity<UserAddingResponseModel> addUser(@RequestBody UserAddingRequestModel requestModel) {
+		UserAddingResponseModel userResponse = userEditService.addUser(requestModel);
+		if(userResponse != null) {
+			return new ResponseEntity<UserAddingResponseModel>(userResponse, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<UserAddingResponseModel>(HttpStatus.NOT_MODIFIED);
 		}
 	}
 	
