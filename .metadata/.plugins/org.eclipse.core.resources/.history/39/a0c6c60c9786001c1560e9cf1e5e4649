@@ -57,7 +57,7 @@ public class ProductService {
 				product.setProductDescription(requestModel.getProductDescription());
 				product.setProductPrice(requestModel.getProductPrice());
 
-				prodRepo.save(product);
+				prodRepo.save(product));
 				ProductAddResponseModel response = mapper.map(requestModel, ProductAddResponseModel.class);
 
 				return response;

@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ecommerce.spring.reqresmodels.ProductAddRequestModel;
-import com.ecommerce.spring.reqresmodels.ProductAddResponseModel;
 import com.ecommerce.spring.reqresmodels.ProductEditRequestModel;
 import com.ecommerce.spring.reqresmodels.ProductEditResponseModel;
 import com.ecommerce.spring.reqresmodels.UserLoginRequestModel;
@@ -37,12 +35,12 @@ public class ProductController {
 	}
 	
 	@PostMapping(value = "/addProd", produces = "application/json")
-	public ResponseEntity<ProductAddResponseModel> addProd(@RequestBody ProductAddRequestModel requestModel) {
-		ProductAddResponseModel predm = prodService.editProd(requestModel);
+	public ResponseEntity<ProductEditResponseModel> addProd(@RequestBody ProductEditRequestModel requestModel) {
+		ProductEditResponseModel predm = prodService.editProd(requestModel);
 		if(predm != null) {
-			return new ResponseEntity<ProductAddResponseModel>(predm, HttpStatus.OK);
+			return new ResponseEntity<ProductEditResponseModel>(predm, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<ProductAddResponseModel>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<ProductEditResponseModel>(HttpStatus.NOT_FOUND);
 		}
 	}
 

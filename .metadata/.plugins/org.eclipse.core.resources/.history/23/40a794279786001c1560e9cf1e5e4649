@@ -38,7 +38,7 @@ public class ProductController {
 	
 	@PostMapping(value = "/addProd", produces = "application/json")
 	public ResponseEntity<ProductAddResponseModel> addProd(@RequestBody ProductAddRequestModel requestModel) {
-		ProductAddResponseModel predm = prodService.editProd(requestModel);
+		ProductAddRequestModel predm = prodService.editProd(requestModel);
 		if(predm != null) {
 			return new ResponseEntity<ProductAddResponseModel>(predm, HttpStatus.OK);
 		}else {

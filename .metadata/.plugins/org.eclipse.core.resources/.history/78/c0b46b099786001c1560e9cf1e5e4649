@@ -48,17 +48,17 @@ public class ProductService {
 	
 	public ProductAddResponseModel editProd(ProductAddRequestModel requestModel) {
 		ModelMapper mapper = new ModelMapper();
-		Products product = new Products();
+		Products product = new Products;
 		boolean valid = validateInput(requestModel);
 		boolean duplicateFields = checkUniqueFields(requestModel);
 		if(valid && duplicateFields) {
 			if(product != null) {		
-				product.setProductName(requestModel.getProductName());
-				product.setProductDescription(requestModel.getProductDescription());
-				product.setProductPrice(requestModel.getProductPrice());
+				product.get().setProductName(requestModel.getProductName());
+				product.get().setProductDescription(requestModel.getProductDescription());
+				product.get().setProductPrice(requestModel.getProductPrice());
 
-				prodRepo.save(product);
-				ProductAddResponseModel response = mapper.map(requestModel, ProductAddResponseModel.class);
+				prodRepo.save(product.get());
+				ProductEditResponseModel response = mapper.map(requestModel, ProductEditResponseModel.class);
 
 				return response;
 			}else {
@@ -131,25 +131,8 @@ public class ProductService {
 			validInput = false;
 		}
 
-		return validInput;
-		
-	}
-	
-	public boolean validateInput(ProductAddRequestModel requestModel) {
-		boolean validInput = true;
-		if(requestModel.getProductName().length() > 50) {
-			validInput = false;
-		}
-		if(requestModel.getProductDescription().length() > 250) {
-			validInput = false;
-		}
-		if(requestModel.getProductPrice() == null) {
-			validInput = false;
-		}
 
 		return validInput;
 		
 	}
-	
-	
 }
