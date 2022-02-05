@@ -1,0 +1,5 @@
+package com.ecommerce.spring.services;
+
+public class ProductService {
+
+}

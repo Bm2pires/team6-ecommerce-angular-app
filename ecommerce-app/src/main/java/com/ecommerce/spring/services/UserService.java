@@ -27,7 +27,6 @@ public class UserService {
 	UserRepository userRepository;
 	
 	public UserDetailResponseModel editUser(UserDetailRequestModel requestModel) {
-		ModelMapper mapper = new ModelMapper();
 		Optional<User> user = userRepository.findById(requestModel.getId());
 		boolean valid = validateInput(requestModel);
 		boolean duplicateEmail = checkUniqueEmail(requestModel);

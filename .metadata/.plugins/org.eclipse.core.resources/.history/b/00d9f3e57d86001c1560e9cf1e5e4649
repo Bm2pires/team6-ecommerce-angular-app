@@ -1,0 +1,8 @@
+package com.ecommerce.spring.services;
+
+@Service
+public class ProductService {
+
+	@Autowired
+	ProductRepository prodRepo
+}
