@@ -1,8 +1,6 @@
 package com.ecommerce.spring.services;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -18,7 +16,6 @@ import com.ecommerce.spring.entities.Products;
 import com.ecommerce.spring.entities.User;
 import com.ecommerce.spring.repositories.UserRepository;
 import com.ecommerce.spring.reqresmodels.ProductEditResponseModel;
-import com.ecommerce.spring.reqresmodels.ProductGetResponseModel;
 import com.ecommerce.spring.reqresmodels.UserAddingRequestModel;
 import com.ecommerce.spring.reqresmodels.UserAddingResponseModel;
 import com.ecommerce.spring.reqresmodels.UserDetailRequestModel;
@@ -184,40 +181,13 @@ public class UserService {
 	}
 
 	public boolean delUser(long id) {
+		ModelMapper mapper = new ModelMapper();
 		Optional<User> user = userRepository.findById(id);
 		if(user.isPresent()) {
 			userRepository.deleteById(id);
 			return true;
 		}else {
 		return false;
-		}
-	}
-
-	public UserAddingRequestModel getUserById(long id) {
-		ModelMapper mapper = new ModelMapper();
-		Optional<User> user = userRepository.findById(id);
-		if(user.isPresent()) {
-			UserAddingRequestModel response = mapper.map(user.get(), UserAddingRequestModel.class);
-				return response;			
-		}else {
-		return null;
-		}
-	}
-
-	public List<UserAddingRequestModel> getAllUser() {
-		ModelMapper mapper = new ModelMapper();
-		List<UserAddingRequestModel> responseList = new ArrayList<>();
-		
-		List<User> list = userRepository.findAll();
-		
-		if(!list.isEmpty()) {
-			for (User user : list) {
-				UserAddingRequestModel modelObject = mapper.map(user, UserAddingRequestModel.class);
-				responseList.add(modelObject);
-			}
-			return responseList;
-		}else {
-			return null;
 		}
 	}
 }

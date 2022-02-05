@@ -1,20 +1,16 @@
 package com.ecommerce.spring.controllers;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.spring.repositories.UserRepository;
@@ -62,36 +58,6 @@ public class UserController {
 			return new ResponseEntity<UserAddingResponseModel>(userResponse, HttpStatus.OK);
 		}else {
 			return new ResponseEntity<UserAddingResponseModel>(HttpStatus.NOT_MODIFIED);
-		}
-	}
-	
-	@DeleteMapping(value = "/delUser", produces = "application/json")
-	public ResponseEntity<String> delUser(@RequestParam long id) {
-		boolean userDeleted = userEditService.delUser(id);
-		if(userDeleted) {
-			return new ResponseEntity<String>("User deleted", HttpStatus.OK);
-		}else {
-			return new ResponseEntity<String>("Deletion Unsuccesfull", HttpStatus.NOT_MODIFIED);
-		}
-	}
-	
-	@GetMapping(value = "/getUser", produces = "application/json")
-	public ResponseEntity<UserAddingRequestModel> getUserById(@RequestParam long id) {
-		UserAddingRequestModel user = userEditService.getUserById(id);
-		if(user != null) {
-			return new ResponseEntity<UserAddingRequestModel>(user, HttpStatus.OK);
-		}else {
-			return new ResponseEntity<UserAddingRequestModel>( HttpStatus.NOT_MODIFIED);
-		}
-	}
-	
-	@GetMapping(value = "/getAllUsers", produces = "application/json")
-	public ResponseEntity<List<UserAddingRequestModel>> getAllUser() {
-		List<UserAddingRequestModel> listOfUsers = userEditService.getAllUser();
-		if(!listOfUsers.isEmpty()) {
-			return new ResponseEntity<List<UserAddingRequestModel>>(listOfUsers, HttpStatus.OK);
-		}else {
-			return new ResponseEntity<List<UserAddingRequestModel>>(HttpStatus.NOT_MODIFIED);
 		}
 	}
 	
