@@ -23,7 +23,10 @@ export class ProductService {
   }
 
   addProd(product: ProductModify): Observable<ProductModify> {
-    // return this.http.post<ProductModify>(this.baseUrl + "addProd", JSON.stringify(product) , this.headers);
     return this.http.post<ProductModify>(this.baseUrl + "addProd", product)
+  }
+
+  editProd(product: ProductDetails): Observable<ProductDetails> {
+    return this.http.put<ProductDetails>(this.baseUrl + "editProd", product)
   }
 }

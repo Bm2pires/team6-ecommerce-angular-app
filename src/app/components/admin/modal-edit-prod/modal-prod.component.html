@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="prodName">Product Name</label>
                 <div class="input-group">
-                    <input id="prodName" maxLength="50" class="form-control" placeholder={{item.productName}} type="text" [(ngModel)]="productModify.productName" [ngModelOptions]="{standalone: true}" required name="prodName" #prodName="ngModel">
+                    <input id="prodName" maxLength="50" class="form-control" placeholder={{item.productName}} type="text" [(ngModel)]="productDetails.productName" [ngModelOptions]="{standalone: true}" required name="prodName" #prodName="ngModel">
                 </div>
                 <div [hidden]="prodName.valid || prodName.pristine" class="alert alert-danger">
                     Product Name is required
@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="prodDescription">Product Description</label>
                 <div class="input-group">
-                    <input id="prodDescription" maxLength="250" class="form-control" placeholder={{item.productDesc}} [(ngModel)]='productModify.productDescription' [ngModelOptions]="{standalone: true}" required name="prodDesc" #prodDesc="ngModel">
+                    <input id="prodDescription" maxLength="250" class="form-control" placeholder={{item.productDescription}} [(ngModel)]='productDetails.productDescription' [ngModelOptions]="{standalone: true}" required name="prodDesc" #prodDesc="ngModel">
                 </div>
                 <div [hidden]="prodDesc.valid || prodDesc.pristine" class="alert alert-danger">
                     Product Description is required
@@ -43,13 +43,13 @@
             <div class="form-group">
                 <label for="prodPrice">Product Price</label>
                 <div class="input-group">
-                    <input id="prodPrice" class="form-control" min=0 value={{item.productPrice}} type="number" [(ngModel)]='productModify.productPrice' [ngModelOptions]="{standalone: true}" required name="prodPrice" #prodPrice="ngModel">
+                    <input id="prodPrice" class="form-control" min=0 value={{item.productPrice}} type="number" [(ngModel)]='productDetails.productPrice' [ngModelOptions]="{standalone: true}" required name="prodPrice" #prodPrice="ngModel">
                 </div>
             </div>
             <div class="form-group">
                 <label for="prodDescription">Product Brand</label>
                 <div class="input-group">
-                    <input id="prodBrand" maxLength="30" class="form-control" placeholder={{item.brand}} [(ngModel)]='productModify.productBrand' [ngModelOptions]="{standalone: true}" required name="prodBrand" #prodBrand="ngModel">
+                    <input id="prodBrand" maxLength="30" class="form-control" placeholder={{item.productBrand}} [(ngModel)]='productDetails.productBrand' [ngModelOptions]="{standalone: true}" required name="prodBrand" #prodBrand="ngModel">
                 </div>
                 <div [hidden]="prodBrand.valid || prodBrand.pristine" class="alert alert-danger">
                     Product Brand is required
@@ -58,7 +58,7 @@
             <div class="form-group">
                 <label for="prodDescription">Product Category</label>
                 <div class="input-group">
-                    <input id="prodCategory" maxLength="30" class="form-control" placeholder={{item.category}} [(ngModel)]='productModify.productCategory' [ngModelOptions]="{standalone: true}" required name="prodCategory" #prodCategory="ngModel">
+                    <input id="prodCategory" maxLength="30" class="form-control" placeholder={{item.productCategory}} [(ngModel)]='productDetails.productCategory' [ngModelOptions]="{standalone: true}" required name="prodCategory" #prodCategory="ngModel">
                 </div>
                 <div [hidden]="prodCategory.valid || prodCategory.pristine" class="alert alert-danger">
                     Product Category is required

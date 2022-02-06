@@ -34,8 +34,7 @@ public class ProductController {
 	@Autowired
 	ProductService prodService;
 	
-	@PutMapping(value = "/editProd", produces = "application/json", consumes = "application/json")
-	@CrossOrigin(origins = "http://localhost:4200")
+	@PutMapping(value = "/editProd", produces = "application/json")
 	public ResponseEntity<ProductEditResponseModel> editProd(@RequestBody ProductEditRequestModel requestModel) {
 		ProductEditResponseModel predm = prodService.editProd(requestModel);
 		if(predm != null) {

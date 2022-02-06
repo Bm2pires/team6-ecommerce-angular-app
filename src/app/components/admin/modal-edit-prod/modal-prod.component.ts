@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductService } from 'src/app/services/product.service';
 import { ProductDetails } from 'src/app/services/productDetails';
 import { ProductModify } from 'src/app/services/productModify';
 
@@ -10,7 +11,7 @@ import { ProductModify } from 'src/app/services/productModify';
 })
 export class ModalComponent implements OnInit {
   @Input()
-  item!: { productId: Number; productName: String; productDesc: String; productPrice: Number; brand: String, category: String};
+  item!: { productId: Number; productName: String; productDescription: String; productPrice: Number; productBrand: String, productCategory: String};
 
 
   errors: Array<string> = [];
@@ -23,12 +24,13 @@ export class ModalComponent implements OnInit {
   newProductCategory: String = "";
 
 
-  productModify: ProductModify = {
+  productDetails: ProductDetails = {
+    productId: 0,
     productName: this.newProductName,
     productDescription: this.newProductDesc,
     productPrice: this.newProductPrice,
     productBrand: this.newProdutBrand,
-    productCategory: this.newProductCategory
+    productCategory: this.newProductCategory,
   };
 
   submitted = false;
@@ -36,14 +38,21 @@ export class ModalComponent implements OnInit {
 
   closeResult = '';
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private prodService: ProductService) {
+  }
   ngOnInit(): void {
+    this.productDetails.productId = this.item.productId;
+
   }
 
   onSubmit(modal: { close: () => void; }) {
     this.submitted = true;
     this.validate();
     if(this.valid){
+      this.prodService.editProd(this.productDetails).subscribe(data => {
+        console.log(data);
+      });
+
       modal.close();
       this.reset();
     }else{
@@ -53,15 +62,15 @@ export class ModalComponent implements OnInit {
   }
 
   validate() {
-    if(this.productModify.productName.length < 3){
+    if(this.productDetails.productName.length < 3){
       this.errors.push("Product name must be greater than 3 characters");
     }
 
-    if(this.productModify.productDescription.length < 10){
+    if(this.productDetails.productDescription.length < 10){
       this.errors.push("Product description must be greater than 10 characters");
     }
 
-    if(this.productModify.productPrice === 0){
+    if(this.productDetails.productPrice === 0){
       this.errors.push("Product price must not be 0.00");
     }
 
@@ -79,7 +88,7 @@ export class ModalComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
 
-    this.productModify.productPrice = this.item.productPrice;
+    this.productDetails.productPrice = this.item.productPrice;
 
   }
 
@@ -105,7 +114,8 @@ export class ModalComponent implements OnInit {
     this.newProdutBrand = "";
     this.newProductCategory = "";
 
-    this.productModify = {
+    this.productDetails = {
+      productId: this.item.productId,
       productName: this.newProductName,
       productDescription: this.newProductDesc,
       productPrice: this.newProductPrice,
