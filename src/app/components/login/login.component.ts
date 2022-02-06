@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
-import { User } from 'src/app/services/loginUser';
+import { LoginUser } from 'src/app/services/loginUser';
+import { User } from 'src/app/services/User';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,16 @@ export class LoginComponent {
   }
 
   onSubmit(form: NgForm) {
+    let user: User = {
+      email: '',
+      password: '',
+      title: '',
+      firstName: '',
+      lastName: '',
+      phone_number: '',
+      address: '',
+      isAdmin: false,
+    };
     // code to execute after form is submitted
     // console.log('Submitted');
     // console.log(form);
@@ -27,9 +38,11 @@ export class LoginComponent {
     this.email = form.value.email;
     this.password = form.value.password;
 
-    const user: User = { email: this.email, password: this.password };
+    const loginUser: LoginUser = { email: this.email, password: this.password };
 
-    this.loginService.authenticate(user);
+    this.loginService.authenticate(loginUser).subscribe((response) => {
+      console.log(response);
+    });
 
     // this.loginService.getUserFromDB(user).subscribe(
     //   (response) => console.log(response),
