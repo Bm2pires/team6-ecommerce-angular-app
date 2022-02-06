@@ -1,7 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from 'src/app/services/user.service';
 import { UserDetails } from 'src/app/services/userDetails';
+import { UserModify } from 'src/app/services/userModify';
 
 @Component({
   selector: 'app-modal-add-user',
@@ -24,14 +26,13 @@ export class ModalAddUserComponent implements OnInit {
   phonenumber:String = "";
   address:String = "";
 
-  userDetails: UserDetails = {
-    id: 0,
+  userModify: UserModify = {
     firstName: this.userFname,
     lastName: this.userLname,
     email: this.userEmail,
     password: this.userPass,
     title: this.userTitle,
-    dob: new Date().toLocaleDateString(),
+    dateOfBirth: new Date().toLocaleDateString(),
     phoneNumber: this.phonenumber,
     address: this.address };
 
@@ -44,10 +45,10 @@ export class ModalAddUserComponent implements OnInit {
 
   closeResult = '';
 
-  constructor(private modalService: NgbModal, private datePipe: DatePipe) {
+  constructor(private modalService: NgbModal, private datePipe: DatePipe, private userService: UserService) {
     // "2000-04-10"
     var date = new Date();
-    this.userDetails.dob = this.datePipe.transform(date,"yyyy-MM-dd")
+    this.userModify.dateOfBirth = this.datePipe.transform(date,"yyyy-MM-dd")
   }
   ngOnInit(): void {
   }
@@ -57,6 +58,10 @@ export class ModalAddUserComponent implements OnInit {
     this.submitted = true;
     this.validate();
     if(this.valid){
+      this.userService.addUser(this.userModify).subscribe(data => {
+        console.log(data);
+      });
+      this.ngOnInit();
       modal.close();
       this.reset();
     }else{
@@ -66,14 +71,14 @@ export class ModalAddUserComponent implements OnInit {
   }
 
   validate() {
-    const phoneNumberCheck = Number(this.userDetails.phoneNumber);
+    const phoneNumberCheck = Number(this.userModify.phoneNumber);
     if(Number.isNaN(phoneNumberCheck)){
       this.errors.push("Phone number must be digits");
     }
-    if(this.userDetails.phoneNumber.length != 10){
+    if(this.userModify.phoneNumber.length != 10){
       this.errors.push("Phone number must be 10 digits");
     }
-    const emailCheck = Array.from(this.userDetails.email);
+    const emailCheck = Array.from(this.userModify.email);
     let emailValid = false;
     emailCheck.forEach((letter) => {
       if(letter === '@'){
@@ -84,14 +89,14 @@ export class ModalAddUserComponent implements OnInit {
       this.errors.push("Email must contain an @");
     }
 
-    const dateCheck = this.userDetails.dob!.toString();
+    const dateCheck = this.userModify.dateOfBirth!.toString();
     let today = this.datePipe.transform(Date.now(),'yyyy-MM-dd')!;
 
     if(dateCheck > today){
       this.errors.push("Date of birth cannot be in the future");
     }
     let today2 = new Date();
-    var birthDate = new Date(this.userDetails.dob!);
+    var birthDate = new Date(this.userModify.dateOfBirth!);
     var age = today2.getFullYear() - birthDate.getFullYear();
     var m = today2.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today2.getDate() < birthDate.getDate())) {
@@ -144,14 +149,13 @@ export class ModalAddUserComponent implements OnInit {
     this.phonenumber = "";
     this.address = "";
 
-    this.userDetails = {
-      id: 0,
+    this.userModify = {
       firstName: this.userFname,
       lastName: this.userLname,
       email: this.userEmail,
       password: this.userPass,
       title: this.userTitle,
-      dob: new Date().toLocaleDateString(),
+      dateOfBirth: new Date().toLocaleDateString(),
       phoneNumber: this.phonenumber,
       address: this.address
     };

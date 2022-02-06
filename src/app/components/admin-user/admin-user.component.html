@@ -6,8 +6,8 @@
             <p class="card-text">User Email: {{user.email}}</p>
             <p class="card-text">User Password: {{user.password}}</p>
             <p class="card-text">User Title: {{user.title}}</p>
-            <p class="card-text">User D.O.B: {{user.dob | date:"dd/MM/yy"}}</p>
-            <p class="card-text">User Phonenumber: {{user.phoneNumber}}</p>
+            <p class="card-text">User D.O.B: {{user.dateOfBirth | date:"dd/MM/yy"}}</p>
+            <p class="card-text">User Phone Number: {{user.phoneNumber}}</p>
             <p class="card-text">User Address: {{user.address}}</p>
 
             <app-modal-user [itemUser]="user"></app-modal-user>

@@ -67,10 +67,9 @@ public class UserController {
 		}
 	}
 	
-	@DeleteMapping(value = "/delUser/{id}", produces = "application/json")
-	public ResponseEntity<String> delUser(@PathVariable String id) {
-		long userId = Long.parseLong(id.substring(4));
-		boolean userDeleted = userEditService.delUser(userId);
+	@DeleteMapping(value = "/delUser", produces = "application/json")
+	public ResponseEntity<String> delUser(@RequestParam long id) {
+		boolean userDeleted = userEditService.delUser(id);
 		if(userDeleted) {
 			return new ResponseEntity<String>("User deleted", HttpStatus.OK);
 		}else {

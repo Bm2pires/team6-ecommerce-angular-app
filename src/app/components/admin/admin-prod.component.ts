@@ -32,7 +32,6 @@ export class AdminComponent implements OnInit {
     this.prodService.delProd(id).subscribe(data => {
       console.log(data)
     });
-    this.ngOnInit();
   }
 
 }

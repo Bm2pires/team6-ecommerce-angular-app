@@ -17,9 +17,10 @@ public class UserAddingResponseModel {
 	private Date dateOfBirth;
 	private String phoneNumber;
 	private String address;
+	private boolean isAdmin;
 	
 	public UserAddingResponseModel(String firstName, String lastName, String email, String title, String password,
-			Date dateOfBirth, String phoneNumber, String address) {
+			Date dateOfBirth, String phoneNumber, String address, boolean isAdmin) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -29,6 +30,7 @@ public class UserAddingResponseModel {
 		this.dateOfBirth = dateOfBirth;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
+		this.isAdmin = isAdmin;
 	}
 	
 	public UserAddingResponseModel() {

@@ -7,7 +7,7 @@
             <div class="form-group">
                 <label for="userfName">User First Name</label>
                 <div class="input-group">
-                    <input id="userfName" maxlength="20" class="form-control" placeholder="First Name" type="text" [(ngModel)]="userDetails.firstName" [ngModelOptions]="{standalone: true}" required name="fName" #fName="ngModel">
+                    <input id="userfName" maxlength="20" class="form-control" placeholder="First Name" type="text" [(ngModel)]="userModify.firstName" [ngModelOptions]="{standalone: true}" required name="fName" #fName="ngModel">
                 </div>
                 <div [hidden]="fName.valid || fName.pristine" class="alert alert-danger">
                     First Name is required
@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label for="userlName">User Last Name</label>
                 <div class="input-group">
-                    <input id="userlName" maxlength="20" class="form-control" placeholder="Last Name" type="text" [(ngModel)]='userDetails.lastName' [ngModelOptions]="{standalone: true}" required name="lName" #lName="ngModel">
+                    <input id="userlName" maxlength="20" class="form-control" placeholder="Last Name" type="text" [(ngModel)]='userModify.lastName' [ngModelOptions]="{standalone: true}" required name="lName" #lName="ngModel">
                 </div>
                 <div [hidden]="lName.valid || lName.pristine" class="alert alert-danger">
                     Last Name is required
@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="userEmail">User Email</label>
                 <div class="input-group">
-                    <input id="userEmail" maxlength="50" class="form-control" placeholder="Email" type="text" [(ngModel)]='userDetails.email' [ngModelOptions]="{standalone: true}" required name="email" #email="ngModel">
+                    <input id="userEmail" maxlength="50" class="form-control" placeholder="Email" type="text" [(ngModel)]='userModify.email' [ngModelOptions]="{standalone: true}" required name="email" #email="ngModel">
                 </div>
                 <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
                     Email is required
@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="userPass">User password</label>
                 <div class="input-group">
-                    <input id="userPass" maxlength="20" class="form-control" placeholder="Password" type="text" [(ngModel)]='userDetails.password' [ngModelOptions]="{standalone: true}" required name="password" #password="ngModel">
+                    <input id="userPass" maxlength="20" class="form-control" placeholder="Password" type="text" [(ngModel)]='userModify.password' [ngModelOptions]="{standalone: true}" required name="password" #password="ngModel">
                 </div>
                 <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
                     Password is required
@@ -42,7 +42,7 @@
             </div>
             <div class="form-group mt-2">
                 <label for="userTitle">User Title</label>
-                <select class="form-control" id="title" required name="title" [(ngModel)]='userDetails.title' #title="ngModel">
+                <select class="form-control" id="title" required name="title" [(ngModel)]='userModify.title' #title="ngModel">
                     <option *ngFor="let t of titles" [value]="t">{{t}}</option>
                   </select>
             </div>
@@ -52,7 +52,7 @@
             <div class="form-group">
                 <label for="userDOB">User DOB</label>
                 <div class="input-group">
-                    <input id="userDOB" class="form-control" type="date" [(ngModel)]='userDetails.dob' [ngModelOptions]="{standalone: true}" required name="dob" #dob="ngModel">
+                    <input id="userDOB" class="form-control" type="date" [(ngModel)]='userModify.dateOfBirth' [ngModelOptions]="{standalone: true}" required name="dob" #dob="ngModel">
                 </div>
                 <div [hidden]="dob.valid || dob.pristine" class="alert alert-danger">
                     D.O.B is required
@@ -61,7 +61,7 @@
             <div class="form-group">
                 <label for="userPhone">User phone number</label>
                 <div class="input-group">
-                    <input id="userPhone" maxlength="10" class="form-control" placeholder="Phonenumber" type="text" [(ngModel)]='userDetails.phoneNumber ' [ngModelOptions]="{standalone: true}" required name="phoneNumber" #phoneNumber="ngModel">
+                    <input id="userPhone" maxlength="10" class="form-control" placeholder="Phonenumber" type="text" [(ngModel)]='userModify.phoneNumber ' [ngModelOptions]="{standalone: true}" required name="phoneNumber" #phoneNumber="ngModel">
                 </div>
                 <div [hidden]="phoneNumber.valid || phoneNumber.pristine" class="alert alert-danger">
                     Phone Number is required
@@ -70,7 +70,7 @@
             <div class="form-group">
                 <label for="userAddress">User Address</label>
                 <div class="input-group">
-                    <input id="userAddress" maxlength="150" class="form-control" placeholder="Address" type="text" [(ngModel)]='userDetails.address ' [ngModelOptions]="{standalone: true}" required name="address" #address="ngModel">
+                    <input id="userAddress" maxlength="150" class="form-control" placeholder="Address" type="text" [(ngModel)]='userModify.address ' [ngModelOptions]="{standalone: true}" required name="address" #address="ngModel">
                 </div>
                 <div [hidden]="address.valid || address.pristine" class="alert alert-danger">
                     Address is required

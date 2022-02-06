@@ -36,7 +36,7 @@ public class UserService {
 		boolean valid = validateInput(requestModel);
 		boolean duplicateEmail = checkUniqueEmail(requestModel);
 		if(valid && duplicateEmail) {
-			if(user.isPresent()) {		
+			if(user != null) {		
 				user.get().setAddress(requestModel.getAddress());
 				user.get().setDob(requestModel.getDateOfBirth());
 				user.get().setEmail(requestModel.getEmail());
@@ -74,7 +74,6 @@ public class UserService {
 			User user = mapper.map(userModel, User.class);
 			user.setAdmin(false);
 			user.setDob(requestModel.getDateOfBirth());
-			user.setPhone_number(requestModel.getPhoneNumber());
 			userRepository.save(user);
 			return userModel;
 		}else {
@@ -212,8 +211,6 @@ public class UserService {
 		if(!list.isEmpty()) {
 			for (Optional<User> user : list) {
 				UserDetailResponseModel modelObject = mapper.map(user.get(), UserDetailResponseModel.class);
-				modelObject.setDateOfBirth(user.get().getDob());
-				modelObject.setPhoneNumber(user.get().getPhone_number());
 				responseList.add(modelObject);
 			}
 			return responseList;

@@ -46,7 +46,7 @@ export class UserInformationComponent implements OnInit {
       email: this.emailNew,
       password: this.passwordNew,
       title: this.titleNew,
-      dob: this.dateofbirthNew,
+      dateOfBirth: this.dateofbirthNew,
       phoneNumber: this.phoneNumberNew,
       address: this.addressNew
     };
@@ -58,7 +58,7 @@ export class UserInformationComponent implements OnInit {
       email: '',
       password: '',
       title: '',
-      dob: new Date().toLocaleDateString(),
+      dateOfBirth: new Date().toLocaleDateString(),
       phoneNumber: '',
       address: ''
     };
@@ -74,7 +74,7 @@ export class UserInformationComponent implements OnInit {
 
 
   constructor(private datePipe: DatePipe) {
-    this.newUserDetails.dob = this.datePipe.transform(this.newUserDetails.dob,"yyyy-MM-dd")
+    this.newUserDetails.dateOfBirth = this.datePipe.transform(this.newUserDetails.dateOfBirth,"yyyy-MM-dd")
 
   }
 
@@ -97,7 +97,7 @@ export class UserInformationComponent implements OnInit {
     this.oldUserDetails.title = this.newUserDetails.title;
     this.oldUserDetails.firstName = this.newUserDetails.firstName;
     this.oldUserDetails.lastName = this.newUserDetails.lastName;
-    this.oldUserDetails.dob = this.newUserDetails.dob
+    this.oldUserDetails.dateOfBirth = this.newUserDetails.dateOfBirth
     this.oldUserDetails.phoneNumber = this.newUserDetails.phoneNumber;
     this.oldUserDetails.address = this.newUserDetails.address;
   }
@@ -110,7 +110,7 @@ export class UserInformationComponent implements OnInit {
     this.newUserDetails.title =this.oldUserDetails.title;
     this.newUserDetails.firstName=this.oldUserDetails.firstName;
     this.newUserDetails.lastName=this.oldUserDetails.lastName;
-    this.newUserDetails.dob=this.oldUserDetails.dob;
+    this.newUserDetails.dateOfBirth=this.oldUserDetails.dateOfBirth;
     this.newUserDetails.phoneNumber=this.oldUserDetails.phoneNumber;
     this.newUserDetails.address=this.oldUserDetails.address;
 
@@ -118,7 +118,7 @@ export class UserInformationComponent implements OnInit {
     this.oldUserDetails.title = '';
     this.oldUserDetails.firstName = '';
     this.oldUserDetails.lastName = '';
-    this.oldUserDetails.dob = new Date().toLocaleDateString();
+    this.oldUserDetails.dateOfBirth = new Date().toLocaleDateString();
     this.oldUserDetails.phoneNumber = '';
     this.oldUserDetails.address = '';
 
@@ -158,7 +158,7 @@ export class UserInformationComponent implements OnInit {
     this.oldUserDetails.title = '';
     this.oldUserDetails.firstName = '';
     this.oldUserDetails.lastName = '';
-    this.oldUserDetails.dob = new Date().toLocaleDateString();
+    this.oldUserDetails.dateOfBirth = new Date().toLocaleDateString();
     this.oldUserDetails.phoneNumber = '';
     this.oldUserDetails.address = '';
 

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserDetails } from './userDetails';
+import { UserModify } from './userModify';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,23 @@ export class UserService {
 
   constructor(http: HttpClient) {
     this.http = http;
-    this.baseUrl = 'http://localhost:8081/user/getAllUsers';
+    this.baseUrl = 'http://localhost:8081/user/';
    }
 
    findAllUsers(): Observable<UserDetails[]> {
-    return this.http.get<UserDetails[]>(this.baseUrl);
+    return this.http.get<UserDetails[]>(this.baseUrl + "getAllUsers");
+  }
+
+  addUser(user: UserModify): Observable<UserModify> {
+    return this.http.post<UserModify>(this.baseUrl + "addUser", user)
+  }
+
+  edituser(user: UserDetails): Observable<UserDetails> {
+    return this.http.put<UserDetails>(this.baseUrl + "editUser", user)
+  }
+
+  delUser(userId: Number): Observable<any> {
+    const identifier = "/:id="+userId;
+    return this.http.delete<any>(this.baseUrl + "delUser" + identifier);
   }
 }

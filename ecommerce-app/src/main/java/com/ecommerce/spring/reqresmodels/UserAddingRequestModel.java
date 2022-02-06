@@ -17,10 +17,9 @@ public class UserAddingRequestModel {
 	private Date dateOfBirth;
 	private String phoneNumber;
 	private String address;
-	private boolean isAdmin;
 	
 	public UserAddingRequestModel(String firstName, String lastName, String email, String title, String password,
-			Date dateOfBirth, String phoneNumber, String address, boolean isAdmin) {
+			Date dateOfBirth, String phoneNumber, String address) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -30,7 +29,6 @@ public class UserAddingRequestModel {
 		this.dateOfBirth = dateOfBirth;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
-		this.isAdmin = isAdmin;
 	}
 	
 	public UserAddingRequestModel() {

@@ -36,7 +36,7 @@ public class UserService {
 		boolean valid = validateInput(requestModel);
 		boolean duplicateEmail = checkUniqueEmail(requestModel);
 		if(valid && duplicateEmail) {
-			if(user.isPresent()) {		
+			if(user != null) {		
 				user.get().setAddress(requestModel.getAddress());
 				user.get().setDob(requestModel.getDateOfBirth());
 				user.get().setEmail(requestModel.getEmail());

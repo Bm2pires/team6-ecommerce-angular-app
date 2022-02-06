@@ -52,7 +52,6 @@ export class ModalComponent implements OnInit {
       this.prodService.editProd(this.productDetails).subscribe(data => {
         console.log(data);
       });
-
       modal.close();
       this.reset();
     }else{

@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from 'src/app/services/user.service';
 import { UserDetails } from 'src/app/services/userDetails';
 
 @Component({
@@ -11,7 +12,7 @@ import { UserDetails } from 'src/app/services/userDetails';
 export class ModalUserComponent implements OnInit {
 
   @Input()
-  itemUser!: {id:Number, firstName:String, lastName:String, email:String, password:String, title:String, dob:string|null, phoneNumber:String, address:String};
+  itemUser!: {id:Number, firstName:String, lastName:String, email:String, password:String, title:String, dateOfBirth:string|null, phoneNumber:String, address:String};
 
 
 
@@ -34,7 +35,7 @@ export class ModalUserComponent implements OnInit {
     email: this.newUserEmail,
     password: this.newUserPassword,
     title: this.newUserTitle,
-    dob: this.newUserDOB,
+    dateOfBirth: this.newUserDOB,
     phoneNumber: this.newUserPhonenumebr,
     address: this.newUserAddress };
 
@@ -46,7 +47,7 @@ export class ModalUserComponent implements OnInit {
 
   closeResult = '';
 
-  constructor(private modalService: NgbModal, private datePipe: DatePipe) {
+  constructor(private modalService: NgbModal, private datePipe: DatePipe, private userService: UserService) {
 
 
   }
@@ -57,14 +58,20 @@ export class ModalUserComponent implements OnInit {
   onSubmit(modal: { close: () => void; }){
     this.submitted = true;
     this.validate();
-    if(this.valid){
+      if(this.valid){
+        this.userService.edituser(this.newUserDetails).subscribe(data => {
+          console.log(data);
+        });
+        this.ngOnInit();
+
       modal.close();
       this.reset();
     }else{
       alert(this.errors)
       this.errors = [];
     }
-  }
+
+}
 
   validate() {
     const phoneNumberCheck = Number(this.newUserDetails.phoneNumber);
@@ -85,14 +92,14 @@ export class ModalUserComponent implements OnInit {
       this.errors.push("Email must contain an @");
     }
 
-    const dateCheck = this.newUserDetails.dob!.toString();
+    const dateCheck = this.newUserDetails.dateOfBirth!.toString();
     let today = this.datePipe.transform(Date.now(),'yyyy-MM-dd')!;
 
     if(dateCheck > today){
       this.errors.push("Date of birth cannot be in the future");
     }
     let today2 = new Date();
-    var birthDate = new Date(this.newUserDetails.dob!);
+    var birthDate = new Date(this.newUserDetails.dateOfBirth!);
     var age = today2.getFullYear() - birthDate.getFullYear();
     var m = today2.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today2.getDate() < birthDate.getDate())) {
@@ -133,9 +140,17 @@ export class ModalUserComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
 
-    var date = this.itemUser.dob;
-    this.newUserDetails.dob = this.datePipe.transform(date,"yyyy-MM-dd")
+    var date = this.itemUser.dateOfBirth;
+    this.newUserDetails.dateOfBirth = this.datePipe.transform(date,"yyyy-MM-dd")
     this.newUserDetails.title = this.itemUser.title;
+    this.newUserDetails.id = this.itemUser.id;
+    this.newUserDetails.firstName = this.itemUser.firstName
+    this.newUserDetails.lastName = this.itemUser.lastName
+    this.newUserDetails.email = this.itemUser.email
+    this.newUserDetails.address = this.itemUser.address
+    this.newUserDetails.password = this.itemUser.password
+    this.newUserDetails.phoneNumber = this.itemUser.phoneNumber
+
   }
 
   private getDismissReason(reason: any): string {
@@ -151,6 +166,7 @@ export class ModalUserComponent implements OnInit {
   onClose(modal: { close: () => void; }) {
     modal.close();
     this.reset();
+
   }
 
   reset(){
@@ -170,7 +186,7 @@ export class ModalUserComponent implements OnInit {
       email: this.newUserEmail,
       password: this.newUserPassword,
       title: this.newUserTitle,
-      dob: this.newUserDOB,
+      dateOfBirth: this.newUserDOB,
       phoneNumber: this.newUserPhonenumebr,
       address: this.newUserAddress };
 

@@ -46,6 +46,7 @@ export class ModalAddProdComponent implements OnInit {
       this.prodService.addProd(this.productModify).subscribe(data => {
         console.log(data);
       });
+      this.ngOnInit();
       modal.close();
       this.reset();
     }else{
