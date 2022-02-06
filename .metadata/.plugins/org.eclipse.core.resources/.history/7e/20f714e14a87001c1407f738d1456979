@@ -75,9 +75,9 @@ public class ProductService {
 			
 			if(category.isEmpty()) {
 				addCategories(requestModel.getProductCategory());
-				product.setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
+				product.setCategories(category.get());
 			}else {
-				product.setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
+				product.setCategories(category.get());
 			}
 			
 			if(brand.isEmpty()) {

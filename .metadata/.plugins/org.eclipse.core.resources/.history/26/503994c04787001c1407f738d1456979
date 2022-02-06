@@ -10,11 +10,6 @@ public class ProductAddRequestModel {
 	private String productDescription;
 
 	private String productPrice;
-	
-	private String productBrand;
-	
-	private String productCategory;
-
 
 	
 
@@ -24,18 +19,10 @@ public class ProductAddRequestModel {
 
 
 
-
-	public ProductAddRequestModel(String productName, String productDescription, String productPrice,
-			String productBrand, String productCategory) {
+	public ProductAddRequestModel(String productName, String productDescription, String productPrice) {
 		super();
 		this.productName = productName;
 		this.productDescription = productDescription;
 		this.productPrice = productPrice;
-		this.productBrand = productBrand;
-		this.productCategory = productCategory;
 	}
-
-
-
-
 }

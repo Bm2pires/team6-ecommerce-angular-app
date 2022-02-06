@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductDetails } from 'src/app/services/productDetails';
+import { ProductModify } from 'src/app/services/productModify';
 
 @Component({
   selector: 'app-modal',
@@ -18,14 +19,16 @@ export class ModalComponent implements OnInit {
   newProductName: String = "";
   newProductDesc: String = "";
   newProductPrice: Number = 0;
+  newProdutBrand: String = "";
+  newProductCategory: String = "";
 
-  productDetails: ProductDetails = {
-    productId: 0,
+
+  productModify: ProductModify = {
     productName: this.newProductName,
     productDesc: this.newProductDesc,
     productPrice: this.newProductPrice,
-    category: "",
-    brand: ""
+    brand: this.newProdutBrand,
+    category: this.newProductCategory
   };
 
   submitted = false;
@@ -50,15 +53,15 @@ export class ModalComponent implements OnInit {
   }
 
   validate() {
-    if(this.productDetails.productName.length < 3){
+    if(this.productModify.productName.length < 3){
       this.errors.push("Product name must be greater than 3 characters");
     }
 
-    if(this.productDetails.productDesc.length < 10){
+    if(this.productModify.productDesc.length < 10){
       this.errors.push("Product description must be greater than 10 characters");
     }
 
-    if(this.productDetails.productPrice === 0){
+    if(this.productModify.productPrice === 0){
       this.errors.push("Product price must not be 0.00");
     }
 
@@ -76,7 +79,7 @@ export class ModalComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
 
-    this.productDetails.productPrice = this.item.productPrice;
+    this.productModify.productPrice = this.item.productPrice;
 
   }
 
@@ -99,14 +102,15 @@ export class ModalComponent implements OnInit {
     this.newProductName = "";
     this.newProductDesc = "";
     this.newProductPrice = 0;
+    this.newProdutBrand = "";
+    this.newProductCategory = "";
 
-    this.productDetails = {
-      productId: 0,
+    this.productModify = {
       productName: this.newProductName,
       productDesc: this.newProductDesc,
       productPrice: this.newProductPrice,
-      category: "",
-      brand: ""
+      brand: this.newProdutBrand,
+      category: this.newProductCategory
     };
 
     this.submitted = false;

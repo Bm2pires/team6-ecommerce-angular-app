@@ -5,6 +5,8 @@
             <p class="card-text">Product Name: {{prod.productName}}</p>
             <p class="card-text">Product Description: {{prod.productDesc}}</p>
             <p class="card-text">Product Price: {{prod.productPrice}}</p>
+            <p class="card-text">Product Brand: {{prod.brand}}</p>
+            <p class="card-text">Product Category: {{prod.category}}</p>
             <app-modal [item]="prod"></app-modal>
             <button type="button" class="btn btn-warning" (click)="delProd(prod.productId)">Delete</button>
         </div>

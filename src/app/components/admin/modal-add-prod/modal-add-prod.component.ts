@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ProductService } from 'src/app/services/product.service';
 import { ProductDetails } from 'src/app/services/productDetails';
+import { ProductModify } from 'src/app/services/productModify';
 
 @Component({
   selector: 'app-modal-add-prod',
@@ -15,14 +17,15 @@ export class ModalAddProdComponent implements OnInit {
   prodName:String = "";
   prodDescription:String = "";
   prodPrice:Number = 0;
+  prodBrand: String = "";
+  prodCategory: String = "";
 
-  productDetails: ProductDetails = {
-    productId: 0,
+  productModify: ProductModify = {
     productName: this.prodName,
     productDesc: this.prodDescription,
     productPrice: this.prodPrice,
-    category: "",
-    brand: ""
+    brand: this.prodBrand,
+    category: this.prodCategory
   };
 
   submitted = false;
@@ -30,7 +33,7 @@ export class ModalAddProdComponent implements OnInit {
 
   closeResult = '';
 
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private prodService: ProductService) {
   }
 
   ngOnInit(): void {
@@ -40,6 +43,9 @@ export class ModalAddProdComponent implements OnInit {
     this.submitted = true;
     this.validate();
     if(this.valid){
+      // this.prodService.addProd(this.productModify).subscribe(data => {
+      //   console.log(data);
+      // });
       modal.close();
       this.reset();
     }else{
@@ -49,15 +55,15 @@ export class ModalAddProdComponent implements OnInit {
   }
 
   validate() {
-    if(this.productDetails.productName.length < 3){
+    if(this.productModify.productName.length < 3){
       this.errors.push("Product name must be greater than 3 characters");
     }
 
-    if(this.productDetails.productDesc.length < 10){
+    if(this.productModify.productDesc.length < 10){
       this.errors.push("Product description must be greater than 10 characters");
     }
 
-    if(this.productDetails.productPrice === 0){
+    if(this.productModify.productPrice === 0){
       this.errors.push("Product price must not be 0.00");
     }
 
@@ -96,14 +102,16 @@ export class ModalAddProdComponent implements OnInit {
     this.prodName = "";
     this.prodDescription = "";
     this.prodPrice = 0.0;
+    this.prodBrand = "";
+    this.prodCategory = "";
 
-    this.productDetails = {
-      productId: 0,
+
+    this.productModify = {
       productName: this.prodName,
       productDesc: this.prodDescription,
       productPrice: this.prodPrice,
-      category: "",
-      brand: ""
+      brand: this.prodBrand,
+      category: this.prodCategory
     };
 
     this.submitted = false;

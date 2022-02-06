@@ -9,10 +9,7 @@ public class ProductAddResponseModel {
 	private String productDescription;
 
 	private String productPrice;
-	
-	private String productBrand;
-	
-	private String productCategory;
+
 	
 
 	public ProductAddResponseModel() {
@@ -21,13 +18,10 @@ public class ProductAddResponseModel {
 
 
 
-	public ProductAddResponseModel(String productName, String productDescription, String productPrice,
-			String productBrand, String productCategory) {
+	public ProductAddResponseModel(String productName, String productDescription, String productPrice) {
 		super();
 		this.productName = productName;
 		this.productDescription = productDescription;
 		this.productPrice = productPrice;
-		this.productBrand = productBrand;
-		this.productCategory = productCategory;
 	}
 }

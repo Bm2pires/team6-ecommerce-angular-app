@@ -21,6 +21,8 @@ import { ModalUserComponent } from './components/admin-user/modal-edit-user/moda
 import { ModalAddUserComponent } from './components/admin-user/modal-add-user/modal-add-user.component';
 import { ModalAddProdComponent } from './components/admin/modal-add-prod/modal-add-prod.component';
 import { DatePipe } from '@angular/common';
+import { UserService } from './services/user.service';
+import { ProductService } from './services/product.service';
 
 const appRoutes: Routes = [
   { path: '', component:  LandingPageComponent},
@@ -58,7 +60,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, UserService, ProductService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

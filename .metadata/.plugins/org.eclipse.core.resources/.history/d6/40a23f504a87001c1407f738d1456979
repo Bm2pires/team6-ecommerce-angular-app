@@ -24,7 +24,7 @@ public class Brand {
 	
 	
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Products> products = new ArrayList<>();
+        private List<Products> products = new ArrayList<>();
 
 
 	public Brand(long brandid, String brandName, List<Products> products) {

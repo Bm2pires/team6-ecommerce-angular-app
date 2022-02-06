@@ -73,18 +73,11 @@ public class ProductService {
 			Optional<Brand> brand = brandRepo.findByBrandName(requestModel.getProductBrand());
 
 			
-			if(category.isEmpty()) {
-				addCategories(requestModel.getProductCategory());
-				product.setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
-			}else {
-				product.setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
-			}
-			
 			if(brand.isEmpty()) {
 				addBrand(requestModel.getProductBrand());
-				product.setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
+				product.setBrand(brand.get());
 			}else {
-				product.setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
+				product.setBrand(brand.get());
 			}
 
 			prodRepo.save(product);
@@ -97,16 +90,9 @@ public class ProductService {
 
 	}
 	
-	private void addCategories(String productCategory) {
-		Categories category = new Categories();
-		category.setCategoryName(productCategory);
-		categoryRepo.save(category);		
-	}
-
 	private void addBrand(String productBrand) {
-		Brand brand = new Brand();
-		brand.setBrandName(productBrand);
-		brandRepo.save(brand);
+		brandRepo.save(new Brand(productBrand));
+		
 	}
 
 	public boolean checkUniqueFields(ProductEditRequestModel requestModel) {
