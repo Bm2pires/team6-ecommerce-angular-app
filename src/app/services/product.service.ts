@@ -29,4 +29,9 @@ export class ProductService {
   editProd(product: ProductDetails): Observable<ProductDetails> {
     return this.http.put<ProductDetails>(this.baseUrl + "editProd", product)
   }
+
+  delProd(prodId: Number): Observable<any> {
+    const identifier = "/:id="+prodId;
+    return this.http.delete<any>(this.baseUrl + "delProd" + identifier);
+  }
 }
