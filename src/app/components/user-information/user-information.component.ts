@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 import { UserDetails } from 'src/app/services/userDetails';
 
 @Component({
@@ -8,26 +9,10 @@ import { UserDetails } from 'src/app/services/userDetails';
   styleUrls: ['./user-information.component.css']
 })
 export class UserInformationComponent implements OnInit {
-  // emailOld: string = "old";
-  // titleOld: string = "akjahskd"
-  // firstnameOld: string = "akjahskd"
-  // lastnameOld:string  = "akjahskd"
-  // dateofbirthOld: Date = new Date
-  // addressOld:string = "akjahskd"
-  // passwordOld:string = "akjahskd"
-  // phoneNumberOld:string = "1234567899"
 
+  errors: Array<string> = [];
+  valid = true
 
-
-  // currUserDetails: UserDetails = { firstName: this.firstnameOld,
-  //   lastName: this.lastnameOld,
-  //   email: this.emailOld,
-  //   password: this.passwordOld,
-  //   title: this.titleOld,
-  //   dob: this.dateofbirthOld,
-  //   phoneNumber: this.phoneNumberOld,
-  //   address: this.addressOld
-  // };
 
     emailNew: string = "Current";
     titleNew: string = "Mr"
@@ -73,25 +58,16 @@ export class UserInformationComponent implements OnInit {
 
 
 
-  constructor(private datePipe: DatePipe) {
-    this.newUserDetails.dateOfBirth = this.datePipe.transform(this.newUserDetails.dateOfBirth,"yyyy-MM-dd")
+  constructor(private datePipe: DatePipe, private userService: UserService) {
 
   }
 
   ngOnInit(): void {
+    this.newUserDetails.dateOfBirth = this.datePipe.transform(this.newUserDetails.dateOfBirth,"yyyy-MM-dd")
   }
 
    disableFunc() {
     this.disabledFields = false;
-
-
-    // this.emailOld = this.emailNew;
-    // this.titleOld = this.titleNew;
-    // this.firstnameOld = this.firstnameNew;
-    // this.lastnameOld = this.lastnameNew;
-    // this.dateofbirthOld = this.dateofbirthNew
-    // this.contactnumberOld = this.contactnumberNew;
-    // this.addressOld = this.addressNew;
 
     this.oldUserDetails.email = this.newUserDetails.email;
     this.oldUserDetails.title = this.newUserDetails.title;
@@ -121,74 +97,80 @@ export class UserInformationComponent implements OnInit {
     this.oldUserDetails.dateOfBirth = new Date().toLocaleDateString();
     this.oldUserDetails.phoneNumber = '';
     this.oldUserDetails.address = '';
-
-    // this.emailNew = this.emailOld;
-    // this.titleNew = this.titleOld;
-    // this.firstnameNew = this.firstnameOld;
-    // this.lastnameNew = this.lastnameOld;
-    // this.dateofbirthNew = this.dateofbirthOld
-    // this.contactnumberNew = this.contactnumberOld;
-    // this.addressNew = this.addressOld;
-
-
-
-    // this.emailOld = '';
-    // this.titleOld = '';
-    // this.firstnameOld = '';
-    // this.lastnameOld = '';
-    // this.dateofbirthOld = new Date
-    // this.contactnumberOld = '';
-    // this.addressOld = '';
-
-    // this.currUserDetails.email = '';
-    // this.currUserDetails.title = '';
-    // this.currUserDetails.firstName = '';
-    // this.currUserDetails.lastName = '';
-    // this.currUserDetails.dob = new Date;
-    // this.currUserDetails.phoneNumber = '';
-    // this.currUserDetails.address = '';
   }
 
   onSubmit() {
+    this.submitted = true;
+    this.validate();
+      if(this.valid){
+        this.userService.edituser(this.newUserDetails).subscribe(data => {
+          console.log(data);
+        });
+        this.ngOnInit();
+        this.disabledFields = true;
+        this.reset();
+    }else{
+      alert(this.errors)
+      this.errors = [];
+    }
 
-
-    this.disabledFields = true;
-
-    this.oldUserDetails.email = '';
-    this.oldUserDetails.title = '';
-    this.oldUserDetails.firstName = '';
-    this.oldUserDetails.lastName = '';
-    this.oldUserDetails.dateOfBirth = new Date().toLocaleDateString();
-    this.oldUserDetails.phoneNumber = '';
-    this.oldUserDetails.address = '';
-
-    // this.emailOld = '';
-    // this.titleOld = '';
-    // this.firstnameOld = '';
-    // this.lastnameOld = '';
-    // this.dateofbirthOld = new Date,
-    // this.contactnumberOld = '';
-    // this.addressOld = '';
-
-    // this.currUserDetails.email = '';
-    // this.currUserDetails.title = '';
-    // this.currUserDetails.firstName = '';
-    // this.currUserDetails.lastName = '';
-    // this.currUserDetails.dob = new Date;
-    // this.currUserDetails.phoneNumber = '';
-    // this.currUserDetails.address = '';
 
     //Need to update backend
 
 
   }
 
-  checkInput(input: { valid: any; }){
-    if(input.valid){
-      return false;
-    }else {
-      return true
+  validate() {
+    const phoneNumberCheck = Number(this.newUserDetails.phoneNumber);
+    if(Number.isNaN(phoneNumberCheck)){
+      this.errors.push("Phone number must be digitis");
+    }
+    if(this.newUserDetails.phoneNumber.length != 10){
+      this.errors.push("Phone number must be 10 digitis");
+    }
+    const emailCheck = Array.from(this.newUserDetails.email);
+    let emailValid = false;
+    emailCheck.forEach((letter) => {
+      if(letter === '@'){
+        emailValid = true;
+      }
+    })
+    if(!emailValid){
+      this.errors.push("Email must contain an @");
+    }
+
+    const dateCheck = this.newUserDetails.dateOfBirth!.toString();
+    let today = this.datePipe.transform(Date.now(),'yyyy-MM-dd')!;
+
+    if(dateCheck > today){
+      this.errors.push("Date of birth cannot be in the future");
+    }
+    let today2 = new Date();
+    var birthDate = new Date(this.newUserDetails.dateOfBirth!);
+    var age = today2.getFullYear() - birthDate.getFullYear();
+    var m = today2.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today2.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    if(age < 18){
+      this.errors.push("Age must be 18 or older");
+    }
+
+
+    if(this.errors.length != 0){
+      this.valid = false;
+    }else{
+      this.valid = true;
     }
   }
+
+  // checkInput(input: { valid: any; }){
+  //   if(input.valid){
+  //     return false;
+  //   }else {
+  //     return true
+  //   }
+  // }
 
 }

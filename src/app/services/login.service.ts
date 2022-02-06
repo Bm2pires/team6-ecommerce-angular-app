@@ -7,7 +7,7 @@ import { User } from './loginUser';
 })
 export class LoginService {
   http: HttpClient;
-  baseUrl: string = 'http://localhost:3000';
+  baseUrl: string = 'http://localhost:8081';
   private retrievedUser: User = { email: '', password: '' };
 
   constructor(http: HttpClient) {
