@@ -88,12 +88,6 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping(value = "/getUserByEmail/{email}", produces = "application/json")
-	public ResponseEntity<UserDetailResponseModel> getUserByEmail(@PathVariable String email) {
-		UserDetailResponseModel user = userEditService.getUserByEmail(email.substring(7));
-		return new ResponseEntity<UserDetailResponseModel>(user, HttpStatus.OK);
-	}
-	
 	//Only gets customers not admins
 	@GetMapping(value = "/getAllUsers", produces = "application/json")
 	public ResponseEntity<List<UserDetailResponseModel>> getAllUser() {

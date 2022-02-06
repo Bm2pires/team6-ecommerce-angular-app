@@ -11,3 +11,4 @@
 1644077537781	Rename local variable 'product'
 1644077636970	Rename local variable 'product'
 1644077741648	Rename local variable 'product'
+1644171040414	Extract local variable 'findByEmail'

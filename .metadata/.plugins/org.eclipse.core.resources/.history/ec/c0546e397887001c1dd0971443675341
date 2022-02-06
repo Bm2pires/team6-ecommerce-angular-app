@@ -221,15 +221,4 @@ public class UserService {
 			return null;
 		}
 	}
-
-	public UserDetailResponseModel getUserByEmail(String email) {
-		ModelMapper mapper = new ModelMapper();
-
-		// TODO Auto-generated method stub
-		Optional<User> user = userRepository.findByEmail(email);
-		UserDetailResponseModel response = mapper.map(user.get(), UserDetailResponseModel.class);
-		response.setDateOfBirth(user.get().getDob());
-		response.setPhoneNumber(user.get().getPhone_number());
-		return response;
-	}
 }

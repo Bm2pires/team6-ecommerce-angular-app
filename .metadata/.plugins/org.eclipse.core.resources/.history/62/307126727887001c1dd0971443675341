@@ -88,9 +88,9 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping(value = "/getUserByEmail/{email}", produces = "application/json")
-	public ResponseEntity<UserDetailResponseModel> getUserByEmail(@PathVariable String email) {
-		UserDetailResponseModel user = userEditService.getUserByEmail(email.substring(7));
+	@GetMapping(value = "/getUserByEmail", produces = "application/json")
+	public ResponseEntity<UserDetailResponseModel> getUserByEmail(@RequestParam String email) {
+		UserDetailResponseModel user = userEditService.getUserByEmail(email);
 		return new ResponseEntity<UserDetailResponseModel>(user, HttpStatus.OK);
 	}
 	

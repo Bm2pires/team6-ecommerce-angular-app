@@ -20,6 +20,11 @@ export class UserService {
     return this.http.get<UserDetails[]>(this.baseUrl + "getAllUsers");
   }
 
+  findUserByEmail(email: String): Observable<UserDetails> {
+    const identifier = "/:email="+email;
+    return this.http.get<UserDetails>(this.baseUrl + "getUserByEmail" + identifier);
+  }
+
   addUser(user: UserModify): Observable<UserModify> {
     return this.http.post<UserModify>(this.baseUrl + "addUser", user)
   }

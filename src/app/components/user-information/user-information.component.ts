@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { UserDetails } from 'src/app/services/userDetails';
 
@@ -10,11 +11,19 @@ import { UserDetails } from 'src/app/services/userDetails';
 })
 export class UserInformationComponent implements OnInit {
 
+  @ViewChild("editUserInfo")
+  yourForm!: NgForm;
+
+  rerender = false;
+
+
   errors: Array<string> = [];
   valid = true
 
+  userDetailDB!: UserDetails;
 
-    emailNew: string = "Current";
+
+    emailNew: string = "Current@";
     titleNew: string = "Mr"
     firstnameNew: string = "Current"
     lastnameNew:string  = "Current"
@@ -22,7 +31,7 @@ export class UserInformationComponent implements OnInit {
     contactnumberNew: string = "Current"
     addressNew:string = "Current"
     passwordNew:string = "Current"
-    phoneNumberNew:string = "Current"
+    phoneNumberNew:string = "1234567899"
 
     newUserDetails: UserDetails = {
       id: 0,
@@ -63,7 +72,21 @@ export class UserInformationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.newUserDetails.dateOfBirth = this.datePipe.transform(this.newUserDetails.dateOfBirth,"yyyy-MM-dd")
+    sessionStorage.setItem('username', "popo@hotmail.com");
+    this.userService.findUserByEmail("popo@hotmail.com").subscribe(data => {
+      console.log(data)
+      this.newUserDetails = data;
+    });
+
+    // this.newUserDetails.email = this.oldUserDetails.email;
+    // this.newUserDetails.title =this.oldUserDetails.title;
+    // this.newUserDetails.firstName=this.oldUserDetails.firstName;
+    // this.newUserDetails.lastName=this.oldUserDetails.lastName;
+    // this.newUserDetails.dateOfBirth=this.oldUserDetails.dateOfBirth;
+    // this.newUserDetails.phoneNumber=this.oldUserDetails.phoneNumber;
+    // this.newUserDetails.address=this.oldUserDetails.address;
+
+    this.newUserDetails.dateOfBirth = this.datePipe.transform(this.newUserDetails.dateOfBirth,"yyyy-MM-dd");
   }
 
    disableFunc() {
@@ -81,14 +104,15 @@ export class UserInformationComponent implements OnInit {
   reset() {
     this.disabledFields = true;
 
+    this.ngOnInit()
 
-    this.newUserDetails.email = this.oldUserDetails.email;
-    this.newUserDetails.title =this.oldUserDetails.title;
-    this.newUserDetails.firstName=this.oldUserDetails.firstName;
-    this.newUserDetails.lastName=this.oldUserDetails.lastName;
-    this.newUserDetails.dateOfBirth=this.oldUserDetails.dateOfBirth;
-    this.newUserDetails.phoneNumber=this.oldUserDetails.phoneNumber;
-    this.newUserDetails.address=this.oldUserDetails.address;
+    // this.newUserDetails.email = this.oldUserDetails.email;
+    // this.newUserDetails.title =this.oldUserDetails.title;
+    // this.newUserDetails.firstName=this.oldUserDetails.firstName;
+    // this.newUserDetails.lastName=this.oldUserDetails.lastName;
+    // this.newUserDetails.dateOfBirth=this.oldUserDetails.dateOfBirth;
+    // this.newUserDetails.phoneNumber=this.oldUserDetails.phoneNumber;
+    // this.newUserDetails.address=this.oldUserDetails.address;
 
     this.oldUserDetails.email = '';
     this.oldUserDetails.title = '';
@@ -97,6 +121,8 @@ export class UserInformationComponent implements OnInit {
     this.oldUserDetails.dateOfBirth = new Date().toLocaleDateString();
     this.oldUserDetails.phoneNumber = '';
     this.oldUserDetails.address = '';
+
+
   }
 
   onSubmit() {
@@ -104,19 +130,21 @@ export class UserInformationComponent implements OnInit {
     this.validate();
       if(this.valid){
         this.userService.edituser(this.newUserDetails).subscribe(data => {
-          console.log(data);
         });
-        this.ngOnInit();
         this.disabledFields = true;
-        this.reset();
+        this.rerender = true;
+
+        setTimeout(() => {
+          this.ngOnInit();
+          this.rerender = false;
+          console.log("Timneout")
+        }, 300)
+
+
     }else{
       alert(this.errors)
       this.errors = [];
     }
-
-
-    //Need to update backend
-
 
   }
 
@@ -164,13 +192,4 @@ export class UserInformationComponent implements OnInit {
       this.valid = true;
     }
   }
-
-  // checkInput(input: { valid: any; }){
-  //   if(input.valid){
-  //     return false;
-  //   }else {
-  //     return true
-  //   }
-  // }
-
 }
