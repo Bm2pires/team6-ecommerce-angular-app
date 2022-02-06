@@ -11,7 +11,8 @@ import { UserDetails } from 'src/app/services/userDetails';
 export class ModalUserComponent implements OnInit {
 
   @Input()
-  itemUser!: {userId:Number, email:String, password:String, title:String, firstname:String, lastname:String, dob:Date, phonenumber:String, address:String, isadmin:Boolean};
+  itemUser!: {id:Number, firstName:String, lastName:String, email:String, password:String, title:String, dob:string|null, phoneNumber:String, address:String};
+
 
 
   errors: Array<string> = [];
