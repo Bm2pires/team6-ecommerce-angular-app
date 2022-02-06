@@ -209,7 +209,7 @@ public class UserService {
 		ModelMapper mapper = new ModelMapper();
 		List<UserDetailResponseModel> responseList = new ArrayList<>();
 		
-		List<Optional<User>> list = userRepository.findByisAdmin(false);
+		List<Optional<User>> list = userRepository.findByisAdmin();
 		
 		if(!list.isEmpty()) {
 			for (Optional<User> user : list) {

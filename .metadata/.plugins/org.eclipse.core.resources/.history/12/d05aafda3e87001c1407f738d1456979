@@ -87,7 +87,6 @@ public class UserController {
 		}
 	}
 	
-	//Only gets customers not admins
 	@GetMapping(value = "/getAllUsers", produces = "application/json")
 	public ResponseEntity<List<UserDetailResponseModel>> getAllUser() {
 		List<UserDetailResponseModel> listOfUsers = userEditService.getAllUser();
