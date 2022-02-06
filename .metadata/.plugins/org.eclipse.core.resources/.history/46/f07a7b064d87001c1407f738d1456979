@@ -59,7 +59,6 @@ public class ProductService {
 					}
 				}
 				
-				
 				if(category.isEmpty()) {
 					addCategories(requestModel.getProductCategory());
 					product.get().setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
@@ -73,8 +72,6 @@ public class ProductService {
 				
 				prodRepo.save(product.get());
 				ProductEditResponseModel response = mapper.map(requestModel, ProductEditResponseModel.class);
-				response.setBrandName(requestModel.getProductBrand());
-				response.setCategoryname(requestModel.getProductCategory());
 
 				return response;
 			}else {

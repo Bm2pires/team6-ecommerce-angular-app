@@ -15,10 +15,6 @@ public class ProductEditRequestModel {
 	private String productDescription;
 
 	private String productPrice;
-	
-	private String productBrand;
-	
-	private String productCategory;
 
 	
 
@@ -28,23 +24,13 @@ public class ProductEditRequestModel {
 
 
 
-	public ProductEditRequestModel(long productId, String productName, String productDescription, String productPrice,
-			String productBrand, String productCategory) {
+	public ProductEditRequestModel(long productId, String productName, String productDescription, String productPrice) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.productDescription = productDescription;
 		this.productPrice = productPrice;
-		this.productBrand = productBrand;
-		this.productCategory = productCategory;
 	}
-
-
-
-
-
-
-
 	
 	
 

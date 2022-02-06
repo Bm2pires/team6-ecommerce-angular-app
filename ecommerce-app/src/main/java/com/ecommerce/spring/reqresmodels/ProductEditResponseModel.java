@@ -15,18 +15,30 @@ public class ProductEditResponseModel {
 	private String productDescription;
 
 	private String productPrice;
+	
+	private String brandName;
+	
+	private String categoryname;
 
 
-	public ProductEditResponseModel(long productId, String productName, String productDescription, String productPrice) {
+
+
+	public ProductEditResponseModel() {
+		super();
+	}
+
+
+
+
+	public ProductEditResponseModel(long productId, String productName, String productDescription, String productPrice,
+			String brandName, String categoryname) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.productDescription = productDescription;
 		this.productPrice = productPrice;
-	}
-
-	public ProductEditResponseModel() {
-		super();
+		this.brandName = brandName;
+		this.categoryname = categoryname;
 	}
 	
 	

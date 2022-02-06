@@ -46,35 +46,8 @@ public class ProductService {
 				product.get().setProductDescription(requestModel.getProductDescription());
 				product.get().setProductPrice(requestModel.getProductPrice());
 
-				Optional<Categories> category = categoryRepo.findByCategoryName(requestModel.getProductCategory());
-				Optional<Brand> brand = brandRepo.findByBrandName(requestModel.getProductBrand());
-				
-				if(brand.isEmpty()) {
-					addBrand(requestModel.getProductBrand());
-					product.get().setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
-
-				}else {
-					if(product.get().getBrand().getBrandid() != brand.get().getBrandid()) {
-						product.get().setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
-					}
-				}
-				
-				
-				if(category.isEmpty()) {
-					addCategories(requestModel.getProductCategory());
-					product.get().setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
-
-				}else {
-					if(product.get().getCategories().getCategoryid() != category.get().getCategoryid()) {
-						product.get().setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
-					}
-				}
-				
-				
 				prodRepo.save(product.get());
 				ProductEditResponseModel response = mapper.map(requestModel, ProductEditResponseModel.class);
-				response.setBrandName(requestModel.getProductBrand());
-				response.setCategoryname(requestModel.getProductCategory());
 
 				return response;
 			}else {
