@@ -1,8 +1,8 @@
 
 export interface ProductModify {
   productName:String,
-  productDesc:String,
+  productDescription:String,
   productPrice:Number,
-  brand: String,
-  category: String
+  productBrand: String,
+  productCategory: String
 }

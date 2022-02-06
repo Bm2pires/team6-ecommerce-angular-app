@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { ProductDetails } from './productDetails';
 import { ProductModify } from './productModify';
 
@@ -10,6 +10,8 @@ import { ProductModify } from './productModify';
 export class ProductService {
   http: HttpClient;
   baseUrl: string;
+  headers = { headers: new HttpHeaders({'Content-Type': 'application/json'})};
+
 
   constructor(http: HttpClient) {
     this.http = http;
@@ -21,6 +23,7 @@ export class ProductService {
   }
 
   addProd(product: ProductModify): Observable<ProductModify> {
-    return this.http.post<ProductModify>(this.baseUrl + "addProd", product);
+    // return this.http.post<ProductModify>(this.baseUrl + "addProd", JSON.stringify(product) , this.headers);
+    return this.http.post<ProductModify>(this.baseUrl + "addProd", product)
   }
 }

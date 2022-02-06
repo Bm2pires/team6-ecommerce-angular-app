@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="prodDescription">Product Description</label>
                 <div class="input-group">
-                    <input id="prodDescription" maxLength="250" class="form-control" placeholder={{item.productDesc}} [(ngModel)]='productModify.productDesc' [ngModelOptions]="{standalone: true}" required name="prodDesc" #prodDesc="ngModel">
+                    <input id="prodDescription" maxLength="250" class="form-control" placeholder={{item.productDesc}} [(ngModel)]='productModify.productDescription' [ngModelOptions]="{standalone: true}" required name="prodDesc" #prodDesc="ngModel">
                 </div>
                 <div [hidden]="prodDesc.valid || prodDesc.pristine" class="alert alert-danger">
                     Product Description is required
@@ -49,7 +49,7 @@
             <div class="form-group">
                 <label for="prodDescription">Product Brand</label>
                 <div class="input-group">
-                    <input id="prodBrand" maxLength="30" class="form-control" placeholder={{item.brand}} [(ngModel)]='productModify.brand' [ngModelOptions]="{standalone: true}" required name="prodBrand" #prodBrand="ngModel">
+                    <input id="prodBrand" maxLength="30" class="form-control" placeholder={{item.brand}} [(ngModel)]='productModify.productBrand' [ngModelOptions]="{standalone: true}" required name="prodBrand" #prodBrand="ngModel">
                 </div>
                 <div [hidden]="prodBrand.valid || prodBrand.pristine" class="alert alert-danger">
                     Product Brand is required
@@ -58,7 +58,7 @@
             <div class="form-group">
                 <label for="prodDescription">Product Category</label>
                 <div class="input-group">
-                    <input id="prodCategory" maxLength="30" class="form-control" placeholder={{item.category}} [(ngModel)]='productModify.category' [ngModelOptions]="{standalone: true}" required name="prodCategory" #prodCategory="ngModel">
+                    <input id="prodCategory" maxLength="30" class="form-control" placeholder={{item.category}} [(ngModel)]='productModify.productCategory' [ngModelOptions]="{standalone: true}" required name="prodCategory" #prodCategory="ngModel">
                 </div>
                 <div [hidden]="prodCategory.valid || prodCategory.pristine" class="alert alert-danger">
                     Product Category is required

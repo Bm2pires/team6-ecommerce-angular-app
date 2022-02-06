@@ -22,10 +22,10 @@ export class ModalAddProdComponent implements OnInit {
 
   productModify: ProductModify = {
     productName: this.prodName,
-    productDesc: this.prodDescription,
+    productDescription: this.prodDescription,
     productPrice: this.prodPrice,
-    brand: this.prodBrand,
-    category: this.prodCategory
+    productBrand: this.prodBrand,
+    productCategory: this.prodCategory
   };
 
   submitted = false;
@@ -43,9 +43,9 @@ export class ModalAddProdComponent implements OnInit {
     this.submitted = true;
     this.validate();
     if(this.valid){
-      // this.prodService.addProd(this.productModify).subscribe(data => {
-      //   console.log(data);
-      // });
+      this.prodService.addProd(this.productModify).subscribe(data => {
+        console.log(data);
+      });
       modal.close();
       this.reset();
     }else{
@@ -59,7 +59,7 @@ export class ModalAddProdComponent implements OnInit {
       this.errors.push("Product name must be greater than 3 characters");
     }
 
-    if(this.productModify.productDesc.length < 10){
+    if(this.productModify.productDescription.length < 10){
       this.errors.push("Product description must be greater than 10 characters");
     }
 
@@ -108,10 +108,10 @@ export class ModalAddProdComponent implements OnInit {
 
     this.productModify = {
       productName: this.prodName,
-      productDesc: this.prodDescription,
+      productDescription: this.prodDescription,
       productPrice: this.prodPrice,
-      brand: this.prodBrand,
-      category: this.prodCategory
+      productBrand: this.prodBrand,
+      productCategory: this.prodCategory
     };
 
     this.submitted = false;

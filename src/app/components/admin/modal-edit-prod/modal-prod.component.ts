@@ -25,10 +25,10 @@ export class ModalComponent implements OnInit {
 
   productModify: ProductModify = {
     productName: this.newProductName,
-    productDesc: this.newProductDesc,
+    productDescription: this.newProductDesc,
     productPrice: this.newProductPrice,
-    brand: this.newProdutBrand,
-    category: this.newProductCategory
+    productBrand: this.newProdutBrand,
+    productCategory: this.newProductCategory
   };
 
   submitted = false;
@@ -57,7 +57,7 @@ export class ModalComponent implements OnInit {
       this.errors.push("Product name must be greater than 3 characters");
     }
 
-    if(this.productModify.productDesc.length < 10){
+    if(this.productModify.productDescription.length < 10){
       this.errors.push("Product description must be greater than 10 characters");
     }
 
@@ -107,10 +107,10 @@ export class ModalComponent implements OnInit {
 
     this.productModify = {
       productName: this.newProductName,
-      productDesc: this.newProductDesc,
+      productDescription: this.newProductDesc,
       productPrice: this.newProductPrice,
-      brand: this.newProdutBrand,
-      category: this.newProductCategory
+      productBrand: this.newProdutBrand,
+      productCategory: this.newProductCategory
     };
 
     this.submitted = false;
