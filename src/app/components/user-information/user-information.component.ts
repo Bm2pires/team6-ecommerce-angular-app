@@ -39,7 +39,9 @@ export class UserInformationComponent implements OnInit {
     passwordNew:string = "Current"
     phoneNumberNew:string = "Current"
 
-    newUserDetails: UserDetails = { firstName: this.firstnameNew,
+    newUserDetails: UserDetails = {
+      id: 0,
+      firstName: this.firstnameNew,
       lastName: this.lastnameNew,
       email: this.emailNew,
       password: this.passwordNew,
@@ -49,7 +51,9 @@ export class UserInformationComponent implements OnInit {
       address: this.addressNew
     };
 
-    oldUserDetails: UserDetails = { firstName: '',
+    oldUserDetails: UserDetails = {
+      id: 0,
+      firstName: '',
       lastName: '',
       email: '',
       password: '',

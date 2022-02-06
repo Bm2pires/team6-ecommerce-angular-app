@@ -49,7 +49,7 @@ public class ProductService {
 
 	}
 	
-	public ProductAddResponseModel addProd(ProductAddRequestModel requestModel) {
+	public ProductAddResponseModel editProd(ProductAddRequestModel requestModel) {
 		ModelMapper mapper = new ModelMapper();
 		Products product = new Products();
 		boolean valid = validateInput(requestModel);

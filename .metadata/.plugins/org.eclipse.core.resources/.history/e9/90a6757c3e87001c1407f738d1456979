@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +29,6 @@ import com.ecommerce.spring.services.UserLoginService;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
 	@Autowired
@@ -78,22 +76,22 @@ public class UserController {
 	}
 	
 	@GetMapping(value = "/getUser", produces = "application/json")
-	public ResponseEntity<UserDetailResponseModel> getUserById(@RequestParam long id) {
-		UserDetailResponseModel user = userEditService.getUserById(id);
+	public ResponseEntity<UserAddingRequestModel> getUserById(@RequestParam long id) {
+		UserAddingRequestModel user = userEditService.getUserById(id);
 		if(user != null) {
-			return new ResponseEntity<UserDetailResponseModel>(user, HttpStatus.OK);
+			return new ResponseEntity<UserAddingRequestModel>(user, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<UserDetailResponseModel>( HttpStatus.NOT_MODIFIED);
+			return new ResponseEntity<UserAddingRequestModel>( HttpStatus.NOT_MODIFIED);
 		}
 	}
 	
 	@GetMapping(value = "/getAllUsers", produces = "application/json")
-	public ResponseEntity<List<UserDetailResponseModel>> getAllUser() {
-		List<UserDetailResponseModel> listOfUsers = userEditService.getAllUser();
+	public ResponseEntity<List<UserAddingRequestModel>> getAllUser() {
+		List<UserAddingRequestModel> listOfUsers = userEditService.getAllUser();
 		if(!listOfUsers.isEmpty()) {
-			return new ResponseEntity<List<UserDetailResponseModel>>(listOfUsers, HttpStatus.OK);
+			return new ResponseEntity<List<UserAddingRequestModel>>(listOfUsers, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<List<UserDetailResponseModel>>(HttpStatus.NOT_MODIFIED);
+			return new ResponseEntity<List<UserAddingRequestModel>>(HttpStatus.NOT_MODIFIED);
 		}
 	}
 	

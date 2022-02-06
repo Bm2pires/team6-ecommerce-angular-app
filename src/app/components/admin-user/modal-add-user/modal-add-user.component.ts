@@ -24,7 +24,9 @@ export class ModalAddUserComponent implements OnInit {
   phonenumber:String = "";
   address:String = "";
 
-  userDetails: UserDetails = { firstName: this.userFname,
+  userDetails: UserDetails = {
+    id: 0,
+    firstName: this.userFname,
     lastName: this.userLname,
     email: this.userEmail,
     password: this.userPass,
@@ -142,7 +144,9 @@ export class ModalAddUserComponent implements OnInit {
     this.phonenumber = "";
     this.address = "";
 
-    this.userDetails = { firstName: this.userFname,
+    this.userDetails = {
+      id: 0,
+      firstName: this.userFname,
       lastName: this.userLname,
       email: this.userEmail,
       password: this.userPass,

@@ -11,7 +11,7 @@ import { UserDetails } from 'src/app/services/userDetails';
 export class ModalUserComponent implements OnInit {
 
   @Input()
-  itemUser!: { userId:Number, email:String, password:String, title:String, firstname:String, lastname:String, dob:Date, phonenumber:String, address:String};
+  itemUser!: {userId:Number, email:String, password:String, title:String, firstname:String, lastname:String, dob:Date, phonenumber:String, address:String, isadmin:Boolean};
 
 
   errors: Array<string> = [];
@@ -26,7 +26,9 @@ export class ModalUserComponent implements OnInit {
   newUserPhonenumebr: String = "";
   newUserAddress: String = "";
 
-  newUserDetails: UserDetails = { firstName: this.newUserFName,
+  newUserDetails: UserDetails = {
+    id: 0,
+    firstName: this.newUserFName,
     lastName: this.newUserLName,
     email: this.newUserEmail,
     password: this.newUserPassword,
@@ -160,7 +162,9 @@ export class ModalUserComponent implements OnInit {
     this.newUserPhonenumebr = "";
     this.newUserAddress = "";
 
-    this.newUserDetails = { firstName: this.newUserFName,
+    this.newUserDetails = {
+      id: 0,
+      firstName: this.newUserFName,
       lastName: this.newUserLName,
       email: this.newUserEmail,
       password: this.newUserPassword,
@@ -168,6 +172,7 @@ export class ModalUserComponent implements OnInit {
       dob: this.newUserDOB,
       phoneNumber: this.newUserPhonenumebr,
       address: this.newUserAddress };
+
       this.submitted = false;
   }
 

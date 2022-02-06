@@ -193,26 +193,26 @@ public class UserService {
 		}
 	}
 
-	public UserDetailResponseModel getUserById(long id) {
+	public UserAddingRequestModel getUserById(long id) {
 		ModelMapper mapper = new ModelMapper();
 		Optional<User> user = userRepository.findById(id);
 		if(user.isPresent()) {
-			UserDetailResponseModel response = mapper.map(user.get(), UserDetailResponseModel.class);
+			UserAddingRequestModel response = mapper.map(user.get(), UserAddingRequestModel.class);
 				return response;			
 		}else {
 		return null;
 		}
 	}
 
-	public List<UserDetailResponseModel> getAllUser() {
+	public List<UserAddingRequestModel> getAllUser() {
 		ModelMapper mapper = new ModelMapper();
-		List<UserDetailResponseModel> responseList = new ArrayList<>();
+		List<UserAddingRequestModel> responseList = new ArrayList<>();
 		
 		List<User> list = userRepository.findAll();
 		
 		if(!list.isEmpty()) {
 			for (User user : list) {
-				UserDetailResponseModel modelObject = mapper.map(user, UserDetailResponseModel.class);
+				UserAddingRequestModel modelObject = mapper.map(user, UserAddingRequestModel.class);
 				responseList.add(modelObject);
 			}
 			return responseList;

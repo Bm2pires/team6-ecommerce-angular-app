@@ -7,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminUserComponent implements OnInit {
   users = [
-    {userId:1, email:"test1@hotmail.com", password:"pass", title:"Mr", firstname:"fname", lastname:"lname", dob: new Date(), phonenumber:"1234567899", address:"address"},
-    {userId:2, email:"test2@hotmail.com", password:"pass", title:"Mrs", firstname:"fname", lastname:"lname", dob: new Date(), phonenumber:"1234567899", address:"address"},
-    {userId:3, email:"test3@hotmail.com", password:"pass", title:"Mr", firstname:"fname", lastname:"lname", dob:new Date(), phonenumber:"1234567899", address:"address"},
-    {userId:4, email:"test4@hotmail.com", password:"pass", title:"Mr", firstname:"fname", lastname:"lname", dob:new Date(), phonenumber:"1234567899", address:"address"},
-    {userId:5, email:"test5@hotmail.com", password:"pass", title:"Mr", firstname:"fname", lastname:"lname", dob:new Date(), phonenumber:"1234567899", address:"address"}
+    {userId:1, email:"test1@hotmail.com", password:"pass", title:"Mr", firstname:"fname", lastname:"lname", dob: new Date(), phonenumber:"1234567899", address:"address", isadmin:false},
+    {userId:2, email:"test2@hotmail.com", password:"pass", title:"Mrs", firstname:"fname", lastname:"lname", dob: new Date(), phonenumber:"1234567899", address:"address", isadmin:false},
+    {userId:3, email:"test3@hotmail.com", password:"pass", title:"Mr", firstname:"fname", lastname:"lname", dob:new Date(), phonenumber:"1234567899", address:"address", isadmin:false},
+    {userId:4, email:"test4@hotmail.com", password:"pass", title:"Mr", firstname:"fname", lastname:"lname", dob:new Date(), phonenumber:"1234567899", address:"address", isadmin:false},
+    {userId:5, email:"test5@hotmail.com", password:"pass", title:"Mr", firstname:"fname", lastname:"lname", dob:new Date(), phonenumber:"1234567899", address:"address", isadmin:false}
 
   ];
 

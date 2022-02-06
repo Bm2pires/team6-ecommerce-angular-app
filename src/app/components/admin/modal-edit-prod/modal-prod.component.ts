@@ -9,7 +9,8 @@ import { ProductDetails } from 'src/app/services/productDetails';
 })
 export class ModalComponent implements OnInit {
   @Input()
-  item!: { productId: Number; productType: String; productName: String; productDesc: String; productPrice: Number};
+  item!: { productId: Number; productName: String; productDesc: String; productPrice: Number; brand: String, category: String};
+
 
   errors: Array<string> = [];
   valid = true
@@ -19,9 +20,12 @@ export class ModalComponent implements OnInit {
   newProductPrice: Number = 0;
 
   productDetails: ProductDetails = {
+    productId: 0,
     productName: this.newProductName,
     productDesc: this.newProductDesc,
-    productPrice: this.newProductPrice
+    productPrice: this.newProductPrice,
+    category: "",
+    brand: ""
   };
 
   submitted = false;
@@ -97,9 +101,12 @@ export class ModalComponent implements OnInit {
     this.newProductPrice = 0;
 
     this.productDetails = {
+      productId: 0,
       productName: this.newProductName,
       productDesc: this.newProductDesc,
-      productPrice: this.newProductPrice
+      productPrice: this.newProductPrice,
+      category: "",
+      brand: ""
     };
 
     this.submitted = false;

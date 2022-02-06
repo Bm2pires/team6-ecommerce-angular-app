@@ -17,9 +17,12 @@ export class ModalAddProdComponent implements OnInit {
   prodPrice:Number = 0;
 
   productDetails: ProductDetails = {
+    productId: 0,
     productName: this.prodName,
     productDesc: this.prodDescription,
-    productPrice: this.prodPrice
+    productPrice: this.prodPrice,
+    category: "",
+    brand: ""
   };
 
   submitted = false;
@@ -95,9 +98,12 @@ export class ModalAddProdComponent implements OnInit {
     this.prodPrice = 0.0;
 
     this.productDetails = {
+      productId: 0,
       productName: this.prodName,
       productDesc: this.prodDescription,
-      productPrice: this.prodPrice
+      productPrice: this.prodPrice,
+      category: "",
+      brand: ""
     };
 
     this.submitted = false;
