@@ -1,15 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="padding:1em 2em;">
     <a class="navbar-brand">Company Brand</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleCollapsed()">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+        (click)="toggleCollapsed()">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     <div style="margin-left: auto;" id="navbarResponsive">
         <ul class="navbar-nav">
             <li class="nav-item active">
                 <a class="nav-link" routerLink="/">Home</a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" routerLink="#" *ngIf="!isAdmin">Products</a>
+                <a class="nav-link" routerLink="/products" *ngIf="!isAdmin">Products</a>
             </li>
             <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-left" *ngIf="!isAdmin">
                 <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown" role="button">Account</a>
