@@ -23,6 +23,8 @@
             <!-- submit button -->
             <button type="submit" style="width: 320px;" class="btn mx-auto bg-light"
                 [disabled]="!f.valid">Login</button>
+            <span class="help-block text-danger" *ngIf="!validLogin && formSubmitted">Login Failed! Incorrect email
+                or password.</span>
 
             <!-- registration info -->
             <p class="text-white mt-3 text-center-mb-1">Don't have an account?</p>

@@ -14,6 +14,8 @@ export class LoginComponent {
   loginService: LoginService;
   email: string = '';
   password: string = '';
+  validLogin = false;
+  formSubmitted = false;
 
   // Inject the login service dependency
   constructor(service: LoginService, private router: Router) {
@@ -22,6 +24,8 @@ export class LoginComponent {
   }
 
   onSubmit(form: NgForm) {
+    this.formSubmitted = true;
+
     let user: User = {
       email: '',
       password: '',
@@ -41,8 +45,11 @@ export class LoginComponent {
     this.loginService.authenticate(loginUser).subscribe((response) => {
       if (response != null) {
         user = response;
+        this.validLogin = true;
         sessionStorage.setItem('user', JSON.stringify(user));
         this.router.navigate(['']);
+      } else {
+        this.validLogin = false;
       }
     });
   }
