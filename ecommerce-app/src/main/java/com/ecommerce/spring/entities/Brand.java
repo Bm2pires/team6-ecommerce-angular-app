@@ -18,22 +18,19 @@ public class Brand {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long brandid;
+	private long brandId;
 
 	private String brandName;
-	
-	
-    @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Products> products = new ArrayList<>();
 
+	@OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Products> products = new ArrayList<>();
 
-	public Brand(long brandid, String brandName, List<Products> products) {
+	public Brand(long brandId, String brandName, List<Products> products) {
 		super();
-		this.brandid = brandid;
+		this.brandId = brandId;
 		this.brandName = brandName;
 		this.products = products;
 	}
-
 
 	public Brand(String brandName, List<Products> products) {
 		super();
@@ -41,10 +38,8 @@ public class Brand {
 		this.products = products;
 	}
 
-
 	public Brand() {
 		super();
 	}
-    
-    
+
 }

@@ -6,7 +6,12 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { NgbdCarouselBasic } from './components/landing-page/carousel/carousel.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbCarouselModule,
+  NgbDropdown,
+  NgbDropdownModule,
+  NgbModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -22,6 +27,7 @@ import { DatePipe } from '@angular/common';
 import { UserService } from './services/user.service';
 import { ProductService } from './services/product.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ProductsComponent } from './components/products/products.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -42,6 +48,10 @@ const appRoutes: Routes = [
     component: AdminUserComponent,
     canActivate: [AuthGuardService],
   },
+  {
+    path: 'products',
+    component: ProductsComponent,
+  },
 ];
 
 @NgModule({
@@ -59,11 +69,14 @@ const appRoutes: Routes = [
     AdminUserComponent,
     ModalUserComponent,
     ModalAddUserComponent,
-    ModalAddProdComponent
+    ModalAddProdComponent,
+    ProductsComponent,
   ],
   imports: [
     BrowserModule,
     NgbModule,
+    NgbCarouselModule,
+    NgbDropdownModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
