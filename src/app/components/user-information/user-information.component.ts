@@ -14,7 +14,6 @@ export class UserInformationComponent implements OnInit {
   @ViewChild("editUserInfo")
   yourForm!: NgForm;
 
-  rerender = false;
 
 
   errors: Array<string> = [];
@@ -116,11 +115,9 @@ export class UserInformationComponent implements OnInit {
         this.userService.edituser(this.newUserDetails).subscribe(data => {
         });
         this.disabledFields = true;
-        this.rerender = true;
 
         setTimeout(() => {
           this.ngOnInit();
-          this.rerender = false;
           console.log("Timneout")
         }, 300)
 

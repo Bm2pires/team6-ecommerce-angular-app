@@ -62,7 +62,6 @@ export class ModalUserComponent implements OnInit {
         this.userService.edituser(this.newUserDetails).subscribe(data => {
           console.log(data);
         });
-        this.ngOnInit();
 
       modal.close();
       this.reset();
