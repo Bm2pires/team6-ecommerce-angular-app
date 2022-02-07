@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { LoginUser } from './loginUser';
 import { User } from './User';
@@ -11,7 +12,7 @@ export class LoginService {
   http: HttpClient;
   baseUrl: string = 'http://localhost:8080/user/login';
 
-  constructor(httpClient: HttpClient) {
+  constructor(httpClient: HttpClient, private router: Router) {
     this.http = httpClient;
   }
 
@@ -27,5 +28,6 @@ export class LoginService {
 
   logout() {
     sessionStorage.removeItem('user');
+    this.router.navigate(['/login']);
   }
 }

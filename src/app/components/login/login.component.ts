@@ -41,7 +41,7 @@ export class LoginComponent {
     this.loginService.authenticate(loginUser).subscribe((response) => {
       user = response;
       sessionStorage.setItem('user', JSON.stringify(user));
-      var obj = JSON.parse(sessionStorage['user']);
+      this.router.navigate(['']);
     });
   }
 }
