@@ -73,9 +73,18 @@ export class UserInformationComponent implements OnInit {
   ngOnInit(): void {
     //Find email by using session storage
     this.userService.findUserByEmail("popo@hotmail.com").subscribe(data => {
-      console.log(data)
       this.newUserDetails = data;
     });
+
+    const arr1 = sessionStorage.getItem("user")?.split("\"").sort();
+    console.log(arr1);
+    // for (let index = 0; index < arr1!.length; index++) {
+    //   const element = arr1![index];
+    //   if(element === "{" || element === "}" || element === "," || element === ":"){
+    //     arr1!.;
+    //   }
+
+    // }
 
     this.newUserDetails.dateOfBirth = this.datePipe.transform(this.newUserDetails.dateOfBirth,"yyyy-MM-dd");
   }

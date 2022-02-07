@@ -13,7 +13,7 @@ export class UserService {
 
   constructor(http: HttpClient) {
     this.http = http;
-    this.baseUrl = 'http://localhost:8081/user/';
+    this.baseUrl = 'http://localhost:8080/user/';
    }
 
    findAllUsers(): Observable<UserDetails[]> {

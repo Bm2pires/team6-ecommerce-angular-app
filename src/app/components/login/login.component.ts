@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { LoginUser } from 'src/app/services/loginUser';
+import { NavbarService } from 'src/app/services/navbar.service';
 import { User } from 'src/app/services/User';
 
 @Component({
@@ -18,7 +19,7 @@ export class LoginComponent {
   formSubmitted = false;
 
   // Inject the login service dependency
-  constructor(service: LoginService, private router: Router) {
+  constructor(service: LoginService, private router: Router, private navService: NavbarService) {
     console.log('Login Component Loaded');
     this.loginService = service;
   }
@@ -53,5 +54,11 @@ export class LoginComponent {
         this.validLogin = false;
       }
     });
+
+    setTimeout(() => {
+      this.navService.callMethodOfSecondComponent();
+    }, 100)
+
+
   }
 }

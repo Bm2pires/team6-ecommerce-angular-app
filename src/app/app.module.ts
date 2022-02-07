@@ -14,8 +14,6 @@ import { UserInformationComponent } from './components/user-information/user-inf
 import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './components/admin/admin-prod.component';
 import { ModalComponent } from './components/admin/modal-edit-prod/modal-prod.component';
-import { CustomerComponent } from './components/navbar/navbar-customer/navbar-customer.component';
-import { NavbarAdminComponent } from './components/navbar/navbar-admin/navbar-admin.component';
 import { AdminUserComponent } from './components/admin-user/admin-user.component';
 import { ModalUserComponent } from './components/admin-user/modal-edit-user/modal-user.component';
 import { ModalAddUserComponent } from './components/admin-user/modal-add-user/modal-add-user.component';
@@ -58,8 +56,6 @@ const appRoutes: Routes = [
     UserInformationComponent,
     AdminComponent,
     ModalComponent,
-    CustomerComponent,
-    NavbarAdminComponent,
     AdminUserComponent,
     ModalUserComponent,
     ModalAddUserComponent,

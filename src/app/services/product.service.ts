@@ -15,7 +15,7 @@ export class ProductService {
 
   constructor(http: HttpClient) {
     this.http = http;
-    this.baseUrl = 'http://localhost:8081/product/';
+    this.baseUrl = 'http://localhost:8080/product/';
   }
 
   findAllProducts(): Observable<ProductDetails[]> {
