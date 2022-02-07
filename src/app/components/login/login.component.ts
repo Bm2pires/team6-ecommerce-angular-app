@@ -47,7 +47,8 @@ export class LoginComponent {
         user = response;
         this.validLogin = true;
         sessionStorage.setItem('user', JSON.stringify(user));
-        this.router.navigate(['']);
+        // waits for 1 second to allow user to see login successful message
+        setTimeout(() => this.router.navigate(['']), 1000);
       } else {
         this.validLogin = false;
       }
