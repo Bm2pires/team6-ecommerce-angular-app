@@ -30,7 +30,7 @@
         <div class="form-group">
             <label for="userPass">User password</label>
             <div class="input-group">
-                <input id="userPass" maxlength="20" class="form-control" type="text" [(ngModel)]='newUserDetails.password' [ngModelOptions]="{standalone: true}" required name="password" #password="ngModel" [disabled]="disabledFields">
+                <input id="userPass" maxlength="20" class="form-control" type="password" [(ngModel)]='newUserDetails.password' [ngModelOptions]="{standalone: true}" required name="password" #password="ngModel" [disabled]="disabledFields">
             </div>
             <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
                 Password is required
@@ -48,10 +48,7 @@
         <div class="form-group">
             <label for="userDOB">User DOB</label>
             <div class="input-group">
-                <input id="userDOB" class="form-control" type="date" [(ngModel)]='newUserDetails.dateOfBirth' [ngModelOptions]="{standalone: true}" required name="dob" #dob="ngModel" [disabled]="disabledFields">
-            </div>
-            <div [hidden]="!dob.valid || title.pristine" class="alert alert-danger">
-                D.O.B is required
+                <input id="userDOB" class="form-control" type="date" [(ngModel)]='newUserDetails.dateOfBirth' [ngModelOptions]="{standalone: true}" required name="dob" #dob="ngModel" [disabled]="true">
             </div>
         </div>
         <div class="form-group">
