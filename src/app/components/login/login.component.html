@@ -21,9 +21,10 @@
             <a href="#" class="float-end mb-3 text-white">Forgot Password</a>
 
             <!-- submit button -->
-            <button type="submit" style="width: 320px;" class="btn mx-auto bg-light"
+            <button type="submit" style="width: 320px;" class="btn mx-auto bg-light mb-2"
                 [disabled]="!f.valid">Login</button>
-            <span class="help-block text-danger" *ngIf="!validLogin && formSubmitted">Login Failed! Incorrect email
+            <span class="help-block text-danger" *ngIf="!validLogin && formSubmitted">Login Failed! Incorrect
+                email
                 or password.</span>
 
             <!-- registration info -->
