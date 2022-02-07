@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { LoginUser } from 'src/app/services/loginUser';
 import { User } from 'src/app/services/User';
@@ -15,7 +16,7 @@ export class LoginComponent {
   password: string = '';
 
   // Inject the login service dependency
-  constructor(service: LoginService) {
+  constructor(service: LoginService, private router: Router) {
     console.log('Login Component Loaded');
     this.loginService = service;
   }
@@ -31,9 +32,6 @@ export class LoginComponent {
       address: '',
       isAdmin: false,
     };
-    // code to execute after form is submitted
-    // console.log('Submitted');
-    // console.log(form);
 
     this.email = form.value.email;
     this.password = form.value.password;
@@ -41,15 +39,9 @@ export class LoginComponent {
     const loginUser: LoginUser = { email: this.email, password: this.password };
 
     this.loginService.authenticate(loginUser).subscribe((response) => {
-      console.log(response);
+      user = response;
+      sessionStorage.setItem('user', JSON.stringify(user));
+      var obj = JSON.parse(sessionStorage['user']);
     });
-
-    // this.loginService.getUserFromDB(user).subscribe(
-    //   (response) => console.log(response),
-    //   (err) => console.log(err)
-    // );
-
-    // console.log(this.email);
-    // console.log(this.password);
   }
 }
