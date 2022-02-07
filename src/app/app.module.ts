@@ -20,14 +20,27 @@ import { AdminUserComponent } from './components/admin-user/admin-user.component
 import { ModalUserComponent } from './components/admin-user/modal-edit-user/modal-user.component';
 import { ModalAddUserComponent } from './components/admin-user/modal-add-user/modal-add-user.component';
 import { ModalAddProdComponent } from './components/admin/modal-add-prod/modal-add-prod.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegisterComponent },
-  { path: 'userInfo', component: UserInformationComponent },
-  { path: 'adminProds', component: AdminComponent },
-  { path: 'adminUsers', component: AdminUserComponent },
+  {
+    path: 'userInfo',
+    component: UserInformationComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'adminProds',
+    component: AdminComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'adminUsers',
+    component: AdminUserComponent,
+    canActivate: [AuthGuardService],
+  },
 ];
 
 @NgModule({
