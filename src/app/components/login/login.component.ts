@@ -15,6 +15,8 @@ export class LoginComponent {
   loginService: LoginService;
   email: string = '';
   password: string = '';
+  validLogin = false;
+  formSubmitted = false;
 
   // Inject the login service dependency
   constructor(service: LoginService, private router: Router, private navService: NavbarService) {
@@ -23,6 +25,8 @@ export class LoginComponent {
   }
 
   onSubmit(form: NgForm) {
+    this.formSubmitted = true;
+
     let user: User = {
       email: '',
       password: '',
@@ -40,9 +44,15 @@ export class LoginComponent {
     const loginUser: LoginUser = { email: this.email, password: this.password };
 
     this.loginService.authenticate(loginUser).subscribe((response) => {
-      user = response;
-      sessionStorage.setItem('user', JSON.stringify(user));
-      this.router.navigate(['']);
+      if (response != null) {
+        user = response;
+        this.validLogin = true;
+        sessionStorage.setItem('user', JSON.stringify(user));
+        // waits for 1 second to allow user to see login successful message
+        setTimeout(() => this.router.navigate(['']), 1000);
+      } else {
+        this.validLogin = false;
+      }
     });
 
     setTimeout(() => {
