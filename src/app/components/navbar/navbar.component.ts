@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { UserService } from 'src/app/services/user.service';
-import { servicesVersion } from 'typescript';
 
 @Component({
   selector: 'app-navbar',
@@ -21,17 +20,6 @@ export class NavbarComponent implements OnInit{
      }
 
      constructor(private userService: UserService, private loginService: LoginService, private navService: NavbarService){
-      // sessionStorage.setItem('username', "popo@hotmail.com");
-      //CHECK IF USER HAS LOGGED IN YET
-      // if(sessionStorage.getItem('username'))
-      // this.userService.checkIfAdmin("popo@hotmail.com").subscribe(data => {
-      //   this.isAdmin = data;
-      // });
-
-      // this.userService.checkIfAdmin("popo@hotmail.com").subscribe(data => {
-      //   this.isAdmin = data;
-      // });
-
       this.navService.invokeEvent.subscribe(value => {
         if(value === 'someVal'){
          this.isUserLoggedIn();
@@ -61,19 +49,9 @@ export class NavbarComponent implements OnInit{
     }
 
     isUserAdmin(){
-      if(JSON.stringify(sessionStorage.getItem("user"))){
-        const user:String = JSON.stringify(sessionStorage.getItem("user"));
-        var str = user;
-        var splitted = str.split(",", 8);
-        const admin = splitted[7]
-        const adminStr = admin.substr(10);
-        if(adminStr.startsWith('t')){
-          this.isAdmin = true
-        }else{
-          this.isAdmin = false
-        }
-        // JSON.parse(adminStr)
-        // this.isAdmin = boolValue;
+      const user = JSON.parse(sessionStorage.getItem("user")!)
+      if(user != null){
+        this.isAdmin = user.admin;
       }else{
         this.isAdmin = false;
       }
