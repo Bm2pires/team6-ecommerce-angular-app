@@ -19,7 +19,8 @@ public class UserLoginService {
 		System.out.println("User authentication request received");
 
 		// try to find the requested user in the repository
-		User user = userRepository.findByEmail(requestModel.getEmail());
+
+		User user = userRepository.findByEmail(requestModel.getEmail()).get();
 		if (user == null) {
 			System.out.println("Error");
 			return null;

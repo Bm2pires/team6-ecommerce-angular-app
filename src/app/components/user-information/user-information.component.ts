@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import { UserDetails } from 'src/app/services/userDetails';
 
 @Component({
   selector: 'app-user-information',
@@ -6,71 +10,167 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-information.component.css']
 })
 export class UserInformationComponent implements OnInit {
-  username: string = "akjahskd";
-  title: string = "akjahskd"
-  firstname: string = "akjahskd"
-  lastname:string  = "akjahskd"
-  dateofbirth: String = "new Date()"
-  contactnumber: string = "akjahskd"
-  address:string = "akjahskd"
 
-  usernameOld: string = "akjahskd";
-  titleOld: string = "akjahskd"
-  firstnameOld: string = "akjahskd"
-  lastnameOld:string  = "akjahskd"
-  dateofbirthOld: String = "new Date()"
-  contactnumberOld: string = "akjahskd"
-  addressOld:string = "akjahskd"
-  disabledFields = true;
+  @ViewChild("editUserInfo")
+  yourForm!: NgForm;
 
-  constructor() { }
+
+
+  errors: Array<string> = [];
+  valid = true
+
+  userDetailDB!: UserDetails;
+
+
+    emailNew: string = "Current@";
+    titleNew: string = "Mr"
+    firstnameNew: string = "Current"
+    lastnameNew:string  = "Current"
+    dateofbirthNew: string | null = new Date().toLocaleDateString();
+    contactnumberNew: string = "Current"
+    addressNew:string = "Current"
+    passwordNew:string = "Current"
+    phoneNumberNew:string = "1234567899"
+
+    newUserDetails: UserDetails = {
+      id: 0,
+      firstName: this.firstnameNew,
+      lastName: this.lastnameNew,
+      email: this.emailNew,
+      password: this.passwordNew,
+      title: this.titleNew,
+      dateOfBirth: this.dateofbirthNew,
+      phoneNumber: this.phoneNumberNew,
+      address: this.addressNew
+    };
+
+    oldUserDetails: UserDetails = {
+      id: 0,
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      title: '',
+      dateOfBirth: new Date().toLocaleDateString(),
+      phoneNumber: '',
+      address: ''
+    };
+
+
+    disabledFields = true;
+
+    titles = ['Mr', 'Mrs',
+    'Miss', 'Ms'];
+
+    submitted = false;
+
+
+
+  constructor(private datePipe: DatePipe, private userService: UserService) {
+
+  }
 
   ngOnInit(): void {
+    //Find email by using session storage
+    this.userService.findUserByEmail("popo@hotmail.com").subscribe(data => {
+      console.log(data)
+      this.newUserDetails = data;
+    });
+
+    this.newUserDetails.dateOfBirth = this.datePipe.transform(this.newUserDetails.dateOfBirth,"yyyy-MM-dd");
   }
 
    disableFunc() {
     this.disabledFields = false;
-    this.usernameOld = this.username;
-    this.titleOld = this.title;
-    this.firstnameOld = this.firstname;
-    this.lastnameOld = this.lastname;
-    this.dateofbirthOld = this.dateofbirth
-    this.contactnumberOld = this.contactnumber;
-    this.addressOld = this.address;
+
+    this.oldUserDetails.email = this.newUserDetails.email;
+    this.oldUserDetails.title = this.newUserDetails.title;
+    this.oldUserDetails.firstName = this.newUserDetails.firstName;
+    this.oldUserDetails.lastName = this.newUserDetails.lastName;
+    this.oldUserDetails.dateOfBirth = this.newUserDetails.dateOfBirth
+    this.oldUserDetails.phoneNumber = this.newUserDetails.phoneNumber;
+    this.oldUserDetails.address = this.newUserDetails.address;
   }
 
   reset() {
     this.disabledFields = true;
-    this.username = this.usernameOld;
-    this.title = this.titleOld;
-    this.firstname = this.firstnameOld;
-    this.lastname = this.lastnameOld;
-    this.dateofbirth = this.dateofbirthOld
-    this.contactnumber = this.contactnumberOld;
-    this.address = this.addressOld;
 
-    this.usernameOld = '';
-    this.titleOld = '';
-    this.firstnameOld = '';
-    this.lastnameOld = '';
-    this.dateofbirthOld = ''
-    this.contactnumberOld = '';
-    this.addressOld = '';
-  }
+    this.ngOnInit()
 
-  saveEdits() {
-    this.disabledFields = true;
-    this.usernameOld = '';
-    this.titleOld = '';
-    this.firstnameOld = '';
-    this.lastnameOld = '';
-    this.dateofbirthOld = ''
-    this.contactnumberOld = '';
-    this.addressOld = '';
-
-    //Need to update backend
+    this.oldUserDetails.email = '';
+    this.oldUserDetails.title = '';
+    this.oldUserDetails.firstName = '';
+    this.oldUserDetails.lastName = '';
+    this.oldUserDetails.dateOfBirth = new Date().toLocaleDateString();
+    this.oldUserDetails.phoneNumber = '';
+    this.oldUserDetails.address = '';
 
 
   }
 
+  onSubmit() {
+    this.submitted = true;
+    this.validate();
+      if(this.valid){
+        this.userService.edituser(this.newUserDetails).subscribe(data => {
+        });
+        this.disabledFields = true;
+
+        setTimeout(() => {
+          this.ngOnInit();
+          console.log("Timneout")
+        }, 300)
+
+
+    }else{
+      alert(this.errors)
+      this.errors = [];
+    }
+
+  }
+
+  validate() {
+    const phoneNumberCheck = Number(this.newUserDetails.phoneNumber);
+    if(Number.isNaN(phoneNumberCheck)){
+      this.errors.push("Phone number must be digitis");
+    }
+    if(this.newUserDetails.phoneNumber.length != 10){
+      this.errors.push("Phone number must be 10 digitis");
+    }
+    const emailCheck = Array.from(this.newUserDetails.email);
+    let emailValid = false;
+    emailCheck.forEach((letter) => {
+      if(letter === '@'){
+        emailValid = true;
+      }
+    })
+    if(!emailValid){
+      this.errors.push("Email must contain an @");
+    }
+
+    const dateCheck = this.newUserDetails.dateOfBirth!.toString();
+    let today = this.datePipe.transform(Date.now(),'yyyy-MM-dd')!;
+
+    if(dateCheck > today){
+      this.errors.push("Date of birth cannot be in the future");
+    }
+    let today2 = new Date();
+    var birthDate = new Date(this.newUserDetails.dateOfBirth!);
+    var age = today2.getFullYear() - birthDate.getFullYear();
+    var m = today2.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today2.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    if(age < 18){
+      this.errors.push("Age must be 18 or older");
+    }
+
+
+    if(this.errors.length != 0){
+      this.valid = false;
+    }else{
+      this.valid = true;
+    }
+  }
 }

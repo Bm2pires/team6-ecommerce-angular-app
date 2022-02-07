@@ -1,13 +1,16 @@
-<app-modal-add-prod></app-modal-add-prod>
 <div class="card-deck m-5" style="display: inline-block" *ngFor="let prod of products">
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="../../../assets/images/placeholderOne.jpg" alt="Card image cap">
         <div class="card-body">
             <p class="card-text">Product Name: {{prod.productName}}</p>
-            <p class="card-text">Product Description: {{prod.productDesc}}</p>
+            <p class="card-text">Product Description: {{prod.productDescription}}</p>
             <p class="card-text">Product Price: {{prod.productPrice}}</p>
+            <p class="card-text">Product Brand: {{prod.productBrand}}</p>
+            <p class="card-text">Product Category: {{prod.productCategory}}</p>
             <app-modal [item]="prod"></app-modal>
             <button type="button" class="btn btn-warning" (click)="delProd(prod.productId)">Delete</button>
         </div>
     </div>
 </div>
+<hr>
+<app-modal-add-prod></app-modal-add-prod>

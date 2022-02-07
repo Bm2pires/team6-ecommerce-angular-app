@@ -1,0 +1,7 @@
+package com.ecommerce.spring.reqresmodels;
+
+public class ProductEditRequestModel {
+
+	private long id
+	private long  
+}

@@ -28,6 +28,6 @@ export class LoginService {
 
   logout() {
     sessionStorage.removeItem('user');
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
   }
 }

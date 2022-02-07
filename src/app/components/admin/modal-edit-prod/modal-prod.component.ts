@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductService } from 'src/app/services/product.service';
+import { ProductDetails } from 'src/app/services/productDetails';
+import { ProductModify } from 'src/app/services/productModify';
 
 @Component({
   selector: 'app-modal',
@@ -8,24 +11,73 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalComponent implements OnInit {
   @Input()
-  item!: { productId: Number; productType: String; productName: String; productDesc: String; productPrice: Number};
+  item!: { productId: Number; productName: String; productDescription: String; productPrice: Number; productBrand: String, productCategory: String};
+
+
+  errors: Array<string> = [];
+  valid = true
 
   newProductName: String = "";
   newProductDesc: String = "";
   newProductPrice: Number = 0;
+  newProdutBrand: String = "";
+  newProductCategory: String = "";
+
+
+  productDetails: ProductDetails = {
+    productId: 0,
+    productName: this.newProductName,
+    productDescription: this.newProductDesc,
+    productPrice: this.newProductPrice,
+    productBrand: this.newProdutBrand,
+    productCategory: this.newProductCategory,
+  };
+
+  submitted = false;
+
 
   closeResult = '';
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private prodService: ProductService) {
+  }
   ngOnInit(): void {
+    this.productDetails.productId = this.item.productId;
+
   }
 
-  editProduct(modal: { close: () => void; }) {
-    modal.close();
-    console.log("Edit product Function")
-    console.log(this.newProductName)
-    console.log(this.newProductDesc)
-    console.log(this.newProductPrice)
+  onSubmit(modal: { close: () => void; }) {
+    this.submitted = true;
+    this.validate();
+    if(this.valid){
+      this.prodService.editProd(this.productDetails).subscribe(data => {
+        console.log(data);
+      });
+      modal.close();
+      this.reset();
+    }else{
+      alert(this.errors)
+      this.errors = [];
+    }
+  }
+
+  validate() {
+    if(this.productDetails.productName.length < 3){
+      this.errors.push("Product name must be greater than 3 characters");
+    }
+
+    if(this.productDetails.productDescription.length < 10){
+      this.errors.push("Product description must be greater than 10 characters");
+    }
+
+    if(this.productDetails.productPrice === 0){
+      this.errors.push("Product price must not be 0.00");
+    }
+
+    if(this.errors.length != 0){
+      this.valid = false;
+    }else{
+      this.valid = true;
+    }
   }
 
   open(content: any) {
@@ -34,10 +86,9 @@ export class ModalComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-    console.log(this.item)
-    this.newProductName = "";
-    this.newProductDesc = "";
-    this.newProductPrice = 0;
+
+    this.productDetails.productPrice = this.item.productPrice;
+
   }
 
   private getDismissReason(reason: any): string {
@@ -48,6 +99,30 @@ export class ModalComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  onClose(modal: { close: () => void; }){
+    modal.close();
+    this.reset();
+  }
+
+  reset() {
+    this.newProductName = "";
+    this.newProductDesc = "";
+    this.newProductPrice = 0;
+    this.newProdutBrand = "";
+    this.newProductCategory = "";
+
+    this.productDetails = {
+      productId: this.item.productId,
+      productName: this.newProductName,
+      productDescription: this.newProductDesc,
+      productPrice: this.newProductPrice,
+      productBrand: this.newProdutBrand,
+      productCategory: this.newProductCategory
+    };
+
+    this.submitted = false;
   }
 
 

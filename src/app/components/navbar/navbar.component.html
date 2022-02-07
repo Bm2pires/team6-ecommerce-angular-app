@@ -4,7 +4,24 @@
     <span class="navbar-toggler-icon"></span>
   </button>
     <div class="justify-content-end" id="navbarResponsive" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
-        <app-navbar-admin *ngIf="isAdmin"></app-navbar-admin>
-        <app-navabar-customer *ngIf="!isAdmin"></app-navabar-customer>
+        <!-- <app-navbar-admin *ngIf="isAdmin"></app-navbar-admin>
+        <app-navabar-customer *ngIf="!isAdmin"></app-navabar-customer> -->
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/">Home</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" routerLink="#">Products</a>
+            </li>
+            <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-left">
+                <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown" role="button">Account</a>
+                <div ngbDropdownMenu aria-labelledby="navbarDropdown" class="dropdown-menu">
+                    <a ngbDropdownItem routerLink="/login" *ngIf="!isUserLoggedIn()">Login</a>
+                    <a ngbDropdownItem routerLink="/registration" *ngIf="!isUserLoggedIn()">Registration</a>
+                    <a ngbDropdownItem routerLink="/userInfo" *ngIf="isUserLoggedIn()">My Account</a>
+                    <a ngbDropdownItem routerLink="/" (click)="logout()" *ngIf="isUserLoggedIn()">Logout</a>
+                </div>
+            </li>
+        </ul>
     </div>
 </nav>

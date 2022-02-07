@@ -1,8 +1,9 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from 'src/app/services/user.service';
 import { UserDetails } from 'src/app/services/userDetails';
-import { UserInformationComponent } from '../../user-information/user-information.component';
+import { UserModify } from 'src/app/services/userModify';
 
 @Component({
   selector: 'app-modal-add-user',
@@ -11,25 +12,27 @@ import { UserInformationComponent } from '../../user-information/user-informatio
 })
 export class ModalAddUserComponent implements OnInit {
 
+
+
   errors: Array<string> = [];
   valid = true
 
   userEmail:String = "";
   userPass:String = "";
-  userTitle:String = "";
+  userTitle:String = "Mr";
   userFname: String = "";
   userLname:String = "";
-  dob:Date = new Date;
+  dob:string|null = new Date().toLocaleDateString();
   phonenumber:String = "";
   address:String = "";
-  password:String = "";
 
-  userDetails: UserDetails = { firstName: this.userFname,
+  userModify: UserModify = {
+    firstName: this.userFname,
     lastName: this.userLname,
     email: this.userEmail,
-    password: this.password,
+    password: this.userPass,
     title: this.userTitle,
-    dob: this.dob,
+    dateOfBirth: new Date().toLocaleDateString(),
     phoneNumber: this.phonenumber,
     address: this.address };
 
@@ -42,8 +45,10 @@ export class ModalAddUserComponent implements OnInit {
 
   closeResult = '';
 
-  constructor(private modalService: NgbModal) {
-    console.log(this.submitted)
+  constructor(private modalService: NgbModal, private datePipe: DatePipe, private userService: UserService) {
+    // "2000-04-10"
+    var date = new Date();
+    this.userModify.dateOfBirth = this.datePipe.transform(date,"yyyy-MM-dd")
   }
   ngOnInit(): void {
   }
@@ -53,23 +58,54 @@ export class ModalAddUserComponent implements OnInit {
     this.submitted = true;
     this.validate();
     if(this.valid){
+      this.userService.addUser(this.userModify).subscribe(data => {
+        console.log(data);
+      });
+      this.ngOnInit();
       modal.close();
       this.reset();
     }else{
-      alert(this.errors.forEach((el)=>el))
+      alert(this.errors)
+      this.errors = [];
     }
   }
 
   validate() {
-    const phoneNumberCheck = Number(this.userDetails.phoneNumber);
-    if(phoneNumberCheck == NaN){
-      this.errors.push("Phone number must be digitis");
+    const phoneNumberCheck = Number(this.userModify.phoneNumber);
+    if(Number.isNaN(phoneNumberCheck)){
+      this.errors.push("Phone number must be digits");
     }
-    const dateCheck = this.userDetails.dob;
-    if(dateCheck > new Date()){
+    if(this.userModify.phoneNumber.length != 10){
+      this.errors.push("Phone number must be 10 digits");
+    }
+    const emailCheck = Array.from(this.userModify.email);
+    let emailValid = false;
+    emailCheck.forEach((letter) => {
+      if(letter === '@'){
+        emailValid = true;
+      }
+    })
+    if(!emailValid){
+      this.errors.push("Email must contain an @");
+    }
+
+    const dateCheck = this.userModify.dateOfBirth!.toString();
+    let today = this.datePipe.transform(Date.now(),'yyyy-MM-dd')!;
+
+    if(dateCheck > today){
       this.errors.push("Date of birth cannot be in the future");
     }
-    //Need to add must be 18
+    let today2 = new Date();
+    var birthDate = new Date(this.userModify.dateOfBirth!);
+    var age = today2.getFullYear() - birthDate.getFullYear();
+    var m = today2.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today2.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    if(age < 18){
+      this.errors.push("Age must be 18 or older");
+    }
 
 
     if(this.errors.length != 0){
@@ -85,10 +121,10 @@ export class ModalAddUserComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-
   }
 
   private getDismissReason(reason: any): string {
+    this.reset();
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -101,8 +137,6 @@ export class ModalAddUserComponent implements OnInit {
   onClose(modal: { close: () => void; }) {
     modal.close();
     this.reset();
-
-
   }
 
   reset(){
@@ -111,17 +145,17 @@ export class ModalAddUserComponent implements OnInit {
     this.userTitle = "";
     this.userFname = "";
     this.userLname = "";
-    this.dob = new Date;
+    this.dob = new Date().toLocaleDateString();
     this.phonenumber = "";
     this.address = "";
-    this.password = "";
 
-    this.userDetails = { firstName: this.userFname,
+    this.userModify = {
+      firstName: this.userFname,
       lastName: this.userLname,
       email: this.userEmail,
-      password: this.password,
+      password: this.userPass,
       title: this.userTitle,
-      dob: this.dob,
+      dateOfBirth: new Date().toLocaleDateString(),
       phoneNumber: this.phonenumber,
       address: this.address
     };

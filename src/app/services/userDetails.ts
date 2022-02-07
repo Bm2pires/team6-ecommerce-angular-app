@@ -1,11 +1,11 @@
 export interface UserDetails {
-
+    id: Number,
     firstName: String,
     lastName: String,
     email: String,
-    password: String,
     title: String,
-    dob: Date,
+    password: String,
+    dateOfBirth: string|null,
     phoneNumber: String,
     address: String
 

@@ -1,0 +1,5 @@
+package com.ecommerce.spring.reqresmodels;
+
+public class UserDetailResponseModel {
+
+}
