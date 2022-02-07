@@ -23,6 +23,7 @@ import { UserService } from './services/user.service';
 import { ProductService } from './services/product.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ProductsComponent } from './components/products/products.component';
+import { LoginService } from './services/login.service';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -74,7 +75,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
   ],
-  providers: [DatePipe, UserService, ProductService],
+  providers: [DatePipe, UserService, ProductService, LoginService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
