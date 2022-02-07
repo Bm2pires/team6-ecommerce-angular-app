@@ -27,6 +27,17 @@ export class LoginComponent {
   onSubmit(form: NgForm) {
     this.formSubmitted = true;
 
+    // let user: User = {
+    //   email: '',
+    //   password: '',
+    //   title: '',
+    //   firstName: '',
+    //   lastName: '',
+    //   phone_number: '',
+    //   address: '',
+    //   isAdmin: false,
+    // };
+
     let user: User = {
       email: '',
       password: '',
@@ -36,6 +47,7 @@ export class LoginComponent {
       phone_number: '',
       address: '',
       isAdmin: false,
+      userId: 0
     };
 
     this.email = form.value.email;

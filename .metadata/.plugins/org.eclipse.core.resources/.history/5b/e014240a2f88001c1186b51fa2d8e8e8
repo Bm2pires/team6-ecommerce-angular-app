@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class UserLoginResponseModel {
-	private long id;
+
 	private String email;
 	private String password;
 	private String title;
@@ -18,7 +18,7 @@ public class UserLoginResponseModel {
 	private boolean isAdmin;
 
 	public UserLoginResponseModel(String email, String password, String title, String firstName, String lastName,
-			String phone_number, String address, boolean isAdmin, Date dateOfBirth, long id) {
+			String phone_number, String address, boolean isAdmin, Date dateOfBirth) {
 		this.email = email;
 		this.password = password;
 		this.title = title;
@@ -28,7 +28,6 @@ public class UserLoginResponseModel {
 		this.address = address;
 		this.isAdmin = isAdmin;
 		this.dateOfBirth = dateOfBirth;
-		this.id = id;
 	}
 
 	public UserLoginResponseModel() {

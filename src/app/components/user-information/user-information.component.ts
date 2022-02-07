@@ -75,6 +75,11 @@ export class UserInformationComponent implements OnInit {
     this.newUserDetails = arr1;
     this.newUserDetails.phoneNumber = arr1.phone_number;
     this.newUserDetails.dateOfBirth = this.datePipe.transform(arr1.dateOfBirth,"yyyy-MM-dd");
+
+
+
+
+
   }
 
    disableFunc() {
@@ -110,13 +115,21 @@ export class UserInformationComponent implements OnInit {
     this.validate();
       if(this.valid){
         this.userService.edituser(this.newUserDetails).subscribe(data => {
+          const x = JSON.parse(sessionStorage.getItem("user")!)
+          x.email = data.email;
+          x.title = data.title;
+          x.firstName = data.firstName;
+          x.lastName = data.lastName;
+          x.phone_number = data.phoneNumber;
+          x.address = data.address;
+          sessionStorage.setItem("user", JSON.stringify(x));
         });
         this.disabledFields = true;
 
         setTimeout(() => {
           this.ngOnInit();
-          console.log("Timneout")
-        }, 300)
+          console.log("timeout")
+        }, 1000)
 
 
     }else{
@@ -145,23 +158,10 @@ export class UserInformationComponent implements OnInit {
       this.errors.push("Email must contain an @");
     }
 
-    const dateCheck = this.newUserDetails.dateOfBirth!.toString();
-    let today = this.datePipe.transform(Date.now(),'yyyy-MM-dd')!;
-
-    if(dateCheck > today){
-      this.errors.push("Date of birth cannot be in the future");
-    }
-    let today2 = new Date();
-    var birthDate = new Date(this.newUserDetails.dateOfBirth!);
-    var age = today2.getFullYear() - birthDate.getFullYear();
-    var m = today2.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today2.getDate() < birthDate.getDate())) {
-        age--;
+    if(this.newUserDetails.address === "" || this.newUserDetails.email === "" || this.newUserDetails.firstName === "" || this.newUserDetails.lastName === "" || this.newUserDetails.password === "" || this.newUserDetails.phoneNumber === ""){
+      this.errors.push("Please fill in all fields")
     }
 
-    if(age < 18){
-      this.errors.push("Age must be 18 or older");
-    }
 
 
     if(this.errors.length != 0){
