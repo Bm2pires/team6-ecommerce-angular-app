@@ -22,6 +22,7 @@ import { DatePipe } from '@angular/common';
 import { UserService } from './services/user.service';
 import { ProductService } from './services/product.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ProductsComponent } from './components/products/products.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -42,6 +43,10 @@ const appRoutes: Routes = [
     component: AdminUserComponent,
     canActivate: [AuthGuardService],
   },
+  {
+    path: 'products',
+    component: ProductsComponent,
+  },
 ];
 
 @NgModule({
@@ -59,7 +64,8 @@ const appRoutes: Routes = [
     AdminUserComponent,
     ModalUserComponent,
     ModalAddUserComponent,
-    ModalAddProdComponent
+    ModalAddProdComponent,
+    ProductsComponent,
   ],
   imports: [
     BrowserModule,
