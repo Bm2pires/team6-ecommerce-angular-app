@@ -8,14 +8,6 @@ import { ProductDetails } from 'src/app/services/productDetails';
   styleUrls: ['./admin-prod.component.css']
 })
 export class AdminComponent implements OnInit {
-  //  products = [
-  //   {productId:1, productType:"laptop", productName:"macbook", productDesc:"Description", productPrice:100.00},
-  //   {productId:2, productType:"laptop", productName:"macbook", productDesc:"Description", productPrice:100.00},
-  //   {productId:3, productType:"laptop", productName:"macbook", productDesc:"Description", productPrice:100.00},
-  //   {productId:4, productType:"laptop", productName:"macbook", productDesc:"Description", productPrice:100.00},
-  //   {productId:5, productType:"laptop", productName:"macbook", productDesc:"Description", productPrice:100.00}
-
-  // ];
 
   products!: ProductDetails[];
 

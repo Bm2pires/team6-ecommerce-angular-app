@@ -1,6 +1,8 @@
 package com.ecommerce.spring.services;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -12,8 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.ecommerce.spring.entities.Products;
 import com.ecommerce.spring.entities.User;
 import com.ecommerce.spring.repositories.UserRepository;
+import com.ecommerce.spring.reqresmodels.ProductEditResponseModel;
+import com.ecommerce.spring.reqresmodels.ProductGetResponseModel;
 import com.ecommerce.spring.reqresmodels.UserAddingRequestModel;
 import com.ecommerce.spring.reqresmodels.UserAddingResponseModel;
 import com.ecommerce.spring.reqresmodels.UserDetailRequestModel;
@@ -29,9 +34,9 @@ public class UserService {
 	public UserDetailResponseModel editUser(UserDetailRequestModel requestModel) {
 		Optional<User> user = userRepository.findById(requestModel.getId());
 		boolean valid = validateInput(requestModel);
-		boolean duplicateEmail = checkUniqueEmail(requestModel.getEmail());
+		boolean duplicateEmail = checkUniqueEmail(requestModel);
 		if(valid && duplicateEmail) {
-			if(user != null) {		
+			if(user.isPresent()) {		
 				user.get().setAddress(requestModel.getAddress());
 				user.get().setDob(requestModel.getDateOfBirth());
 				user.get().setEmail(requestModel.getEmail());
@@ -53,7 +58,7 @@ public class UserService {
 	}
 	
 	public UserAddingResponseModel addUser(@RequestBody UserAddingRequestModel requestModel) {
-		UserAddingRequestModel userModel = new UserAddingRequestModel();
+		UserAddingResponseModel userModel = new UserAddingResponseModel();
 		ModelMapper mapper = new ModelMapper();
 		boolean valid = validateInput(requestModel);
 		boolean duplicateEmail = checkUniqueEmail(requestModel.getEmail());
@@ -67,24 +72,42 @@ public class UserService {
 			userModel.setPhoneNumber(requestModel.getPhoneNumber());
 			userModel.setTitle(requestModel.getTitle());
 			User user = mapper.map(userModel, User.class);
+			user.setAdmin(false);
+			user.setDob(requestModel.getDateOfBirth());
+			user.setPhone_number(requestModel.getPhoneNumber());
 			userRepository.save(user);
-			return new UserAddingResponseModel(userModel.getFirstName(), userModel.getLastName(), userModel.getEmail(), userModel.getTitle(), userModel.getPassword(),
-					userModel.getDateOfBirth(), userModel.getPhoneNumber(), userModel.getAddress());
+			return userModel;
 		}else {
 			return null;
 		}
 
 	}
 	
+	//AddUser
 	public boolean checkUniqueEmail(String email) {
 		Optional<User> userCheck = userRepository.findByEmail(email);
-		if(userCheck == null) {
+		if(userCheck.isEmpty()) {
 			return true;
 		}else {
 			return false;
 		}
 	}
 	
+	//EditUser
+	public boolean checkUniqueEmail(UserDetailRequestModel requestModel) {
+		Optional<User> userCheck = userRepository.findByEmail(requestModel.getEmail());
+		if(userCheck.isEmpty()) {
+			return true;
+		}else {
+			if(userCheck.get().getUserId() == requestModel.getId()) {
+				return true;
+			}else {
+				return false;
+			}
+		}
+	}
+	
+	//editUser
 	public boolean validateInput(UserDetailRequestModel requestModel) {
 		boolean validInput = true;
 		if(requestModel.getAddress().length() > 150) {
@@ -121,6 +144,7 @@ public class UserService {
 		
 	}
 	
+	//AddUser
 	public boolean validateInput(UserAddingRequestModel requestModel) {
 		boolean validInput = true;
 		if(requestModel.getAddress().length() > 150) {
@@ -155,5 +179,57 @@ public class UserService {
 		}
 		return validInput;
 		
+	}
+
+	public boolean delUser(long id) {
+		Optional<User> user = userRepository.findById(id);
+		if(user.isPresent()) {
+			userRepository.deleteById(id);
+			return true;
+		}else {
+		return false;
+		}
+	}
+
+	public UserDetailResponseModel getUserById(long id) {
+		ModelMapper mapper = new ModelMapper();
+		Optional<User> user = userRepository.findById(id);
+		if(user.isPresent()) {
+			UserDetailResponseModel response = mapper.map(user.get(), UserDetailResponseModel.class);
+				return response;			
+		}else {
+		return null;
+		}
+	}
+
+	//Only gets customers not admins
+	public List<UserDetailResponseModel> getAllUser() {
+		ModelMapper mapper = new ModelMapper();
+		List<UserDetailResponseModel> responseList = new ArrayList<>();
+		
+		List<Optional<User>> list = userRepository.findByisAdmin(false);
+		
+		if(!list.isEmpty()) {
+			for (Optional<User> user : list) {
+				UserDetailResponseModel modelObject = mapper.map(user.get(), UserDetailResponseModel.class);
+				modelObject.setDateOfBirth(user.get().getDob());
+				modelObject.setPhoneNumber(user.get().getPhone_number());
+				responseList.add(modelObject);
+			}
+			return responseList;
+		}else {
+			return null;
+		}
+	}
+
+	public UserDetailResponseModel getUserByEmail(String email) {
+		ModelMapper mapper = new ModelMapper();
+
+		// TODO Auto-generated method stub
+		Optional<User> user = userRepository.findByEmail(email);
+		UserDetailResponseModel response = mapper.map(user.get(), UserDetailResponseModel.class);
+		response.setDateOfBirth(user.get().getDob());
+		response.setPhoneNumber(user.get().getPhone_number());
+		return response;
 	}
 }

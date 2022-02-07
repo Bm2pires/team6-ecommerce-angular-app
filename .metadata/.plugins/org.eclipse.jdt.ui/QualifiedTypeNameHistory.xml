@@ -5,7 +5,6 @@
     <fullyQualifiedTypeName name="com.ecommerce.spring.reqresmodels.UserDetailRequestModel"/>
     <fullyQualifiedTypeName name="com.ecommerce.spring.entities.User"/>
     <fullyQualifiedTypeName name="com.ecommerce.spring.services.UserEditService"/>
-    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
     <fullyQualifiedTypeName name="com.ecommerce.spring.repositories.UserRepository"/>
     <fullyQualifiedTypeName name="com.ecommerce.spring.reqresmodels.UserAddingRequestModel"/>
     <fullyQualifiedTypeName name="org.modelmapper.ModelMapper"/>
@@ -44,4 +43,5 @@
     <fullyQualifiedTypeName name="com.ecommerce.spring.entities.Categories"/>
     <fullyQualifiedTypeName name="com.ecommerce.spring.entities.Brand"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
 </qualifiedTypeNameHistroy>

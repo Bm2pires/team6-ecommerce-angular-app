@@ -25,6 +25,11 @@ export class UserService {
     return this.http.get<UserDetails>(this.baseUrl + "getUserByEmail" + identifier);
   }
 
+  checkIfAdmin(email: String): Observable<Boolean> {
+    const identifier = "/:email="+email;
+    return this.http.get<Boolean>(this.baseUrl + "isUserAdmin" + identifier);
+  }
+
   addUser(user: UserModify): Observable<UserModify> {
     return this.http.post<UserModify>(this.baseUrl + "addUser", user)
   }

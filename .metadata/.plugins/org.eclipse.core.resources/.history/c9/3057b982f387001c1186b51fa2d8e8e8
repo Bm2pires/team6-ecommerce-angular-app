@@ -95,10 +95,10 @@ public class UserController {
 	}
 	
 	@GetMapping(value = "/isUserAdmin/{email}", produces = "application/json")
-	public ResponseEntity<Boolean> isUserAdmin(@PathVariable String email) {
+	public ResponseEntity<boolean> isUserAdmin(@PathVariable String email) {
 		boolean isAdmin = userEditService.isUserAdmin(email.substring(7));
 		
-		return new ResponseEntity<Boolean>(isAdmin, HttpStatus.OK);
+		return new ResponseEntity<boolean>(user, HttpStatus.OK);
 	}
 	
 	//Only gets customers not admins

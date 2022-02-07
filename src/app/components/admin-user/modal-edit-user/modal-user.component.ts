@@ -118,21 +118,6 @@ export class ModalUserComponent implements OnInit {
     }
   }
 
-  // editUser(modal: { close: () => void; }) {
-  //   modal.close();
-  //   // console.log(document.getElementById("userTitleNew"))
-  //   // console.log("Edit User Function")
-  //   // console.log(this.newUserFName)
-  //   // console.log(this.newUserLName)
-  //   // console.log(this.newUserEmail)
-  //   console.log(this.newUserDOB)
-  //   // console.log(this.newUserPhonenumebr)
-  //   // console.log(this.newUserAddress)
-  //   // console.log(this.newUserPassword)
-  //   // console.log(this.newUserTitle)
-
-  //  }
-
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

@@ -232,4 +232,10 @@ public class UserService {
 		response.setPhoneNumber(user.get().getPhone_number());
 		return response;
 	}
+
+	public boolean isUserAdmin(String email) {
+		ModelMapper mapper = new ModelMapper();
+		Optional<User> user = userRepository.findByEmail(email);
+		return user.get().isAdmin();		
+	}
 }

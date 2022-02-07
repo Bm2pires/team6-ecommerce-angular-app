@@ -78,14 +78,6 @@ export class UserInformationComponent implements OnInit {
       this.newUserDetails = data;
     });
 
-    // this.newUserDetails.email = this.oldUserDetails.email;
-    // this.newUserDetails.title =this.oldUserDetails.title;
-    // this.newUserDetails.firstName=this.oldUserDetails.firstName;
-    // this.newUserDetails.lastName=this.oldUserDetails.lastName;
-    // this.newUserDetails.dateOfBirth=this.oldUserDetails.dateOfBirth;
-    // this.newUserDetails.phoneNumber=this.oldUserDetails.phoneNumber;
-    // this.newUserDetails.address=this.oldUserDetails.address;
-
     this.newUserDetails.dateOfBirth = this.datePipe.transform(this.newUserDetails.dateOfBirth,"yyyy-MM-dd");
   }
 
@@ -105,14 +97,6 @@ export class UserInformationComponent implements OnInit {
     this.disabledFields = true;
 
     this.ngOnInit()
-
-    // this.newUserDetails.email = this.oldUserDetails.email;
-    // this.newUserDetails.title =this.oldUserDetails.title;
-    // this.newUserDetails.firstName=this.oldUserDetails.firstName;
-    // this.newUserDetails.lastName=this.oldUserDetails.lastName;
-    // this.newUserDetails.dateOfBirth=this.oldUserDetails.dateOfBirth;
-    // this.newUserDetails.phoneNumber=this.oldUserDetails.phoneNumber;
-    // this.newUserDetails.address=this.oldUserDetails.address;
 
     this.oldUserDetails.email = '';
     this.oldUserDetails.title = '';
