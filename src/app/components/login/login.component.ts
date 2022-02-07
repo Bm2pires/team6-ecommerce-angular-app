@@ -39,9 +39,11 @@ export class LoginComponent {
     const loginUser: LoginUser = { email: this.email, password: this.password };
 
     this.loginService.authenticate(loginUser).subscribe((response) => {
-      user = response;
-      sessionStorage.setItem('user', JSON.stringify(user));
-      this.router.navigate(['']);
+      if (response != null) {
+        user = response;
+        sessionStorage.setItem('user', JSON.stringify(user));
+        this.router.navigate(['']);
+      }
     });
   }
 }
