@@ -10,6 +10,7 @@ import {
   NgbCarouselModule,
   NgbDropdown,
   NgbDropdownModule,
+  NgbModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -73,13 +74,14 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    NgbModule,
     NgbCarouselModule,
     NgbDropdownModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
   ],
-  providers: [],
+  providers: [DatePipe, UserService, ProductService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
