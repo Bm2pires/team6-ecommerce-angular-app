@@ -1,5 +1,4 @@
 const Pool = require("pg").Pool;
-
 // database connection
 const db = new Pool({
   user: "postgres",
@@ -19,7 +18,10 @@ const getUser = (req, res) => {
         throw error;
       }
       if (result.rows.length >= 1) {
-        res.status(200).json({ message: "User Found." });
+        res.status(200).json({
+          email: result.rows[0].email_address,
+          password: result.rows[0].password,
+        });
       } else {
         res.status(401).json({ message: "User Not Found." });
       }

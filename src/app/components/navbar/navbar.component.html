@@ -1,24 +1,39 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="padding:1em 2em;">
-    <a class="navbar-brand" routerLink="/">Company Brand</a>
+    <a class="navbar-brand">Company Brand</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleCollapsed()">
     <span class="navbar-toggler-icon"></span>
   </button>
-    <div class="justify-content-end" id="navbarResponsive" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+    <div style="margin-left: auto;" id="navbarResponsive">
         <ul class="navbar-nav">
             <li class="nav-item active">
                 <a class="nav-link" routerLink="/">Home</a>
             </li>
-            <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-left">
+            <li class="nav-item ">
+                <a class="nav-link" routerLink="#" *ngIf="!isAdmin">Products</a>
+            </li>
+            <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-left" *ngIf="!isAdmin">
                 <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown" role="button">Account</a>
                 <div ngbDropdownMenu aria-labelledby="navbarDropdown" class="dropdown-menu">
-                    <a ngbDropdownItem routerLink="/login">Login</a>
-                    <a ngbDropdownItem routerLink="/registration">Registration</a>
-                    <a ngbDropdownItem routerLink="#">My Account</a>
+                    <a ngbDropdownItem routerLink="/login" *ngIf="!isLoggedIn">Login</a>
+                    <a ngbDropdownItem routerLink="/registration" *ngIf="!isLoggedIn">Registration</a>
+                    <a ngbDropdownItem routerLink="/userInfo" *ngIf="isLoggedIn && !isAdmin">My Account</a>
+                    <a ngbDropdownItem routerLink="/" (click)="logout()" *ngIf="isLoggedIn">Logout</a>
                 </div>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" routerLink="#">Products</a>
-            </li>
+            <div *ngIf="isAdmin">
+                <ul class="navbar-nav">
+                    <li class="nav-item ">
+                        <a class="nav-link" routerLink="/adminProds">Products</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" routerLink="/adminUsers">Users</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" routerLink="/" (click)="logout()">Logout</a>
+                    </li>
+                </ul>
+            </div>
+
         </ul>
     </div>
 </nav>

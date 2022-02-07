@@ -1,0 +1,5 @@
+package com.ecommerce.spring.repositories;
+
+public interface BrandRepository {
+
+}

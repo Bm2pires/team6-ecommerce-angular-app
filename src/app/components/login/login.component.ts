@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
-import { User } from 'src/app/services/loginUser';
+import { LoginUser } from 'src/app/services/loginUser';
+import { NavbarService } from 'src/app/services/navbar.service';
+import { User } from 'src/app/services/User';
 
 @Component({
   selector: 'app-login',
@@ -12,29 +15,50 @@ export class LoginComponent {
   loginService: LoginService;
   email: string = '';
   password: string = '';
+  validLogin = false;
+  formSubmitted = false;
 
-  constructor(service: LoginService) {
+  // Inject the login service dependency
+  constructor(service: LoginService, private router: Router, private navService: NavbarService) {
     console.log('Login Component Loaded');
     this.loginService = service;
   }
 
   onSubmit(form: NgForm) {
-    // code to execute after form is submitted
-    console.log('Submitted');
-    // console.log(form);
+    this.formSubmitted = true;
+
+    let user: User = {
+      email: '',
+      password: '',
+      title: '',
+      firstName: '',
+      lastName: '',
+      phone_number: '',
+      address: '',
+      isAdmin: false,
+    };
 
     this.email = form.value.email;
     this.password = form.value.password;
 
-    const user: User = { email: this.email, password: this.password };
+    const loginUser: LoginUser = { email: this.email, password: this.password };
 
-    console.log(user);
-    this.loginService.getUserFromDB(user).subscribe(
-      (response) => console.log(response),
-      (err) => console.log(err)
-    );
+    this.loginService.authenticate(loginUser).subscribe((response) => {
+      if (response != null) {
+        user = response;
+        this.validLogin = true;
+        sessionStorage.setItem('user', JSON.stringify(user));
+        // waits for 1 second to allow user to see login successful message
+        setTimeout(() => this.router.navigate(['']), 1000);
+      } else {
+        this.validLogin = false;
+      }
+    });
 
-    // console.log(this.email);
-    // console.log(this.password);
+    setTimeout(() => {
+      this.navService.callMethodOfSecondComponent();
+    }, 100)
+
+
   }
 }

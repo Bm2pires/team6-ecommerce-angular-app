@@ -1,0 +1,62 @@
+<ng-template #content let-modal id="modalProd">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Product Add</h4>
+    </div>
+    <div class="modal-body">
+        <form #addProd="ngForm">
+            <div class="form-group">
+                <label for="prodName">Product Name</label>
+                <div class="input-group">
+                    <input id="prodName" maxLength="50" class="form-control" placeholder="Product Name" type="text" [(ngModel)]="productModify.productName" [ngModelOptions]="{standalone: true}" required name="prodName" #prodName="ngModel">
+                </div>
+                <div [hidden]="prodName.valid || prodName.pristine" class="alert alert-danger">
+                    Product Name is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="prodDescription">Product Description</label>
+                <div class="input-group">
+                    <!-- <input id="prodDescription" maxLength="250" class="form-control" placeholder="Product Description" type="text" [(ngModel)]='productModify.productDesc' [ngModelOptions]="{standalone: true}" required name="prodDesc" #prodDesc="ngModel"> -->
+                    <input id="prodDesc" maxLength="250" class="form-control" placeholder="Product Description" type="text" [(ngModel)]="productModify.productDescription" [ngModelOptions]="{standalone: true}" required name="prodDesc" #prodDesc="ngModel">
+                </div>
+                <div [hidden]="prodDesc.valid || prodDesc.pristine" class="alert alert-danger">
+                    Product Description is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="prodPrice">Product Price</label>
+                <div class="input-group">
+                    <input id="prodPrice" class="form-control" placeholder="Product Price" type="number" min=0 value=0 [(ngModel)]='productModify.productPrice' [ngModelOptions]="{standalone: true}" required name="prodPrice" #prodPrice="ngModel">
+                </div>
+                <div [hidden]="prodPrice.valid || prodPrice.pristine" class="alert alert-danger">
+                    Product Price is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="prodDescription">Product Brand</label>
+                <div class="input-group">
+                    <input id="prodBrand" maxLength="30" class="form-control" placeholder="Product Brand" [(ngModel)]='productModify.productBrand' [ngModelOptions]="{standalone: true}" required name="prodBrand" #prodBrand="ngModel">
+                </div>
+                <div [hidden]="prodBrand.valid || prodBrand.pristine" class="alert alert-danger">
+                    Product Brand is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="prodDescription">Product Category</label>
+                <div class="input-group">
+                    <input id="prodCategory" maxLength="30" class="form-control" placeholder="Product Category" [(ngModel)]='productModify.productCategory' [ngModelOptions]="{standalone: true}" required name="prodCategory" #prodCategory="ngModel">
+                </div>
+                <div [hidden]="prodCategory.valid || prodCategory.pristine" class="alert alert-danger">
+                    Product Category is required
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" [disabled]="!addProd.form.valid" (click)="onSubmit(modal)">Add</button>
+        <button type="button" aria-label="Close" class="btn btn-outline-dark" (click)="onClose(modal)">Close</button>
+    </div>
+
+</ng-template>
+
+<button class="btn btn-primary" (click)="open(content)">Add Product</button>

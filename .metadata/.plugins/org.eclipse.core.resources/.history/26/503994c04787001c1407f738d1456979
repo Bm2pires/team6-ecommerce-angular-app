@@ -1,0 +1,28 @@
+package com.ecommerce.spring.reqresmodels;
+
+import lombok.Data;
+
+@Data
+public class ProductAddRequestModel {
+
+	private String productName;
+
+	private String productDescription;
+
+	private String productPrice;
+
+	
+
+	public ProductAddRequestModel() {
+		super();
+	}
+
+
+
+	public ProductAddRequestModel(String productName, String productDescription, String productPrice) {
+		super();
+		this.productName = productName;
+		this.productDescription = productDescription;
+		this.productPrice = productPrice;
+	}
+}

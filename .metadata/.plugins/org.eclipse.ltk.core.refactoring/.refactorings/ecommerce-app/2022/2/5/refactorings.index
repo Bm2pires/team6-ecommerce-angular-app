@@ -1,0 +1,14 @@
+1644057760341	Rename type 'UserEditService'
+1644057775447	Rename type 'UserModifcationService'
+1644058502369	Rename local variable 'user'
+1644058513746	Rename local variable 'us'
+1644058578408	Rename local variable 'udrm'
+1644063597908	Delete element
+1644065444637	Rename local variable 'user'
+1644073673347	Rename local variable 'duplicateEmail'
+1644075798069	Rename local variable 'tutorial'
+1644076380244	Delete element
+1644077537781	Rename local variable 'product'
+1644077636970	Rename local variable 'product'
+1644077741648	Rename local variable 'product'
+1644171040414	Extract local variable 'findByEmail'

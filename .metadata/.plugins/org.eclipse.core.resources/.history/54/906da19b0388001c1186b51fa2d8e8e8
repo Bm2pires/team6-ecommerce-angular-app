@@ -1,0 +1,65 @@
+<<<<<<< HEAD
+## server port
+server.port=8081
+#
+##properties
+#
+#message.text=Message from chat app
+#message.user=John Mathew
+#
+## DataSource properties - URL, username, password, Hibernate Dialect class (properties -> database data type) - org.hibernate.dialect.PostgreSQLDialect
+#
+spring.datasource.url= jdbc:postgresql://localhost:5432/ecommerce
+spring.datasource.username= postgres
+spring.datasource.password= root
+#
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation= true
+spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.PostgreSQLDialect
+#
+## JPA & Hibernate properties
+## Show all queries - SELECT, INSERT, CREATE
+#spring.jpa.show-sql=true
+## To format the sql query properties
+#spring.jpa.properties.hibernate.format_sql=true
+##spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServer2016Dialect
+##ddl-auto used for generating table schema from hibernate - hibernate ddl auto (create, create-drop, validate, update)
+## create if schema is not there
+## update/create-drop
+#spring.jpa.hibernate.ddl-auto = update
+
+#Key=value
+# h2 database - h2-console :
+#spring.h2.console.enabled=true
+
+# Data source :
+#spring.datasource.url=jdbc:h2:mem:testdb
+=======
+# server port
+server.port=8080
+
+#properties
+
+# DataSource properties - URL, username, password, Hibernate Dialect class (properties -> database data type) - org.hibernate.dialect.PostgreSQLDialect
+>>>>>>> e1681ae1aae682d2fc2510503832c7aefe72d5e7
+
+spring.datasource.url= jdbc:postgresql://localhost:5432/ecommerce
+spring.datasource.username= postgres
+spring.datasource.password= root
+
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation= true
+spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.PostgreSQLDialect
+
+# JPA & Hibernate properties
+# Show all queries - SELECT, INSERT, CREATE
+spring.jpa.show-sql=true
+# To format the sql query properties
+spring.jpa.properties.hibernate.format_sql=true
+#spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServer2016Dialect
+#ddl-auto used for generating table schema from hibernate - hibernate ddl auto (create, create-drop, validate, update)
+# create if schema is not there
+# update/create-drop
+spring.jpa.hibernate.ddl-auto = update
+<<<<<<< HEAD
+=======
+
+>>>>>>> e1681ae1aae682d2fc2510503832c7aefe72d5e7

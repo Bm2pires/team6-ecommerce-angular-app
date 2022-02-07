@@ -1,0 +1,6 @@
+package com.ecommerce.spring.reqresmodels;
+
+@Data
+public class UserDetailRequestModel {
+
+}
