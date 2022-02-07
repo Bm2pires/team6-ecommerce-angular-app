@@ -15,9 +15,9 @@ public class ProductGetResponseModel {
 
 	private String productPrice;
 	
-	private String productCategory;
+	private String category;
     
-	private String productBrand;
+	private String brand;
 	
 
 	public ProductGetResponseModel() {
@@ -26,14 +26,14 @@ public class ProductGetResponseModel {
 
 
 	public ProductGetResponseModel(long productId, String productName, String productDescription, String productPrice,
-			String productCategory, String productBrand) {
+			String category, String brand) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.productDescription = productDescription;
 		this.productPrice = productPrice;
-		this.productCategory = productCategory;
-		this.productBrand = productBrand;
+		this.category = category;
+		this.brand = brand;
 	}
 
 	

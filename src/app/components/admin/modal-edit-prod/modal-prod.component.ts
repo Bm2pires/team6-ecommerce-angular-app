@@ -87,7 +87,12 @@ export class ModalComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
 
+    this.productDetails.productName = this.item.productName;
+    this.productDetails.productDescription = this.item.productDescription;
     this.productDetails.productPrice = this.item.productPrice;
+    this.productDetails.productBrand = this.item.productBrand;
+    this.productDetails.productCategory = this.item.productCategory;
+
 
   }
 
