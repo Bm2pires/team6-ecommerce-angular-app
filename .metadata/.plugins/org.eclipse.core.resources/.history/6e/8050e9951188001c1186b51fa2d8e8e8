@@ -12,10 +12,10 @@ public class UserLoginResponseModel {
 	private String lastName;
 	private String phone_number;
 	private String address;
-	private boolean isAdmin;
+	private String isadmin;
 
 	public UserLoginResponseModel(String email, String password, String title, String firstName, String lastName,
-			String phone_number, String address, boolean isAdmin) {
+			String phone_number, String address, String isadmin) {
 		this.email = email;
 		this.password = password;
 		this.title = title;
@@ -23,7 +23,7 @@ public class UserLoginResponseModel {
 		this.lastName = lastName;
 		this.phone_number = phone_number;
 		this.address = address;
-		this.isAdmin = isAdmin;
+		this.isadmin = isadmin;
 	}
 
 	public UserLoginResponseModel() {

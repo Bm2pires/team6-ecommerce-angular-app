@@ -15,7 +15,7 @@ public class UserLoginResponseModel {
 	private boolean isAdmin;
 
 	public UserLoginResponseModel(String email, String password, String title, String firstName, String lastName,
-			String phone_number, String address, boolean isAdmin) {
+			String phone_number, String address, String isAdmin) {
 		this.email = email;
 		this.password = password;
 		this.title = title;
