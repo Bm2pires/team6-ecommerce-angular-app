@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
-import { User } from 'src/app/services/loginUser';
+import { LoginUser } from 'src/app/services/loginUser';
+import { User } from 'src/app/services/User';
 
 @Component({
   selector: 'app-login',
@@ -14,29 +16,32 @@ export class LoginComponent {
   password: string = '';
 
   // Inject the login service dependency
-  constructor(service: LoginService) {
+  constructor(service: LoginService, private router: Router) {
     console.log('Login Component Loaded');
     this.loginService = service;
   }
 
   onSubmit(form: NgForm) {
-    // code to execute after form is submitted
-    // console.log('Submitted');
-    // console.log(form);
+    let user: User = {
+      email: '',
+      password: '',
+      title: '',
+      firstName: '',
+      lastName: '',
+      phone_number: '',
+      address: '',
+      isAdmin: false,
+    };
 
     this.email = form.value.email;
     this.password = form.value.password;
 
-    const user: User = { email: this.email, password: this.password };
+    const loginUser: LoginUser = { email: this.email, password: this.password };
 
-    this.loginService.authenticate(user);
-
-    // this.loginService.getUserFromDB(user).subscribe(
-    //   (response) => console.log(response),
-    //   (err) => console.log(err)
-    // );
-
-    // console.log(this.email);
-    // console.log(this.password);
+    this.loginService.authenticate(loginUser).subscribe((response) => {
+      user = response;
+      sessionStorage.setItem('user', JSON.stringify(user));
+      this.router.navigate(['']);
+    });
   }
 }

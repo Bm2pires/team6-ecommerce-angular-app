@@ -6,7 +6,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { NgbdCarouselBasic } from './components/landing-page/carousel/carousel.component';
-import {  NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -20,18 +20,33 @@ import { AdminUserComponent } from './components/admin-user/admin-user.component
 import { ModalUserComponent } from './components/admin-user/modal-edit-user/modal-user.component';
 import { ModalAddUserComponent } from './components/admin-user/modal-add-user/modal-add-user.component';
 import { ModalAddProdComponent } from './components/admin/modal-add-prod/modal-add-prod.component';
+<<<<<<< HEAD
 import { DatePipe } from '@angular/common';
 import { UserService } from './services/user.service';
 import { ProductService } from './services/product.service';
+=======
+import { AuthGuardService } from './services/auth-guard.service';
+>>>>>>> e1681ae1aae682d2fc2510503832c7aefe72d5e7
 
 const appRoutes: Routes = [
-  { path: '', component:  LandingPageComponent},
-  { path: 'login', component:  LoginComponent},
-  { path: 'registration', component:  RegisterComponent},
-  { path: 'userInfo', component: UserInformationComponent},
-  { path: 'adminProds', component: AdminComponent},
-  { path: 'adminUsers', component: AdminUserComponent}
-
+  { path: '', component: LandingPageComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'registration', component: RegisterComponent },
+  {
+    path: 'userInfo',
+    component: UserInformationComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'adminProds',
+    component: AdminComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'adminUsers',
+    component: AdminUserComponent,
+    canActivate: [AuthGuardService],
+  },
 ];
 
 @NgModule({

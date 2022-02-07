@@ -71,7 +71,7 @@ export class UserInformationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    sessionStorage.setItem('username', "popo@hotmail.com");
+    //Find email by using session storage
     this.userService.findUserByEmail("popo@hotmail.com").subscribe(data => {
       console.log(data)
       this.newUserDetails = data;

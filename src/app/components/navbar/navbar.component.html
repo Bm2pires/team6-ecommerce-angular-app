@@ -4,6 +4,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
     <div class="justify-content-end" id="navbarResponsive" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+
         <app-navbar-admin *ngIf="isAdmin"></app-navbar-admin>
         <app-navabar-customer *ngIf="!isAdmin"></app-navabar-customer>
     </div>
