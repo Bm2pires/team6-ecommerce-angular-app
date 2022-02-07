@@ -1,10 +1,13 @@
 <div class="card bg-dark mx-auto mt-4 mb-2" style="width: 22rem;">
   <div class="card-body text-center">
-        <!-- insert img here if necessary -->
+    
+    <!-- insert img here if necessary -->
     <h2 class="card-title text-white text-center">Welcome</h2>
     <p class="text-white text-center text-muted">Register in by entering the information below</p>
-
-    <form (ngSubmit)="onSubmit()" #form="ngForm">      
+    
+    <p class="card-title text-white text-center ">{{msg}}</p>
+ 
+    <form (ngSubmit)="registerUser(form)" #form="ngForm">      
 <!-- start of form groups -->
 
       <!-- email id as user name  -->
@@ -28,7 +31,7 @@
           <select
           class="form-control mb-3 mx-auto bg-dark text-light" 
           name="title"
-          required ngModel
+          required ngModel title
           title
         >
           <option value="" disabled>Select Title</option>
@@ -45,7 +48,7 @@
         id="firstname"
         placeholder="Enter First Name"
           class="form-control mb-3 mx-auto bg-dark text-light" 
-          ngModel required firstName
+           required ngModel firstname
           #firstname="ngModel"
           pattern="^[a-z A-Z a-z]*$" 
           maxlength="12"
@@ -61,7 +64,7 @@
         id="lastname"
         placeholder="Enter Last Name"
           class="form-control mb-3 mx-auto bg-dark text-light"
-          ngModel required lastName    #lastname="ngModel"
+          ngModel lastname required   #lastname="ngModel"
           pattern="^[a-z A-Z a-z]*$"
           maxlength="12">
       </div>
@@ -85,10 +88,12 @@
         name="contactNo"
           placeholder="Enter Contact Number"
           class="form-control mb-3 mx-auto bg-dark text-light" 
-           required ngModel contactNo
+           required 
+           ngModel contactNo
             maxlength="10" minlength="10"
             pattern="^[0-9]*$"  
             #contactNo="ngModel"
+           
             >
 
       </div>
@@ -104,7 +109,7 @@
           pattern="(?=.*[!@#$%&*])(?=.*[a-z])(?=.*[A-Z]).{6,}" 
           password 
           #password="ngModel"
-          maxlength="10">
+                    maxlength="10">
       </div>
       <span class="help-block text-white" *ngIf="(password.touched && !password.dirty)">Please Enter Password </span>
       <span class="help-block text-white" *ngIf="(!password.valid && password.dirty)">Enter Strong Password(Must contain one upper case, lower case, special char(!@#$%&*) & number) </span>
@@ -137,6 +142,7 @@
           ngModel address
           required 
           #address="ngModel"
+          
            ></textarea>
       </div>
       <span class="help-block text-white" *ngIf="(address.touched && !address.dirty)">
@@ -149,5 +155,6 @@
       <p class="text-white mt-3 text-center-mb-1">Already have account</p>
       <a routerLink="/login" class="text-white text-center mb-5">SIGN IN</a>
     </form>
+
   </div>
 </div> <!-- End of registration card --> 
