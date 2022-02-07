@@ -1,5 +1,7 @@
 package com.ecommerce.spring.services;
 
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,8 @@ public class UserLoginService {
 				System.out.println("Login Successful!");
 				ModelMapper mapper = new ModelMapper();
 				UserLoginResponseModel returnObject = mapper.map(user, UserLoginResponseModel.class);
+				returnObject.setEmail(user.getEmail());
+				System.out.println(returnObject);
 				return returnObject;
 			} else {
 				System.out.println("Login Failed");

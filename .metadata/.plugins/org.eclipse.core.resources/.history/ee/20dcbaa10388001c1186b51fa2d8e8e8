@@ -4,6 +4,7 @@ server.port=8080
 #properties
 
 # DataSource properties - URL, username, password, Hibernate Dialect class (properties -> database data type) - org.hibernate.dialect.PostgreSQLDialect
+>>>>>>> e1681ae1aae682d2fc2510503832c7aefe72d5e7
 
 spring.datasource.url= jdbc:postgresql://localhost:5432/ecommerce
 spring.datasource.username= postgres
@@ -22,4 +23,7 @@ spring.jpa.properties.hibernate.format_sql=true
 # create if schema is not there
 # update/create-drop
 spring.jpa.hibernate.ddl-auto = update
+<<<<<<< HEAD
+=======
 
+>>>>>>> e1681ae1aae682d2fc2510503832c7aefe72d5e7

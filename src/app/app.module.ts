@@ -20,13 +20,10 @@ import { AdminUserComponent } from './components/admin-user/admin-user.component
 import { ModalUserComponent } from './components/admin-user/modal-edit-user/modal-user.component';
 import { ModalAddUserComponent } from './components/admin-user/modal-add-user/modal-add-user.component';
 import { ModalAddProdComponent } from './components/admin/modal-add-prod/modal-add-prod.component';
-<<<<<<< HEAD
 import { DatePipe } from '@angular/common';
 import { UserService } from './services/user.service';
 import { ProductService } from './services/product.service';
-=======
 import { AuthGuardService } from './services/auth-guard.service';
->>>>>>> e1681ae1aae682d2fc2510503832c7aefe72d5e7
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },

@@ -1,5 +1,7 @@
 package com.ecommerce.spring.services;
 
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,14 +22,14 @@ public class UserLoginService {
 
 		// try to find the requested user in the repository
 
-		User user = userRepository.findByEmail(requestModel.getEmail()).get();
-		if (user == null) {
+		Optional<User> user = userRepository.findByEmail(requestModel.getEmail());
+		if (user.isEmpty()) {
 			System.out.println("Error");
 			return null;
 		} else {
 			// if the user in the request matches the user found from the database then
-			if (requestModel.getEmail().equals(user.getEmail())
-					&& requestModel.getPassword().equals(user.getPassword())) {
+			if (requestModel.getEmail().equals(user.get().getEmail())
+					&& requestModel.getPassword().equals(user.get().getPassword())) {
 				System.out.println("Login Successful!");
 				ModelMapper mapper = new ModelMapper();
 				UserLoginResponseModel returnObject = mapper.map(user, UserLoginResponseModel.class);
