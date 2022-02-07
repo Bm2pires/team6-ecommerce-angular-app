@@ -91,24 +91,9 @@ export class ModalUserComponent implements OnInit {
       this.errors.push("Email must contain an @");
     }
 
-    const dateCheck = this.newUserDetails.dateOfBirth!.toString();
-    let today = this.datePipe.transform(Date.now(),'yyyy-MM-dd')!;
-
-    if(dateCheck > today){
-      this.errors.push("Date of birth cannot be in the future");
+    if(this.newUserDetails.address === "" || this.newUserDetails.email === "" || this.newUserDetails.firstName === "" || this.newUserDetails.lastName === "" || this.newUserDetails.password === "" || this.newUserDetails.phoneNumber === ""){
+      this.errors.push("Please fill in all fields")
     }
-    let today2 = new Date();
-    var birthDate = new Date(this.newUserDetails.dateOfBirth!);
-    var age = today2.getFullYear() - birthDate.getFullYear();
-    var m = today2.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today2.getDate() < birthDate.getDate())) {
-        age--;
-    }
-
-    if(age < 18){
-      this.errors.push("Age must be 18 or older");
-    }
-
 
     if(this.errors.length != 0){
       this.valid = false;

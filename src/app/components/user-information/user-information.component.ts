@@ -75,11 +75,6 @@ export class UserInformationComponent implements OnInit {
     this.newUserDetails = arr1;
     this.newUserDetails.phoneNumber = arr1.phone_number;
     this.newUserDetails.dateOfBirth = this.datePipe.transform(arr1.dateOfBirth,"yyyy-MM-dd");
-
-
-
-
-
   }
 
    disableFunc() {

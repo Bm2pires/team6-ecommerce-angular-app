@@ -9,7 +9,7 @@
                 <div class="input-group">
                     <input id="userfName" maxlength="20" class="form-control" placeholder={{itemUser.firstName}} type="text" [(ngModel)]="newUserDetails.firstName" [ngModelOptions]="{standalone: true}" required name="fName" #fName="ngModel">
                 </div>
-                <div [hidden]="fName.valid || fName.pristine" class="alert alert-danger">
+                <div *ngIf="fName.invalid && (fName.dirty || fName.touched)" class="alert alert-danger">
                     First Name is required
                 </div>
             </div>
@@ -18,7 +18,7 @@
                 <div class="input-group">
                     <input id="userlName" maxlength="20" class="form-control" placeholder={{itemUser.lastName}} type="text" [(ngModel)]='newUserDetails.lastName' [ngModelOptions]="{standalone: true}" required name="lName" #lName="ngModel">
                 </div>
-                <div [hidden]="lName.valid || lName.pristine" class="alert alert-danger">
+                <div *ngIf="lName.invalid && (lName.dirty || lName.touched)" class="alert alert-danger">
                     Last Name is required
                 </div>
             </div>
@@ -27,7 +27,7 @@
                 <div class="input-group">
                     <input id="userEmail" maxlength="50" class="form-control" placeholder={{itemUser.email}} type="text" [(ngModel)]='newUserDetails.email' [ngModelOptions]="{standalone: true}" required name="email" #email="ngModel">
                 </div>
-                <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
                     Email is required
                 </div>
             </div>
@@ -36,7 +36,7 @@
                 <div class="input-group">
                     <input id="userPass" maxlength="20" class="form-control" placeholder={{itemUser.password}} type="text" [(ngModel)]='newUserDetails.password' [ngModelOptions]="{standalone: true}" required name="password" #password="ngModel">
                 </div>
-                <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+                <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
                     Password is required
                 </div>
             </div>
@@ -46,16 +46,13 @@
                   <option *ngFor="let t of titles" [value]="t">{{t}}</option>
                 </select>
             </div>
-            <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+            <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
                 Title is required
             </div>
             <div class="form-group">
                 <label for="userDOB">User DOB</label>
                 <div class="input-group">
-                    <input id="userDOB" class="form-control" type="date" [(ngModel)]='newUserDetails.dateOfBirth' [ngModelOptions]="{standalone: true}" required name="dob" #dob="ngModel">
-                </div>
-                <div [hidden]="dob.valid || dob.pristine" class="alert alert-danger">
-                    D.O.B is required
+                    <input id="userDOB" disabled=true class="form-control" type="date" [(ngModel)]='newUserDetails.dateOfBirth' [ngModelOptions]="{standalone: true}" name="dob" #dob="ngModel">
                 </div>
             </div>
             <div class="form-group">
@@ -63,7 +60,7 @@
                 <div class="input-group">
                     <input id="userPhone" maxlength="10" class="form-control" placeholder={{itemUser.phoneNumber}} type="text" [(ngModel)]=' newUserDetails.phoneNumber ' [ngModelOptions]="{standalone: true}" required name="phoneNumber" #phoneNumber="ngModel">
                 </div>
-                <div [hidden]="phoneNumber.valid || phoneNumber.pristine" class="alert alert-danger">
+                <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="alert alert-danger">
                     Phone Number is required
                 </div>
             </div>
@@ -72,7 +69,7 @@
                 <div class="input-group">
                     <input id="userAddress" maxlength="150" class="form-control" placeholder={{itemUser.address}} type="text" [(ngModel)]='newUserDetails.address ' [ngModelOptions]="{standalone: true}" required name="address" #address="ngModel">
                 </div>
-                <div [hidden]="address.valid || address.pristine" class="alert alert-danger">
+                <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
                     Address is required
                 </div>
             </div>

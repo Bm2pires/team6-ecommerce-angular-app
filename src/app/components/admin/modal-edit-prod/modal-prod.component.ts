@@ -73,6 +73,14 @@ export class ModalComponent implements OnInit {
       this.errors.push("Product price must not be 0.00");
     }
 
+    if(this.productDetails.productBrand.length < 3){
+      this.errors.push("Product name must be greater than 3 characters");
+    }
+
+    if(this.productDetails.productCategory.length < 2){
+      this.errors.push("Product name must be greater than 2 characters");
+    }
+
     if(this.errors.length != 0){
       this.valid = false;
     }else{
