@@ -6,7 +6,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { NgbdCarouselBasic } from './components/landing-page/carousel/carousel.component';
-import {  NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -22,13 +22,12 @@ import { ModalAddUserComponent } from './components/admin-user/modal-add-user/mo
 import { ModalAddProdComponent } from './components/admin/modal-add-prod/modal-add-prod.component';
 
 const appRoutes: Routes = [
-  { path: '', component:  LandingPageComponent},
-  { path: 'login', component:  LoginComponent},
-  { path: 'registration', component:  RegisterComponent},
-  { path: 'userInfo', component: UserInformationComponent},
-  { path: 'adminProds', component: AdminComponent},
-  { path: 'adminUsers', component: AdminUserComponent}
-
+  { path: '', component: LandingPageComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'registration', component: RegisterComponent },
+  { path: 'userInfo', component: UserInformationComponent },
+  { path: 'adminProds', component: AdminComponent },
+  { path: 'adminUsers', component: AdminUserComponent },
 ];
 
 @NgModule({
