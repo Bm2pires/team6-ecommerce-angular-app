@@ -12,34 +12,13 @@ import { ProductModify } from 'src/app/services/interfaces/productModify';
 export class ModalComponent implements OnInit {
   //Gets Product from main admin-prod component
   @Input()
-<<<<<<< HEAD
   item!: { productId: Number; productName: String; productDescription: String; productPrice: Number; productBrand: String, productCategory: String};
 
   //Will be filled with erros of user input
-=======
-  item!: {
-    productId: Number;
-    productName: String;
-    productDescription: String;
-    productPrice: Number;
-    productBrand: String;
-    productCategory: String;
-  };
-
->>>>>>> 787fa5118148e07f559efaa50f7aaa5a1cf8803a
   errors: Array<string> = [];
   valid = true;
 
-<<<<<<< HEAD
   //Stores product details
-=======
-  newProductName: String = '';
-  newProductDesc: String = '';
-  newProductPrice: Number = 0;
-  newProdutBrand: String = '';
-  newProductCategory: String = '';
-
->>>>>>> 787fa5118148e07f559efaa50f7aaa5a1cf8803a
   productDetails: ProductDetails = {
     productId: 0,
     productName: "",
@@ -47,6 +26,7 @@ export class ModalComponent implements OnInit {
     productPrice: 0,
     productBrand: "",
     productCategory: "",
+    imageUrl: ""
   };
 
   //Checks if form is usbmitted
@@ -54,16 +34,9 @@ export class ModalComponent implements OnInit {
 
   closeResult = '';
 
-<<<<<<< HEAD
   constructor(private modalService: NgbModal, private prodService: ProductService) {
   }
   //Sets the productid to the one given by admin-prod componenet
-=======
-  constructor(
-    private modalService: NgbModal,
-    private prodService: ProductService
-  ) {}
->>>>>>> 787fa5118148e07f559efaa50f7aaa5a1cf8803a
   ngOnInit(): void {
     this.productDetails.productId = this.item.productId;
   }
@@ -78,14 +51,9 @@ export class ModalComponent implements OnInit {
       });
       modal.close();
       this.reset();
-<<<<<<< HEAD
     }else{
       //Alerts users to their erroros in input
       alert(this.errors)
-=======
-    } else {
-      alert(this.errors);
->>>>>>> 787fa5118148e07f559efaa50f7aaa5a1cf8803a
       this.errors = [];
     }
   }
@@ -167,6 +135,7 @@ export class ModalComponent implements OnInit {
       productPrice: 0,
       productBrand: "",
       productCategory: "",
+      imageUrl: "",
     };
 
     this.submitted = false;

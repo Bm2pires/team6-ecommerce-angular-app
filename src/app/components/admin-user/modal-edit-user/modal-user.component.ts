@@ -11,28 +11,13 @@ import { UserDetails } from 'src/app/services/interfaces/userDetails';
 })
 export class ModalUserComponent implements OnInit {
   @Input()
-<<<<<<< HEAD
   itemUser!: {id:Number, firstName:String, lastName:String, email:String, password:String, title:String, dateOfBirth:string|null, phoneNumber:String, address:String};
 
   confirmPass:String;
-=======
-  itemUser!: {
-    id: Number;
-    firstName: String;
-    lastName: String;
-    email: String;
-    password: String;
-    title: String;
-    dateOfBirth: string | null;
-    phoneNumber: String;
-    address: String;
-  };
->>>>>>> 787fa5118148e07f559efaa50f7aaa5a1cf8803a
 
   errors: Array<string> = [];
   valid = true;
 
-<<<<<<< HEAD
   newUserDetails: UserDetails = {
     id: 0,
     firstName: "",
@@ -43,27 +28,6 @@ export class ModalUserComponent implements OnInit {
     dateOfBirth: new Date().toLocaleDateString(),
     phoneNumber: "",
     address: ""
-=======
-  newUserFName: String = '';
-  newUserLName: String = '';
-  newUserEmail: String = '';
-  newUserPassword: String = '';
-  newUserTitle: String = 'Mr';
-  newUserDOB: string | null = new Date().toLocaleDateString();
-  newUserPhonenumebr: String = '';
-  newUserAddress: String = '';
-
-  newUserDetails: UserDetails = {
-    id: 0,
-    firstName: this.newUserFName,
-    lastName: this.newUserLName,
-    email: this.newUserEmail,
-    password: this.newUserPassword,
-    title: this.newUserTitle,
-    dateOfBirth: this.newUserDOB,
-    phoneNumber: this.newUserPhonenumebr,
-    address: this.newUserAddress,
->>>>>>> 787fa5118148e07f559efaa50f7aaa5a1cf8803a
   };
 
   titles = ['Mr', 'Mrs', 'Miss', 'Ms'];
@@ -82,16 +46,9 @@ export class ModalUserComponent implements OnInit {
   onSubmit(modal: { close: () => void }) {
     this.submitted = true;
     this.validate();
-<<<<<<< HEAD
       if(this.valid){
         this.userService.edituser(this.newUserDetails).subscribe(data => {
         });
-=======
-    if (this.valid) {
-      this.userService.edituser(this.newUserDetails).subscribe((data) => {
-        console.log(data);
-      });
->>>>>>> 787fa5118148e07f559efaa50f7aaa5a1cf8803a
 
       modal.close();
       this.reset();

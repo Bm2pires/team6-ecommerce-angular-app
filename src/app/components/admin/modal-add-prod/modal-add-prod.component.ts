@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from 'src/app/services/product.service';
-import { ProductDetails } from 'src/app/services/interfaces/productDetails';
 import { ProductModify } from 'src/app/services/interfaces/productModify';
 
 @Component({
