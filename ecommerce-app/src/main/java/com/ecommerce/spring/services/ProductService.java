@@ -251,8 +251,8 @@ public class ProductService {
 		if (!list.isEmpty()) {
 			for (Products product : list) {
 				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
-				modelObject.setBrand(product.getBrand().getBrandName());
-				modelObject.setCategory(product.getCategories().getCategoryName());
+				modelObject.setProductBrand(product.getBrand().getBrandName());
+				modelObject.setProductCategory(product.getCategories().getCategoryName());
 				responseList.add(modelObject);
 			}
 			return responseList;
