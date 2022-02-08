@@ -22,77 +22,21 @@
                 </ul>
             </div>
             <!-- Filter side bar on left -->
-
-            <div class="col">
+            <div *ngFor="let tempProduct of products" class="col-md-3">
                 <div class=" card">
                     <a href="#">
-                        <img class="card-img-top" src="../../../assets/images/image-cap.svg" alt="Card image cap">
+                        <img class="card-img-top" src="{{ tempProduct.imageUrl }}" alt="Card image cap">
                     </a>
                     <div class="card-body">
-                        <h5 class="Product-1">Product 1</h5>
-                        <p>Brand: </p>
-                        <p>Category: </p>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of
-                            the card's content.</p>
-                        <h6 class="price">£13.99</h6>
+                        <h5 class="Product-1">{{ tempProduct.productName }}</h5>
+                        <p class="card-text">{{ tempProduct.productDescription }}</p>
+                        <p>Brand: {{ tempProduct.productBrand }}</p>
+                        <p>Category: {{ tempProduct.productCategory }}</p>
+                        <h6 class="price">{{ tempProduct.productPrice }}</h6>
                         <a href="#" class="btn btn-primary">Add to cart</a>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card">
-                    <a href="#">
-                        <img class="card-img-top" src="../../../assets/images/image-cap.svg" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="Product-1">Product 2</h5>
-                        <p>Brand: </p>
-                        <p>Category: </p>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of
-                            the card's content.</p>
-                        <h6 class="price">£13.99</h6>
-                        <a href="#" class="btn btn-primary">Add to cart</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <a href="#">
-                        <img class="card-img-top" src="../../../assets/images/image-cap.svg" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="Product-1">Product 3</h5>
-                        <p>Brand: </p>
-                        <p>Category: </p>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of
-                            the card's content.</p>
-                        <h6 class="price">£13.99</h6>
-                        <a href="#" class="btn btn-primary">Add to cart</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <a href="#">
-                        <img class="card-img-top" src="../../../assets/images/image-cap.svg" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="Product-1">Product 4</h5>
-                        <p>Brand: </p>
-                        <p>Category: </p>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of
-                            the card's content.</p>
-                        <h6 class="price">£13.99</h6>
-                        <a href="#" class="btn btn-primary">Add to cart</a>
-                    </div>
-                </div>
-            </div>
-
-
         </div>
     </div>
 </div>
