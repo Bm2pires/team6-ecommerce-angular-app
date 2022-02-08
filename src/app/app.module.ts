@@ -8,7 +8,6 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { NgbdCarouselBasic } from './components/landing-page/carousel/carousel.component';
 import {
   NgbCarouselModule,
-  NgbDropdown,
   NgbDropdownModule,
   NgbModule,
 } from '@ng-bootstrap/ng-bootstrap';
@@ -29,6 +28,7 @@ import { ProductService } from './services/product.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ProductsComponent } from './components/products/products.component';
 import { LoginService } from './services/login.service';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -53,6 +53,10 @@ const appRoutes: Routes = [
     path: 'products',
     component: ProductsComponent,
   },
+  {
+    path: 'shoppingCart',
+    component: ShoppingCartComponent,
+  },
 ];
 
 @NgModule({
@@ -72,6 +76,7 @@ const appRoutes: Routes = [
     ModalAddUserComponent,
     ModalAddProdComponent,
     ProductsComponent,
+    ShoppingCartComponent,
   ],
   imports: [
     BrowserModule,

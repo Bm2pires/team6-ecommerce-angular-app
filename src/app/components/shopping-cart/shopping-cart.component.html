@@ -1,0 +1,23 @@
+<div class="container m-5">
+    <div class="row" *ngIf="!empty">
+        <div *ngFor="let tempProduct of products" class="col-md-3">
+            <div class="card" style="margin: 0.5em;">
+                <a href="#">
+                    <img class="card-img-top" src="{{ tempProduct.imageUrl }}" alt="Card image cap">
+                </a>
+                <div class="card-body">
+                    <h5 class="Product-1">{{ tempProduct.productName }}</h5>
+                    <p class="card-text">{{ tempProduct.productDescription }}</p>
+                    <p>Brand: {{ tempProduct.brand }}</p>
+                    <p>Category: {{ tempProduct.category }}</p>
+                    <p>Quantity: {{tempProduct.quantity}}</p>
+                    <h6 class="price">{{ tempProduct.productPrice | currency:'GBP'}}</h6>
+                </div>
+                <button class="btn btn-primary" (click)="removeFromCart(tempProduct.productId)">Remove from cart</button>
+            </div>
+        </div>
+    </div>
+    <h5 *ngIf="empty" style="justify-content: center;">You have no products in your shopping cart currently.</h5>
+    <hr *ngIf="!empty">
+    <button *ngIf="!empty" class="btn btn-primary" href="#">Checkout</button>
+</div>
