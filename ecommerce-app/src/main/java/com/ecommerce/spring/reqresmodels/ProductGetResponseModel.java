@@ -14,14 +14,13 @@ public class ProductGetResponseModel {
 
 	private String imageUrl;
 
-	private String productCategory;
+	private String category;
 
-	private String productBrand;
+	private String brand;
 
 	public ProductGetResponseModel() {
 		super();
 	}
-
 
 	// new constructor with image url
 	public ProductGetResponseModel(long productId, String productName, String productDescription, String productPrice,
@@ -32,8 +31,8 @@ public class ProductGetResponseModel {
 		this.productDescription = productDescription;
 		this.productPrice = productPrice;
 		this.imageUrl = imageUrl;
-		this.productCategory = category;
-		this.productBrand = brand;
+		this.category = category;
+		this.brand = brand;
 	}
 
 }
