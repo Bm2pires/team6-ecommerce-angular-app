@@ -2,29 +2,26 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
-import { UserDetails } from 'src/app/services/userDetails';
-import { UserModify } from 'src/app/services/userModify';
+import { UserDetails } from 'src/app/services/interfaces/userDetails';
+import { UserModify } from 'src/app/services/interfaces/userModify';
 
 @Component({
   selector: 'app-modal-add-user',
   templateUrl: './modal-add-user.component.html',
-  styleUrls: ['./modal-add-user.component.css']
+  styleUrls: ['./modal-add-user.component.css'],
 })
 export class ModalAddUserComponent implements OnInit {
-
-
-
   errors: Array<string> = [];
-  valid = true
+  valid = true;
 
-  userEmail:String = "";
-  userPass:String = "";
-  userTitle:String = "Mr";
-  userFname: String = "";
-  userLname:String = "";
-  dob:string|null = new Date().toLocaleDateString();
-  phonenumber:String = "";
-  address:String = "";
+  userEmail: String = '';
+  userPass: String = '';
+  userTitle: String = 'Mr';
+  userFname: String = '';
+  userLname: String = '';
+  dob: string | null = new Date().toLocaleDateString();
+  phonenumber: String = '';
+  address: String = '';
 
   userModify: UserModify = {
     firstName: this.userFname,
@@ -34,93 +31,97 @@ export class ModalAddUserComponent implements OnInit {
     title: this.userTitle,
     dateOfBirth: new Date().toLocaleDateString(),
     phoneNumber: this.phonenumber,
-    address: this.address };
+    address: this.address,
+  };
 
-
-  titles = ['Mr', 'Mrs',
-  'Miss', 'Ms'];
+  titles = ['Mr', 'Mrs', 'Miss', 'Ms'];
 
   submitted = false;
 
-
   closeResult = '';
 
-  constructor(private modalService: NgbModal, private datePipe: DatePipe, private userService: UserService) {
+  constructor(
+    private modalService: NgbModal,
+    private datePipe: DatePipe,
+    private userService: UserService
+  ) {
     // "2000-04-10"
     var date = new Date();
-    this.userModify.dateOfBirth = this.datePipe.transform(date,"yyyy-MM-dd")
+    this.userModify.dateOfBirth = this.datePipe.transform(date, 'yyyy-MM-dd');
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-
-  onSubmit(modal: { close: () => void; }) {
+  onSubmit(modal: { close: () => void }) {
     this.submitted = true;
     this.validate();
-    if(this.valid){
-      this.userService.addUser(this.userModify).subscribe(data => {
+    if (this.valid) {
+      this.userService.addUser(this.userModify).subscribe((data) => {
         console.log(data);
       });
       this.ngOnInit();
       modal.close();
       this.reset();
-    }else{
-      alert(this.errors)
+    } else {
+      alert(this.errors);
       this.errors = [];
     }
   }
 
   validate() {
     const phoneNumberCheck = Number(this.userModify.phoneNumber);
-    if(Number.isNaN(phoneNumberCheck)){
-      this.errors.push("Phone number must be digits");
+    if (Number.isNaN(phoneNumberCheck)) {
+      this.errors.push('Phone number must be digits');
     }
-    if(this.userModify.phoneNumber.length != 10){
-      this.errors.push("Phone number must be 10 digits");
+    if (this.userModify.phoneNumber.length != 10) {
+      this.errors.push('Phone number must be 10 digits');
     }
     const emailCheck = Array.from(this.userModify.email);
     let emailValid = false;
     emailCheck.forEach((letter) => {
-      if(letter === '@'){
+      if (letter === '@') {
         emailValid = true;
       }
-    })
-    if(!emailValid){
-      this.errors.push("Email must contain an @");
+    });
+    if (!emailValid) {
+      this.errors.push('Email must contain an @');
     }
 
     const dateCheck = this.userModify.dateOfBirth!.toString();
-    let today = this.datePipe.transform(Date.now(),'yyyy-MM-dd')!;
+    let today = this.datePipe.transform(Date.now(), 'yyyy-MM-dd')!;
 
-    if(dateCheck > today){
-      this.errors.push("Date of birth cannot be in the future");
+    if (dateCheck > today) {
+      this.errors.push('Date of birth cannot be in the future');
     }
     let today2 = new Date();
     var birthDate = new Date(this.userModify.dateOfBirth!);
     var age = today2.getFullYear() - birthDate.getFullYear();
     var m = today2.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today2.getDate() < birthDate.getDate())) {
-        age--;
+      age--;
     }
 
-    if(age < 18){
-      this.errors.push("Age must be 18 or older");
+    if (age < 18) {
+      this.errors.push('Age must be 18 or older');
     }
 
-
-    if(this.errors.length != 0){
+    if (this.errors.length != 0) {
       this.valid = false;
-    }else{
+    } else {
       this.valid = true;
     }
   }
 
   open(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   private getDismissReason(reason: any): string {
@@ -134,20 +135,20 @@ export class ModalAddUserComponent implements OnInit {
     }
   }
 
-  onClose(modal: { close: () => void; }) {
+  onClose(modal: { close: () => void }) {
     modal.close();
     this.reset();
   }
 
-  reset(){
-    this.userEmail = "";
-    this.userPass = "";
-    this.userTitle = "";
-    this.userFname = "";
-    this.userLname = "";
+  reset() {
+    this.userEmail = '';
+    this.userPass = '';
+    this.userTitle = '';
+    this.userFname = '';
+    this.userLname = '';
     this.dob = new Date().toLocaleDateString();
-    this.phonenumber = "";
-    this.address = "";
+    this.phonenumber = '';
+    this.address = '';
 
     this.userModify = {
       firstName: this.userFname,
@@ -157,10 +158,8 @@ export class ModalAddUserComponent implements OnInit {
       title: this.userTitle,
       dateOfBirth: new Date().toLocaleDateString(),
       phoneNumber: this.phonenumber,
-      address: this.address
+      address: this.address,
     };
     this.submitted = false;
   }
 }
-
-
