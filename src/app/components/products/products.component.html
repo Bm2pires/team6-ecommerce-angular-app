@@ -32,7 +32,7 @@
                         <p class="card-text">{{ tempProduct.productDescription }}</p>
                         <p>Brand: {{ tempProduct.productBrand }}</p>
                         <p>Category: {{ tempProduct.productCategory }}</p>
-                        <h6 class="price">{{ tempProduct.productPrice }}</h6>
+                        <h6 class="price">{{ tempProduct.productPrice | currency:'GBP'}}</h6>
                         <a href="#" class="btn btn-primary">Add to cart</a>
                     </div>
                 </div>
