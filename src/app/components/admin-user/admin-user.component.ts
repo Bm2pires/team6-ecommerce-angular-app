@@ -12,16 +12,17 @@ export class AdminUserComponent implements OnInit {
 
   constructor(private userService: UserService) {}
 
+  //Gets useers from db
   ngOnInit(): void {
     this.userService.findAllUsers().subscribe((data) => {
       this.users = data;
     });
   }
 
+  //Deletes user
   delUser(id: any) {
     console.log(id);
     this.userService.delUser(id).subscribe((data) => {
-      console.log(data);
     });
     this.ngOnInit();
   }

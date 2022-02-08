@@ -10,14 +10,18 @@ import { UserDetails } from 'src/app/services/interfaces/userDetails';
   styleUrls: ['./modal-user.component.css'],
 })
 export class ModalUserComponent implements OnInit {
+  //Gets user from main admin-user component
   @Input()
-  itemUser!: {id:Number, firstName:String, lastName:String, email:String, password:String, title:String, dateOfBirth:string|null, phoneNumber:String, address:String};
+  itemUser!: {id:number, firstName:string, lastName:string, email:string, password:string, title:string, dateOfBirth:string|null, phoneNumber:string, address:string};
 
+  //Used to check if user password matches
   confirmPass:String;
 
+  //Will be filled with user input errors
   errors: Array<string> = [];
   valid = true;
 
+  //Used to store user details
   newUserDetails: UserDetails = {
     id: 0,
     firstName: "",
@@ -41,10 +45,12 @@ export class ModalUserComponent implements OnInit {
     private datePipe: DatePipe,
     private userService: UserService
   ) {}
+
   ngOnInit(): void {}
 
   onSubmit(modal: { close: () => void }) {
     this.submitted = true;
+    //Checks if user input is valid
     this.validate();
       if(this.valid){
         this.userService.edituser(this.newUserDetails).subscribe(data => {
@@ -53,6 +59,7 @@ export class ModalUserComponent implements OnInit {
       modal.close();
       this.reset();
     } else {
+      //Will aler tuser to input errors
       alert(this.errors);
       this.errors = [];
     }
@@ -105,11 +112,13 @@ export class ModalUserComponent implements OnInit {
         }
       );
 
+    //formats date to readable format
     var date = this.itemUser.dateOfBirth;
     this.newUserDetails.dateOfBirth = this.datePipe.transform(
       date,
       'yyyy-MM-dd'
     );
+    //Populates user details with correct user from admin-user
     this.newUserDetails.title = this.itemUser.title;
     this.newUserDetails.id = this.itemUser.id;
     this.newUserDetails.firstName = this.itemUser.firstName
@@ -138,6 +147,7 @@ export class ModalUserComponent implements OnInit {
     this.reset();
   }
 
+  //Resests userdetails to default settings
   reset(){
     this.newUserDetails = {
       id: 0,

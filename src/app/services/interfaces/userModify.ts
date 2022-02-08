@@ -1,11 +1,11 @@
 export interface UserModify {
-  firstName: String,
-  lastName: String,
-  email: String,
-  title: String,
-  password: String,
+  firstName: string,
+  lastName: string,
+  email: string,
+  title: string,
+  password: string,
   dateOfBirth: string|null,
-  phoneNumber: String,
-  address: String
+  phoneNumber: string,
+  address: string
 
 }

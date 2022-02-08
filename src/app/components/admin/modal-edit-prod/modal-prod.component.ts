@@ -12,7 +12,7 @@ import { ProductModify } from 'src/app/services/interfaces/productModify';
 export class ModalComponent implements OnInit {
   //Gets Product from main admin-prod component
   @Input()
-  item!: { productId: Number; productName: String; productDescription: String; productPrice: Number; productBrand: String, productCategory: String};
+  item!: { productId: number; productName: string; productDescription: string; productPrice: number; productBrand: string, productCategory: string};
 
   //Will be filled with erros of user input
   errors: Array<string> = [];
