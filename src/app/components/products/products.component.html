@@ -16,10 +16,21 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <h5>Filter by:</h5>
-                <ul class="nav-sidebar">
-                    <li>Brand</li>
-                    <li>Category</li>
-                </ul>
+                <!-- brand select -->
+                <label for="brand-select">Brand: </label>
+
+                <select name="brands" id="brand-select">
+                    <option value="">Please choose an option</option>
+                    <option value="Dell">Dell</option>
+                    <option value="HP">HP</option>
+                </select>
+                <br />
+                <label for="category-select">Category: </label>
+
+                <select name="categories" id="category-select">
+                    <option value="">Please choose an option</option>
+                    <option value="Laptop">Laptop</option>
+                </select>
             </div>
             <!-- Filter side bar on left -->
             <div *ngFor="let tempProduct of products" class="col-md-3">

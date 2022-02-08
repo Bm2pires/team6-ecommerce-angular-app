@@ -232,11 +232,11 @@ public class ProductService {
 		Optional<Products> product = prodRepo.findById(id);
 		if (product.isPresent()) {
 			ProductGetResponseModel response = mapper.map(product.get(), ProductGetResponseModel.class);
-				response.setProductBrand(product.get().getBrand().getBrandName());
-				response.setProductCategory(product.get().getCategories().getCategoryName());
-				return response;
-		}else {
-		return null;
+			response.setProductBrand(product.get().getBrand().getBrandName());
+			response.setProductCategory(product.get().getCategories().getCategoryName());
+			return response;
+		} else {
+			return null;
 		}
 	}
 
@@ -258,6 +258,67 @@ public class ProductService {
 			return null;
 		}
 
+	}
+
+	public List<ProductGetResponseModel> getProdByBrandName(String brandName) {
+		ModelMapper mapper = new ModelMapper();
+		List<ProductGetResponseModel> responseList = new ArrayList<>();
+
+		Brand b = brandRepo.findByBrandName(brandName).get();
+
+		List<Products> list = b.getProducts();
+
+		if (!list.isEmpty()) {
+			for (Products product : list) {
+				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
+				modelObject.setProductBrand(product.getBrand().getBrandName());
+				modelObject.setProductCategory(product.getCategories().getCategoryName());
+				responseList.add(modelObject);
+			}
+			return responseList;
+		} else {
+			return null;
+		}
+	}
+
+	public List<ProductGetResponseModel> getProdByCategoryName(String categoryName) {
+		ModelMapper mapper = new ModelMapper();
+		List<ProductGetResponseModel> responseList = new ArrayList<>();
+
+		Categories c = categoryRepo.findByCategoryName(categoryName).get();
+
+		List<Products> list = c.getProducts();
+
+		if (!list.isEmpty()) {
+			for (Products product : list) {
+				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
+				modelObject.setProductBrand(product.getBrand().getBrandName());
+				modelObject.setProductCategory(product.getCategories().getCategoryName());
+				responseList.add(modelObject);
+			}
+			return responseList;
+		} else {
+			return null;
+		}
+	}
+
+	public List<ProductGetResponseModel> getProdByBrandNameAndCategory(String brandName, String categoryName) {
+		ModelMapper mapper = new ModelMapper();
+		List<ProductGetResponseModel> responseList = new ArrayList<>();
+
+		List<Products> list = prodRepo.findByBrandAndCategories(brandName, categoryName).get();
+
+		if (!list.isEmpty()) {
+			for (Products product : list) {
+				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
+				modelObject.setProductBrand(product.getBrand().getBrandName());
+				modelObject.setProductCategory(product.getCategories().getCategoryName());
+				responseList.add(modelObject);
+			}
+			return responseList;
+		} else {
+			return null;
+		}
 	}
 
 }
