@@ -19,7 +19,7 @@
                 <!-- brand select -->
                 <label for="brand-select">Brand: </label>
 
-                <select name="brands" id="brand-select">
+                <select (change)="onChange(brand.value)" #brand name="brands" id="brand-select">
                     <option value="">Please choose an option</option>
                     <option value="Dell">Dell</option>
                     <option value="HP">HP</option>
@@ -27,7 +27,7 @@
                 <br />
                 <label for="category-select">Category: </label>
 
-                <select name="categories" id="category-select">
+                <select (change)="onChange(category.value)" #category name="categories" id="category-select">
                     <option value="">Please choose an option</option>
                     <option value="Laptop">Laptop</option>
                 </select>
