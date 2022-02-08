@@ -31,6 +31,7 @@ public class UserLoginService {
 				System.out.println("Login Successful!");
 				ModelMapper mapper = new ModelMapper();
 				UserLoginResponseModel returnObject = mapper.map(user, UserLoginResponseModel.class);
+				returnObject.setDateOfBirth(user.getDob());
 				return returnObject;
 			} else {
 				System.out.println("Login Failed");

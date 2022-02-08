@@ -4,49 +4,63 @@
     </div>
     <div class="modal-body">
         <form #addProd="ngForm">
+            <!-- Product URL -->
+            <div class="form-group">
+                <label for="prodName">Product URL</label>
+                <div class="input-group">
+                    <input id="prodUrl" class="form-control" placeholder="Product URL" type="text" [(ngModel)]="productModify.imageUrl" [ngModelOptions]="{standalone: true}" required name="prodImage" #prodImage="ngModel">
+                </div>
+                <div *ngIf="prodImage.invalid && (prodImage.dirty || prodImage.touched)" class="alert alert-danger">
+                    Product Image is required
+                </div>
+            </div>
+            <!-- Product Name -->
             <div class="form-group">
                 <label for="prodName">Product Name</label>
                 <div class="input-group">
                     <input id="prodName" maxLength="50" class="form-control" placeholder="Product Name" type="text" [(ngModel)]="productModify.productName" [ngModelOptions]="{standalone: true}" required name="prodName" #prodName="ngModel">
                 </div>
-                <div [hidden]="prodName.valid || prodName.pristine" class="alert alert-danger">
+                <div *ngIf="prodName.invalid && (prodName.dirty || prodName.touched)" class="alert alert-danger">
                     Product Name is required
                 </div>
             </div>
+            <!-- Product Description -->
             <div class="form-group">
                 <label for="prodDescription">Product Description</label>
                 <div class="input-group">
-                    <!-- <input id="prodDescription" maxLength="250" class="form-control" placeholder="Product Description" type="text" [(ngModel)]='productModify.productDesc' [ngModelOptions]="{standalone: true}" required name="prodDesc" #prodDesc="ngModel"> -->
                     <input id="prodDesc" maxLength="250" class="form-control" placeholder="Product Description" type="text" [(ngModel)]="productModify.productDescription" [ngModelOptions]="{standalone: true}" required name="prodDesc" #prodDesc="ngModel">
                 </div>
-                <div [hidden]="prodDesc.valid || prodDesc.pristine" class="alert alert-danger">
+                <div *ngIf="prodDesc.invalid && (prodDesc.dirty || prodDesc.touched)" class="alert alert-danger">
                     Product Description is required
                 </div>
             </div>
+            <!-- Product Price -->
             <div class="form-group">
                 <label for="prodPrice">Product Price</label>
                 <div class="input-group">
                     <input id="prodPrice" class="form-control" placeholder="Product Price" type="number" min=0 value=0 [(ngModel)]='productModify.productPrice' [ngModelOptions]="{standalone: true}" required name="prodPrice" #prodPrice="ngModel">
                 </div>
-                <div [hidden]="prodPrice.valid || prodPrice.pristine" class="alert alert-danger">
+                <div *ngIf="prodPrice.invalid && (prodPrice.dirty || prodPrice.touched)" class="alert alert-danger">
                     Product Price is required
                 </div>
             </div>
+            <!-- Product Brand -->
             <div class="form-group">
-                <label for="prodDescription">Product Brand</label>
+                <label for="prodBrand">Product Brand</label>
                 <div class="input-group">
                     <input id="prodBrand" maxLength="30" class="form-control" placeholder="Product Brand" [(ngModel)]='productModify.productBrand' [ngModelOptions]="{standalone: true}" required name="prodBrand" #prodBrand="ngModel">
                 </div>
-                <div [hidden]="prodBrand.valid || prodBrand.pristine" class="alert alert-danger">
+                <div *ngIf="prodBrand.invalid && (prodBrand.dirty || prodBrand.touched)" class="alert alert-danger">
                     Product Brand is required
                 </div>
             </div>
+            <!-- Product Category -->
             <div class="form-group">
-                <label for="prodDescription">Product Category</label>
+                <label for="prodCategory">Product Category</label>
                 <div class="input-group">
                     <input id="prodCategory" maxLength="30" class="form-control" placeholder="Product Category" [(ngModel)]='productModify.productCategory' [ngModelOptions]="{standalone: true}" required name="prodCategory" #prodCategory="ngModel">
                 </div>
-                <div [hidden]="prodCategory.valid || prodCategory.pristine" class="alert alert-danger">
+                <div *ngIf="prodCategory.invalid && (prodCategory.dirty || prodCategory.touched)" class="alert alert-danger">
                     Product Category is required
                 </div>
             </div>

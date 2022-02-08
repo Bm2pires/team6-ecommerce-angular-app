@@ -1,12 +1,13 @@
+<!-- Presents all products in a card like form -->
 <div class="card-deck m-5" style="display: inline-block" *ngFor="let prod of products">
     <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="../../../assets/images/placeholderOne.jpg" alt="Card image cap">
+        <img class="card-img-top" src={{prod.imageUrl}} alt="Card image cap">
         <div class="card-body">
             <p class="card-text">Product Name: {{prod.productName}}</p>
             <p class="card-text">Product Description: {{prod.productDescription}}</p>
             <p class="card-text">Product Price: {{prod.productPrice}}</p>
-            <p class="card-text">Product Brand: {{prod.productBrand}}</p>
-            <p class="card-text">Product Category: {{prod.productCategory}}</p>
+            <p class="card-text">Product Brand: {{prod.brand}}</p>
+            <p class="card-text">Product Category: {{prod.category}}</p>
             <app-modal [item]="prod"></app-modal>
             <button type="button" class="btn btn-warning" (click)="delProd(prod.productId)">Delete</button>
         </div>

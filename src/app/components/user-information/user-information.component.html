@@ -5,7 +5,7 @@
             <div class="input-group">
                 <input id="userfName" maxlength="20" class="form-control" type="text" [(ngModel)]="newUserDetails.firstName" [ngModelOptions]="{standalone: true}" required name="fName" #fName="ngModel" [disabled]="disabledFields">
             </div>
-            <div [hidden]="fName.valid || fName.pristine" class="alert alert-danger">
+            <div *ngIf="fName.invalid && (fName.dirty || fName.touched)" class="alert alert-danger">
                 First Name is required
             </div>
         </div>
@@ -14,7 +14,7 @@
             <div class="input-group">
                 <input id="userlName" maxlength="20" class="form-control" type="text" [(ngModel)]='newUserDetails.lastName' [ngModelOptions]="{standalone: true}" required name="lName" #lName="ngModel" [disabled]="disabledFields">
             </div>
-            <div [hidden]="lName.valid || lName.pristine" class="alert alert-danger">
+            <div *ngIf="lName.invalid && (lName.dirty || lName.touched)" class="alert alert-danger">
                 Last Name is required
             </div>
         </div>
@@ -23,35 +23,48 @@
             <div class="input-group">
                 <input id="userEmail" maxlength="50" class="form-control" type="text" [(ngModel)]='newUserDetails.email' [ngModelOptions]="{standalone: true}" required name="email" #email="ngModel" [disabled]="disabledFields">
             </div>
-            <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
                 Email is required
             </div>
         </div>
+        <!-- Password -->
         <div class="form-group">
-            <label for="userPass">User password</label>
-            <div class="input-group">
-                <input id="userPass" maxlength="20" class="form-control" type="text" [(ngModel)]='newUserDetails.password' [ngModelOptions]="{standalone: true}" required name="password" #password="ngModel" [disabled]="disabledFields">
+            <label for="userPass">User Password</label>
+            <input type="password" class="form-control" pattern="(?=.*[!@#$%&*])(?=.*[a-z])(?=.*[A-Z]).{6,}" [(ngModel)]='newUserDetails.password' [ngModelOptions]="{standalone: true}" required name="password" #password="ngModel" [disabled]="disabledFields" maxlength="10">
+            <div *ngIf="(password.touched && !password.dirty)" class="alert alert-danger">
+                Please Enter Password
             </div>
-            <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-                Password is required
+            <div *ngIf="(!password.valid && password.dirty)" class="alert alert-danger">
+                Enter Strong Password(Must contain one upper case, lower case, special char(!@#$%&*) & number)
             </div>
         </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+            <label for="userConfirmPass">Confirm Password</label>
+            <input type="password" class="form-control" pattern="{{password.value}}" maxlength="10" [(ngModel)]='confirmPass' [ngModelOptions]="{standalone: true}" required name="conPassword" #conPassword="ngModel" [disabled]="disabledFields">
+            <div *ngIf="(!conPassword.valid && conPassword.touched && password.dirty)" class="alert alert-danger">
+                Passwords do not match
+            </div>
+            <div *ngIf="(conPassword.touched && !conPassword.dirty)" class="alert alert-danger">
+                Please Enter Confirm Password
+            </div>
+        </div>
+
+        <!-- Title -->
         <div class="form-group mt-2">
             <label for="userTitle">User Title</label>
             <select class="form-control" id="title" required name="title" [(ngModel)]='newUserDetails.title' #title="ngModel" required [disabled]="disabledFields">
           <option *ngFor="let t of titles" [value]="t">{{t}}</option>
         </select>
-            <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+            <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
                 Title is required
             </div>
         </div>
         <div class="form-group">
             <label for="userDOB">User DOB</label>
             <div class="input-group">
-                <input id="userDOB" class="form-control" type="date" [(ngModel)]='newUserDetails.dateOfBirth' [ngModelOptions]="{standalone: true}" required name="dob" #dob="ngModel" [disabled]="disabledFields">
-            </div>
-            <div [hidden]="!dob.valid || title.pristine" class="alert alert-danger">
-                D.O.B is required
+                <input id="userDOB" class="form-control" type="date" [(ngModel)]='newUserDetails.dateOfBirth' [ngModelOptions]="{standalone: true}" required name="dob" #dob="ngModel" [disabled]="true">
             </div>
         </div>
         <div class="form-group">
@@ -59,7 +72,7 @@
             <div class="input-group">
                 <input id="userPhone" maxlength="10" class="form-control" type="text" [(ngModel)]='newUserDetails.phoneNumber' [ngModelOptions]="{standalone: true}" required name="phoneNumber" #phoneNumber="ngModel" [disabled]="disabledFields">
             </div>
-            <div [hidden]="phoneNumber.valid || phoneNumber.pristine" class="alert alert-danger">
+            <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="alert alert-danger">
                 Phone Number is required
             </div>
         </div>
@@ -68,7 +81,7 @@
             <div class="input-group">
                 <input id="userAddress" maxlength="150" class="form-control" type="text" [(ngModel)]='newUserDetails.address' [ngModelOptions]="{standalone: true}" required name="address" #address="ngModel" [disabled]="disabledFields">
             </div>
-            <div [hidden]="address.valid || address.pristine" class="alert alert-danger">
+            <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
                 Address is required
             </div>
         </div>

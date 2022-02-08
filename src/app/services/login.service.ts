@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
-import { LoginUser } from './loginUser';
-import { User } from './User';
+import { Observable } from 'rxjs';
+import { LoginUser } from './interfaces/loginUser';
+import { User } from './interfaces/User';
 
 @Injectable({
   providedIn: 'root',

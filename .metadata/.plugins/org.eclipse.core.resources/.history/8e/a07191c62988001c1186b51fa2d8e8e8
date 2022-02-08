@@ -1,0 +1,41 @@
+package com.ecommerce.spring.services;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ecommerce.spring.entities.User;
+import com.ecommerce.spring.repositories.UserRepository;
+import com.ecommerce.spring.reqresmodels.UserLoginRequestModel;
+import com.ecommerce.spring.reqresmodels.UserLoginResponseModel;
+
+@Service
+public class UserLoginService {
+
+	@Autowired
+	UserRepository userRepository;
+
+	public UserLoginResponseModel authenticate(UserLoginRequestModel requestModel) {
+		System.out.println("User authentication request received");
+
+		// try to find the requested user in the repository
+
+		User user = userRepository.findByEmail(requestModel.getEmail()).get();
+		if (user == null) {
+			System.out.println("Error");
+			return null;
+		} else {
+			// if the user in the request matches the user found from the database then
+			if (requestModel.getEmail().equals(user.getEmail())
+					&& requestModel.getPassword().equals(user.getPassword())) {
+				System.out.println("Login Successful!");
+				ModelMapper mapper = new ModelMapper();
+				UserLoginResponseModel returnObject = mapper.map(user, UserLoginResponseModel.class);
+				return returnObject;
+			} else {
+				System.out.println("Login Failed");
+				return null;
+			}
+		}
+	}
+}

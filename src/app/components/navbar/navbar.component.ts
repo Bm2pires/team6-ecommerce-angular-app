@@ -9,7 +9,9 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit{
+  //Checks if user is admin
   isAdmin: Boolean = false;
+  //Checks if user is logged in
   isLoggedIn = false;
 
 
@@ -20,6 +22,7 @@ export class NavbarComponent implements OnInit{
      }
 
      constructor(private userService: UserService, private loginService: LoginService, private navService: NavbarService){
+       //Used to connect to login component - When user logs in this function will be called after going through navbar.service.ts (login -> navbar.service.ts -> navbar.component.ts)
       this.navService.invokeEvent.subscribe(value => {
         if(value === 'someVal'){
          this.isUserLoggedIn();
@@ -27,6 +30,7 @@ export class NavbarComponent implements OnInit{
       })
 
      }
+
   ngOnInit(): void {
     this.isUserLoggedIn();
   }
@@ -38,6 +42,7 @@ export class NavbarComponent implements OnInit{
        this.isAdmin = false;
      }
 
+     //Checks if user is logged in and also calls method to chek if user is admin
      isUserLoggedIn() {
      const loggedIn = this.loginService.isUserLoggedIn();
      if(loggedIn){
@@ -48,6 +53,7 @@ export class NavbarComponent implements OnInit{
     }
     }
 
+    //Checks if user is admin
     isUserAdmin(){
       const user = JSON.parse(sessionStorage.getItem("user")!)
       if(user != null){

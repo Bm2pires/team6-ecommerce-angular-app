@@ -23,11 +23,12 @@ import { AdminUserComponent } from './components/admin-user/admin-user.component
 import { ModalUserComponent } from './components/admin-user/modal-edit-user/modal-user.component';
 import { ModalAddUserComponent } from './components/admin-user/modal-add-user/modal-add-user.component';
 import { ModalAddProdComponent } from './components/admin/modal-add-prod/modal-add-prod.component';
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { UserService } from './services/user.service';
 import { ProductService } from './services/product.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ProductsComponent } from './components/products/products.component';
+import { LoginService } from './services/login.service';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -81,7 +82,13 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
   ],
-  providers: [DatePipe, UserService, ProductService],
+  providers: [
+    DatePipe,
+    UserService,
+    ProductService,
+    LoginService,
+    CurrencyPipe,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

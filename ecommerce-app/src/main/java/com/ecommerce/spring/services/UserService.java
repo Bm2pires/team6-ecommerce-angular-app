@@ -113,9 +113,6 @@ public class UserService {
 		if(requestModel.getAddress().length() > 150) {
 			validInput = false;
 		}
-//		if(requestModel.getDateOfBirth()) {
-//					
-//		}
 		if(requestModel.getEmail().length() > 50) {
 			validInput = false;
 
@@ -150,9 +147,6 @@ public class UserService {
 		if(requestModel.getAddress().length() > 150) {
 			validInput = false;
 		}
-//		if(requestModel.getDateOfBirth()) {
-//					
-//		}
 		if(requestModel.getEmail().length() > 50) {
 			validInput = false;
 
