@@ -12,6 +12,8 @@ export class ProductsComponent implements OnInit {
   productService: ProductService;
   products!: ProductDetails[];
   shoppingCart: CartService;
+  deviceName:string = "";
+  prodAdded:boolean = true;
 
   constructor(productService: ProductService, shoppingCart: CartService) {
     this.productService = productService;
@@ -33,7 +35,12 @@ export class ProductsComponent implements OnInit {
     this.productService.findProductById(id).subscribe((data) => {
       const product:ProductDetails = data;
       this.shoppingCart.addToCart(product)
-      alert(product.productName + " added to shopping cart")
+      this.deviceName = product.productName;
+      this.prodAdded = false;
+      setTimeout(() => {
+        this.deviceName = "";
+        this.prodAdded = true;
+      }, 1500);
     });
   }
 }

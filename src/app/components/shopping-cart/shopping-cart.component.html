@@ -1,4 +1,4 @@
-<div class="container m-5">
+<div class="container m-1">
     <div class="row" *ngIf="!empty">
         <div *ngFor="let tempProduct of products" class="col-md-3">
             <div class="card" style="margin: 0.5em;">
@@ -17,7 +17,10 @@
             </div>
         </div>
     </div>
-    <h5 *ngIf="empty" style="justify-content: center;">You have no products in your shopping cart currently.</h5>
-    <hr *ngIf="!empty">
-    <button *ngIf="!empty" class="btn btn-primary" href="#">Checkout</button>
+</div>
+<h5 *ngIf="empty">You have no products in your shopping cart currently.</h5>
+<hr *ngIf="!empty">
+<div *ngIf="!empty" class="bg-light p-4" style="display: flex; justify-content: center;">
+    <button class="btn btn-primary m-2" href="#">Checkout</button>
+    <h5 class="pt-3">{{price | currency:'GBP'}}</h5>
 </div>

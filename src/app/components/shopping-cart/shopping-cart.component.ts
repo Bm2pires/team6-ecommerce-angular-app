@@ -10,6 +10,7 @@ import { ProductDetails } from 'src/app/services/interfaces/productDetails';
 export class ShoppingCartComponent implements OnInit {
   products = this.cartService.getItems();
   empty = true
+  price = this.cartService.totalPrice;
 
 
 

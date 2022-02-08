@@ -7,6 +7,7 @@ import { ProductOrders } from './interfaces/productOrders';
 })
 export class CartService {
   products: ProductOrders[] = [];
+  totalPrice: number = 0;
 
 
   constructor() { }
@@ -33,6 +34,14 @@ export class CartService {
 
       this.products.push(productOrders);
     }
+    this.calculatePrice();
+  }
+
+  calculatePrice() {
+    this.products.forEach((prod)=> {
+      let price = prod.productPrice * prod.quantity;
+      this.totalPrice = this.totalPrice + price;
+    })
   }
 
   getItems() {
