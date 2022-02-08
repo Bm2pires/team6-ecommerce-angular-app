@@ -14,9 +14,9 @@ public class ProductGetResponseModel {
 
 	private String imageUrl;
 
-	private String category;
+	private String productCategory;
 
-	private String brand;
+	private String productBrand;
 
 	public ProductGetResponseModel() {
 		super();
@@ -32,8 +32,8 @@ public class ProductGetResponseModel {
 		this.productDescription = productDescription;
 		this.productPrice = productPrice;
 		this.imageUrl = imageUrl;
-		this.category = category;
-		this.brand = brand;
+		this.productCategory = category;
+		this.productBrand = brand;
 	}
 
 }

@@ -70,6 +70,8 @@ INSERT INTO products(image_url, product_desc, product_name, product_price, brand
 
 INSERT INTO products(image_url, product_desc, product_name, product_price, brand_brand_id, categories_categoryid) VALUES ('', 'HP Spectre', 'HP Laptop', '850.00', 2, 1)
 
+INSERT INTO products(image_url, product_desc, product_name, product_price, brand_brand_id, categories_categoryid) VALUES ('', 'HP Envy', 'HP Laptop 2022', '750.00', 2, 1)
+
 INSERT INTO categories(category_name) VALUES ('Laptop')
 
 INSERT INTO brand(brand_name) VALUES ('Dell')
