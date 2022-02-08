@@ -24,7 +24,6 @@ import { ProductService } from './services/product.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ProductsComponent } from './components/products/products.component';
 import { LoginService } from './services/login.service';
-import { BrandComponent } from './services/brand/brand.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -68,7 +67,6 @@ const appRoutes: Routes = [
     ModalAddUserComponent,
     ModalAddProdComponent,
     ProductsComponent,
-    BrandComponent,
   ],
   imports: [
     BrowserModule,
