@@ -5,17 +5,17 @@ import lombok.Data;
 @Data
 public class CategoryResponseModel {
 
-	private long categoryid;
+	private long categoryId;
 	private String categoryName;
-
-	public CategoryResponseModel(long categoryid, String categoryName) {
-		super();
-		this.categoryid = categoryid;
-		this.categoryName = categoryName;
-	}
 
 	public CategoryResponseModel() {
 		super();
+	}
+
+	public CategoryResponseModel(long categoryId, String categoryName) {
+		super();
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
 	}
 
 }
