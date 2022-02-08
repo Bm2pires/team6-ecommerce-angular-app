@@ -3,8 +3,7 @@ package com.ecommerce.spring.reqresmodels;
 import lombok.Data;
 
 @Data
-public class ProductAddRequestModel {
-
+public class ProductAddResponseModel {
 	private String productName;
 
 	private String productDescription;
@@ -14,37 +13,21 @@ public class ProductAddRequestModel {
 	private String productBrand;
 	
 	private String productCategory;
-	private String imageUrl;
-
-
-
 	
 
-	public ProductAddRequestModel() {
+	public ProductAddResponseModel() {
 		super();
 	}
 
 
 
-
-
-	public ProductAddRequestModel(String productName, String productDescription, String productPrice,
-			String productBrand, String productCategory, String imageUrl) {
+	public ProductAddResponseModel(String productName, String productDescription, String productPrice,
+			String productBrand, String productCategory) {
 		super();
 		this.productName = productName;
 		this.productDescription = productDescription;
 		this.productPrice = productPrice;
 		this.productBrand = productBrand;
 		this.productCategory = productCategory;
-		this.imageUrl = imageUrl;
 	}
-
-
-
-
-
-
-
-
-
 }

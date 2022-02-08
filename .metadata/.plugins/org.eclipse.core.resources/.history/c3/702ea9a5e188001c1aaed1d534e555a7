@@ -42,7 +42,6 @@ public class ProductService {
 				product.get().setProductName(requestModel.getProductName());
 				product.get().setProductDescription(requestModel.getProductDescription());
 				product.get().setProductPrice(requestModel.getProductPrice());
-				product.get().setImageUrl(requestModel.getImageUrl());
 
 				Optional<Categories> category = categoryRepo.findByCategoryName(requestModel.getProductCategory());
 				Optional<Brand> brand = brandRepo.findByBrandName(requestModel.getProductBrand());
@@ -93,7 +92,6 @@ public class ProductService {
 			product.setProductName(requestModel.getProductName());
 			product.setProductDescription(requestModel.getProductDescription());
 			product.setProductPrice(requestModel.getProductPrice());
-			product.setImageUrl(requestModel.getImageUrl());
 
 			Optional<Categories> category = categoryRepo.findByCategoryName(requestModel.getProductCategory());
 			Optional<Brand> brand = brandRepo.findByBrandName(requestModel.getProductBrand());

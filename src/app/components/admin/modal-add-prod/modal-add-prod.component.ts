@@ -34,7 +34,8 @@ export class ModalAddProdComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private prodService: ProductService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {}
 
@@ -46,6 +47,7 @@ export class ModalAddProdComponent implements OnInit {
     if (this.valid) {
       this.prodService.addProd(this.productModify).subscribe((data) => {
       });
+
       modal.close();
       //Resets modal to default fields
       this.reset();
@@ -113,6 +115,7 @@ export class ModalAddProdComponent implements OnInit {
   onClose(modal: { close: () => void }) {
     modal.close();
     this.reset();
+
   }
 
   reset() {
@@ -126,6 +129,7 @@ export class ModalAddProdComponent implements OnInit {
     };
 
     this.submitted = false;
+
   }
 
 

@@ -2,7 +2,6 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
-import { UserDetails } from 'src/app/services/interfaces/userDetails';
 import { UserModify } from 'src/app/services/interfaces/userModify';
 
 @Component({

@@ -22,6 +22,17 @@ public class ProductGetResponseModel {
 		super();
 	}
 
+	// old constructor
+//	public ProductGetResponseModel(long productId, String productName, String productDescription, String productPrice,
+//			String category, String brand) {
+//		super();
+//		this.productId = productId;
+//		this.productName = productName;
+//		this.productDescription = productDescription;
+//		this.productPrice = productPrice;
+//		this.category = category;
+//		this.brand = brand;
+//	}
 
 	// new constructor with image url
 	public ProductGetResponseModel(long productId, String productName, String productDescription, String productPrice,

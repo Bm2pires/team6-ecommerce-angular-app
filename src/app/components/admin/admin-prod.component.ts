@@ -9,6 +9,7 @@ import { ProductDetails } from 'src/app/services/interfaces/productDetails';
 })
 export class AdminComponent implements OnInit {
 
+
   //Stores all the products
   products!: ProductDetails[];
 
@@ -26,6 +27,8 @@ export class AdminComponent implements OnInit {
     this.prodService.delProd(id).subscribe(data => {
     });
     this.ngOnInit();
+    this.ngOnInit();
+
   }
 
 
