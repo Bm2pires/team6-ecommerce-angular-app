@@ -34,12 +34,27 @@
             <div class="form-group">
                 <label for="userPass">User password</label>
                 <div class="input-group">
-                    <input id="userPass" maxlength="20" class="form-control" placeholder={{itemUser.password}} type="text" [(ngModel)]='newUserDetails.password' [ngModelOptions]="{standalone: true}" required name="password" #password="ngModel">
+                    <input pattern="(?=.*[!@#$%&*])(?=.*[a-z])(?=.*[A-Z]).{6,}" id="userPass" maxlength="10" class="form-control" type="password" [(ngModel)]='newUserDetails.password' [ngModelOptions]="{standalone: true}" required name="password" #password="ngModel">
                 </div>
                 <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
                     Password is required
                 </div>
+                <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                    <span class="help-block" *ngIf="(!password.valid && password.dirty)">Enter Strong Password(Must contain one upper case, lower case, special char(!@#$%&*) & number) </span>
+                </div>
             </div>
+
+            <div class="form-group">
+                <label for="userConfirmPass">Confirm Password</label>
+                <input type="password" class="form-control" pattern="{{password.value}}" maxlength="10" [(ngModel)]='confirmPass' [ngModelOptions]="{standalone: true}" required name="conPassword" #conPassword="ngModel">
+                <div *ngIf="(!conPassword.valid && conPassword.touched && password.dirty)" class="alert alert-danger">
+                    Passwords do not match
+                </div>
+                <div *ngIf="(conPassword.touched && !conPassword.dirty)" class="alert alert-danger">
+                    Please Enter Confirm Password
+                </div>
+            </div>
+
             <div class="form-group mt-2">
                 <label for="userTitle">User Title</label>
                 <select class="form-control" id="title" required name="title" [(ngModel)]='newUserDetails.title' #title="ngModel" required>

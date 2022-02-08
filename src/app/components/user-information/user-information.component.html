@@ -27,15 +27,31 @@
                 Email is required
             </div>
         </div>
+        <!-- Password -->
         <div class="form-group">
-            <label for="userPass">User password</label>
-            <div class="input-group">
-                <input id="userPass" maxlength="20" class="form-control" type="password" [(ngModel)]='newUserDetails.password' [ngModelOptions]="{standalone: true}" required name="password" #password="ngModel" [disabled]="disabledFields">
+            <label for="userPass">User Password</label>
+            <input type="password" class="form-control" pattern="(?=.*[!@#$%&*])(?=.*[a-z])(?=.*[A-Z]).{6,}" [(ngModel)]='newUserDetails.password' [ngModelOptions]="{standalone: true}" required name="password" #password="ngModel" [disabled]="disabledFields" maxlength="10">
+            <div *ngIf="(password.touched && !password.dirty)" class="alert alert-danger">
+                Please Enter Password
             </div>
-            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
-                Password is required
+            <div *ngIf="(!password.valid && password.dirty)" class="alert alert-danger">
+                Enter Strong Password(Must contain one upper case, lower case, special char(!@#$%&*) & number)
             </div>
         </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+            <label for="userConfirmPass">Confirm Password</label>
+            <input type="password" class="form-control" pattern="{{password.value}}" maxlength="10" [(ngModel)]='confirmPass' [ngModelOptions]="{standalone: true}" required name="conPassword" #conPassword="ngModel" [disabled]="disabledFields">
+            <div *ngIf="(!conPassword.valid && conPassword.touched && password.dirty)" class="alert alert-danger">
+                Passwords do not match
+            </div>
+            <div *ngIf="(conPassword.touched && !conPassword.dirty)" class="alert alert-danger">
+                Please Enter Confirm Password
+            </div>
+        </div>
+
+        <!-- Title -->
         <div class="form-group mt-2">
             <label for="userTitle">User Title</label>
             <select class="form-control" id="title" required name="title" [(ngModel)]='newUserDetails.title' #title="ngModel" required [disabled]="disabledFields">

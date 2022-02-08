@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Route } from '@angular/compiler/src/core';
+// import { Router } from '@angular/compiler/src/core';
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,15 +13,15 @@ import { User } from 'src/app/services/registerUser';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent  {
-  
+
   date=new Date();
   todaysDate= formatDate(this.date, 'yyyy-MM-dd', 'en-US');
-  
+
   msg='';
-  
+
   user:any=[];
 
-  
+
   constructor(private _service:UserService, private router:Router) {
     this._service = _service;
    }
@@ -39,7 +39,7 @@ export class RegisterComponent  {
       phone_number: form.value.contactNo,
       password: form.value.password,
       address: form.value.address,
-    
+
     };
     let email=form.value.email;
 
@@ -51,23 +51,23 @@ export class RegisterComponent  {
       this.msg="Registration successful";
 this.router.navigate(['/login']);
 
-    }, 
-    
+    },
+
     error=>{
        console.log("exception occurs");
        this.msg=email+" Email id already used";
-       
+
        //this.msg=error.error;
-       
-       
+
+
      }
-     
+
    )
-   
+
   }
 
-  
 
-   
+
+
   }
 

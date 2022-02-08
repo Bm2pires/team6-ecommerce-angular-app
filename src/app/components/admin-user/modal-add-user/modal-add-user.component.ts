@@ -12,29 +12,31 @@ import { UserModify } from 'src/app/services/userModify';
 })
 export class ModalAddUserComponent implements OnInit {
 
+  confirmPass:String;
 
 
   errors: Array<string> = [];
   valid = true
 
-  userEmail:String = "";
-  userPass:String = "";
-  userTitle:String = "Mr";
-  userFname: String = "";
-  userLname:String = "";
-  dob:string|null = new Date().toLocaleDateString();
-  phonenumber:String = "";
-  address:String = "";
+  // userEmail:String = "";
+  // userPass:String = "";
+  // userTitle:String = "Mr";
+  // userFname: String = "";
+  // userLname:String = "";
+  // dob:string|null = new Date().toLocaleDateString();
+  // phonenumber:String = "";
+  // address:String = "";
 
   userModify: UserModify = {
-    firstName: this.userFname,
-    lastName: this.userLname,
-    email: this.userEmail,
-    password: this.userPass,
-    title: this.userTitle,
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    title: "Mr",
     dateOfBirth: new Date().toLocaleDateString(),
-    phoneNumber: this.phonenumber,
-    address: this.address };
+    phoneNumber: "",
+    address: ""
+  };
 
 
   titles = ['Mr', 'Mrs',
@@ -46,7 +48,6 @@ export class ModalAddUserComponent implements OnInit {
   closeResult = '';
 
   constructor(private modalService: NgbModal, private datePipe: DatePipe, private userService: UserService) {
-    // "2000-04-10"
     var date = new Date();
     this.userModify.dateOfBirth = this.datePipe.transform(date,"yyyy-MM-dd")
   }
@@ -59,9 +60,8 @@ export class ModalAddUserComponent implements OnInit {
     this.validate();
     if(this.valid){
       this.userService.addUser(this.userModify).subscribe(data => {
-        console.log(data);
       });
-      this.ngOnInit();
+
       modal.close();
       this.reset();
     }else{
@@ -87,6 +87,11 @@ export class ModalAddUserComponent implements OnInit {
     })
     if(!emailValid){
       this.errors.push("Email must contain an @");
+    }
+
+    if(this.userModify.password != this.confirmPass || this.confirmPass === ""){
+      this.errors.push("Passwords do not match")
+
     }
 
     if(this.userModify.address === "" || this.userModify.email === "" || this.userModify.firstName === "" || this.userModify.lastName === "" || this.userModify.password === "" || this.userModify.phoneNumber === ""){
@@ -123,28 +128,31 @@ export class ModalAddUserComponent implements OnInit {
   onClose(modal: { close: () => void; }) {
     modal.close();
     this.reset();
+
   }
 
   reset(){
-    this.userEmail = "";
-    this.userPass = "";
-    this.userTitle = "";
-    this.userFname = "";
-    this.userLname = "";
-    this.dob = new Date().toLocaleDateString();
-    this.phonenumber = "";
-    this.address = "";
+    // this.userEmail = "";
+    // this.userPass = "";
+    // this.userTitle = "";
+    // this.userFname = "";
+    // this.userLname = "";
+    // this.dob = new Date().toLocaleDateString();
+    // this.phonenumber = "";
+    // this.address = "";
 
     this.userModify = {
-      firstName: this.userFname,
-      lastName: this.userLname,
-      email: this.userEmail,
-      password: this.userPass,
-      title: this.userTitle,
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      title: "Mr",
       dateOfBirth: new Date().toLocaleDateString(),
-      phoneNumber: this.phonenumber,
-      address: this.address
+      phoneNumber: "",
+      address: ""
     };
+    this.confirmPass = "";
+
     this.submitted = false;
   }
 }

@@ -14,30 +14,22 @@ export class ModalUserComponent implements OnInit {
   @Input()
   itemUser!: {id:Number, firstName:String, lastName:String, email:String, password:String, title:String, dateOfBirth:string|null, phoneNumber:String, address:String};
 
-
+  confirmPass:String;
 
   errors: Array<string> = [];
   valid = true
 
-  newUserFName: String = "";
-  newUserLName: String = "";
-  newUserEmail: String = "";
-  newUserPassword: String = "";
-  newUserTitle: String = "Mr";
-  newUserDOB: string | null = new Date().toLocaleDateString();
-  newUserPhonenumebr: String = "";
-  newUserAddress: String = "";
-
   newUserDetails: UserDetails = {
     id: 0,
-    firstName: this.newUserFName,
-    lastName: this.newUserLName,
-    email: this.newUserEmail,
-    password: this.newUserPassword,
-    title: this.newUserTitle,
-    dateOfBirth: this.newUserDOB,
-    phoneNumber: this.newUserPhonenumebr,
-    address: this.newUserAddress };
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    title: "Mr",
+    dateOfBirth: new Date().toLocaleDateString(),
+    phoneNumber: "",
+    address: ""
+  };
 
     titles = ['Mr', 'Mrs',
     'Miss', 'Ms'];
@@ -60,7 +52,6 @@ export class ModalUserComponent implements OnInit {
     this.validate();
       if(this.valid){
         this.userService.edituser(this.newUserDetails).subscribe(data => {
-          console.log(data);
         });
 
       modal.close();
@@ -91,6 +82,11 @@ export class ModalUserComponent implements OnInit {
       this.errors.push("Email must contain an @");
     }
 
+    if(this.newUserDetails.password != this.confirmPass || this.confirmPass === ""){
+      this.errors.push("Passwords do not match")
+
+    }
+
     if(this.newUserDetails.address === "" || this.newUserDetails.email === "" || this.newUserDetails.firstName === "" || this.newUserDetails.lastName === "" || this.newUserDetails.password === "" || this.newUserDetails.phoneNumber === ""){
       this.errors.push("Please fill in all fields")
     }
@@ -119,6 +115,8 @@ export class ModalUserComponent implements OnInit {
     this.newUserDetails.address = this.itemUser.address
     this.newUserDetails.password = this.itemUser.password
     this.newUserDetails.phoneNumber = this.itemUser.phoneNumber
+    this.confirmPass = this.newUserDetails.password;
+
 
   }
 
@@ -139,25 +137,18 @@ export class ModalUserComponent implements OnInit {
   }
 
   reset(){
-    this.newUserEmail = "";
-    this.newUserPassword = "";
-    this.newUserTitle = "";
-    this.newUserFName = "";
-    this.newUserLName = "";
-    this.newUserDOB = new Date().toLocaleDateString();
-    this.newUserPhonenumebr = "";
-    this.newUserAddress = "";
-
     this.newUserDetails = {
       id: 0,
-      firstName: this.newUserFName,
-      lastName: this.newUserLName,
-      email: this.newUserEmail,
-      password: this.newUserPassword,
-      title: this.newUserTitle,
-      dateOfBirth: this.newUserDOB,
-      phoneNumber: this.newUserPhonenumebr,
-      address: this.newUserAddress };
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      title: "Mr",
+      dateOfBirth: new Date().toLocaleDateString(),
+      phoneNumber: "",
+      address: ""
+    };
+    this.confirmPass = "";
 
       this.submitted = false;
   }

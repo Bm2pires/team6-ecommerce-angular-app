@@ -15,33 +15,23 @@ export class UserInformationComponent implements OnInit {
   yourForm!: NgForm;
 
 
+  confirmPass:String;
 
   errors: Array<string> = [];
   valid = true
 
   userDetailDB!: UserDetails;
 
-
-    emailNew: string = "Current@";
-    titleNew: string = "Mr"
-    firstnameNew: string = "Current"
-    lastnameNew:string  = "Current"
-    dateofbirthNew: string | null = new Date().toLocaleDateString();
-    contactnumberNew: string = "Current"
-    addressNew:string = "Current"
-    passwordNew:string = "Current"
-    phoneNumberNew:string = "1234567899"
-
     newUserDetails: UserDetails = {
       id: 0,
-      firstName: this.firstnameNew,
-      lastName: this.lastnameNew,
-      email: this.emailNew,
-      password: this.passwordNew,
-      title: this.titleNew,
-      dateOfBirth: this.dateofbirthNew,
-      phoneNumber: this.phoneNumberNew,
-      address: this.addressNew
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      title: '',
+      dateOfBirth: new Date().toLocaleDateString(),
+      phoneNumber: '',
+      address: ''
     };
 
     oldUserDetails: UserDetails = {
@@ -75,6 +65,7 @@ export class UserInformationComponent implements OnInit {
     this.newUserDetails = arr1;
     this.newUserDetails.phoneNumber = arr1.phone_number;
     this.newUserDetails.dateOfBirth = this.datePipe.transform(arr1.dateOfBirth,"yyyy-MM-dd");
+    this.confirmPass = this.newUserDetails.password;
   }
 
    disableFunc() {
@@ -84,9 +75,11 @@ export class UserInformationComponent implements OnInit {
     this.oldUserDetails.title = this.newUserDetails.title;
     this.oldUserDetails.firstName = this.newUserDetails.firstName;
     this.oldUserDetails.lastName = this.newUserDetails.lastName;
-    this.oldUserDetails.dateOfBirth = this.newUserDetails.dateOfBirth
     this.oldUserDetails.phoneNumber = this.newUserDetails.phoneNumber;
     this.oldUserDetails.address = this.newUserDetails.address;
+    this.oldUserDetails.password = this.newUserDetails.password
+
+
   }
 
   reset() {
@@ -98,9 +91,12 @@ export class UserInformationComponent implements OnInit {
     this.oldUserDetails.title = '';
     this.oldUserDetails.firstName = '';
     this.oldUserDetails.lastName = '';
-    this.oldUserDetails.dateOfBirth = new Date().toLocaleDateString();
     this.oldUserDetails.phoneNumber = '';
     this.oldUserDetails.address = '';
+    this.oldUserDetails.password = '';
+
+
+
 
 
   }
@@ -117,14 +113,16 @@ export class UserInformationComponent implements OnInit {
           x.lastName = data.lastName;
           x.phone_number = data.phoneNumber;
           x.address = data.address;
+          x.password = data.password;
           sessionStorage.setItem("user", JSON.stringify(x));
+          this.confirmPass = "";
         });
         this.disabledFields = true;
 
         setTimeout(() => {
           this.ngOnInit();
           console.log("timeout")
-        }, 1000)
+        }, 1500)
 
 
     }else{
@@ -135,6 +133,8 @@ export class UserInformationComponent implements OnInit {
   }
 
   validate() {
+    console.log(this.newUserDetails.password)
+    console.log(this.confirmPass)
     const phoneNumberCheck = Number(this.newUserDetails.phoneNumber);
     if(Number.isNaN(phoneNumberCheck)){
       this.errors.push("Phone number must be digitis");
@@ -153,11 +153,14 @@ export class UserInformationComponent implements OnInit {
       this.errors.push("Email must contain an @");
     }
 
+    if(this.newUserDetails.password != this.confirmPass || this.confirmPass === ""){
+      this.errors.push("Passwords do not match")
+
+    }
+
     if(this.newUserDetails.address === "" || this.newUserDetails.email === "" || this.newUserDetails.firstName === "" || this.newUserDetails.lastName === "" || this.newUserDetails.password === "" || this.newUserDetails.phoneNumber === ""){
       this.errors.push("Please fill in all fields")
     }
-
-
 
     if(this.errors.length != 0){
       this.valid = false;
