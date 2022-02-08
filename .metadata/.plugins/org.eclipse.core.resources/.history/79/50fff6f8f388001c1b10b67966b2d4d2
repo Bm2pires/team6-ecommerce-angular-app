@@ -1,0 +1,5 @@
+package com.ecommerce.spring.entities;
+
+public class Order_Items {
+
+}

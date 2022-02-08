@@ -42,7 +42,7 @@ export class NavbarComponent implements OnInit{
        this.isAdmin = false;
      }
 
-     //Cheks if user is logged in and also calls method to chek if user is admin
+     //Checks if user is logged in and also calls method to chek if user is admin
      isUserLoggedIn() {
      const loggedIn = this.loginService.isUserLoggedIn();
      if(loggedIn){

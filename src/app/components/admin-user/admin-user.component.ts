@@ -21,9 +21,9 @@ export class AdminUserComponent implements OnInit {
 
   //Deletes user
   delUser(id: any) {
-    console.log(id);
     this.userService.delUser(id).subscribe((data) => {
     });
+    this.ngOnInit();
     this.ngOnInit();
   }
 }

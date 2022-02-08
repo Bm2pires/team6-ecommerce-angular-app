@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -35,20 +36,10 @@ public class Products {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Brand brand;
+	
+    @OneToOne(mappedBy = "products")
+    private OrderItems orderItems;
 
-	// old constructor without imageUrl
-//	public Products(long productId, String productName, String productDescription, String productPrice,
-//			Categories categories, Brand brand) {
-//		super();
-//		this.productId = productId;
-//		this.productName = productName;
-//		this.productDescription = productDescription;
-//		this.productPrice = productPrice;
-//		this.categories = categories;
-//		this.brand = brand;
-//	}
-
-	// new updated constructor
 	public Products(long productId, String productName, String productDescription, String productPrice, String imageUrl,
 			Categories categories, Brand brand) {
 		super();
@@ -61,18 +52,6 @@ public class Products {
 		this.brand = brand;
 	}
 
-	// old constructor without imageUrl
-//	public Products(String productName, String productDescription, String productPrice, Categories categories,
-//			Brand brand) {
-//		super();
-//		this.productName = productName;
-//		this.productDescription = productDescription;
-//		this.productPrice = productPrice;
-//		this.categories = categories;
-//		this.brand = brand;
-//	}
-
-	// new updated constructor
 	public Products(String productName, String productDescription, String productPrice, String imageUrl,
 			Categories categories, Brand brand) {
 		super();
