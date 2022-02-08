@@ -4,5 +4,6 @@ export interface ProductModify {
   productDescription:String,
   productPrice:Number,
   productBrand: String,
-  productCategory: String
+  productCategory: String,
+  imageUrl: String
 }

@@ -4,6 +4,16 @@
     </div>
     <div class="modal-body">
         <form #addProd="ngForm">
+            <!-- Product URL -->
+            <div class="form-group">
+                <label for="prodName">Product URL</label>
+                <div class="input-group">
+                    <input id="prodUrl" class="form-control" placeholder="Product URL" type="text" [(ngModel)]="productModify.imageUrl" [ngModelOptions]="{standalone: true}" required name="prodImage" #prodImage="ngModel">
+                </div>
+                <div *ngIf="prodImage.invalid && (prodImage.dirty || prodImage.touched)" class="alert alert-danger">
+                    Product Image is required
+                </div>
+            </div>
             <!-- Product Name -->
             <div class="form-group">
                 <label for="prodName">Product Name</label>

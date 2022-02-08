@@ -20,7 +20,8 @@ export class ModalAddProdComponent implements OnInit {
     productDescription: "",
     productPrice: 0,
     productBrand: "",
-    productCategory: ""
+    productCategory: "",
+    imageUrl: ""
   };
 
   //Chekcs if form ahs been submitted
@@ -119,7 +120,8 @@ export class ModalAddProdComponent implements OnInit {
       productDescription: "",
       productPrice: 0,
       productBrand: "",
-      productCategory: ""
+      productCategory: "",
+      imageUrl: ""
     };
 
     this.submitted = false;
