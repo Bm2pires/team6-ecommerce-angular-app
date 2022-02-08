@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductModify } from 'src/app/services/interfaces/productModify';
@@ -9,6 +9,8 @@ import { ProductModify } from 'src/app/services/interfaces/productModify';
   styleUrls: ['./modal-add-prod.component.css'],
 })
 export class ModalAddProdComponent implements OnInit {
+
+
 
   //Error arrays. Will be filled with error messages
   errors: Array<string> = [];
@@ -24,7 +26,7 @@ export class ModalAddProdComponent implements OnInit {
     imageUrl: ""
   };
 
-  //Chekcs if form ahs been submitted
+  //Checks if form has been submitted
   submitted = false;
 
   closeResult = '';
@@ -43,7 +45,6 @@ export class ModalAddProdComponent implements OnInit {
     this.validate();
     if (this.valid) {
       this.prodService.addProd(this.productModify).subscribe((data) => {
-        console.log(data);
       });
       modal.close();
       //Resets modal to default fields
@@ -126,4 +127,6 @@ export class ModalAddProdComponent implements OnInit {
 
     this.submitted = false;
   }
+
+
 }

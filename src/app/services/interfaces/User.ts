@@ -7,7 +7,7 @@ export interface User {
   // phone_number: string;
   // address: string;
   // isAdmin: boolean;
-  userId: Number;
+  userId: number;
   email: string;
   password: string;
   title: string;

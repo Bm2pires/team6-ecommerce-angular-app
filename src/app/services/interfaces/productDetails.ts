@@ -1,9 +1,9 @@
 export interface ProductDetails {
-  productId: Number;
-  productName: String;
-  productDescription: String;
-  productPrice: Number;
-  imageUrl: String;
-  productBrand: String;
-  productCategory: String;
+  productId: number;
+  productName: string;
+  productDescription: string;
+  productPrice: number;
+  imageUrl: string;
+  productBrand: string;
+  productCategory: string;
 }

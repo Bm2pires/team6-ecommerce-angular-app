@@ -1,12 +1,12 @@
 export interface UserDetails {
-    id: Number,
-    firstName: String,
-    lastName: String,
-    email: String,
-    title: String,
-    password: String,
+    id: number,
+    firstName: string,
+    lastName: string,
+    email: string,
+    title: string,
+    password: string,
     dateOfBirth: string|null,
-    phoneNumber: String,
-    address: String
+    phoneNumber: string,
+    address: string
 
 }

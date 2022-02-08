@@ -12,12 +12,14 @@ import { UserModify } from 'src/app/services/interfaces/userModify';
 })
 export class ModalAddUserComponent implements OnInit {
 
+  //Used to confirm password
   confirmPass:String;
 
-
+  //Will fill with user input errors
   errors: Array<string> = [];
   valid = true;
 
+  //Used to store the details of user addition
   userModify: UserModify = {
     firstName: "",
     lastName: "",
@@ -37,6 +39,7 @@ export class ModalAddUserComponent implements OnInit {
   closeResult = '';
 
   constructor(private modalService: NgbModal, private datePipe: DatePipe, private userService: UserService) {
+    //Foramtting date into a readable manner
     var date = new Date();
     this.userModify.dateOfBirth = this.datePipe.transform(date, 'yyyy-MM-dd');
   }
@@ -44,6 +47,7 @@ export class ModalAddUserComponent implements OnInit {
 
   onSubmit(modal: { close: () => void }) {
     this.submitted = true;
+    //Checks if user input is valid
     this.validate();
     if(this.valid){
       this.userService.addUser(this.userModify).subscribe(data => {
@@ -119,9 +123,9 @@ export class ModalAddUserComponent implements OnInit {
   onClose(modal: { close: () => void }) {
     modal.close();
     this.reset();
-
   }
 
+  //Reset user details to default state
   reset(){
     this.userModify = {
       firstName: "",
