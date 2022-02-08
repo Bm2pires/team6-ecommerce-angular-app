@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
 import { LoginService } from 'src/app/services/login.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { UserService } from 'src/app/services/user.service';
@@ -21,7 +22,7 @@ export class NavbarComponent implements OnInit{
        this.collapsed = !this.collapsed;
      }
 
-     constructor(private userService: UserService, private loginService: LoginService, private navService: NavbarService){
+     constructor(private userService: UserService, private loginService: LoginService, private navService: NavbarService, private cartService: CartService){
        //Used to connect to login component - When user logs in this function will be called after going through navbar.service.ts (login -> navbar.service.ts -> navbar.component.ts)
       this.navService.invokeEvent.subscribe(value => {
         if(value === 'someVal'){
@@ -40,6 +41,7 @@ export class NavbarComponent implements OnInit{
        this.ngOnInit();
        this.isLoggedIn = false;
        this.isAdmin = false;
+       this.cartService.clearCart();
      }
 
      //Checks if user is logged in and also calls method to chek if user is admin
