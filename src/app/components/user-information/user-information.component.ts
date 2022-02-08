@@ -2,23 +2,22 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { UserDetails } from 'src/app/services/userDetails';
+import { UserDetails } from 'src/app/services/interfaces/userDetails';
 
 @Component({
   selector: 'app-user-information',
   templateUrl: './user-information.component.html',
-  styleUrls: ['./user-information.component.css']
+  styleUrls: ['./user-information.component.css'],
 })
 export class UserInformationComponent implements OnInit {
-
-  @ViewChild("editUserInfo")
+  @ViewChild('editUserInfo')
   yourForm!: NgForm;
 
 
   confirmPass:String;
 
   errors: Array<string> = [];
-  valid = true
+  valid = true;
 
   userDetailDB!: UserDetails;
 
@@ -68,7 +67,7 @@ export class UserInformationComponent implements OnInit {
     this.confirmPass = this.newUserDetails.password;
   }
 
-   disableFunc() {
+  disableFunc() {
     this.disabledFields = false;
 
     this.oldUserDetails.email = this.newUserDetails.email;
@@ -85,7 +84,7 @@ export class UserInformationComponent implements OnInit {
   reset() {
     this.disabledFields = true;
 
-    this.ngOnInit()
+    this.ngOnInit();
 
     this.oldUserDetails.email = '';
     this.oldUserDetails.title = '';
@@ -129,28 +128,27 @@ export class UserInformationComponent implements OnInit {
       alert(this.errors)
       this.errors = [];
     }
-
   }
 
   validate() {
     console.log(this.newUserDetails.password)
     console.log(this.confirmPass)
     const phoneNumberCheck = Number(this.newUserDetails.phoneNumber);
-    if(Number.isNaN(phoneNumberCheck)){
-      this.errors.push("Phone number must be digitis");
+    if (Number.isNaN(phoneNumberCheck)) {
+      this.errors.push('Phone number must be digitis');
     }
-    if(this.newUserDetails.phoneNumber.length != 10){
-      this.errors.push("Phone number must be 10 digitis");
+    if (this.newUserDetails.phoneNumber.length != 10) {
+      this.errors.push('Phone number must be 10 digitis');
     }
     const emailCheck = Array.from(this.newUserDetails.email);
     let emailValid = false;
     emailCheck.forEach((letter) => {
-      if(letter === '@'){
+      if (letter === '@') {
         emailValid = true;
       }
-    })
-    if(!emailValid){
-      this.errors.push("Email must contain an @");
+    });
+    if (!emailValid) {
+      this.errors.push('Email must contain an @');
     }
 
     if(this.newUserDetails.password != this.confirmPass || this.confirmPass === ""){
@@ -164,7 +162,7 @@ export class UserInformationComponent implements OnInit {
 
     if(this.errors.length != 0){
       this.valid = false;
-    }else{
+    } else {
       this.valid = true;
     }
   }

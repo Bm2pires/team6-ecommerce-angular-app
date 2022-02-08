@@ -2,13 +2,13 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
-import { UserDetails } from 'src/app/services/userDetails';
-import { UserModify } from 'src/app/services/userModify';
+import { UserDetails } from 'src/app/services/interfaces/userDetails';
+import { UserModify } from 'src/app/services/interfaces/userModify';
 
 @Component({
   selector: 'app-modal-add-user',
   templateUrl: './modal-add-user.component.html',
-  styleUrls: ['./modal-add-user.component.css']
+  styleUrls: ['./modal-add-user.component.css'],
 })
 export class ModalAddUserComponent implements OnInit {
 
@@ -16,16 +16,7 @@ export class ModalAddUserComponent implements OnInit {
 
 
   errors: Array<string> = [];
-  valid = true
-
-  // userEmail:String = "";
-  // userPass:String = "";
-  // userTitle:String = "Mr";
-  // userFname: String = "";
-  // userLname:String = "";
-  // dob:string|null = new Date().toLocaleDateString();
-  // phonenumber:String = "";
-  // address:String = "";
+  valid = true;
 
   userModify: UserModify = {
     firstName: "",
@@ -39,23 +30,19 @@ export class ModalAddUserComponent implements OnInit {
   };
 
 
-  titles = ['Mr', 'Mrs',
-  'Miss', 'Ms'];
+  titles = ['Mr', 'Mrs', 'Miss', 'Ms'];
 
   submitted = false;
-
 
   closeResult = '';
 
   constructor(private modalService: NgbModal, private datePipe: DatePipe, private userService: UserService) {
     var date = new Date();
-    this.userModify.dateOfBirth = this.datePipe.transform(date,"yyyy-MM-dd")
+    this.userModify.dateOfBirth = this.datePipe.transform(date, 'yyyy-MM-dd');
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-
-  onSubmit(modal: { close: () => void; }) {
+  onSubmit(modal: { close: () => void }) {
     this.submitted = true;
     this.validate();
     if(this.valid){
@@ -64,29 +51,29 @@ export class ModalAddUserComponent implements OnInit {
 
       modal.close();
       this.reset();
-    }else{
-      alert(this.errors)
+    } else {
+      alert(this.errors);
       this.errors = [];
     }
   }
 
   validate() {
     const phoneNumberCheck = Number(this.userModify.phoneNumber);
-    if(Number.isNaN(phoneNumberCheck)){
-      this.errors.push("Phone number must be digits");
+    if (Number.isNaN(phoneNumberCheck)) {
+      this.errors.push('Phone number must be digits');
     }
-    if(this.userModify.phoneNumber.length != 10){
-      this.errors.push("Phone number must be 10 digits");
+    if (this.userModify.phoneNumber.length != 10) {
+      this.errors.push('Phone number must be 10 digits');
     }
     const emailCheck = Array.from(this.userModify.email);
     let emailValid = false;
     emailCheck.forEach((letter) => {
-      if(letter === '@'){
+      if (letter === '@') {
         emailValid = true;
       }
-    })
-    if(!emailValid){
-      this.errors.push("Email must contain an @");
+    });
+    if (!emailValid) {
+      this.errors.push('Email must contain an @');
     }
 
     if(this.userModify.password != this.confirmPass || this.confirmPass === ""){
@@ -98,20 +85,24 @@ export class ModalAddUserComponent implements OnInit {
       this.errors.push("Please fill in all fields")
     }
 
-
-    if(this.errors.length != 0){
+    if (this.errors.length != 0) {
       this.valid = false;
-    }else{
+    } else {
       this.valid = true;
     }
   }
 
   open(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   private getDismissReason(reason: any): string {
@@ -125,22 +116,13 @@ export class ModalAddUserComponent implements OnInit {
     }
   }
 
-  onClose(modal: { close: () => void; }) {
+  onClose(modal: { close: () => void }) {
     modal.close();
     this.reset();
 
   }
 
   reset(){
-    // this.userEmail = "";
-    // this.userPass = "";
-    // this.userTitle = "";
-    // this.userFname = "";
-    // this.userLname = "";
-    // this.dob = new Date().toLocaleDateString();
-    // this.phonenumber = "";
-    // this.address = "";
-
     this.userModify = {
       firstName: "",
       lastName: "",
@@ -156,5 +138,3 @@ export class ModalAddUserComponent implements OnInit {
     this.submitted = false;
   }
 }
-
-

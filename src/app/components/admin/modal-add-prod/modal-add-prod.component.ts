@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from 'src/app/services/product.service';
-import { ProductModify } from 'src/app/services/productModify';
+import { ProductDetails } from 'src/app/services/interfaces/productDetails';
+import { ProductModify } from 'src/app/services/interfaces/productModify';
 
 @Component({
   selector: 'app-modal-add-prod',
   templateUrl: './modal-add-prod.component.html',
-  styleUrls: ['./modal-add-prod.component.css']
+  styleUrls: ['./modal-add-prod.component.css'],
 })
 export class ModalAddProdComponent implements OnInit {
 
   //Error arrays. Will be filled with error messages
   errors: Array<string> = [];
-  valid = true
+  valid = true;
 
   //Will store all product details for adding a product
   productModify: ProductModify = {
@@ -26,22 +27,22 @@ export class ModalAddProdComponent implements OnInit {
   //Chekcs if form ahs been submitted
   submitted = false;
 
-
   closeResult = '';
 
-  constructor(private modalService: NgbModal, private prodService: ProductService) {
-  }
+  constructor(
+    private modalService: NgbModal,
+    private prodService: ProductService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 
   onSubmit(modal: { close: () => void; }) {
     this.submitted = true;
     //Cheks if input was valid
     this.validate();
-    if(this.valid){
-      this.prodService.addProd(this.productModify).subscribe(data => {
+    if (this.valid) {
+      this.prodService.addProd(this.productModify).subscribe((data) => {
         console.log(data);
       });
       modal.close();
@@ -55,16 +56,18 @@ export class ModalAddProdComponent implements OnInit {
   }
 
   validate() {
-    if(this.productModify.productName.length < 3){
-      this.errors.push("Product name must be greater than 3 characters");
+    if (this.productModify.productName.length < 3) {
+      this.errors.push('Product name must be greater than 3 characters');
     }
 
-    if(this.productModify.productDescription.length < 10){
-      this.errors.push("Product description must be greater than 10 characters");
+    if (this.productModify.productDescription.length < 10) {
+      this.errors.push(
+        'Product description must be greater than 10 characters'
+      );
     }
 
-    if(this.productModify.productPrice === 0){
-      this.errors.push("Product price must not be 0.00");
+    if (this.productModify.productPrice === 0) {
+      this.errors.push('Product price must not be 0.00');
     }
 
     if(this.productModify.productBrand.length < 3){
@@ -77,17 +80,22 @@ export class ModalAddProdComponent implements OnInit {
 
     if(this.errors.length != 0){
       this.valid = false;
-    }else{
+    } else {
       this.valid = true;
     }
   }
 
   open(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   private getDismissReason(reason: any): string {
@@ -101,7 +109,7 @@ export class ModalAddProdComponent implements OnInit {
     }
   }
 
-  onClose(modal: { close: () => void; }){
+  onClose(modal: { close: () => void }) {
     modal.close();
     this.reset();
   }
@@ -117,5 +125,4 @@ export class ModalAddProdComponent implements OnInit {
 
     this.submitted = false;
   }
-
 }

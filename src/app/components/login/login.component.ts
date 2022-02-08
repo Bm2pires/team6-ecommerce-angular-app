@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
-import { LoginUser } from 'src/app/services/loginUser';
+import { LoginUser } from 'src/app/services/interfaces/loginUser';
 import { NavbarService } from 'src/app/services/navbar.service';
-import { User } from 'src/app/services/User';
+import { User } from 'src/app/services/interfaces/User';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,11 @@ export class LoginComponent {
   formSubmitted = false;
 
   // Inject the login service dependency
-  constructor(service: LoginService, private router: Router, private navService: NavbarService) {
+  constructor(
+    service: LoginService,
+    private router: Router,
+    private navService: NavbarService
+  ) {
     console.log('Login Component Loaded');
     this.loginService = service;
   }
@@ -69,8 +73,6 @@ export class LoginComponent {
 
     setTimeout(() => {
       this.navService.callMethodOfSecondComponent();
-    }, 100)
-
-
+    }, 100);
   }
 }
