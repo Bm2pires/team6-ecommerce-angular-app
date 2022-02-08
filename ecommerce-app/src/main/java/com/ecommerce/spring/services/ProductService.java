@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.ecommerce.spring.entities.Brand;
 import com.ecommerce.spring.entities.Categories;
 import com.ecommerce.spring.entities.Products;
-import com.ecommerce.spring.entities.User;
 import com.ecommerce.spring.repositories.BrandRepository;
 import com.ecommerce.spring.repositories.CategoryReposoitory;
 import com.ecommerce.spring.repositories.ProductRepository;
@@ -20,18 +19,16 @@ import com.ecommerce.spring.reqresmodels.ProductAddResponseModel;
 import com.ecommerce.spring.reqresmodels.ProductEditRequestModel;
 import com.ecommerce.spring.reqresmodels.ProductEditResponseModel;
 import com.ecommerce.spring.reqresmodels.ProductGetResponseModel;
-import com.ecommerce.spring.reqresmodels.UserDetailRequestModel;
-import com.ecommerce.spring.reqresmodels.UserDetailResponseModel;
 
 @Service
 public class ProductService {
 
 	@Autowired
 	ProductRepository prodRepo;
-	
+
 	@Autowired
 	BrandRepository brandRepo;
-	
+
 	@Autowired
 	CategoryReposoitory categoryRepo;
 
@@ -40,77 +37,76 @@ public class ProductService {
 		Optional<Products> product = prodRepo.findById(requestModel.getProductId());
 		boolean valid = validateInput(requestModel);
 		boolean duplicateFields = checkUniqueFields(requestModel);
-		if(valid && duplicateFields) {
-			if(product != null) {		
+		if (valid && duplicateFields) {
+			if (product != null) {
 				product.get().setProductName(requestModel.getProductName());
 				product.get().setProductDescription(requestModel.getProductDescription());
 				product.get().setProductPrice(requestModel.getProductPrice());
 
 				Optional<Categories> category = categoryRepo.findByCategoryName(requestModel.getProductCategory());
 				Optional<Brand> brand = brandRepo.findByBrandName(requestModel.getProductBrand());
-				
-				if(brand.isEmpty()) {
+
+				if (brand.isEmpty()) {
 					addBrand(requestModel.getProductBrand());
 					product.get().setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
 
-				}else {
-					if(product.get().getBrand().getBrandid() != brand.get().getBrandid()) {
+				} else {
+					if (product.get().getBrand().getBrandId() != brand.get().getBrandId()) {
 						product.get().setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
 					}
 				}
-				
-				
-				if(category.isEmpty()) {
-					addCategories(requestModel.getProductCategory());
-					product.get().setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
 
-				}else {
-					if(product.get().getCategories().getCategoryid() != category.get().getCategoryid()) {
-						product.get().setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
+				if (category.isEmpty()) {
+					addCategories(requestModel.getProductCategory());
+					product.get()
+							.setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
+
+				} else {
+					if (product.get().getCategories().getCategoryid() != category.get().getCategoryid()) {
+						product.get().setCategories(
+								categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
 					}
 				}
-				
-				
+
 				prodRepo.save(product.get());
 				ProductEditResponseModel response = mapper.map(requestModel, ProductEditResponseModel.class);
 				response.setBrandName(requestModel.getProductBrand());
 				response.setCategoryname(requestModel.getProductCategory());
 
 				return response;
-			}else {
+			} else {
 				return null;
 			}
-		}else {
+		} else {
 			return null;
 		}
 
 	}
-	
+
 	public ProductAddResponseModel addProd(ProductAddRequestModel requestModel) {
 		ModelMapper mapper = new ModelMapper();
 		Products product = new Products();
 		boolean valid = validateInput(requestModel);
 		boolean duplicateFields = checkUniqueFields(requestModel);
-		if(valid && duplicateFields) {
+		if (valid && duplicateFields) {
 			product.setProductName(requestModel.getProductName());
 			product.setProductDescription(requestModel.getProductDescription());
 			product.setProductPrice(requestModel.getProductPrice());
-			
+
 			Optional<Categories> category = categoryRepo.findByCategoryName(requestModel.getProductCategory());
 			Optional<Brand> brand = brandRepo.findByBrandName(requestModel.getProductBrand());
 
-			
-			if(category.isEmpty()) {
+			if (category.isEmpty()) {
 				addCategories(requestModel.getProductCategory());
 				product.setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
-			}else {
+			} else {
 				product.setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
 			}
-			
-			if(brand.isEmpty()) {
+
+			if (brand.isEmpty()) {
 				addBrand(requestModel.getProductBrand());
 				product.setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
-			}else {
+			} else {
 				product.setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
 			}
 
@@ -118,16 +114,16 @@ public class ProductService {
 			ProductAddResponseModel response = mapper.map(requestModel, ProductAddResponseModel.class);
 
 			return response;
-		}else {
+		} else {
 			return null;
 		}
 
 	}
-	
+
 	private void addCategories(String productCategory) {
 		Categories category = new Categories();
 		category.setCategoryName(productCategory);
-		categoryRepo.save(category);		
+		categoryRepo.save(category);
 	}
 
 	private void addBrand(String productBrand) {
@@ -140,94 +136,93 @@ public class ProductService {
 		boolean uniqueName = checkUniqueName(requestModel.getProductName(), requestModel.getProductId());
 		boolean uniqueDesc = checkUniqueName(requestModel.getProductDescription(), requestModel.getProductId());
 
-		if(uniqueName && uniqueDesc) {
+		if (uniqueName && uniqueDesc) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	public boolean checkUniqueFields(ProductAddRequestModel requestModel) {
 		boolean uniqueName = checkUniqueName(requestModel.getProductName(), 0);
 		boolean uniqueDesc = checkUniqueName(requestModel.getProductDescription(), 0);
 
-		if(uniqueName && uniqueDesc) {
+		if (uniqueName && uniqueDesc) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
-	
-	
+
 	public boolean checkUniqueName(String name, long id) {
 		Optional<Products> prodCheck = prodRepo.findByProductName(name);
-		if(prodCheck.isEmpty()) {
+		if (prodCheck.isEmpty()) {
 			return true;
-		}else {
-			if(prodCheck.get().getProductId() == id) {
+		} else {
+			if (prodCheck.get().getProductId() == id) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
 		}
 	}
-	
+
 	public boolean checkUniqueDesc(String desc, long id) {
 		Optional<Products> prodCheck = prodRepo.findByProductName(desc);
-		if(prodCheck.isEmpty()) {
+		if (prodCheck.isEmpty()) {
 			return true;
-		}else {
-			if(prodCheck.get().getProductId() == id) {
+		} else {
+			if (prodCheck.get().getProductId() == id) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
 		}
 	}
-	
+
 	public boolean validateInput(ProductEditRequestModel requestModel) {
 		boolean validInput = true;
-		if(requestModel.getProductName().length() > 50) {
+		if (requestModel.getProductName().length() > 50) {
 			validInput = false;
 		}
-		if(requestModel.getProductDescription().length() > 250) {
+		if (requestModel.getProductDescription().length() > 250) {
 			validInput = false;
 		}
-		if(requestModel.getProductPrice() == null) {
+		if (requestModel.getProductPrice() == null) {
 			validInput = false;
 		}
 
 		return validInput;
-		
+
 	}
-	
+
 	public boolean validateInput(ProductAddRequestModel requestModel) {
 		boolean validInput = true;
-		if(requestModel.getProductName().length() > 50) {
+		if (requestModel.getProductName().length() > 50) {
 			validInput = false;
 		}
-		if(requestModel.getProductDescription().length() > 250) {
+		if (requestModel.getProductDescription().length() > 250) {
 			validInput = false;
 		}
-		if(requestModel.getProductPrice() == null) {
+		if (requestModel.getProductPrice() == null) {
 			validInput = false;
 		}
 
 		return validInput;
-		
+
 	}
 
-	//Need to check wheather anyone has this product in their order_items table
+	// Need to check wheather anyone has this product in their order_items table
 	public boolean delProd(long id) {
 		Optional<Products> product = prodRepo.findById(id);
-		if(product.isPresent()) {
+		if (product.isPresent()) {
 			product.get().setBrand(null);
 			product.get().setCategories(null);
 			prodRepo.save(product.get());
 			prodRepo.deleteById(id);
 			return true;
-		}else {
-		return false;
+		} else {
+			return false;
 		}
 
 	}
@@ -235,11 +230,11 @@ public class ProductService {
 	public ProductGetResponseModel getProdById(long id) {
 		ModelMapper mapper = new ModelMapper();
 		Optional<Products> product = prodRepo.findById(id);
-		if(product.isPresent()) {
+		if (product.isPresent()) {
 			ProductGetResponseModel response = mapper.map(product.get(), ProductGetResponseModel.class);
 				response.setProductBrand(product.get().getBrand().getBrandName());
 				response.setProductCategory(product.get().getCategories().getCategoryName());
-				return response;			
+				return response;
 		}else {
 		return null;
 		}
@@ -248,10 +243,10 @@ public class ProductService {
 	public List<ProductGetResponseModel> getAllProd() {
 		ModelMapper mapper = new ModelMapper();
 		List<ProductGetResponseModel> responseList = new ArrayList<>();
-		
+
 		List<Products> list = prodRepo.findAll();
-		
-		if(!list.isEmpty()) {
+
+		if (!list.isEmpty()) {
 			for (Products product : list) {
 				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
 				modelObject.setProductBrand(product.getBrand().getBrandName());
@@ -259,11 +254,10 @@ public class ProductService {
 				responseList.add(modelObject);
 			}
 			return responseList;
-		}else {
+		} else {
 			return null;
 		}
-		
+
 	}
-	
-	
+
 }

@@ -1,44 +1,73 @@
-import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
+import { Route } from '@angular/compiler/src/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/register.service';
+import { User } from 'src/app/services/registerUser';
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
-  email: string = '';
-  title:string='';
-  firstName:string='';
-  lastName:string='';
-  dob:string='';
-  contactNo:string='';
-  password: string = '';
-  address:string='';
-  constructor() {}
-  ngOnInit(): void {}
+export class RegisterComponent  {
+  
+  date=new Date();
+  todaysDate= formatDate(this.date, 'yyyy-MM-dd', 'en-US');
+  
+  msg='';
+  
+  user:any=[];
 
+  
+  constructor(private _service:UserService, private router:Router) {
+    this._service = _service;
+   }
 
-  onSubmit(form: NgForm) {
-    // code to execute after form is submitted
-    console.log('Submitted');
-    console.log(form);
+  ngOnInit(): void {
+  }
 
-    this.email = form.value.email;
-    this.title=form.value.title;
-    this.firstName = form.value.firstName;
-    this.lastName = form.value.lastName;
-    this.dob = form.value.dob;
-    this.contactNo=form.value.contactNo;
-    this.password = form.value.password;
-    this.address=form.value.address;
+  registerUser(form: NgForm){
+    const newUser: User={
+      email: form.value.email,
+      title: form.value.title,
+      firstName: form.value.firstname,
+      lastName: form.value.lastname,
+      dob: form.value.dob,
+      phone_number: form.value.contactNo,
+      password: form.value.password,
+      address: form.value.address,
+    
+    };
+    let email=form.value.email;
 
-    console.log(this.email);
-    // console.log(this.title);
-    console.log(this.firstName);
-    console.log(this.lastName);
-    console.log(this.dob);
-    console.log(this.contactNo);
-    console.log(this.password);
-    console.log(this.address);
-  }}
+    form.reset();
+
+   this._service.registerUser(newUser).subscribe(
+    data=>{
+      console.log("response received");
+      this.msg="Registration successful";
+this.router.navigate(['/login']);
+
+    }, 
+    
+    error=>{
+       console.log("exception occurs");
+       this.msg=email+" Email id already used";
+       
+       //this.msg=error.error;
+       
+       
+     }
+     
+   )
+   
+  }
+
+  
+
+   
+  }
+
