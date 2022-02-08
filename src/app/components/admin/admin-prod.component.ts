@@ -9,22 +9,24 @@ import { ProductDetails } from 'src/app/services/productDetails';
 })
 export class AdminComponent implements OnInit {
 
+  //Stores all the products
   products!: ProductDetails[];
 
 
   constructor(private prodService: ProductService) { }
 
+  //Gets products from databases and stores it in products
   ngOnInit(): void {
     this.prodService.findAllProducts().subscribe(data => {
       this.products = data;
-      console.log(data)
     });
   }
 
+  //Deletes a specefic product
   delProd(id: any){
     this.prodService.delProd(id).subscribe(data => {
-      console.log(data)
     });
+    this.ngOnInit();
   }
 
 }

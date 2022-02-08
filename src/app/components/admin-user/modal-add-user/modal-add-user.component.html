@@ -4,6 +4,7 @@
     </div>
     <div class="modal-body">
         <form #addUserForm="ngForm">
+            <!-- User First Name -->
             <div class="form-group">
                 <label for="userfName">User First Name</label>
                 <div class="input-group">
@@ -13,6 +14,7 @@
                     First Name is required
                 </div>
             </div>
+            <!-- User Last Name -->
             <div class="form-group">
                 <label for="userlName">User Last Name</label>
                 <div class="input-group">
@@ -22,6 +24,7 @@
                     Last Name is required
                 </div>
             </div>
+            <!-- User Email -->
             <div class="form-group">
                 <label for="userEmail">User Email</label>
                 <div class="input-group">
@@ -31,6 +34,7 @@
                     Email is required
                 </div>
             </div>
+            <!-- User Password -->
             <div class="form-group">
                 <label for="userPass">User password</label>
                 <div class="input-group">
@@ -43,6 +47,7 @@
                     <span class="help-block" *ngIf="(!password.valid && password.dirty)">Enter Strong Password(Must contain one upper case, lower case, special char(!@#$%&*) & number) </span>
                 </div>
             </div>
+            <!-- User Confirm Password -->
             <div class="form-group">
                 <label for="userConfirmPass">Confirm Password</label>
                 <input type="password" class="form-control" pattern="{{password.value}}" maxlength="10" [(ngModel)]='confirmPass' [ngModelOptions]="{standalone: true}" required name="conPassword" #conPassword="ngModel">
@@ -53,6 +58,7 @@
                     Please Enter Confirm Password
                 </div>
             </div>
+            <!-- User Title -->
             <div class="form-group mt-2">
                 <label for="userTitle">User Title</label>
                 <select class="form-control" id="title" required name="title" [(ngModel)]='userModify.title' #title="ngModel">
@@ -62,12 +68,14 @@
             <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
                 Title is required
             </div>
+            <!-- User DOB -->
             <div class="form-group">
                 <label for="userDOB">User DOB</label>
                 <div class="input-group">
                     <input id="userDOB" class="form-control" disabled=true type="date" [(ngModel)]='userModify.dateOfBirth' [ngModelOptions]="{standalone: true}" name="dob" #dob="ngModel">
                 </div>
             </div>
+            <!-- User Phone Number -->
             <div class="form-group">
                 <label for="userPhone">User phone number</label>
                 <div class="input-group">
@@ -77,6 +85,7 @@
                     Phone Number is required
                 </div>
             </div>
+            <!-- User Address -->
             <div class="form-group">
                 <label for="userAddress">User Address</label>
                 <div class="input-group">

@@ -10,29 +10,25 @@ import { ProductModify } from 'src/app/services/productModify';
   styleUrls: ['./modal-prod.component.css']
 })
 export class ModalComponent implements OnInit {
+  //Gets Product from main admin-prod component
   @Input()
   item!: { productId: Number; productName: String; productDescription: String; productPrice: Number; productBrand: String, productCategory: String};
 
-
+  //Will be filled with erros of user input
   errors: Array<string> = [];
   valid = true
 
-  newProductName: String = "";
-  newProductDesc: String = "";
-  newProductPrice: Number = 0;
-  newProdutBrand: String = "";
-  newProductCategory: String = "";
-
-
+  //Stores product details
   productDetails: ProductDetails = {
     productId: 0,
-    productName: this.newProductName,
-    productDescription: this.newProductDesc,
-    productPrice: this.newProductPrice,
-    productBrand: this.newProdutBrand,
-    productCategory: this.newProductCategory,
+    productName: "",
+    productDescription: "",
+    productPrice: 0,
+    productBrand: "",
+    productCategory: "",
   };
 
+  //Checks if form is usbmitted
   submitted = false;
 
 
@@ -40,6 +36,7 @@ export class ModalComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private prodService: ProductService) {
   }
+  //Sets the productid to the one given by admin-prod componenet
   ngOnInit(): void {
     this.productDetails.productId = this.item.productId;
 
@@ -47,6 +44,7 @@ export class ModalComponent implements OnInit {
 
   onSubmit(modal: { close: () => void; }) {
     this.submitted = true;
+    //Chekcs if user inpu tis valid
     this.validate();
     if(this.valid){
       this.prodService.editProd(this.productDetails).subscribe(data => {
@@ -55,11 +53,13 @@ export class ModalComponent implements OnInit {
       modal.close();
       this.reset();
     }else{
+      //Alerts users to their erroros in input
       alert(this.errors)
       this.errors = [];
     }
   }
 
+  //checks user input
   validate() {
     if(this.productDetails.productName.length < 3){
       this.errors.push("Product name must be greater than 3 characters");
@@ -95,6 +95,7 @@ export class ModalComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
 
+    //Sets the product to the product given by admin-prod component
     this.productDetails.productName = this.item.productName;
     this.productDetails.productDescription = this.item.productDescription;
     this.productDetails.productPrice = this.item.productPrice;
@@ -120,19 +121,14 @@ export class ModalComponent implements OnInit {
   }
 
   reset() {
-    this.newProductName = "";
-    this.newProductDesc = "";
-    this.newProductPrice = 0;
-    this.newProdutBrand = "";
-    this.newProductCategory = "";
-
+    //resets product to defaults
     this.productDetails = {
-      productId: this.item.productId,
-      productName: this.newProductName,
-      productDescription: this.newProductDesc,
-      productPrice: this.newProductPrice,
-      productBrand: this.newProdutBrand,
-      productCategory: this.newProductCategory
+      productId: 0,
+      productName: "",
+      productDescription: "",
+      productPrice: 0,
+      productBrand: "",
+      productCategory: "",
     };
 
     this.submitted = false;

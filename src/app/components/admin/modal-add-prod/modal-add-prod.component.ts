@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from 'src/app/services/product.service';
-import { ProductDetails } from 'src/app/services/productDetails';
 import { ProductModify } from 'src/app/services/productModify';
 
 @Component({
@@ -11,23 +10,20 @@ import { ProductModify } from 'src/app/services/productModify';
 })
 export class ModalAddProdComponent implements OnInit {
 
+  //Error arrays. Will be filled with error messages
   errors: Array<string> = [];
   valid = true
 
-  prodName:String = "";
-  prodDescription:String = "";
-  prodPrice:Number = 0;
-  prodBrand: String = "";
-  prodCategory: String = "";
-
+  //Will store all product details for adding a product
   productModify: ProductModify = {
-    productName: this.prodName,
-    productDescription: this.prodDescription,
-    productPrice: this.prodPrice,
-    productBrand: this.prodBrand,
-    productCategory: this.prodCategory
+    productName: "",
+    productDescription: "",
+    productPrice: 0,
+    productBrand: "",
+    productCategory: ""
   };
 
+  //Chekcs if form ahs been submitted
   submitted = false;
 
 
@@ -39,17 +35,20 @@ export class ModalAddProdComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
   onSubmit(modal: { close: () => void; }) {
     this.submitted = true;
+    //Cheks if input was valid
     this.validate();
     if(this.valid){
       this.prodService.addProd(this.productModify).subscribe(data => {
         console.log(data);
       });
-      this.ngOnInit();
       modal.close();
+      //Resets modal to default fields
       this.reset();
     }else{
+      //Informs user of errors made
       alert(this.errors)
       this.errors = [];
     }
@@ -108,19 +107,12 @@ export class ModalAddProdComponent implements OnInit {
   }
 
   reset() {
-    this.prodName = "";
-    this.prodDescription = "";
-    this.prodPrice = 0.0;
-    this.prodBrand = "";
-    this.prodCategory = "";
-
-
     this.productModify = {
-      productName: this.prodName,
-      productDescription: this.prodDescription,
-      productPrice: this.prodPrice,
-      productBrand: this.prodBrand,
-      productCategory: this.prodCategory
+      productName: "",
+      productDescription: "",
+      productPrice: 0,
+      productBrand: "",
+      productCategory: ""
     };
 
     this.submitted = false;
