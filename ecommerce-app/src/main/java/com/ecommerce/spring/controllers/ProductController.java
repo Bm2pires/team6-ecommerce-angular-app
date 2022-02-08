@@ -109,8 +109,8 @@ public class ProductController {
 	// W.I.P.
 	// get all products by brand name and category id
 	@GetMapping(value = "/getAllProd/brand/{brandName}/category/{categoryName}", produces = "application/json")
-	public ResponseEntity<List<ProductGetResponseModel>> getProdByBrandNameAndCategory(
-			@PathVariable("brandName") String brandName, @PathVariable("categoryName") String categoryName) {
+	public ResponseEntity<List<ProductGetResponseModel>> getProdByBrandNameAndCategory(@PathVariable String brandName,
+			@PathVariable String categoryName) {
 		List<ProductGetResponseModel> response = prodService.getProdByBrandNameAndCategory(brandName, categoryName);
 		if (!response.isEmpty()) {
 			return new ResponseEntity<List<ProductGetResponseModel>>(response, HttpStatus.OK);

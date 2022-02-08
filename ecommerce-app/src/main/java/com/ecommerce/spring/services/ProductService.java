@@ -306,7 +306,7 @@ public class ProductService {
 		ModelMapper mapper = new ModelMapper();
 		List<ProductGetResponseModel> responseList = new ArrayList<>();
 
-		List<Products> list = prodRepo.findByBrandAndCategories(brandName, categoryName).get();
+		List<Products> list = prodRepo.findByBrandBrandNameAndCategoriesCategoryName(brandName, categoryName).get();
 
 		if (!list.isEmpty()) {
 			for (Products product : list) {
