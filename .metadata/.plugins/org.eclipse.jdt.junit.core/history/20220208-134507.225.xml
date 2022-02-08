@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="EcommerceAppApplicationTests" project="ecommerce-app" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.ecommerce.spring.EcommerceAppApplicationTests" time="0.189" displayname="EcommerceAppApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.ecommerce.spring.EcommerceAppApplicationTests]">
-    <testcase name="contextLoads" classname="com.ecommerce.spring.EcommerceAppApplicationTests" time="0.189" displayname="contextLoads()" uniqueid="[engine:junit-jupiter]/[class:com.ecommerce.spring.EcommerceAppApplicationTests]/[method:contextLoads()]"/>
-  </testsuite>
-</testrun>
