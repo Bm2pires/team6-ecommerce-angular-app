@@ -70,7 +70,7 @@ export class ProductsComponent implements OnInit {
           (data) => {
             this.products = data;
           },
-          // return the error message
+          // if there is an error then set products to null and set error message flag to true
           () => {
             this.products = null;
             this.error = true;
