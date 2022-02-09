@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Brand } from 'src/app/services/interfaces/brand';
 import { Categories } from 'src/app/services/interfaces/categories';
 import { ProductDetails } from 'src/app/services/interfaces/productDetails';
-import { Sort } from 'src/app/services/interfaces/sort';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -15,7 +14,6 @@ export class ProductsComponent implements OnInit {
   products!: ProductDetails[];
   brands!: Brand[];
   categories!: Categories[];
-  sort!: Sort;
   error: boolean;
 
   constructor(productService: ProductService) {
@@ -26,8 +24,78 @@ export class ProductsComponent implements OnInit {
     this.listBrands();
     this.listCategories();
     this.listProducts();
+    this.products.sort;
     // default sort on page initialization
-    this.sort = { fieldName: 'productPrice', direction: 'ASC' };
+  }
+
+  // sort function
+  sortProductsByPriceAsc(a: ProductDetails, b: ProductDetails) {
+    if (a.productPrice < b.productPrice) {
+      return -1;
+    }
+    if (a.productPrice > b.productPrice) {
+      return 1;
+    }
+    return 0;
+  }
+
+  // sort function
+  sortProductsByPriceDesc(a: ProductDetails, b: ProductDetails) {
+    if (a.productPrice < b.productPrice) {
+      return 1;
+    }
+    if (a.productPrice > b.productPrice) {
+      return -1;
+    }
+    return 0;
+  }
+
+  // sort function
+  sortProductsByBrandAtoZ(a: ProductDetails, b: ProductDetails) {
+    if (a.brand < b.brand) {
+      return -1;
+    }
+    if (a.brand > b.brand) {
+      return 1;
+    }
+    return 0;
+  }
+
+  // sort function
+  sortProductsByBrandZtoA(a: ProductDetails, b: ProductDetails) {
+    if (a.productPrice < b.productPrice) {
+      return 1;
+    }
+    if (a.productPrice > b.productPrice) {
+      return -1;
+    }
+    return 0;
+  }
+
+  // event handler for sort select on change
+  onChangeSort() {
+    let optionSelectElement = <HTMLSelectElement>(
+      document.getElementById('sort-select')
+    );
+    let optionValue =
+      optionSelectElement.options[optionSelectElement.selectedIndex].value;
+
+    switch (optionValue) {
+      case 'PriceAscending':
+        this.products.sort(this.sortProductsByPriceAsc);
+        break;
+      case 'PriceDescending':
+        this.products.sort(this.sortProductsByPriceDesc);
+        break;
+      case 'BrandAZ':
+        this.products.sort(this.sortProductsByBrandAtoZ);
+        break;
+      case 'BrandZA':
+        this.products.sort(this.sortProductsByBrandZtoA);
+        break;
+      default:
+        break;
+    }
   }
 
   listProducts() {

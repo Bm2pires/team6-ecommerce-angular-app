@@ -3,12 +3,12 @@
     <!-- products container -->
     <div class="container">
         <div class="d-flex justify-content-end mt-3 mb-3">
-            <label for="sort" class="">Sort By:</label><br />
-            <select (change)="onChange()" name="sort" id="sort">
-                <option [value]="">Price(low to high)</option>
-                <option [value]="priceDescending">Price(high to low)</option>
-                <option [value]="BrandA">Brand(A-Z)</option>
-                <option [value]="BrandZ">Brand(Z-A)</option>
+            <label for="sort" class="sort-select">Sort By:</label><br />
+            <select (change)="onChangeSort()" #sort name="sort-select" id="sort-select">
+                <option value="PriceAscending">Price(low to high)</option>
+                <option value="PriceDescending">Price(high to low)</option>
+                <option value="BrandAZ">Brand(A-Z)</option>
+                <option value="BrandZA">Brand(Z-A)</option>
             </select>
         </div>
         <!-- End of Sort by element -->
