@@ -67,10 +67,10 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" [disabled]="!addProd.form.valid" (click)="onSubmit(modal)">Add</button>
-        <button type="button" aria-label="Close" class="btn btn-outline-dark" (click)="onClose(modal)">Close</button>
+        <button type="button" class="btn btn-success" [disabled]="!addProd.form.valid" (click)="onSubmit(modal)">Add</button>
+        <button type="button" aria-label="Close" class="btn btn-success" (click)="onClose(modal)">Close</button>
     </div>
 
 </ng-template>
 
-<button class="btn btn-primary" (click)="open(content)">Add Product</button>
+<button class="btn btn-success" (click)="open(content)">Add Product</button>

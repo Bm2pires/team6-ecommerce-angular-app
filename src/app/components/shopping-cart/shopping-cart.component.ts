@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductDetails } from 'src/app/services/interfaces/productDetails';
+import { ProductOrders } from 'src/app/services/interfaces/productOrders';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -8,9 +9,9 @@ import { ProductDetails } from 'src/app/services/interfaces/productDetails';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-  products = this.cartService.getItems();
+  products  = this.cartService.getItems();
   empty = true
-  price = this.cartService.totalPrice;
+  price : number;
 
 
 
@@ -20,15 +21,23 @@ export class ShoppingCartComponent implements OnInit {
     }else{
       this.empty = false;
     }
-    console.log(this.products)
   }
 
   ngOnInit(): void {
-
+    this.products = this.cartService.getItems();
+    this.price = this.cartService.totalPrice;
   }
 
   removeFromCart(id:number){
     this.cartService.removeProd(id);
+
+    setTimeout(()=>{
+      this.ngOnInit();
+    }, 300)
+
+    this.empty = this.cartService.checkIfCartIsEmpty();
   }
+
+
 
 }

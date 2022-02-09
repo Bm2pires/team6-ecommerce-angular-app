@@ -38,6 +38,7 @@ public class UserService {
 	public UserDetailResponseModel editUser(UserDetailRequestModel requestModel) {
 		Optional<User> user = userRepository.findById(requestModel.getId());
 		boolean valid = validateInput(requestModel);
+		//Checks if the email input given is a duplicate so that it does not violate the duplicate constraint on email
 		boolean duplicateEmail = checkUniqueEmail(requestModel);
 		if(valid && duplicateEmail) {
 			if(user.isPresent()) {		
@@ -65,6 +66,7 @@ public class UserService {
 		UserAddingResponseModel userModel = new UserAddingResponseModel();
 		ModelMapper mapper = new ModelMapper();
 		boolean valid = validateInput(requestModel);
+		//Checks if the email input given is a duplicate so that it does not violate the duplicate constraint on email
 		boolean duplicateEmail = checkUniqueEmail(requestModel.getEmail());
 		if(valid && duplicateEmail) {
 			userModel.setAddress(requestModel.getAddress());
@@ -87,7 +89,7 @@ public class UserService {
 
 	}
 	
-	//AddUser
+	//AddUser check unique email
 	public boolean checkUniqueEmail(String email) {
 		Optional<User> userCheck = userRepository.findByEmail(email);
 		if(userCheck.isEmpty()) {
@@ -97,7 +99,7 @@ public class UserService {
 		}
 	}
 	
-	//EditUser
+	//EditUser check unique email
 	public boolean checkUniqueEmail(UserDetailRequestModel requestModel) {
 		Optional<User> userCheck = userRepository.findByEmail(requestModel.getEmail());
 		if(userCheck.isEmpty()) {
@@ -111,7 +113,7 @@ public class UserService {
 		}
 	}
 	
-	//editUser
+	//Edit User  
 	public boolean validateInput(UserDetailRequestModel requestModel) {
 		boolean validInput = true;
 		if(requestModel.getAddress().length() > 150) {
@@ -145,7 +147,7 @@ public class UserService {
 		
 	}
 	
-	//AddUser
+	//Add User validate input
 	public boolean validateInput(UserAddingRequestModel requestModel) {
 		boolean validInput = true;
 		if(requestModel.getAddress().length() > 150) {
@@ -182,7 +184,7 @@ public class UserService {
 	public boolean delUser(long id) {
 		Optional<User> user = userRepository.findById(id);
 		if(user.isPresent()) {
-			//Cheks if user has an orderdetails and if so checks if orderdetails has items in it
+			//Checks if user has an order details and if so checks if order details has items in it
 			if(orderDetailsService.checkIfUserHasOrderDetailsOrOrders(user.get())) {
 				//this section of code is for when order details exists and it has items in it 
 				return false;
@@ -212,7 +214,7 @@ public class UserService {
 		}
 	}
 
-	//Only gets customers not admins
+	//Only gets customers not administrators
 	public List<UserDetailResponseModel> getAllUser() {
 		ModelMapper mapper = new ModelMapper();
 		List<UserDetailResponseModel> responseList = new ArrayList<>();
@@ -232,20 +234,18 @@ public class UserService {
 		}
 	}
 
-	public UserDetailResponseModel getUserByEmail(String email) {
-		ModelMapper mapper = new ModelMapper();
-
-		// TODO Auto-generated method stub
-		Optional<User> user = userRepository.findByEmail(email);
-		UserDetailResponseModel response = mapper.map(user.get(), UserDetailResponseModel.class);
-		response.setDateOfBirth(user.get().getDob());
-		response.setPhoneNumber(user.get().getPhone_number());
-		return response;
-	}
-
-	public boolean isUserAdmin(String email) {
-		ModelMapper mapper = new ModelMapper();
-		Optional<User> user = userRepository.findByEmail(email);
-		return user.get().isAdmin();		
-	}
+//	public UserDetailResponseModel getUserByEmail(String email) {
+//		ModelMapper mapper = new ModelMapper();
+//		Optional<User> user = userRepository.findByEmail(email);
+//		UserDetailResponseModel response = mapper.map(user.get(), UserDetailResponseModel.class);
+//		response.setDateOfBirth(user.get().getDob());
+//		response.setPhoneNumber(user.get().getPhone_number());
+//		return response;
+//	}
+//
+//	public boolean isUserAdmin(String email) {
+//		ModelMapper mapper = new ModelMapper();
+//		Optional<User> user = userRepository.findByEmail(email);
+//		return user.get().isAdmin();		
+//	}
 }

@@ -85,18 +85,18 @@ public class UserController {
 		}
 	}
 	
-//	@GetMapping(value = "/getUserByEmail/{email}", produces = "application/json")
-//	public ResponseEntity<UserDetailResponseModel> getUserByEmail(@PathVariable String email) {
-//		UserDetailResponseModel user = userEditService.getUserByEmail(email.substring(7));
-//		return new ResponseEntity<UserDetailResponseModel>(user, HttpStatus.OK);
-//	}
-//	
-//	@GetMapping(value = "/isUserAdmin/{email}", produces = "application/json")
-//	public ResponseEntity<Boolean> isUserAdmin(@PathVariable String email) {
-//		boolean isAdmin = userEditService.isUserAdmin(email.substring(7));
-//		
-//		return new ResponseEntity<Boolean>(isAdmin, HttpStatus.OK);
-//	}
+	@GetMapping(value = "/getUserByEmail/{email}", produces = "application/json")
+	public ResponseEntity<UserDetailResponseModel> getUserByEmail(@PathVariable String email) {
+		UserDetailResponseModel user = userEditService.getUserByEmail(email.substring(7));
+		return new ResponseEntity<UserDetailResponseModel>(user, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/isUserAdmin/{email}", produces = "application/json")
+	public ResponseEntity<Boolean> isUserAdmin(@PathVariable String email) {
+		boolean isAdmin = userEditService.isUserAdmin(email.substring(7));
+		
+		return new ResponseEntity<Boolean>(isAdmin, HttpStatus.OK);
+	}
 	
 	//Only gets customers not admins
 	@GetMapping(value = "/getAllUsers", produces = "application/json")

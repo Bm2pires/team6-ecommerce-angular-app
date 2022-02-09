@@ -38,7 +38,9 @@ export class CartService {
   }
 
   calculatePrice() {
+    this.totalPrice = 0;
     this.products.forEach((prod)=> {
+      console.log(this.totalPrice)
       let price = prod.productPrice * prod.quantity;
       this.totalPrice = this.totalPrice + price;
     })
@@ -56,6 +58,15 @@ export class CartService {
   removeProd(id:number) {
     let index = this.products.findIndex(d => d.productId === id)
     this.products.splice(index, 1)
+    this.calculatePrice()
+  }
+
+  checkIfCartIsEmpty() {
+    if(this.products.length === 0){
+      return true;
+    }else{
+      return false;
+    }
   }
 
 }

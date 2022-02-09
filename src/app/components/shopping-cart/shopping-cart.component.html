@@ -13,14 +13,18 @@
                     <p>Quantity: {{tempProduct.quantity}}</p>
                     <h6 class="price">{{ tempProduct.productPrice | currency:'GBP'}}</h6>
                 </div>
-                <button class="btn btn-primary" (click)="removeFromCart(tempProduct.productId)">Remove from cart</button>
+                <button class="btn btn-warning" (click)="removeFromCart(tempProduct.productId)">Remove from cart</button>
             </div>
         </div>
     </div>
 </div>
-<h4 *ngIf="empty" class="text text-center rounded">You have no products in your shopping cart currently.</h4>
+<div class="container bg-light text-muted mt-3 rounded text-center p-5" *ngIf="empty">
+    <h2 class="text pt-4 pb-1">You have no products in your shopping cart currently.</h2>
+    <h2 class="text pb-4 pt-1 lead">Please navigate to the products page in order to enter products into your cart.</h2>
+    <button class="btn btn-success m-2" routerLink="/products">Products</button>
+</div>
 <hr *ngIf="!empty">
 <div *ngIf="!empty" class="bg-light p-4" style="display: flex; justify-content: center;">
-    <button class="btn btn-primary m-2" href="#">Checkout</button>
+    <button class="btn btn-success m-2" href="#">Checkout</button>
     <h5 class="pt-3">{{price | currency:'GBP'}}</h5>
 </div>

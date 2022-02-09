@@ -98,12 +98,12 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" [disabled]="!editUserForm.form.valid" (click)="onSubmit(modal)">Edit User</button>
-        <button type="button" aria-label="Close" class="btn btn-outline-dark" (click)="onClose(modal)">Close</button>
+        <button type="button" class="btn btn-success" [disabled]="!editUserForm.form.valid" (click)="onSubmit(modal)">Edit User</button>
+        <button type="button" aria-label="Close" class="btn btn-success" (click)="onClose(modal)">Close</button>
     </div>
 </ng-template>
 
-<button class="btn btn-primary" (click)="open(content)">Edit User</button>
+<button class="btn btn-success" (click)="open(content)">Edit User</button>
 
 
 <hr>

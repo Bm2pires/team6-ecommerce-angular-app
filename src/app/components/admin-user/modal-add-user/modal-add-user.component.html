@@ -101,10 +101,10 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" [disabled]="!addUserForm.form.valid" (click)="onSubmit(modal)">Add User</button>
-        <button type="button" aria-label="Close" class="btn btn-outline-dark" (click)="onClose(modal)">Close</button>
+        <button type="button" class="btn btn-success" [disabled]="!addUserForm.form.valid" (click)="onSubmit(modal)">Add User</button>
+        <button type="button" aria-label="Close" class="btn btn-success" (click)="onClose(modal)">Close</button>
     </div>
 
 </ng-template>
 
-<button class="btn btn-primary m-2" (click)="open(content)">Add User</button>
+<button class="btn btn-success m-2" (click)="open(content)">Add User</button>
