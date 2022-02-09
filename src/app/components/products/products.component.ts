@@ -29,7 +29,6 @@ export class ProductsComponent implements OnInit {
     this.listBrands();
     this.listCategories();
     this.listProducts();
-    this.products.sort(this.sortProductsByPriceAsc);
     // default sort on page initialization
   }
 
@@ -106,6 +105,7 @@ export class ProductsComponent implements OnInit {
   listProducts() {
     this.productService.findAllProducts().subscribe((data) => {
       this.products = data;
+      this.products.sort(this.sortProductsByPriceAsc);
     });
   }
 

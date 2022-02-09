@@ -40,9 +40,11 @@
 
             <!-- Filter side bar on left -->
             <!-- Error message -->
-            <span class="help-block text-danger" *ngIf="error"> No products found with Brand "{{ brand.value }}" and
-                Category "{{ category.value}}"
-            </span>
+            <div *ngIf="error" class="col">
+                <span class="help-block text-danger"><strong>No products found with Brand "{{ brand.value }}" and
+                        Category "{{ category.value}}"</strong>
+                </span>
+            </div>
             <div *ngFor="let tempProduct of products" class="col-md-3 mb-3">
                 <div class="card">
                     <a href="#">
