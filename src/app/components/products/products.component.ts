@@ -45,7 +45,8 @@ export class ProductsComponent implements OnInit {
   }
 
   // detects changes in select boxes
-  onChange(event) {
+  onChange() {
+    // reset error message to false
     this.error = false;
 
     // get value from brand select element
@@ -76,21 +77,21 @@ export class ProductsComponent implements OnInit {
           }
         );
       // else if brand is selected and category is blank
-    } else if (event.target.value != '' && categoryValue == '') {
+    } else if (brandValue != '' && categoryValue == '') {
       this.productService
-        .getAllProductsByBrand(event.target.value)
+        .getAllProductsByBrand(brandValue)
         .subscribe((data) => {
           this.products = data;
         });
       // else if category is selected and brand is blank then
-    } else if (event.target.value != '' && brandValue == '') {
+    } else if (categoryValue != '' && brandValue == '') {
       this.productService
-        .getAllProductsByCategory(event.target.value)
+        .getAllProductsByCategory(categoryValue)
         .subscribe((data) => {
           this.products = data;
         });
       // otherwise reset
-    } else {
+    } else if (brandValue == '' && categoryValue == '') {
       this.productService.findAllProducts().subscribe((data) => {
         this.products = data;
       });

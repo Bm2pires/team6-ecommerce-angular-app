@@ -20,14 +20,14 @@
                 <!-- brand select -->
                 <label for="brand-select">Brand: </label>
 
-                <select (change)="onChange($event)" #brand name="brands" id="brand-select">
+                <select (change)="onChange()" #brand name="brands" id="brand-select">
                     <option value="">Please choose an option</option>
                     <option *ngFor="let brand of brands" [value]="brand.brandName">{{ brand.brandName }}</option>
                 </select>
                 <br />
                 <label for="category-select">Category: </label>
 
-                <select (change)="onChange($event)" #category name="categories" id="category-select">
+                <select (change)="onChange()" #category name="categories" id="category-select">
                     <option value="">Please choose an option</option>
                     <option *ngFor="let category of categories" [value]="category.categoryName">{{
                         category.categoryName }}
