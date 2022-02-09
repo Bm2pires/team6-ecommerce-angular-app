@@ -72,7 +72,10 @@
             <div class="form-group">
                 <label for="userDOB">User DOB</label>
                 <div class="input-group">
-                    <input id="userDOB" class="form-control" disabled=true type="date" [(ngModel)]='userModify.dateOfBirth' [ngModelOptions]="{standalone: true}" name="dob" #dob="ngModel">
+                    <input id="userDOB" class="form-control" type="date" [(ngModel)]='userModify.dateOfBirth' [ngModelOptions]="{standalone: true}" name="dob" #dob="ngModel">
+                </div>
+                <div *ngIf="dob.invalid && (dob.dirty || dob.touched)" class="alert alert-danger">
+                    DOB is required
                 </div>
             </div>
             <!-- User Phone Number -->

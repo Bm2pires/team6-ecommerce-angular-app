@@ -42,6 +42,6 @@ export class UserService {
 
   delUser(userId: Number): Observable<any> {
     const identifier = '/:id=' + userId;
-    return this.http.delete<any>(this.baseUrl + 'delUser' + identifier);
+    return this.http.delete<any>(this.baseUrl + 'delUser' + identifier, {observe: 'response'});
   }
 }

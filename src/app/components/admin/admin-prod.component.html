@@ -1,3 +1,6 @@
+<div class="container bg-info mt-4 rounded" *ngIf="notice">
+    <p class="p-2 text-light">{{notice}}</p>
+</div>
 <!-- Presents all products in a card like form -->
 <div class="card-deck m-5" style="display: inline-block" *ngFor="let prod of products">
     <div class="card" style="width: 18rem;">
@@ -8,10 +11,10 @@
             <p class="card-text">Product Price: {{prod.productPrice}}</p>
             <p class="card-text">Product Brand: {{prod.brand}}</p>
             <p class="card-text">Product Category: {{prod.category}}</p>
-            <app-modal [item]="prod"></app-modal>
+            <app-modal [item]="prod" (childEvent)="relaod($event)"></app-modal>
             <button type="button" class="btn btn-warning" (click)="delProd(prod.productId)">Delete</button>
         </div>
     </div>
 </div>
 <hr>
-<app-modal-add-prod></app-modal-add-prod>
+<app-modal-add-prod (childEvent)="relaod($event)"></app-modal-add-prod>

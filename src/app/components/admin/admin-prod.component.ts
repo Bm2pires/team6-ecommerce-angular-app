@@ -9,6 +9,7 @@ import { ProductDetails } from 'src/app/services/interfaces/productDetails';
 })
 export class AdminComponent implements OnInit {
 
+  notice: String = "";
 
   //Stores all the products
   products!: ProductDetails[];
@@ -25,10 +26,24 @@ export class AdminComponent implements OnInit {
   //Deletes a specefic product
   delProd(id: any){
     this.prodService.delProd(id).subscribe(data => {
-    });
-    this.ngOnInit();
-    this.ngOnInit();
+    }, err => {
+      this.notice = "Deletion Succesfull"
 
+    });
+
+    setTimeout(()=>{
+      this.ngOnInit();
+      this.notice = "";
+    }, 1500)
+
+  }
+
+  relaod(message: String){
+    this.notice = message;
+    setTimeout(()=>{
+      this.ngOnInit();
+      this.notice = "";
+    }, 1500)
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductDetails } from 'src/app/services/interfaces/productDetails';
@@ -13,6 +13,11 @@ export class ModalComponent implements OnInit {
   //Gets Product from main admin-prod component
   @Input()
   item!: { productId: number; productName: string; productDescription: string; productPrice: number; brand: string, category: string, imageUrl:string};
+
+  @Output() childEvent = new EventEmitter();
+  relaod(message){
+    this.childEvent.emit(message);
+  }
 
   //Will be filled with erros of user input
   errors: Array<string> = [];
@@ -49,6 +54,7 @@ export class ModalComponent implements OnInit {
       this.prodService.editProd(this.productDetails).subscribe((data) => {
         console.log(data);
       });
+      this.relaod("Product has been edited")
       modal.close();
       this.reset();
     }else{
@@ -74,8 +80,8 @@ export class ModalComponent implements OnInit {
       this.errors.push('Product price must not be 0.00');
     }
 
-    if(this.productDetails.brand.length < 3){
-      this.errors.push("Product brand must be greater than 3 characters");
+    if(this.productDetails.brand.length < 2){
+      this.errors.push("Product brand must be greater than 2 characters");
     }
 
     if(this.productDetails.category.length < 2){

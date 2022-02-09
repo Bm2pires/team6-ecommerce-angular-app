@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { UserDetails } from 'src/app/services/interfaces/userDetails';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-user',
@@ -9,7 +10,7 @@ import { UserDetails } from 'src/app/services/interfaces/userDetails';
 })
 export class AdminUserComponent implements OnInit {
   users!: UserDetails[];
-  deletionNotice: String = "";
+  notice: String = "";
 
   constructor(private userService: UserService) {}
 
@@ -22,14 +23,28 @@ export class AdminUserComponent implements OnInit {
 
   //Deletes user
   delUser(id: any) {
-    this.userService.delUser(id).subscribe((data) => {
-      this.deletionNotice = "Deletion Succesfull"
-    }, (error) => {
-      this.deletionNotice = "Deletion Unsuccesfull. User may have an active orders which is preventing deletion"
-    });
+    this.userService.delUser(id).subscribe(response => {
+
+    }, err => {
+      //handle errors here
+      if(err.status != 200){
+        this.notice = "Deletion Unsuccesfull. User may have an active orders which is preventing deletion"
+      }else{
+        this.notice = "Deletion Succesfull"
+      }
+  });
+
     setTimeout(()=>{
       this.ngOnInit();
-      this.deletionNotice = "";
+      this.notice = "";
+    }, 1500)
+  }
+
+  relaod(message: String){
+    this.notice = message;
+    setTimeout(()=>{
+      this.ngOnInit();
+      this.notice = "";
     }, 1500)
   }
 }

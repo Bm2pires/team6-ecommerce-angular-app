@@ -9,7 +9,10 @@ import { ProductModify } from 'src/app/services/interfaces/productModify';
   styleUrls: ['./modal-add-prod.component.css'],
 })
 export class ModalAddProdComponent implements OnInit {
-
+  @Output() childEvent = new EventEmitter();
+  relaod(message){
+    this.childEvent.emit(message);
+  }
 
 
   //Error arrays. Will be filled with error messages
@@ -47,7 +50,7 @@ export class ModalAddProdComponent implements OnInit {
     if (this.valid) {
       this.prodService.addProd(this.productModify).subscribe((data) => {
       });
-
+      this.relaod("Product has been added")
       modal.close();
       //Resets modal to default fields
       this.reset();
@@ -73,8 +76,8 @@ export class ModalAddProdComponent implements OnInit {
       this.errors.push('Product price must not be 0.00');
     }
 
-    if(this.productModify.productBrand.length < 3){
-      this.errors.push("Product name must be greater than 3 characters");
+    if(this.productModify.productBrand.length < 2){
+      this.errors.push("Product name must be greater than 2 characters");
     }
 
     if(this.productModify.productCategory.length < 2){

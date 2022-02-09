@@ -58,7 +58,7 @@
             <div class="form-group">
                 <label for="prodCategory">Product Category</label>
                 <div class="input-group">
-                    <input id="prodCategory" maxLength="30" class="form-control" placeholder={{item.category}} [(ngModel)]='productDetails.category' [ngModelOptions]="{standalone: true}" required name="prodCategory" #prodCategory="ngModel">
+                    <input id="prodCategory" maxLength="30" class="form-control" placeholder={{item.brand}} [(ngModel)]='productDetails.category' [ngModelOptions]="{standalone: true}" required name="prodCategory" #prodCategory="ngModel">
                 </div>
                 <div *ngIf="prodCategory.invalid && (prodCategory.dirty || prodCategory.touched)" class="alert alert-danger">
                     Product Category is required
