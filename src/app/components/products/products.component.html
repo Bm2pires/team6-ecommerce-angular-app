@@ -33,7 +33,11 @@
                         category.categoryName }}
                     </option>
                 </select>
+                <div class="container bg-success mt-4 rounded" [hidden]="prodAdded">
+                    <p class="p-2 text-light">{{deviceName}} has been added to your Shopping Cart.</p>
+                </div>
             </div>
+
             <!-- Filter side bar on left -->
             <!-- Error message -->
             <div *ngIf="error" class="col">
@@ -52,7 +56,7 @@
                         <p>Brand: {{ tempProduct.brand }}</p>
                         <p>Category: {{ tempProduct.category }}</p>
                         <h6 class="price">{{ tempProduct.productPrice | currency:'GBP'}}</h6>
-                        <a href="#" class="btn btn-primary">Add to cart</a>
+                        <button class="btn btn-primary" (click)="addToCart(tempProduct.productId)">Add to cart</button>
                     </div>
                 </div>
             </div>

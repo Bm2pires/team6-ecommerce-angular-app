@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
 import { UserDetails } from 'src/app/services/interfaces/userDetails';
@@ -13,6 +13,11 @@ export class ModalUserComponent implements OnInit {
   //Gets user from main admin-user component
   @Input()
   itemUser!: {id:number, firstName:string, lastName:string, email:string, password:string, title:string, dateOfBirth:string|null, phoneNumber:string, address:string};
+
+  @Output() childEvent = new EventEmitter();
+  relaod(message){
+    this.childEvent.emit(message);
+  }
 
   //Used to check if user password matches
   confirmPass:String;
@@ -55,11 +60,11 @@ export class ModalUserComponent implements OnInit {
       if(this.valid){
         this.userService.edituser(this.newUserDetails).subscribe(data => {
         });
-
+      this.relaod("User has been edited");
       modal.close();
       this.reset();
     } else {
-      //Will aler tuser to input errors
+      //Will alert user to input errors
       alert(this.errors);
       this.errors = [];
     }

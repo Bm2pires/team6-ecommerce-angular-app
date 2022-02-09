@@ -25,6 +25,14 @@ export class ProductService {
     return this.http.get<ProductDetails[]>(this.baseUrl + 'getAllProd');
   }
 
+  findProductById(prodId: number): Observable<ProductDetails> {
+    return this.http.get<ProductDetails>(this.baseUrl + 'getProd', {
+      params: {
+        id: prodId
+      }
+    })
+  }
+
   addProd(product: ProductModify): Observable<ProductModify> {
     return this.http.post<ProductModify>(this.baseUrl + 'addProd', product);
   }
@@ -67,3 +75,7 @@ export class ProductService {
     );
   }
 }
+function params<T>(arg0: string, params: any, arg2: { id: number; }): Observable<ProductDetails> {
+  throw new Error('Function not implemented.');
+}
+

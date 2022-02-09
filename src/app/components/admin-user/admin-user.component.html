@@ -1,4 +1,7 @@
 <!-- Presents user in a card-like format -->
+<div class="container bg-info mt-4 rounded" *ngIf="notice">
+    <p class="p-2 text-light">{{notice}}</p>
+</div>
 <div class="card-deck m-5" style="display: inline-block" *ngFor="let user of users">
     <div class="card" style="width: 17rem;">
         <div class="card-body">
@@ -9,11 +12,12 @@
             <p class="card-text">User D.O.B: {{user.dateOfBirth | date:"dd/MM/yy"}}</p>
             <p class="card-text">User Phone Number: {{user.phoneNumber}}</p>
             <p class="card-text">User Address: {{user.address}}</p>
-            <app-modal-user [itemUser]="user"></app-modal-user>
+            <!-- <app-modal-user [itemUser]="user"></app-modal-user> -->
+            <app-modal-user [itemUser]="user" (childEvent)="relaod($event)"></app-modal-user>
             <button type="button" class="btn btn-warning" (click)="delUser(user.id)">Delete</button>
         </div>
     </div>
 
 </div>
 <hr>
-<app-modal-add-user></app-modal-add-user>
+<app-modal-add-user (childEvent)="relaod($event)"></app-modal-add-user>

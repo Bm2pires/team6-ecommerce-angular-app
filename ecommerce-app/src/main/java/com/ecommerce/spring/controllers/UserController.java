@@ -65,6 +65,8 @@ public class UserController {
 	@DeleteMapping(value = "/delUser/{id}", produces = "application/json")
 	public ResponseEntity<String> delUser(@PathVariable String id) {
 		long userId = Long.parseLong(id.substring(4));
+		//Postman use delUser/:id and then put the value in the path variable section that pops up
+//		long userId = Long.parseLong(id);
 		boolean userDeleted = userEditService.delUser(userId);
 		if(userDeleted) {
 			return new ResponseEntity<String>("User deleted", HttpStatus.OK);
@@ -83,18 +85,18 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping(value = "/getUserByEmail/{email}", produces = "application/json")
-	public ResponseEntity<UserDetailResponseModel> getUserByEmail(@PathVariable String email) {
-		UserDetailResponseModel user = userEditService.getUserByEmail(email.substring(7));
-		return new ResponseEntity<UserDetailResponseModel>(user, HttpStatus.OK);
-	}
-	
-	@GetMapping(value = "/isUserAdmin/{email}", produces = "application/json")
-	public ResponseEntity<Boolean> isUserAdmin(@PathVariable String email) {
-		boolean isAdmin = userEditService.isUserAdmin(email.substring(7));
-		
-		return new ResponseEntity<Boolean>(isAdmin, HttpStatus.OK);
-	}
+//	@GetMapping(value = "/getUserByEmail/{email}", produces = "application/json")
+//	public ResponseEntity<UserDetailResponseModel> getUserByEmail(@PathVariable String email) {
+//		UserDetailResponseModel user = userEditService.getUserByEmail(email.substring(7));
+//		return new ResponseEntity<UserDetailResponseModel>(user, HttpStatus.OK);
+//	}
+//	
+//	@GetMapping(value = "/isUserAdmin/{email}", produces = "application/json")
+//	public ResponseEntity<Boolean> isUserAdmin(@PathVariable String email) {
+//		boolean isAdmin = userEditService.isUserAdmin(email.substring(7));
+//		
+//		return new ResponseEntity<Boolean>(isAdmin, HttpStatus.OK);
+//	}
 	
 	//Only gets customers not admins
 	@GetMapping(value = "/getAllUsers", produces = "application/json")

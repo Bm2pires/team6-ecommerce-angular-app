@@ -20,18 +20,6 @@ export class UserService {
     return this.http.get<UserDetails[]>(this.baseUrl + 'getAllUsers');
   }
 
-  findUserByEmail(email: String): Observable<UserDetails> {
-    const identifier = '/:email=' + email;
-    return this.http.get<UserDetails>(
-      this.baseUrl + 'getUserByEmail' + identifier
-    );
-  }
-
-  checkIfAdmin(email: String): Observable<Boolean> {
-    const identifier = '/:email=' + email;
-    return this.http.get<Boolean>(this.baseUrl + 'isUserAdmin' + identifier);
-  }
-
   addUser(user: UserModify): Observable<UserModify> {
     return this.http.post<UserModify>(this.baseUrl + 'addUser', user);
   }
@@ -42,6 +30,6 @@ export class UserService {
 
   delUser(userId: Number): Observable<any> {
     const identifier = '/:id=' + userId;
-    return this.http.delete<any>(this.baseUrl + 'delUser' + identifier);
+    return this.http.delete<any>(this.baseUrl + 'delUser' + identifier, {observe: 'response'});
   }
 }

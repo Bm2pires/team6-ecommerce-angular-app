@@ -21,4 +21,8 @@ INSERT INTO brand(brand_name) VALUES ('Dell'), ('HP');
 
 INSERT INTO products(image_url, product_desc, product_name, product_price, brand_brand_id, categories_categoryid) VALUES ('..\assets\images\product-images\dell-laptop.jfif', 'Dell Laptop', 'Dell Laptop', '450.00', 1, 1), ('..\assets\images\product-images\hp-laptop.jfif', 'HP Spectre', 'HP Laptop', '850.00', 2, 1),
 ('..\assets\images\product-images\hp-laptop.jfif', 'HP Envy', 'HP Laptop 2022', '750.00', 2, 1)
+
+INSERT INTO order_details(billing_address, date_of_order, shipping_address, total_price, user_id) VALUES ('40 Crossway Lane', '2021-07-12', '40 Crossway Lane', 400.76, 1)
+
+INSERT INTO order_items (quantity, order_details_order_detailsid, product_id) VALUES (5, 1, 2);
 ```

@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
 import { UserModify } from 'src/app/services/interfaces/userModify';
@@ -10,6 +10,11 @@ import { UserModify } from 'src/app/services/interfaces/userModify';
   styleUrls: ['./modal-add-user.component.css'],
 })
 export class ModalAddUserComponent implements OnInit {
+
+  @Output() childEvent = new EventEmitter();
+  relaod(message){
+    this.childEvent.emit(message);
+  }
 
   //Used to confirm password
   confirmPass:String;
@@ -51,7 +56,7 @@ export class ModalAddUserComponent implements OnInit {
     if(this.valid){
       this.userService.addUser(this.userModify).subscribe(data => {
       });
-
+      this.relaod("User has been added");
       modal.close();
       this.reset();
     } else {
@@ -86,6 +91,24 @@ export class ModalAddUserComponent implements OnInit {
 
     if(this.userModify.address === "" || this.userModify.email === "" || this.userModify.firstName === "" || this.userModify.lastName === "" || this.userModify.password === "" || this.userModify.phoneNumber === ""){
       this.errors.push("Please fill in all fields")
+    }
+
+    const dateCheck = this.userModify.dateOfBirth!.toString();
+    let today = this.datePipe.transform(Date.now(),'yyyy-MM-dd')!;
+
+    if(dateCheck > today){
+      this.errors.push("Date of birth cannot be in the future");
+    }
+    let today2 = new Date();
+    var birthDate = new Date(this.userModify.dateOfBirth!);
+    var age = today2.getFullYear() - birthDate.getFullYear();
+    var m = today2.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today2.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    if(age < 18){
+      this.errors.push("Age must be 18 or older");
     }
 
     if (this.errors.length != 0) {
