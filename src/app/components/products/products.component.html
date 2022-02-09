@@ -19,17 +19,18 @@
                 <!-- brand select -->
                 <label for="brand-select">Brand: </label>
 
-                <select name="brands" id="brand-select">
+                <select (change)="onChange($event)" #brand name="brands" id="brand-select">
                     <option value="">Please choose an option</option>
-                    <option value="Dell">Dell</option>
-                    <option value="HP">HP</option>
+                    <option *ngFor="let brand of brands" [value]="brand.brandName">{{ brand.brandName }}</option>
                 </select>
                 <br />
                 <label for="category-select">Category: </label>
 
-                <select name="categories" id="category-select">
+                <select (change)="onChange($event)" #category name="categories" id="category-select">
                     <option value="">Please choose an option</option>
-                    <option value="Laptop">Laptop</option>
+                    <option *ngFor="let category of categories" [value]="category.categoryName">{{
+                        category.categoryName }}
+                    </option>
                 </select>
                 <div class="container bg-info mt-4 rounded" [hidden]="prodAdded">
                     <p class="p-2 text-light">{{deviceName}} has been added to your Shopping Cart.</p>
@@ -37,16 +38,16 @@
             </div>
 
             <!-- Filter side bar on left -->
-            <div *ngFor="let tempProduct of products" class="col-md-3">
-                <div class=" card">
+            <div *ngFor="let tempProduct of products" class="col-md-3 mb-3">
+                <div class="card">
                     <a href="#">
                         <img class="card-img-top" src="{{ tempProduct.imageUrl }}" alt="Card image cap">
                     </a>
                     <div class="card-body">
                         <h5 class="Product-1">{{ tempProduct.productName }}</h5>
                         <p class="card-text">{{ tempProduct.productDescription }}</p>
-                        <p>Brand: {{ tempProduct.category }}</p>
-                        <p>Category: {{ tempProduct.brand }}</p>
+                        <p>Brand: {{ tempProduct.brand }}</p>
+                        <p>Category: {{ tempProduct.category }}</p>
                         <h6 class="price">{{ tempProduct.productPrice | currency:'GBP'}}</h6>
                         <button class="btn btn-primary" (click)="addToCart(tempProduct.productId)">Add to cart</button>
                     </div>

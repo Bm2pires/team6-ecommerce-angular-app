@@ -14,6 +14,8 @@ import com.ecommerce.spring.entities.Products;
 import com.ecommerce.spring.repositories.BrandRepository;
 import com.ecommerce.spring.repositories.CategoryReposoitory;
 import com.ecommerce.spring.repositories.ProductRepository;
+import com.ecommerce.spring.reqresmodels.BrandResponseModel;
+import com.ecommerce.spring.reqresmodels.CategoryResponseModel;
 import com.ecommerce.spring.reqresmodels.ProductAddRequestModel;
 import com.ecommerce.spring.reqresmodels.ProductAddResponseModel;
 import com.ecommerce.spring.reqresmodels.ProductEditRequestModel;
@@ -234,8 +236,8 @@ public class ProductService {
 		Optional<Products> product = prodRepo.findById(id);
 		if (product.isPresent()) {
 			ProductGetResponseModel response = mapper.map(product.get(), ProductGetResponseModel.class);
-			response.setProductBrand(product.get().getBrand().getBrandName());
-			response.setProductCategory(product.get().getCategories().getCategoryName());
+			response.setBrand(product.get().getBrand().getBrandName());
+			response.setCategory(product.get().getCategories().getCategoryName());
 			return response;
 		} else {
 			return null;
@@ -262,6 +264,42 @@ public class ProductService {
 
 	}
 
+	// get all brands
+	public List<BrandResponseModel> getAllBrands() {
+		ModelMapper mapper = new ModelMapper();
+		List<BrandResponseModel> responseList = new ArrayList<>();
+
+		List<Brand> list = brandRepo.findAll();
+
+		if (!list.isEmpty()) {
+			for (Brand brand : list) {
+				BrandResponseModel modelObject = mapper.map(brand, BrandResponseModel.class);
+				responseList.add(modelObject);
+			}
+			return responseList;
+		} else {
+			return null;
+		}
+	}
+
+	// get all categories
+	public List<CategoryResponseModel> getAllCategories() {
+		ModelMapper mapper = new ModelMapper();
+		List<CategoryResponseModel> responseList = new ArrayList<>();
+
+		List<Categories> list = categoryRepo.findAll();
+
+		if (!list.isEmpty()) {
+			for (Categories category : list) {
+				CategoryResponseModel modelObject = mapper.map(category, CategoryResponseModel.class);
+				responseList.add(modelObject);
+			}
+			return responseList;
+		} else {
+			return null;
+		}
+	}
+
 	public List<ProductGetResponseModel> getProdByBrandName(String brandName) {
 		ModelMapper mapper = new ModelMapper();
 		List<ProductGetResponseModel> responseList = new ArrayList<>();
@@ -273,8 +311,8 @@ public class ProductService {
 		if (!list.isEmpty()) {
 			for (Products product : list) {
 				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
-				modelObject.setProductBrand(product.getBrand().getBrandName());
-				modelObject.setProductCategory(product.getCategories().getCategoryName());
+				modelObject.setBrand(product.getBrand().getBrandName());
+				modelObject.setCategory(product.getCategories().getCategoryName());
 				responseList.add(modelObject);
 			}
 			return responseList;
@@ -294,8 +332,8 @@ public class ProductService {
 		if (!list.isEmpty()) {
 			for (Products product : list) {
 				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
-				modelObject.setProductBrand(product.getBrand().getBrandName());
-				modelObject.setProductCategory(product.getCategories().getCategoryName());
+				modelObject.setBrand(product.getBrand().getBrandName());
+				modelObject.setCategory(product.getCategories().getCategoryName());
 				responseList.add(modelObject);
 			}
 			return responseList;
@@ -308,13 +346,13 @@ public class ProductService {
 		ModelMapper mapper = new ModelMapper();
 		List<ProductGetResponseModel> responseList = new ArrayList<>();
 
-		List<Products> list = prodRepo.findByBrandAndCategories(brandName, categoryName).get();
+		List<Products> list = prodRepo.findByBrandBrandNameAndCategoriesCategoryName(brandName, categoryName).get();
 
 		if (!list.isEmpty()) {
 			for (Products product : list) {
 				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
-				modelObject.setProductBrand(product.getBrand().getBrandName());
-				modelObject.setProductCategory(product.getCategories().getCategoryName());
+				modelObject.setBrand(product.getBrand().getBrandName());
+				modelObject.setCategory(product.getCategories().getCategoryName());
 				responseList.add(modelObject);
 			}
 			return responseList;

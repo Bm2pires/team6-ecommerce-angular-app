@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecommerce.spring.reqresmodels.BrandResponseModel;
+import com.ecommerce.spring.reqresmodels.CategoryResponseModel;
 import com.ecommerce.spring.reqresmodels.ProductAddRequestModel;
 import com.ecommerce.spring.reqresmodels.ProductAddResponseModel;
 import com.ecommerce.spring.reqresmodels.ProductEditRequestModel;
@@ -84,6 +86,28 @@ public class ProductController {
 		}
 	}
 
+	// get all brands
+	@GetMapping(value = "/getAllBrands", produces = "application/json")
+	public ResponseEntity<List<BrandResponseModel>> getAllBrands() {
+		List<BrandResponseModel> response = prodService.getAllBrands();
+		if (!response.isEmpty()) {
+			return new ResponseEntity<List<BrandResponseModel>>(response, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<List<BrandResponseModel>>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	// get all categories
+	@GetMapping(value = "/getAllCategories", produces = "application/json")
+	public ResponseEntity<List<CategoryResponseModel>> getAllCategories() {
+		List<CategoryResponseModel> response = prodService.getAllCategories();
+		if (!response.isEmpty()) {
+			return new ResponseEntity<List<CategoryResponseModel>>(response, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<List<CategoryResponseModel>>(HttpStatus.NOT_FOUND);
+		}
+	}
+
 	// get all products by brand name
 	@GetMapping(value = "/getAllProd/brand/{brandName}", produces = "application/json")
 	public ResponseEntity<List<ProductGetResponseModel>> getProdByBrand(@PathVariable String brandName) {
@@ -106,11 +130,10 @@ public class ProductController {
 		}
 	}
 
-	// W.I.P.
 	// get all products by brand name and category id
 	@GetMapping(value = "/getAllProd/brand/{brandName}/category/{categoryName}", produces = "application/json")
-	public ResponseEntity<List<ProductGetResponseModel>> getProdByBrandNameAndCategory(
-			@PathVariable("brandName") String brandName, @PathVariable("categoryName") String categoryName) {
+	public ResponseEntity<List<ProductGetResponseModel>> getProdByBrandNameAndCategory(@PathVariable String brandName,
+			@PathVariable String categoryName) {
 		List<ProductGetResponseModel> response = prodService.getProdByBrandNameAndCategory(brandName, categoryName);
 		if (!response.isEmpty()) {
 			return new ResponseEntity<List<ProductGetResponseModel>>(response, HttpStatus.OK);

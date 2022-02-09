@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
+import { Brand } from './interfaces/brand';
+import { Categories } from './interfaces/categories';
 import { ProductDetails } from './interfaces/productDetails';
 import { ProductModify } from './interfaces/productModify';
 
@@ -42,6 +44,35 @@ export class ProductService {
   delProd(prodId: Number): Observable<any> {
     const identifier = '/:id=' + prodId;
     return this.http.delete<any>(this.baseUrl + 'delProd' + identifier);
+  }
+
+  getAllBrands(): Observable<Brand[]> {
+    return this.http.get<Brand[]>(this.baseUrl + 'getAllBrands');
+  }
+
+  getAllCategories(): Observable<Categories[]> {
+    return this.http.get<Categories[]>(this.baseUrl + 'getAllCategories');
+  }
+
+  getAllProductsByBrand(brandName: string): Observable<ProductDetails[]> {
+    return this.http.get<ProductDetails[]>(
+      this.baseUrl + `getAllProd/brand/${brandName}`
+    );
+  }
+
+  getAllProductsByCategory(category: string): Observable<ProductDetails[]> {
+    return this.http.get<ProductDetails[]>(
+      this.baseUrl + `getAllProd/category/${category}`
+    );
+  }
+
+  getAllProductsByBrandAndCategory(
+    brandName: string,
+    category: string
+  ): Observable<ProductDetails[]> {
+    return this.http.get<ProductDetails[]>(
+      this.baseUrl + `getAllProd/brand/${brandName}/category/${category}`
+    );
   }
 }
 function params<T>(arg0: string, params: any, arg2: { id: number; }): Observable<ProductDetails> {
