@@ -20,20 +20,6 @@ export class UserService {
     return this.http.get<UserDetails[]>(this.baseUrl + 'getAllUsers');
   }
 
-  //NOT USED ANYWHERE
-  // findUserByEmail(email: String): Observable<UserDetails> {
-  //   const identifier = '/:email=' + email;
-  //   return this.http.get<UserDetails>(
-  //     this.baseUrl + 'getUserByEmail' + identifier
-  //   );
-  // }
-
-    //NOT USED ANYWHERE
-  // checkIfAdmin(email: String): Observable<Boolean> {
-  //   const identifier = '/:email=' + email;
-  //   return this.http.get<Boolean>(this.baseUrl + 'isUserAdmin' + identifier);
-  // }
-
   addUser(user: UserModify): Observable<UserModify> {
     return this.http.post<UserModify>(this.baseUrl + 'addUser', user);
   }
