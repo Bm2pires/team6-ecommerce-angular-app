@@ -4,11 +4,11 @@
     <div class="container">
         <div class="d-flex justify-content-end mt-3 mb-3">
             <label for="sort" class="">Sort By:</label><br />
-            <select name="sort" id="sort">
-                <option value="priceAscending">Price(low to high)</option>
-                <option value="priceDescending">Price(high to low)</option>
-                <option value="BrandA">Brand(A-Z)</option>
-                <option value="BrandZ">Brand(Z-A)</option>
+            <select (change)="onChange()" name="sort" id="sort">
+                <option [value]="">Price(low to high)</option>
+                <option [value]="priceDescending">Price(high to low)</option>
+                <option [value]="BrandA">Brand(A-Z)</option>
+                <option [value]="BrandZ">Brand(Z-A)</option>
             </select>
         </div>
         <!-- End of Sort by element -->

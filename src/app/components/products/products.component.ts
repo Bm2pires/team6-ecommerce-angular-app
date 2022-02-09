@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Brand } from 'src/app/services/interfaces/brand';
 import { Categories } from 'src/app/services/interfaces/categories';
 import { ProductDetails } from 'src/app/services/interfaces/productDetails';
+import { Sort } from 'src/app/services/interfaces/sort';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class ProductsComponent implements OnInit {
   products!: ProductDetails[];
   brands!: Brand[];
   categories!: Categories[];
+  sort!: Sort;
   error: boolean;
 
   constructor(productService: ProductService) {
@@ -24,6 +26,8 @@ export class ProductsComponent implements OnInit {
     this.listBrands();
     this.listCategories();
     this.listProducts();
+    // default sort on page initialization
+    this.sort = { fieldName: 'productPrice', direction: 'ASC' };
   }
 
   listProducts() {

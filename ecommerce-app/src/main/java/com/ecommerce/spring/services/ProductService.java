@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.spring.entities.Brand;
@@ -248,7 +249,7 @@ public class ProductService {
 		ModelMapper mapper = new ModelMapper();
 		List<ProductGetResponseModel> responseList = new ArrayList<>();
 
-		List<Products> list = prodRepo.findAll();
+		List<Products> list = prodRepo.findAll(Sort.by(Sort.Direction.ASC, "productPrice"));
 
 		if (!list.isEmpty()) {
 			for (Products product : list) {
