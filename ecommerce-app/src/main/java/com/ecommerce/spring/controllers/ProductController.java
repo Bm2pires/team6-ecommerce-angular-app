@@ -136,9 +136,14 @@ public class ProductController {
 	public ResponseEntity<List<ProductGetResponseModel>> getProdByBrandNameAndCategory(@PathVariable String brandName,
 			@PathVariable String categoryName) {
 		List<ProductGetResponseModel> response = prodService.getProdByBrandNameAndCategory(brandName, categoryName);
-		if (!response.isEmpty()) {
-			return new ResponseEntity<List<ProductGetResponseModel>>(response, HttpStatus.OK);
-		} else {
+		try {
+			if (!response.isEmpty()) {
+				return new ResponseEntity<List<ProductGetResponseModel>>(response, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<List<ProductGetResponseModel>>(HttpStatus.NOT_FOUND);
+			}
+		} catch (NullPointerException e) {
+			System.out.println("No Products found for Brand name and category");
 			return new ResponseEntity<List<ProductGetResponseModel>>(HttpStatus.NOT_FOUND);
 		}
 	}
