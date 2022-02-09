@@ -14,6 +14,7 @@ export class ProductsComponent implements OnInit {
   products!: ProductDetails[];
   brands!: Brand[];
   categories!: Categories[];
+  error: boolean;
 
   constructor(productService: ProductService) {
     this.productService = productService;
@@ -23,6 +24,78 @@ export class ProductsComponent implements OnInit {
     this.listBrands();
     this.listCategories();
     this.listProducts();
+    this.products.sort;
+    // default sort on page initialization
+  }
+
+  // sort function
+  sortProductsByPriceAsc(a: ProductDetails, b: ProductDetails) {
+    if (a.productPrice < b.productPrice) {
+      return -1;
+    }
+    if (a.productPrice > b.productPrice) {
+      return 1;
+    }
+    return 0;
+  }
+
+  // sort function
+  sortProductsByPriceDesc(a: ProductDetails, b: ProductDetails) {
+    if (a.productPrice < b.productPrice) {
+      return 1;
+    }
+    if (a.productPrice > b.productPrice) {
+      return -1;
+    }
+    return 0;
+  }
+
+  // sort function
+  sortProductsByBrandAtoZ(a: ProductDetails, b: ProductDetails) {
+    if (a.brand < b.brand) {
+      return -1;
+    }
+    if (a.brand > b.brand) {
+      return 1;
+    }
+    return 0;
+  }
+
+  // sort function
+  sortProductsByBrandZtoA(a: ProductDetails, b: ProductDetails) {
+    if (a.productPrice < b.productPrice) {
+      return 1;
+    }
+    if (a.productPrice > b.productPrice) {
+      return -1;
+    }
+    return 0;
+  }
+
+  // event handler for sort select on change
+  onChangeSort() {
+    let optionSelectElement = <HTMLSelectElement>(
+      document.getElementById('sort-select')
+    );
+    let optionValue =
+      optionSelectElement.options[optionSelectElement.selectedIndex].value;
+
+    switch (optionValue) {
+      case 'PriceAscending':
+        this.products.sort(this.sortProductsByPriceAsc);
+        break;
+      case 'PriceDescending':
+        this.products.sort(this.sortProductsByPriceDesc);
+        break;
+      case 'BrandAZ':
+        this.products.sort(this.sortProductsByBrandAtoZ);
+        break;
+      case 'BrandZA':
+        this.products.sort(this.sortProductsByBrandZtoA);
+        break;
+      default:
+        break;
+    }
   }
 
   listProducts() {
@@ -44,7 +117,10 @@ export class ProductsComponent implements OnInit {
   }
 
   // detects changes in select boxes
-  onChange(event) {
+  onChange() {
+    // reset error message to false
+    this.error = false;
+
     // get value from brand select element
     let brandSelect = <HTMLSelectElement>(
       document.getElementById('brand-select')
@@ -62,26 +138,32 @@ export class ProductsComponent implements OnInit {
     if (brandValue != '' && categoryValue != '') {
       this.productService
         .getAllProductsByBrandAndCategory(brandValue, categoryValue)
-        .subscribe((data) => {
-          this.products = data;
-          console.log(this.products);
-        });
+        .subscribe(
+          (data) => {
+            this.products = data;
+          },
+          // if there is an error then set products to null and set error message flag to true
+          () => {
+            this.products = null;
+            this.error = true;
+          }
+        );
       // else if brand is selected and category is blank
-    } else if (event.target.value != '' && categoryValue == '') {
+    } else if (brandValue != '' && categoryValue == '') {
       this.productService
-        .getAllProductsByBrand(event.target.value)
+        .getAllProductsByBrand(brandValue)
         .subscribe((data) => {
           this.products = data;
         });
       // else if category is selected and brand is blank then
-    } else if (event.target.value != '' && brandValue == '') {
+    } else if (categoryValue != '' && brandValue == '') {
       this.productService
-        .getAllProductsByCategory(event.target.value)
+        .getAllProductsByCategory(categoryValue)
         .subscribe((data) => {
           this.products = data;
         });
       // otherwise reset
-    } else {
+    } else if (brandValue == '' && categoryValue == '') {
       this.productService.findAllProducts().subscribe((data) => {
         this.products = data;
       });

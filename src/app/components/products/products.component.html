@@ -3,30 +3,31 @@
     <!-- products container -->
     <div class="container">
         <div class="d-flex justify-content-end mt-3 mb-3">
-            <label for="sort" class="">Sort By:</label><br />
-            <select name="sort" id="sort">
-                <option value="priceAscending">Price(low to high)</option>
-                <option value="priceDescending">Price(high to low)</option>
-                <option value="BrandA">Brand(A-Z)</option>
-                <option value="BrandZ">Brand(Z-A)</option>
+            <label for="sort" class="sort-select">Sort By:</label><br />
+            <select (change)="onChangeSort()" #sort name="sort-select" id="sort-select">
+                <option value="PriceAscending">Price(low to high)</option>
+                <option value="PriceDescending">Price(high to low)</option>
+                <option value="BrandAZ">Brand(A-Z)</option>
+                <option value="BrandZA">Brand(Z-A)</option>
             </select>
         </div>
         <!-- End of Sort by element -->
 
         <div class="row">
+
             <div class="col-sm-3 col-md-2 sidebar">
                 <h5>Filter by:</h5>
                 <!-- brand select -->
                 <label for="brand-select">Brand: </label>
 
-                <select (change)="onChange($event)" #brand name="brands" id="brand-select">
+                <select (change)="onChange()" #brand name="brands" id="brand-select">
                     <option value="">Please choose an option</option>
                     <option *ngFor="let brand of brands" [value]="brand.brandName">{{ brand.brandName }}</option>
                 </select>
                 <br />
                 <label for="category-select">Category: </label>
 
-                <select (change)="onChange($event)" #category name="categories" id="category-select">
+                <select (change)="onChange()" #category name="categories" id="category-select">
                     <option value="">Please choose an option</option>
                     <option *ngFor="let category of categories" [value]="category.categoryName">{{
                         category.categoryName }}
@@ -34,6 +35,10 @@
                 </select>
             </div>
             <!-- Filter side bar on left -->
+            <!-- Error message -->
+            <span class="help-block text-danger" *ngIf="error"> No products found with Brand "{{ brand.value }}" and
+                Category "{{ category.value}}"
+            </span>
             <div *ngFor="let tempProduct of products" class="col-md-3 mb-3">
                 <div class="card">
                     <a href="#">
