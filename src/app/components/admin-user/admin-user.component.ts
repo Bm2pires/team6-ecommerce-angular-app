@@ -9,6 +9,7 @@ import { UserDetails } from 'src/app/services/interfaces/userDetails';
 })
 export class AdminUserComponent implements OnInit {
   users!: UserDetails[];
+  deletionNotice: String = "";
 
   constructor(private userService: UserService) {}
 
@@ -22,8 +23,13 @@ export class AdminUserComponent implements OnInit {
   //Deletes user
   delUser(id: any) {
     this.userService.delUser(id).subscribe((data) => {
+      this.deletionNotice = "Deletion Succesfull"
+    }, (error) => {
+      this.deletionNotice = "Deletion Unsuccesfull. User may have an active orders which is preventing deletion"
     });
-    this.ngOnInit();
-    this.ngOnInit();
+    setTimeout(()=>{
+      this.ngOnInit();
+      this.deletionNotice = "";
+    }, 1500)
   }
 }

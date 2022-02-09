@@ -32,6 +32,7 @@ public class ProductController {
 
 	@Autowired
 	ProductService prodService;
+	
 
 	@PutMapping(value = "/editProd", produces = "application/json", consumes = "application/json")
 	@CrossOrigin(origins = "http://localhost:4200")

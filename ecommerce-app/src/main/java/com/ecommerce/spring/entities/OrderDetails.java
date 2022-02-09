@@ -16,7 +16,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class OrderDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,19 +36,17 @@ public class OrderDetails {
 	@Column
 	private Date dateOfOrder;
 	
-	@Temporal(TemporalType.DATE)
 	@Column
-	private Date shippingAddress;
+	private String shippingAddress;
 	
-	@Temporal(TemporalType.DATE)
 	@Column
-	private Date billingAddress;
+	private String billingAddress;
 	
 	@OneToMany(mappedBy = "orderDetails", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<OrderItems> orders = new ArrayList<>();
 
-	public OrderDetails(long orderDetailsID, User user, double totalPrice, Date dateOfOrder, Date shippingAddress,
-			Date billingAddress, List<OrderItems> orders) {
+	public OrderDetails(long orderDetailsID, User user, double totalPrice, Date dateOfOrder, String shippingAddress,
+			String billingAddress, List<OrderItems> orders) {
 		super();
 		this.orderDetailsID = orderDetailsID;
 		this.user = user;

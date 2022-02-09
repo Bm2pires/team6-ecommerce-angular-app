@@ -31,6 +31,10 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
+	//used to check if user has an order details
+	@Autowired 
+	OrderDetailsService orderDetailsService;
+	
 	public UserDetailResponseModel editUser(UserDetailRequestModel requestModel) {
 		Optional<User> user = userRepository.findById(requestModel.getId());
 		boolean valid = validateInput(requestModel);
@@ -178,8 +182,20 @@ public class UserService {
 	public boolean delUser(long id) {
 		Optional<User> user = userRepository.findById(id);
 		if(user.isPresent()) {
-			userRepository.deleteById(id);
-			return true;
+			//Cheks if user has an orderdetails and if so checks if orderdetails has items in it
+			if(orderDetailsService.checkIfUserHasOrderDetailsOrOrders(user.get())) {
+				//this section of code is for when order details exists and it has items in it 
+				return false;
+			}else {
+				//this section of code is for when order details exists and it has no items in it or if there is no order details
+				if(user.get().getOrderDetails() != null) {
+					//Deletes both user and order details row
+					orderDetailsService.delOrderDetails(user.get().getOrderDetails().getOrderDetailsID());
+				}else {
+					userRepository.deleteById(id);
+				}
+				return true;
+			}
 		}else {
 		return false;
 		}

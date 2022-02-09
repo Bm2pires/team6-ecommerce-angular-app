@@ -1,0 +1,14 @@
+package com.ecommerce.spring.repositories;
+
+import java.util.Optional;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.ecommerce.spring.entities.OrderDetails;
+import com.ecommerce.spring.entities.OrderItems;
+
+public interface OrderItemsRepository extends CrudRepository<OrderItems, Long>{
+
+	Optional<OrderItems> findByOrderDetails(OrderDetails orderDetails);
+
+}

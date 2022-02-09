@@ -48,6 +48,7 @@ export class ProductsComponent implements OnInit {
       }, 1500);
     });
   }
+
   listBrands() {
     this.productService.getAllBrands().subscribe((data) => {
       this.brands = data;

@@ -1,4 +1,7 @@
 <!-- Presents user in a card-like format -->
+<div class="container bg-info mt-4 rounded" *ngIf="deletionNotice">
+    <p class="p-2 text-light">{{deletionNotice}}</p>
+</div>
 <div class="card-deck m-5" style="display: inline-block" *ngFor="let user of users">
     <div class="card" style="width: 17rem;">
         <div class="card-body">

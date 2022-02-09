@@ -1,0 +1,29 @@
+package com.ecommerce.spring.services;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ecommerce.spring.entities.OrderDetails;
+import com.ecommerce.spring.repositories.OrderDetailsRepository;
+import com.ecommerce.spring.repositories.OrderItemsRepository;
+import com.ecommerce.spring.repositories.ProductRepository;
+
+@Service
+public class OrderDetailsService {
+	@Autowired
+	OrderDetailsRepository orderDetailsRepo;
+
+	@Autowired
+	OrderItemsRepository orderItemsRepo;
+	
+	public boolean checkIfUserHasRepo(long id) {
+		Optional<OrderDetails> orderDetails = orderDetailsRepo.findByUserID(id);
+		if(orderDetails.isPresent()) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+}
