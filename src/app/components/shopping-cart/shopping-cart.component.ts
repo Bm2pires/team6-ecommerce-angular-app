@@ -28,8 +28,33 @@ export class ShoppingCartComponent implements OnInit {
     this.price = this.cartService.totalPrice;
   }
 
-  removeFromCart(id:number){
+  removeAllFromCart(id:number){
     this.cartService.removeProd(id);
+
+    setTimeout(()=>{
+      this.ngOnInit();
+    }, 300)
+
+    this.empty = this.cartService.checkIfCartIsEmpty();
+  }
+
+  removeOneFromCart(id:number){
+    let x: ProductOrders = this.products[this.cartService.findIndex(id)];
+    if(x.quantity > 1){
+      this.cartService.decreseQuantity(x)
+    }else{
+      this.cartService.removeProd(id);
+    }
+
+    setTimeout(()=>{
+      this.ngOnInit();
+    }, 300)
+
+    this.empty = this.cartService.checkIfCartIsEmpty();
+  }
+
+  clearCart(){
+    this.cartService.clearCart();
 
     setTimeout(()=>{
       this.ngOnInit();

@@ -29,7 +29,7 @@ export class ProductsComponent implements OnInit {
     this.listBrands();
     this.listCategories();
     this.listProducts();
-    this.products.sort;
+    this.products.sort(this.sortProductsByPriceAsc);
     // default sort on page initialization
   }
 

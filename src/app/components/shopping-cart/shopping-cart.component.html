@@ -11,9 +11,13 @@
                     <p>Brand: {{ tempProduct.brand }}</p>
                     <p>Category: {{ tempProduct.category }}</p>
                     <p>Quantity: {{tempProduct.quantity}}</p>
-                    <h6 class="price">{{ tempProduct.productPrice | currency:'GBP'}}</h6>
+                    <p class="price">Unit Price: {{ (tempProduct.productPrice) | currency: "GBP"}}</p>
+                    <h6 class="price" *ngIf="tempProduct.quantity > 1">Sub-Total: {{ (tempProduct.productPrice * tempProduct.quantity) | currency: "GBP"}}</h6>
                 </div>
-                <button class="btn btn-warning" (click)="removeFromCart(tempProduct.productId)">Remove from cart</button>
+                <div class="btn-group">
+                    <button class="btn btn-warning m-2 rounded" *ngIf="tempProduct.quantity > 1" (click)="removeOneFromCart(tempProduct.productId)">Remove One from cart</button>
+                    <button class="btn btn-warning m-2 rounded" (click)="removeAllFromCart(tempProduct.productId)">Remove Product From cart</button>
+                </div>
             </div>
         </div>
     </div>
@@ -26,5 +30,6 @@
 <hr *ngIf="!empty">
 <div *ngIf="!empty" class="bg-light p-4" style="display: flex; justify-content: center;">
     <button class="btn btn-success m-2" href="#">Checkout</button>
-    <h5 class="pt-3">{{price | currency:'GBP'}}</h5>
+    <button class="btn btn-warning  m-2" (click)="clearCart()">Clear cart</button>
+    <h5 class="pt-3">Total: {{price | currency:'GBP'}}</h5>
 </div>

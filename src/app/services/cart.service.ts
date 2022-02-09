@@ -16,7 +16,7 @@ export class CartService {
     let index = null;
     this.products.map((e)=>{
       if (e.productId === product.productId) {
-        index = this.products.findIndex(d => d.productId === product.productId)
+        index = this.findIndex(e.productId);
       }})
 
     if(index != null){
@@ -40,7 +40,6 @@ export class CartService {
   calculatePrice() {
     this.totalPrice = 0;
     this.products.forEach((prod)=> {
-      console.log(this.totalPrice)
       let price = prod.productPrice * prod.quantity;
       this.totalPrice = this.totalPrice + price;
     })
@@ -56,8 +55,19 @@ export class CartService {
   }
 
   removeProd(id:number) {
-    let index = this.products.findIndex(d => d.productId === id)
+    let index = this.findIndex(id);
     this.products.splice(index, 1)
+    this.calculatePrice()
+  }
+
+  findIndex(id:number){
+    let index = this.products.findIndex(d => d.productId === id)
+    return index;
+  }
+
+  decreseQuantity(productOrders: ProductOrders) {
+    let index = this.findIndex(productOrders.productId);
+    this.products[index].quantity = productOrders.quantity - 1;
     this.calculatePrice()
   }
 
