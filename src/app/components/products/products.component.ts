@@ -14,6 +14,7 @@ export class ProductsComponent implements OnInit {
   products!: ProductDetails[];
   brands!: Brand[];
   categories!: Categories[];
+  error: boolean;
 
   constructor(productService: ProductService) {
     this.productService = productService;
@@ -45,6 +46,8 @@ export class ProductsComponent implements OnInit {
 
   // detects changes in select boxes
   onChange(event) {
+    this.error = false;
+
     // get value from brand select element
     let brandSelect = <HTMLSelectElement>(
       document.getElementById('brand-select')
@@ -62,10 +65,16 @@ export class ProductsComponent implements OnInit {
     if (brandValue != '' && categoryValue != '') {
       this.productService
         .getAllProductsByBrandAndCategory(brandValue, categoryValue)
-        .subscribe((data) => {
-          this.products = data;
-          console.log(this.products);
-        });
+        .subscribe(
+          (data) => {
+            this.products = data;
+          },
+          // return the error message
+          () => {
+            this.products = null;
+            this.error = true;
+          }
+        );
       // else if brand is selected and category is blank
     } else if (event.target.value != '' && categoryValue == '') {
       this.productService

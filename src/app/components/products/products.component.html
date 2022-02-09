@@ -14,6 +14,7 @@
         <!-- End of Sort by element -->
 
         <div class="row">
+
             <div class="col-sm-3 col-md-2 sidebar">
                 <h5>Filter by:</h5>
                 <!-- brand select -->
@@ -34,6 +35,9 @@
                 </select>
             </div>
             <!-- Filter side bar on left -->
+            <span class="help-block text-danger" *ngIf="error"> No products found with Brand "{{ brand.value }}" and
+                Category "{{ category.value}}"
+            </span>
             <div *ngFor="let tempProduct of products" class="col-md-3 mb-3">
                 <div class="card">
                     <a href="#">
