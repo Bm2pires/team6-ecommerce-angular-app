@@ -141,6 +141,7 @@ export class ProductsComponent implements OnInit {
         .subscribe(
           (data) => {
             this.products = data;
+            this.onChangeSort();
           },
           // if there is an error then set products to null and set error message flag to true
           () => {
@@ -154,6 +155,7 @@ export class ProductsComponent implements OnInit {
         .getAllProductsByBrand(brandValue)
         .subscribe((data) => {
           this.products = data;
+          this.onChangeSort();
         });
       // else if category is selected and brand is blank then
     } else if (categoryValue != '' && brandValue == '') {
@@ -161,11 +163,13 @@ export class ProductsComponent implements OnInit {
         .getAllProductsByCategory(categoryValue)
         .subscribe((data) => {
           this.products = data;
+          this.onChangeSort();
         });
       // otherwise reset
     } else if (brandValue == '' && categoryValue == '') {
       this.productService.findAllProducts().subscribe((data) => {
         this.products = data;
+        this.onChangeSort();
       });
     }
   }
