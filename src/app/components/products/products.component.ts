@@ -32,55 +32,7 @@ export class ProductsComponent implements OnInit {
     this.listProducts();
   }
 
-<<<<<<< HEAD
   // event handler for sort select on change for sorting products accordingly
-=======
-  // sort function
-  sortProductsByPriceAsc(a: ProductDetails, b: ProductDetails) {
-    if (a.productPrice < b.productPrice) {
-      return -1;
-    }
-    if (a.productPrice > b.productPrice) {
-      return 1;
-    }
-    return 0;
-  }
-
-  // sort function
-  sortProductsByPriceDesc(a: ProductDetails, b: ProductDetails) {
-    if (a.productPrice < b.productPrice) {
-      return 1;
-    }
-    if (a.productPrice > b.productPrice) {
-      return -1;
-    }
-    return 0;
-  }
-
-  // sort function
-  sortProductsByBrandAtoZ(a: ProductDetails, b: ProductDetails) {
-    if (a.productBrand < b.productBrand) {
-      return -1;
-    }
-    if (a.productBrand > b.productBrand) {
-      return 1;
-    }
-    return 0;
-  }
-
-  // sort function
-  sortProductsByBrandZtoA(a: ProductDetails, b: ProductDetails) {
-    if (a.productPrice < b.productPrice) {
-      return 1;
-    }
-    if (a.productPrice > b.productPrice) {
-      return -1;
-    }
-    return 0;
-  }
-
-  // event handler for sort select on change
->>>>>>> a83be64bcefc8b8c280be627b50a4aec6d2ff201
   onChangeSort() {
     let optionSelectElement = <HTMLSelectElement>(
       document.getElementById('sort-select')
