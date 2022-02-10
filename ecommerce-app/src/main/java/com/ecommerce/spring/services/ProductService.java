@@ -49,6 +49,7 @@ public class ProductService {
 				Optional<Categories> category = categoryRepo.findByCategoryName(requestModel.getProductCategory());
 				Optional<Brand> brand = brandRepo.findByBrandName(requestModel.getProductBrand());
 
+				//Checks if request model brand given exits in db and if not adds it
 				if (brand.isEmpty()) {
 					addBrand(requestModel.getProductBrand());
 					product.get().setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
@@ -73,8 +74,8 @@ public class ProductService {
 
 				prodRepo.save(product.get());
 				ProductEditResponseModel response = mapper.map(requestModel, ProductEditResponseModel.class);
-				response.setBrandName(requestModel.getProductBrand());
-				response.setCategoryname(requestModel.getProductCategory());
+				response.setProductBrand(requestModel.getProductBrand());
+				response.setProductCategory(requestModel.getProductCategory());
 
 				return response;
 			} else {
@@ -236,8 +237,8 @@ public class ProductService {
 		Optional<Products> product = prodRepo.findById(id);
 		if (product.isPresent()) {
 			ProductGetResponseModel response = mapper.map(product.get(), ProductGetResponseModel.class);
-			response.setBrand(product.get().getBrand().getBrandName());
-			response.setCategory(product.get().getCategories().getCategoryName());
+			response.setProductBrand(product.get().getBrand().getBrandName());
+			response.setProductCategory(product.get().getCategories().getCategoryName());
 			return response;
 		} else {
 			return null;
@@ -253,8 +254,8 @@ public class ProductService {
 		if (!list.isEmpty()) {
 			for (Products product : list) {
 				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
-				modelObject.setBrand(product.getBrand().getBrandName());
-				modelObject.setCategory(product.getCategories().getCategoryName());
+				modelObject.setProductBrand(product.getBrand().getBrandName());
+				modelObject.setProductCategory(product.getCategories().getCategoryName());
 				responseList.add(modelObject);
 			}
 			return responseList;
@@ -311,8 +312,8 @@ public class ProductService {
 		if (!list.isEmpty()) {
 			for (Products product : list) {
 				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
-				modelObject.setBrand(product.getBrand().getBrandName());
-				modelObject.setCategory(product.getCategories().getCategoryName());
+				modelObject.setProductBrand(product.getBrand().getBrandName());
+				modelObject.setProductCategory(product.getCategories().getCategoryName());
 				responseList.add(modelObject);
 			}
 			return responseList;
@@ -332,8 +333,8 @@ public class ProductService {
 		if (!list.isEmpty()) {
 			for (Products product : list) {
 				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
-				modelObject.setBrand(product.getBrand().getBrandName());
-				modelObject.setCategory(product.getCategories().getCategoryName());
+				modelObject.setProductBrand(product.getBrand().getBrandName());
+				modelObject.setProductCategory(product.getCategories().getCategoryName());
 				responseList.add(modelObject);
 			}
 			return responseList;
@@ -351,8 +352,8 @@ public class ProductService {
 		if (!list.isEmpty()) {
 			for (Products product : list) {
 				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
-				modelObject.setBrand(product.getBrand().getBrandName());
-				modelObject.setCategory(product.getCategories().getCategoryName());
+				modelObject.setProductBrand(product.getBrand().getBrandName());
+				modelObject.setProductCategory(product.getCategories().getCategoryName());
 				responseList.add(modelObject);
 			}
 			return responseList;

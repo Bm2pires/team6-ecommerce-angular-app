@@ -38,20 +38,34 @@ public class ProductController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<ProductEditResponseModel> editProd(@RequestBody ProductEditRequestModel requestModel) {
 		ProductEditResponseModel predm = prodService.editProd(requestModel);
-		if (predm != null) {
-			return new ResponseEntity<ProductEditResponseModel>(predm, HttpStatus.OK);
-		} else {
+		try {
+			if (predm != null) {
+				return new ResponseEntity<ProductEditResponseModel>(predm, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<ProductEditResponseModel>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return new ResponseEntity<ProductEditResponseModel>(HttpStatus.NOT_FOUND);
+
 		}
 	}
 
 	@PostMapping(value = "/addProd", produces = "application/json", consumes = "application/json")
 	public ResponseEntity<ProductAddResponseModel> addProd(@RequestBody ProductAddRequestModel requestModel) {
 		ProductAddResponseModel predm = prodService.addProd(requestModel);
-		if (predm != null) {
-			return new ResponseEntity<ProductAddResponseModel>(predm, HttpStatus.OK);
-		} else {
+		try {
+			if (predm != null) {
+				return new ResponseEntity<ProductAddResponseModel>(predm, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<ProductAddResponseModel>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return new ResponseEntity<ProductAddResponseModel>(HttpStatus.NOT_FOUND);
+
 		}
 	}
 
@@ -60,9 +74,15 @@ public class ProductController {
 	public ResponseEntity<String> delProd(@PathVariable String id) {
 		long prodId = Long.parseLong(id.substring(4));
 		boolean deleted = prodService.delProd(prodId);
-		if (deleted) {
-			return new ResponseEntity<String>("Product Deleted", HttpStatus.OK);
-		} else {
+		try {
+			if (deleted) {
+				return new ResponseEntity<String>("Product Deleted", HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>("Deletion unsuccesfull", HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return new ResponseEntity<String>("Deletion unsuccesfull", HttpStatus.NOT_FOUND);
 		}
 	}
@@ -70,19 +90,32 @@ public class ProductController {
 	@GetMapping(value = "/getProd", produces = "application/json")
 	public ResponseEntity<ProductGetResponseModel> getProdById(@RequestParam(name = "id") long id) {
 		ProductGetResponseModel response = prodService.getProdById(id);
-		if (response != null) {
-			return new ResponseEntity<ProductGetResponseModel>(response, HttpStatus.OK);
-		} else {
+		try {
+			if (response != null) {
+				return new ResponseEntity<ProductGetResponseModel>(response, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<ProductGetResponseModel>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return new ResponseEntity<ProductGetResponseModel>(HttpStatus.NOT_FOUND);
+
 		}
 	}
 
 	@GetMapping(value = "/getAllProd", produces = "application/json")
 	public ResponseEntity<List<ProductGetResponseModel>> getAllProd() {
 		List<ProductGetResponseModel> response = prodService.getAllProd();
-		if (!response.isEmpty()) {
-			return new ResponseEntity<List<ProductGetResponseModel>>(response, HttpStatus.OK);
-		} else {
+		try {
+			if (!response.isEmpty()) {
+				return new ResponseEntity<List<ProductGetResponseModel>>(response, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<List<ProductGetResponseModel>>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return new ResponseEntity<List<ProductGetResponseModel>>(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -91,10 +124,17 @@ public class ProductController {
 	@GetMapping(value = "/getAllBrands", produces = "application/json")
 	public ResponseEntity<List<BrandResponseModel>> getAllBrands() {
 		List<BrandResponseModel> response = prodService.getAllBrands();
-		if (!response.isEmpty()) {
-			return new ResponseEntity<List<BrandResponseModel>>(response, HttpStatus.OK);
-		} else {
+		try {
+			if (!response.isEmpty()) {
+				return new ResponseEntity<List<BrandResponseModel>>(response, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<List<BrandResponseModel>>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return new ResponseEntity<List<BrandResponseModel>>(HttpStatus.NOT_FOUND);
+
 		}
 	}
 
@@ -102,10 +142,17 @@ public class ProductController {
 	@GetMapping(value = "/getAllCategories", produces = "application/json")
 	public ResponseEntity<List<CategoryResponseModel>> getAllCategories() {
 		List<CategoryResponseModel> response = prodService.getAllCategories();
-		if (!response.isEmpty()) {
-			return new ResponseEntity<List<CategoryResponseModel>>(response, HttpStatus.OK);
-		} else {
+		try {
+			if (!response.isEmpty()) {
+				return new ResponseEntity<List<CategoryResponseModel>>(response, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<List<CategoryResponseModel>>(HttpStatus.NOT_FOUND);
+			}
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return new ResponseEntity<List<CategoryResponseModel>>(HttpStatus.NOT_FOUND);
+
 		}
 	}
 
@@ -113,9 +160,15 @@ public class ProductController {
 	@GetMapping(value = "/getAllProd/brand/{brandName}", produces = "application/json")
 	public ResponseEntity<List<ProductGetResponseModel>> getProdByBrand(@PathVariable String brandName) {
 		List<ProductGetResponseModel> response = prodService.getProdByBrandName(brandName);
-		if (!response.isEmpty()) {
-			return new ResponseEntity<List<ProductGetResponseModel>>(response, HttpStatus.OK);
-		} else {
+		try {
+			if (!response.isEmpty()) {
+				return new ResponseEntity<List<ProductGetResponseModel>>(response, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<List<ProductGetResponseModel>>(HttpStatus.NOT_FOUND);
+			}
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return new ResponseEntity<List<ProductGetResponseModel>>(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -124,11 +177,17 @@ public class ProductController {
 	@GetMapping(value = "/getAllProd/category/{categoryName}", produces = "application/json")
 	public ResponseEntity<List<ProductGetResponseModel>> getProdByCategory(@PathVariable String categoryName) {
 		List<ProductGetResponseModel> response = prodService.getProdByCategoryName(categoryName);
-		if (!response.isEmpty()) {
-			return new ResponseEntity<List<ProductGetResponseModel>>(response, HttpStatus.OK);
-		} else {
+		try {
+			if (!response.isEmpty()) {
+				return new ResponseEntity<List<ProductGetResponseModel>>(response, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<List<ProductGetResponseModel>>(HttpStatus.NOT_FOUND);
+			}
+		} catch (NullPointerException e) {
+			System.out.println("No Products found for Brand name and category");
 			return new ResponseEntity<List<ProductGetResponseModel>>(HttpStatus.NOT_FOUND);
 		}
+
 	}
 
 	// get all products by brand name and category id

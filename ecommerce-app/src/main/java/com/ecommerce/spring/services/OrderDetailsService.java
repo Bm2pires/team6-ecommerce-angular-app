@@ -21,22 +21,30 @@ public class OrderDetailsService {
 	@Autowired
 	OrderItemsRepository orderItemsRepo;
 	
+	
+	//Checks if user has order details and if they do have order details checks if it has orders
 	public boolean checkIfUserHasOrderDetailsOrOrders(User user) {
+		//Returns the order details matched with user given in param
 		Optional<OrderDetails> orderDetails = orderDetailsRepo.findByUser(user);
 
+		//Check if user has order details
 		if(orderDetails.isPresent()) {
+			//Returns list of user's order_items
 			List<OrderItems> orderitems = orderDetails.get().getOrders();
 			
+			//Check if users order list is empty and if so returns false otherwise returns true
 			if(orderitems.isEmpty()) {
 				return false;
 			}else {
 				return true;
 			}
 		}else {
+			//returns false if user does not have an order details
 			return false;
 		}
 	}
 	
+	//
 	public boolean delOrderDetails(long id) {
 		Optional<OrderDetails> orderDetails = orderDetailsRepo.findById(id);
 
