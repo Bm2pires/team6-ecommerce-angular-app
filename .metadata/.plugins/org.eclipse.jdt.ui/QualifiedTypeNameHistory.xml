@@ -48,4 +48,6 @@
     <fullyQualifiedTypeName name="com.ecommerce.spring.entities.OrderItems"/>
     <fullyQualifiedTypeName name="com.ecommerce.spring.entities.OrderDetails"/>
     <fullyQualifiedTypeName name="javax.persistence.Column"/>
+    <fullyQualifiedTypeName name="springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc"/>
+    <fullyQualifiedTypeName name="springfox.documentation.swagger2.annotations.EnableSwagger2"/>
 </qualifiedTypeNameHistroy>

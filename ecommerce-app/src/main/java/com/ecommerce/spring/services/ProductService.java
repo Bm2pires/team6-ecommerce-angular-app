@@ -49,6 +49,7 @@ public class ProductService {
 				Optional<Categories> category = categoryRepo.findByCategoryName(requestModel.getProductCategory());
 				Optional<Brand> brand = brandRepo.findByBrandName(requestModel.getProductBrand());
 
+				//Checks if request model brand given exits in db and if not adds it
 				if (brand.isEmpty()) {
 					addBrand(requestModel.getProductBrand());
 					product.get().setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
