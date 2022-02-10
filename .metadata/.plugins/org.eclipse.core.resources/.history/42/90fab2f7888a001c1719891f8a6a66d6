@@ -225,6 +225,7 @@ public class ProductService {
 
 	}
 
+	// Need to check wheather anyone has this product in their order_items table
 	public boolean delProd(long id) {
 		Optional<Products> product = prodRepo.findById(id);
 		if (product.isPresent()) {

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.ecommerce.spring.entities.OrderDetails;
 import com.ecommerce.spring.entities.OrderItems;
-import com.ecommerce.spring.entities.Products;
 import com.ecommerce.spring.entities.User;
 import com.ecommerce.spring.repositories.OrderDetailsRepository;
 import com.ecommerce.spring.repositories.OrderItemsRepository;
@@ -66,17 +65,5 @@ public class OrderDetailsService {
 		}else {
 			return false;
 		}
-	}
-	
-	public boolean checkIfProductItemExits(Products product) {
-		List<Optional<OrderItems>> orderItems = orderItemsRepo.findByProducts(product);
-		
-		if(orderItems.isEmpty()) {
-			return false;
-		}else {
-			return true;
-		}
-
-		
 	}
 }
