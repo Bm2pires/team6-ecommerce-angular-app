@@ -1,0 +1,365 @@
+package com.ecommerce.spring.services;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ecommerce.spring.entities.Brand;
+import com.ecommerce.spring.entities.Categories;
+import com.ecommerce.spring.entities.Products;
+import com.ecommerce.spring.repositories.BrandRepository;
+import com.ecommerce.spring.repositories.CategoryReposoitory;
+import com.ecommerce.spring.repositories.ProductRepository;
+import com.ecommerce.spring.reqresmodels.BrandResponseModel;
+import com.ecommerce.spring.reqresmodels.CategoryResponseModel;
+import com.ecommerce.spring.reqresmodels.ProductAddRequestModel;
+import com.ecommerce.spring.reqresmodels.ProductAddResponseModel;
+import com.ecommerce.spring.reqresmodels.ProductEditRequestModel;
+import com.ecommerce.spring.reqresmodels.ProductEditResponseModel;
+import com.ecommerce.spring.reqresmodels.ProductGetResponseModel;
+
+@Service
+public class ProductService {
+
+	@Autowired
+	ProductRepository prodRepo;
+
+	@Autowired
+	BrandRepository brandRepo;
+
+	@Autowired
+	CategoryReposoitory categoryRepo;
+
+	public ProductEditResponseModel editProd(ProductEditRequestModel requestModel) {
+		ModelMapper mapper = new ModelMapper();
+		Optional<Products> product = prodRepo.findById(requestModel.getProductId());
+		boolean valid = validateInput(requestModel);
+		boolean duplicateFields = checkUniqueFields(requestModel);
+		if (valid && duplicateFields) {
+			if (product != null) {
+				product.get().setProductName(requestModel.getProductName());
+				product.get().setProductDescription(requestModel.getProductDescription());
+				product.get().setProductPrice(requestModel.getProductPrice());
+				product.get().setImageUrl(requestModel.getImageUrl());
+
+				Optional<Categories> category = categoryRepo.findByCategoryName(requestModel.getProductCategory());
+				Optional<Brand> brand = brandRepo.findByBrandName(requestModel.getProductBrand());
+
+				//Checks if request model brand given exits in db and if not adds it
+				if (brand.isEmpty()) {
+					addBrand(requestModel.getProductBrand());
+					product.get().setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
+
+				} else {
+					if (product.get().getBrand().getBrandId() != brand.get().getBrandId()) {
+						product.get().setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
+					}
+				}
+
+				if (category.isEmpty()) {
+					addCategories(requestModel.getProductCategory());
+					product.get()
+							.setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
+
+				} else {
+					if (product.get().getCategories().getCategoryid() != category.get().getCategoryid()) {
+						product.get().setCategories(
+								categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
+					}
+				}
+
+				prodRepo.save(product.get());
+				ProductEditResponseModel response = mapper.map(requestModel, ProductEditResponseModel.class);
+				response.setProductBrand(requestModel.getProductBrand());
+				response.setProductCategory(requestModel.getProductCategory());
+
+				return response;
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+
+	}
+
+	public ProductAddResponseModel addProd(ProductAddRequestModel requestModel) {
+		ModelMapper mapper = new ModelMapper();
+		Products product = new Products();
+		boolean valid = validateInput(requestModel);
+		boolean duplicateFields = checkUniqueFields(requestModel);
+		if (valid && duplicateFields) {
+			product.setProductName(requestModel.getProductName());
+			product.setProductDescription(requestModel.getProductDescription());
+			product.setProductPrice(requestModel.getProductPrice());
+			product.setImageUrl(requestModel.getImageUrl());
+
+			Optional<Categories> category = categoryRepo.findByCategoryName(requestModel.getProductCategory());
+			Optional<Brand> brand = brandRepo.findByBrandName(requestModel.getProductBrand());
+
+			if (category.isEmpty()) {
+				addCategories(requestModel.getProductCategory());
+				product.setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
+			} else {
+				product.setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
+			}
+
+			if (brand.isEmpty()) {
+				addBrand(requestModel.getProductBrand());
+				product.setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
+			} else {
+				product.setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
+			}
+
+			prodRepo.save(product);
+			ProductAddResponseModel response = mapper.map(requestModel, ProductAddResponseModel.class);
+
+			return response;
+		} else {
+			return null;
+		}
+
+	}
+
+	private void addCategories(String productCategory) {
+		Categories category = new Categories();
+		category.setCategoryName(productCategory);
+		categoryRepo.save(category);
+	}
+
+	private void addBrand(String productBrand) {
+		Brand brand = new Brand();
+		brand.setBrandName(productBrand);
+		brandRepo.save(brand);
+	}
+
+	public boolean checkUniqueFields(ProductEditRequestModel requestModel) {
+		boolean uniqueName = checkUniqueName(requestModel.getProductName(), requestModel.getProductId());
+		boolean uniqueDesc = checkUniqueName(requestModel.getProductDescription(), requestModel.getProductId());
+
+		if (uniqueName && uniqueDesc) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean checkUniqueFields(ProductAddRequestModel requestModel) {
+		boolean uniqueName = checkUniqueName(requestModel.getProductName(), 0);
+		boolean uniqueDesc = checkUniqueName(requestModel.getProductDescription(), 0);
+
+		if (uniqueName && uniqueDesc) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean checkUniqueName(String name, long id) {
+		Optional<Products> prodCheck = prodRepo.findByProductName(name);
+		if (prodCheck.isEmpty()) {
+			return true;
+		} else {
+			if (prodCheck.get().getProductId() == id) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	public boolean checkUniqueDesc(String desc, long id) {
+		Optional<Products> prodCheck = prodRepo.findByProductName(desc);
+		if (prodCheck.isEmpty()) {
+			return true;
+		} else {
+			if (prodCheck.get().getProductId() == id) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	public boolean validateInput(ProductEditRequestModel requestModel) {
+		boolean validInput = true;
+		if (requestModel.getProductName().length() > 50) {
+			validInput = false;
+		}
+		if (requestModel.getProductDescription().length() > 250) {
+			validInput = false;
+		}
+		if (requestModel.getProductPrice() == null) {
+			validInput = false;
+		}
+
+		return validInput;
+
+	}
+
+	public boolean validateInput(ProductAddRequestModel requestModel) {
+		boolean validInput = true;
+		if (requestModel.getProductName().length() > 50) {
+			validInput = false;
+		}
+		if (requestModel.getProductDescription().length() > 250) {
+			validInput = false;
+		}
+		if (requestModel.getProductPrice() == null) {
+			validInput = false;
+		}
+
+		return validInput;
+
+	}
+
+	// Need to check wheather anyone has this product in their order_items table
+	public boolean delProd(long id) {
+		Optional<Products> product = prodRepo.findById(id);
+		if (product.isPresent()) {
+			product.get().setBrand(null);
+			product.get().setCategories(null);
+			prodRepo.save(product.get());
+			prodRepo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public ProductGetResponseModel getProdById(long id) {
+		ModelMapper mapper = new ModelMapper();
+		Optional<Products> product = prodRepo.findById(id);
+		if (product.isPresent()) {
+			ProductGetResponseModel response = mapper.map(product.get(), ProductGetResponseModel.class);
+			response.setBrand(product.get().getBrand().getBrandName());
+			response.setCategory(product.get().getCategories().getCategoryName());
+			return response;
+		} else {
+			return null;
+		}
+	}
+
+	public List<ProductGetResponseModel> getAllProd() {
+		ModelMapper mapper = new ModelMapper();
+		List<ProductGetResponseModel> responseList = new ArrayList<>();
+
+		List<Products> list = prodRepo.findAll();
+
+		if (!list.isEmpty()) {
+			for (Products product : list) {
+				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
+				modelObject.setBrand(product.getBrand().getBrandName());
+				modelObject.setCategory(product.getCategories().getCategoryName());
+				responseList.add(modelObject);
+			}
+			return responseList;
+		} else {
+			return null;
+		}
+
+	}
+
+	// get all brands
+	public List<BrandResponseModel> getAllBrands() {
+		ModelMapper mapper = new ModelMapper();
+		List<BrandResponseModel> responseList = new ArrayList<>();
+
+		List<Brand> list = brandRepo.findAll();
+
+		if (!list.isEmpty()) {
+			for (Brand brand : list) {
+				BrandResponseModel modelObject = mapper.map(brand, BrandResponseModel.class);
+				responseList.add(modelObject);
+			}
+			return responseList;
+		} else {
+			return null;
+		}
+	}
+
+	// get all categories
+	public List<CategoryResponseModel> getAllCategories() {
+		ModelMapper mapper = new ModelMapper();
+		List<CategoryResponseModel> responseList = new ArrayList<>();
+
+		List<Categories> list = categoryRepo.findAll();
+
+		if (!list.isEmpty()) {
+			for (Categories category : list) {
+				CategoryResponseModel modelObject = mapper.map(category, CategoryResponseModel.class);
+				responseList.add(modelObject);
+			}
+			return responseList;
+		} else {
+			return null;
+		}
+	}
+
+	public List<ProductGetResponseModel> getProdByBrandName(String brandName) {
+		ModelMapper mapper = new ModelMapper();
+		List<ProductGetResponseModel> responseList = new ArrayList<>();
+
+		Brand b = brandRepo.findByBrandName(brandName).get();
+
+		List<Products> list = b.getProducts();
+
+		if (!list.isEmpty()) {
+			for (Products product : list) {
+				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
+				modelObject.setBrand(product.getBrand().getBrandName());
+				modelObject.setCategory(product.getCategories().getCategoryName());
+				responseList.add(modelObject);
+			}
+			return responseList;
+		} else {
+			return null;
+		}
+	}
+
+	public List<ProductGetResponseModel> getProdByCategoryName(String categoryName) {
+		ModelMapper mapper = new ModelMapper();
+		List<ProductGetResponseModel> responseList = new ArrayList<>();
+
+		Categories c = categoryRepo.findByCategoryName(categoryName).get();
+
+		List<Products> list = c.getProducts();
+
+		if (!list.isEmpty()) {
+			for (Products product : list) {
+				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
+				modelObject.setBrand(product.getBrand().getBrandName());
+				modelObject.setCategory(product.getCategories().getCategoryName());
+				responseList.add(modelObject);
+			}
+			return responseList;
+		} else {
+			return null;
+		}
+	}
+
+	public List<ProductGetResponseModel> getProdByBrandNameAndCategory(String brandName, String categoryName) {
+		ModelMapper mapper = new ModelMapper();
+		List<ProductGetResponseModel> responseList = new ArrayList<>();
+
+		List<Products> list = prodRepo.findByBrandBrandNameAndCategoriesCategoryName(brandName, categoryName).get();
+
+		if (!list.isEmpty()) {
+			for (Products product : list) {
+				ProductGetResponseModel modelObject = mapper.map(product, ProductGetResponseModel.class);
+				modelObject.setBrand(product.getBrand().getBrandName());
+				modelObject.setCategory(product.getCategories().getCategoryName());
+				responseList.add(modelObject);
+			}
+			return responseList;
+		} else {
+			return null;
+		}
+	}
+
+}

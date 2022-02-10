@@ -53,8 +53,8 @@
                     <div class="card-body">
                         <h5 class="Product-1">{{ tempProduct.productName }}</h5>
                         <p class="card-text">{{ tempProduct.productDescription }}</p>
-                        <p>Brand: {{ tempProduct.brand }}</p>
-                        <p>Category: {{ tempProduct.category }}</p>
+                        <p>Brand: {{ tempProduct.productBrand }}</p>
+                        <p>Category: {{ tempProduct.productCategory }}</p>
                         <h6 class="price">{{ tempProduct.productPrice | currency:'GBP'}}</h6>
                         <button class="btn btn-primary" (click)="addToCart(tempProduct.productId)">Add to cart</button>
                     </div>

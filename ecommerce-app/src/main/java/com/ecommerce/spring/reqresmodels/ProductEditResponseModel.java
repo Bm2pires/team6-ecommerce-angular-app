@@ -16,9 +16,10 @@ public class ProductEditResponseModel {
 
 	private String productPrice;
 	
-	private String brandName;
+	private String productBrand;
 	
-	private String categoryname;
+	private String productCategory;
+	
 	private String imageUrl;
 
 
@@ -32,14 +33,14 @@ public class ProductEditResponseModel {
 
 
 	public ProductEditResponseModel(long productId, String productName, String productDescription, String productPrice,
-			String brandName, String categoryname, String imageUrl) {
+			String productBrand, String productCategory, String imageUrl) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.productDescription = productDescription;
 		this.productPrice = productPrice;
-		this.brandName = brandName;
-		this.categoryname = categoryname;
+		this.productBrand = productBrand;
+		this.productCategory = productCategory;
 		this.imageUrl = imageUrl;
 	}
 
