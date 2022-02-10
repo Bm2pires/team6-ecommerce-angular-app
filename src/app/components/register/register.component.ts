@@ -6,31 +6,27 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/register.service';
 import { User } from 'src/app/services/registerUser';
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent  {
+export class RegisterComponent {
+  date = new Date();
+  todaysDate = formatDate(this.date, 'yyyy-MM-dd', 'en-US');
 
-  date=new Date();
-  todaysDate= formatDate(this.date, 'yyyy-MM-dd', 'en-US');
+  msg = '';
 
-  msg='';
+  user: any = [];
 
-  user:any=[];
-
-
-  constructor(private _service:UserService, private router:Router) {
+  constructor(private _service: UserService, private router: Router) {
     this._service = _service;
-   }
-
-  ngOnInit(): void {
   }
 
-  registerUser(form: NgForm){
-    const newUser: User={
+  ngOnInit(): void {}
+
+  registerUser(form: NgForm) {
+    const newUser: User = {
       email: form.value.email,
       title: form.value.title,
       firstName: form.value.firstname,
@@ -39,35 +35,25 @@ export class RegisterComponent  {
       phone_number: form.value.contactNo,
       password: form.value.password,
       address: form.value.address,
-
     };
-    let email=form.value.email;
+    let email = form.value.email;
 
     form.reset();
 
-   this._service.registerUser(newUser).subscribe(
-    data=>{
-      console.log("response received");
-      this.msg="Registration successful";
-this.router.navigate(['/login']);
+    this._service.registerUser(newUser).subscribe(
+      (data) => {
+        alert('Successfuly registered!');
+        console.log('response received');
+        this.msg = 'Registration successful';
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        alert('Email ID already used');
+        console.log('exception occurs');
+        this.msg = email + ' Email id already used';
 
-    },
-
-    error=>{
-       console.log("exception occurs");
-       this.msg=email+" Email id already used";
-
-       //this.msg=error.error;
-
-
-     }
-
-   )
-
+        //this.msg=error.error;
+      }
+    );
   }
-
-
-
-
-  }
-
+}
