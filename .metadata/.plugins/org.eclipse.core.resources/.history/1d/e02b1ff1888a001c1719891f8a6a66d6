@@ -79,6 +79,8 @@ public class UserController {
 	@DeleteMapping(value = "/delUser/{id}", produces = "application/json")
 	public ResponseEntity<String> delUser(@PathVariable String id) {
 		long userId = Long.parseLong(id.substring(4));
+		//Postman use delUser/:id and then put the value in the path variable section that pops up
+//		long userId = Long.parseLong(id);
 		boolean userDeleted = userEditService.delUser(userId);
 		try {
 			if(userDeleted) {
