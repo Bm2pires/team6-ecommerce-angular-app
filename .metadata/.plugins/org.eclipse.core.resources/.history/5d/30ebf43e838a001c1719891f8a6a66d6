@@ -44,22 +44,18 @@ public class OrderDetailsService {
 		}
 	}
 	
-	//Deletes orderdetails row 
+	//
 	public boolean delOrderDetails(long id) {
-		//Checks if orderdetails id given exists
 		Optional<OrderDetails> orderDetails = orderDetailsRepo.findById(id);
 
 		if(orderDetails.isPresent()) {
-			//Gets all order items associated with order details
 			List<OrderItems> orderItems = orderDetails.get().getOrders();
 			
 			if(!orderItems.isEmpty()) {
 				for(OrderItems o: orderItems) {
-					//Deletes every order item associated with orderdetails
 					orderItemsRepo.deleteById(o.getOrderItemsID());
 				}
 			}
-			//deletes order details
 			orderDetailsRepo.deleteById(id);
 			return true;
 		}else {

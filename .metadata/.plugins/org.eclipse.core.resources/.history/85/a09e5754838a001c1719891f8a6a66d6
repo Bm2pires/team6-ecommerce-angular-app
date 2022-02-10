@@ -59,8 +59,7 @@ public class ProductService {
 						product.get().setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
 					}
 				}
-				
-				//Checks if request model brand given exits in db and if not adds it
+
 				if (category.isEmpty()) {
 					addCategories(requestModel.getProductCategory());
 					product.get()
@@ -102,15 +101,13 @@ public class ProductService {
 			Optional<Categories> category = categoryRepo.findByCategoryName(requestModel.getProductCategory());
 			Optional<Brand> brand = brandRepo.findByBrandName(requestModel.getProductBrand());
 
-			//Checks if request model category given exits in db and if not adds it
 			if (category.isEmpty()) {
 				addCategories(requestModel.getProductCategory());
 				product.setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
 			} else {
 				product.setCategories(categoryRepo.findByCategoryName(requestModel.getProductCategory()).get());
 			}
-			
-			//Checks if request model brand given exits in db and if not adds it
+
 			if (brand.isEmpty()) {
 				addBrand(requestModel.getProductBrand());
 				product.setBrand(brandRepo.findByBrandName(requestModel.getProductBrand()).get());
@@ -140,7 +137,6 @@ public class ProductService {
 		brandRepo.save(brand);
 	}
 
-	//Checks if request model given has a unique name and description to not violate unique constraint on the two columns
 	public boolean checkUniqueFields(ProductEditRequestModel requestModel) {
 		boolean uniqueName = checkUniqueName(requestModel.getProductName(), requestModel.getProductId());
 		boolean uniqueDesc = checkUniqueName(requestModel.getProductDescription(), requestModel.getProductId());
@@ -152,7 +148,6 @@ public class ProductService {
 		}
 	}
 
-	//Checks if request model given has a unique name and description to not violate unique constraint on the two columns
 	public boolean checkUniqueFields(ProductAddRequestModel requestModel) {
 		boolean uniqueName = checkUniqueName(requestModel.getProductName(), 0);
 		boolean uniqueDesc = checkUniqueName(requestModel.getProductDescription(), 0);
@@ -234,6 +229,7 @@ public class ProductService {
 		} else {
 			return false;
 		}
+
 	}
 
 	public ProductGetResponseModel getProdById(long id) {
