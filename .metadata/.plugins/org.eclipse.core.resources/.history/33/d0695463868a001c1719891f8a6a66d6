@@ -33,9 +33,6 @@ public class ProductService {
 
 	@Autowired
 	CategoryReposoitory categoryRepo;
-	
-	@Autowired
-	OrderDetailsService orderDetailsService;
 
 	public ProductEditResponseModel editProd(ProductEditRequestModel requestModel) {
 		ModelMapper mapper = new ModelMapper();
@@ -229,16 +226,11 @@ public class ProductService {
 	public boolean delProd(long id) {
 		Optional<Products> product = prodRepo.findById(id);
 		if (product.isPresent()) {
-			if(!orderDetailsService.checkIfProductItemExits(product.get())) {
-				product.get().setBrand(null);
-				product.get().setCategories(null);
-				prodRepo.save(product.get());
-				prodRepo.deleteById(id);
-				return true;
-			}else {
-				return false;
-			}
-
+			product.get().setBrand(null);
+			product.get().setCategories(null);
+			prodRepo.save(product.get());
+			prodRepo.deleteById(id);
+			return true;
 		} else {
 			return false;
 		}

@@ -73,7 +73,7 @@ public class ProductController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<String> delProd(@PathVariable String id) {
 		long prodId = Long.parseLong(id.substring(4));
-//		long prodId = Long.parseLong(id);
+		long prodId = Long.parseLong(id);
 		boolean deleted = prodService.delProd(prodId);
 		try {
 			if (deleted) {

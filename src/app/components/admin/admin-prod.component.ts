@@ -25,11 +25,22 @@ export class AdminComponent implements OnInit {
 
   //Deletes a specefic product
   delProd(id: any){
-    this.prodService.delProd(id).subscribe(data => {
-    }, err => {
-      this.notice = "Deletion Succesfull"
+    // this.prodService.delProd(id).subscribe(data => {
+    // }, err => {
+    //   this.notice = "Deletion Succesfull"
 
-    });
+    // });
+
+    this.prodService.delProd(id).subscribe(response => {
+
+    }, err => {
+      //handle errors here
+      if(err.status != 200){
+        this.notice = "Deletion Unsuccesfull. Product may be a apart of someones order"
+      }else{
+        this.notice = "Deletion Succesfull"
+      }
+  });
 
     setTimeout(()=>{
       this.ngOnInit();

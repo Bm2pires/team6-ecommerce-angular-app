@@ -229,7 +229,7 @@ public class ProductService {
 	public boolean delProd(long id) {
 		Optional<Products> product = prodRepo.findById(id);
 		if (product.isPresent()) {
-			if(!orderDetailsService.checkIfProductItemExits(product.get())) {
+			if(orderDetailsService.checkIfProductItemExits(product.get())) {
 				product.get().setBrand(null);
 				product.get().setCategories(null);
 				prodRepo.save(product.get());

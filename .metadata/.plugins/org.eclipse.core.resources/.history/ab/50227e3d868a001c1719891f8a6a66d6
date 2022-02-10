@@ -70,12 +70,6 @@ public class OrderDetailsService {
 	
 	public boolean checkIfProductItemExits(Products product) {
 		List<Optional<OrderItems>> orderItems = orderItemsRepo.findByProducts(product);
-		
-		if(orderItems.isEmpty()) {
-			return false;
-		}else {
-			return true;
-		}
 
 		
 	}
