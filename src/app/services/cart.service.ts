@@ -27,8 +27,8 @@ export class CartService {
       productOrders.productName = product.productName;
       productOrders.productDescription = product.productDescription;
       productOrders.productPrice = product.productPrice;
-      productOrders.brand = product.brand;
-      productOrders.category = product.category;
+      productOrders.brand = product.productBrand;
+      productOrders.category = product.productCategory;
       productOrders.imageUrl = product.imageUrl;
       productOrders.quantity = 1;
 

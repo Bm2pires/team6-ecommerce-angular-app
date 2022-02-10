@@ -48,7 +48,7 @@
             <div class="form-group">
                 <label for="prodBrand">Product Brand</label>
                 <div class="input-group">
-                    <input id="prodBrand" maxLength="30" class="form-control" placeholder={{item.brand}} [(ngModel)]='productDetails.brand' [ngModelOptions]="{standalone: true}" required name="prodBrand" #prodBrand="ngModel">
+                    <input id="prodBrand" maxLength="30" class="form-control" placeholder={{item.productBrand}} [(ngModel)]='productDetails.productBrand' [ngModelOptions]="{standalone: true}" required name="prodBrand" #prodBrand="ngModel">
                 </div>
                 <div *ngIf="prodBrand.invalid && (prodBrand.dirty || prodBrand.touched)" class="alert alert-danger">
                     Product Brand is required
@@ -58,7 +58,7 @@
             <div class="form-group">
                 <label for="prodCategory">Product Category</label>
                 <div class="input-group">
-                    <input id="prodCategory" maxLength="30" class="form-control" placeholder={{item.brand}} [(ngModel)]='productDetails.category' [ngModelOptions]="{standalone: true}" required name="prodCategory" #prodCategory="ngModel">
+                    <input id="prodCategory" maxLength="30" class="form-control" placeholder={{item.productCategory}} [(ngModel)]='productDetails.productCategory' [ngModelOptions]="{standalone: true}" required name="prodCategory" #prodCategory="ngModel">
                 </div>
                 <div *ngIf="prodCategory.invalid && (prodCategory.dirty || prodCategory.touched)" class="alert alert-danger">
                     Product Category is required

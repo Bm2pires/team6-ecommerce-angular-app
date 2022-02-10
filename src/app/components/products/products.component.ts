@@ -56,10 +56,10 @@ export class ProductsComponent implements OnInit {
 
   // sort function
   sortProductsByBrandAtoZ(a: ProductDetails, b: ProductDetails) {
-    if (a.brand < b.brand) {
+    if (a.productBrand < b.productBrand) {
       return -1;
     }
-    if (a.brand > b.brand) {
+    if (a.productBrand > b.productBrand) {
       return 1;
     }
     return 0;
