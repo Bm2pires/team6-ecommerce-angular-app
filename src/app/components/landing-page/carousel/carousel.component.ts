@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 
 export class NgbdCarouselBasic {
 
-  //Images taht will be viewed on carousel
+  //Images that will be viewed on carousel
   images = ["../../../../assets/images/placeholderOne.jpg", "../../../../assets/images/placeholderTwo.jpg", "../../../../assets/images/placeholderThree.jpg"];
 }
