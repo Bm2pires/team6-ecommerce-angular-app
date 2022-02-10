@@ -33,14 +33,14 @@ public class ProductEditResponseModel {
 
 
 	public ProductEditResponseModel(long productId, String productName, String productDescription, String productPrice,
-			String productBrand, String productCategory, String imageUrl) {
+			String brandName, String categoryname, String imageUrl) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.productDescription = productDescription;
 		this.productPrice = productPrice;
-		this.productBrand = productBrand;
-		this.productCategory = productCategory;
+		this.brandName = brandName;
+		this.categoryname = categoryname;
 		this.imageUrl = imageUrl;
 	}
 

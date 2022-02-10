@@ -12,7 +12,7 @@ import { ProductModify } from 'src/app/services/interfaces/productModify';
 export class ModalComponent implements OnInit {
   //Gets Product from main admin-prod component
   @Input()
-  item!: { productId: number; productName: string; productDescription: string; productPrice: number; brand: string, category: string, imageUrl:string};
+  item!: { productId: number; productName: string; productDescription: string; productPrice: number; productBrand: string, productCategory: string, imageUrl:string};
 
   @Output() childEvent = new EventEmitter();
   relaod(message){
@@ -29,8 +29,8 @@ export class ModalComponent implements OnInit {
     productName: "",
     productDescription: "",
     productPrice: 0,
-    brand: "",
-    category: "",
+    productBrand: "",
+    productCategory: "",
     imageUrl: ""
   };
 
@@ -80,11 +80,11 @@ export class ModalComponent implements OnInit {
       this.errors.push('Product price must not be 0.00');
     }
 
-    if(this.productDetails.brand.length < 2){
+    if(this.productDetails.productBrand.length < 2){
       this.errors.push("Product brand must be greater than 2 characters");
     }
 
-    if(this.productDetails.category.length < 2){
+    if(this.productDetails.productCategory.length < 2){
       this.errors.push("Product category must be greater than 2 characters");
     }
 
@@ -111,8 +111,8 @@ export class ModalComponent implements OnInit {
     this.productDetails.productName = this.item.productName;
     this.productDetails.productDescription = this.item.productDescription;
     this.productDetails.productPrice = this.item.productPrice;
-    this.productDetails.brand = this.item.brand;
-    this.productDetails.category = this.item.category;
+    this.productDetails.productBrand = this.item.productBrand;
+    this.productDetails.productCategory = this.item.productCategory;
     this.productDetails.imageUrl = this.item.imageUrl;
 
 
@@ -140,9 +140,9 @@ export class ModalComponent implements OnInit {
       productName: "",
       productDescription: "",
       productPrice: 0,
-      brand: "",
-      category: "",
-      imageUrl: "",
+      productBrand: "",
+      productCategory: "",
+      imageUrl: ""
     };
 
     this.submitted = false;

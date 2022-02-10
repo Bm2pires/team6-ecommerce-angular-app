@@ -14,8 +14,8 @@ export class ProductsComponent implements OnInit {
   productService: ProductService;
   products!: ProductDetails[];
   shoppingCart: CartService;
-  deviceName:string = "";
-  prodAdded:boolean = true;
+  deviceName: string = '';
+  prodAdded: boolean = true;
   brands!: Brand[];
   categories!: Categories[];
   error: boolean;
@@ -26,57 +26,13 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // list brands, categories on select boxes and get products from db
     this.listBrands();
     this.listCategories();
     this.listProducts();
-    // default sort on page initialization
   }
 
-  // sort function
-  sortProductsByPriceAsc(a: ProductDetails, b: ProductDetails) {
-    if (a.productPrice < b.productPrice) {
-      return -1;
-    }
-    if (a.productPrice > b.productPrice) {
-      return 1;
-    }
-    return 0;
-  }
-
-  // sort function
-  sortProductsByPriceDesc(a: ProductDetails, b: ProductDetails) {
-    if (a.productPrice < b.productPrice) {
-      return 1;
-    }
-    if (a.productPrice > b.productPrice) {
-      return -1;
-    }
-    return 0;
-  }
-
-  // sort function
-  sortProductsByBrandAtoZ(a: ProductDetails, b: ProductDetails) {
-    if (a.brand < b.brand) {
-      return -1;
-    }
-    if (a.brand > b.brand) {
-      return 1;
-    }
-    return 0;
-  }
-
-  // sort function
-  sortProductsByBrandZtoA(a: ProductDetails, b: ProductDetails) {
-    if (a.productPrice < b.productPrice) {
-      return 1;
-    }
-    if (a.productPrice > b.productPrice) {
-      return -1;
-    }
-    return 0;
-  }
-
-  // event handler for sort select on change
+  // event handler for sort select on change for sorting products accordingly
   onChangeSort() {
     let optionSelectElement = <HTMLSelectElement>(
       document.getElementById('sort-select')
@@ -86,16 +42,16 @@ export class ProductsComponent implements OnInit {
 
     switch (optionValue) {
       case 'PriceAscending':
-        this.products.sort(this.sortProductsByPriceAsc);
+        this.products.sort(this.productService.sortProductsByPriceAsc);
         break;
       case 'PriceDescending':
-        this.products.sort(this.sortProductsByPriceDesc);
+        this.products.sort(this.productService.sortProductsByPriceDesc);
         break;
       case 'BrandAZ':
-        this.products.sort(this.sortProductsByBrandAtoZ);
+        this.products.sort(this.productService.sortProductsByBrandAtoZ);
         break;
       case 'BrandZA':
-        this.products.sort(this.sortProductsByBrandZtoA);
+        this.products.sort(this.productService.sortProductsByBrandZtoA);
         break;
       default:
         break;
@@ -105,18 +61,18 @@ export class ProductsComponent implements OnInit {
   listProducts() {
     this.productService.findAllProducts().subscribe((data) => {
       this.products = data;
-      this.products.sort(this.sortProductsByPriceAsc);
+      this.products.sort(this.productService.sortProductsByPriceAsc);
     });
   }
 
   addToCart(id: number) {
     this.productService.findProductById(id).subscribe((data) => {
-      const product:ProductDetails = data;
-      this.shoppingCart.addToCart(product)
+      const product: ProductDetails = data;
+      this.shoppingCart.addToCart(product);
       this.deviceName = product.productName;
       this.prodAdded = false;
       setTimeout(() => {
-        this.deviceName = "";
+        this.deviceName = '';
         this.prodAdded = true;
       }, 1500);
     });
@@ -134,25 +90,26 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  // detects changes in select boxes
+  // function to detech changes on brand and category select boxed and call API endpoints accordingly
   onChange() {
     // reset error message to false
     this.error = false;
 
-    // get value from brand select element
+    // retrieve value from brand select element
     let brandSelect = <HTMLSelectElement>(
       document.getElementById('brand-select')
     );
     let brandValue = brandSelect.options[brandSelect.selectedIndex].value;
 
-    // get value from category select element
+    // retrieve value from category select element
     let categorySelect = <HTMLSelectElement>(
       document.getElementById('category-select')
     );
     let categoryValue =
       categorySelect.options[categorySelect.selectedIndex].value;
 
-    // if both are selected then call API Endpoint for both brand and category
+    // if both brand and category are selected then call API Endpoint for both brand and category to retrieve the
+    // appropriate products
     if (brandValue != '' && categoryValue != '') {
       this.productService
         .getAllProductsByBrandAndCategory(brandValue, categoryValue)
@@ -167,7 +124,8 @@ export class ProductsComponent implements OnInit {
             this.error = true;
           }
         );
-      // else if brand is selected and category is blank
+
+      // else if brand is selected and category is blank then call appropriate API endpoint
     } else if (brandValue != '' && categoryValue == '') {
       this.productService
         .getAllProductsByBrand(brandValue)
@@ -175,7 +133,7 @@ export class ProductsComponent implements OnInit {
           this.products = data;
           this.onChangeSort();
         });
-      // else if category is selected and brand is blank then
+      // else if category is selected and brand is blank then call appropriate API endpoint
     } else if (categoryValue != '' && brandValue == '') {
       this.productService
         .getAllProductsByCategory(categoryValue)
@@ -183,7 +141,7 @@ export class ProductsComponent implements OnInit {
           this.products = data;
           this.onChangeSort();
         });
-      // otherwise reset
+      // otherwise reset the products to all products
     } else if (brandValue == '' && categoryValue == '') {
       this.productService.findAllProducts().subscribe((data) => {
         this.products = data;

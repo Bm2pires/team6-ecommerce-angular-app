@@ -9,8 +9,8 @@
             <p class="card-text">Product Name: {{prod.productName}}</p>
             <p class="card-text">Product Description: {{prod.productDescription}}</p>
             <p class="card-text">Product Price: {{prod.productPrice}}</p>
-            <p class="card-text">Product Brand: {{prod.brand}}</p>
-            <p class="card-text">Product Category: {{prod.category}}</p>
+            <p class="card-text">Product Brand: {{prod.productBrand}}</p>
+            <p class="card-text">Product Category: {{prod.productCategory}}</p>
             <app-modal [item]="prod" (childEvent)="relaod($event)"></app-modal>
             <button type="button" class="btn btn-warning" (click)="delProd(prod.productId)">Delete</button>
         </div>

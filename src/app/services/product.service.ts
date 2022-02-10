@@ -28,9 +28,9 @@ export class ProductService {
   findProductById(prodId: number): Observable<ProductDetails> {
     return this.http.get<ProductDetails>(this.baseUrl + 'getProd', {
       params: {
-        id: prodId
-      }
-    })
+        id: prodId,
+      },
+    });
   }
 
   addProd(product: ProductModify): Observable<ProductModify> {
@@ -74,8 +74,48 @@ export class ProductService {
       this.baseUrl + `getAllProd/brand/${brandName}/category/${category}`
     );
   }
-}
-function params<T>(arg0: string, params: any, arg2: { id: number; }): Observable<ProductDetails> {
-  throw new Error('Function not implemented.');
-}
 
+  // comparator function
+  sortProductsByPriceAsc(a: ProductDetails, b: ProductDetails) {
+    if (a.productPrice < b.productPrice) {
+      return -1;
+    }
+    if (a.productPrice > b.productPrice) {
+      return 1;
+    }
+    return 0;
+  }
+
+  // comparator function
+  sortProductsByPriceDesc(a: ProductDetails, b: ProductDetails) {
+    if (a.productPrice < b.productPrice) {
+      return 1;
+    }
+    if (a.productPrice > b.productPrice) {
+      return -1;
+    }
+    return 0;
+  }
+
+  // comparator function
+  sortProductsByBrandAtoZ(a: ProductDetails, b: ProductDetails) {
+    if (a.productBrand < b.productBrand) {
+      return -1;
+    }
+    if (a.productBrand > b.productBrand) {
+      return 1;
+    }
+    return 0;
+  }
+
+  // comparator function
+  sortProductsByBrandZtoA(a: ProductDetails, b: ProductDetails) {
+    if (a.productPrice < b.productPrice) {
+      return 1;
+    }
+    if (a.productPrice > b.productPrice) {
+      return -1;
+    }
+    return 0;
+  }
+}
