@@ -110,10 +110,10 @@ export class ProductService {
 
   // comparator function
   sortProductsByBrandZtoA(a: ProductDetails, b: ProductDetails) {
-    if (a.productPrice < b.productPrice) {
+    if (a.productBrand < b.productBrand) {
       return 1;
     }
-    if (a.productPrice > b.productPrice) {
+    if (a.productBrand > b.productBrand) {
       return -1;
     }
     return 0;
