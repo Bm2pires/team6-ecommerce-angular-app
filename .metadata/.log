@@ -2824,6 +2824,7 @@ Java Model Exception: Java Model Status [productCategory [in ProductEditRequestM
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1468)
 !SUBENTRY 1 org.eclipse.jdt.core 4 969 2022-02-10 12:40:49.936
 !MESSAGE productCategory [in ProductEditRequestModel [in [Working copy] ProductEditRequestModel.java [in com.ecommerce.spring.reqresmodels [in src/main/java [in ecommerce-app]]]]] does not exist
+<<<<<<< HEAD
 !SESSION 2022-02-10 14:27:38.476 -----------------------------------------------
 eclipse.buildId=4.12.0.I20190605-1800
 java.version=11.0.11
@@ -2847,3 +2848,5 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+=======
+>>>>>>> a83be64bcefc8b8c280be627b50a4aec6d2ff201
