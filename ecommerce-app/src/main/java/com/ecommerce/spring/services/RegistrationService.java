@@ -19,14 +19,8 @@ public class RegistrationService {
 
 	public UserRegistrationResponseModel register(UserRegistrationRequestModel requestModel) throws Exception {
 		System.out.println("User registration request received");
-
-		
-		
-		
 		Optional<User> user = userRepository.findByEmail(requestModel.getEmail());
-		
-		
-		
+	
 		if (user.isEmpty()) {
 				System.out.println("Register Successful!");
 				ModelMapper mapper = new ModelMapper();
@@ -34,8 +28,6 @@ public class RegistrationService {
 				User newUser = mapper.map(requestModel, User.class);
 				userRepository.save(newUser);
 				return returnObject;
-				
-		
 			
 		} else {
 			System.out.println("Error");
@@ -44,6 +36,4 @@ public class RegistrationService {
 			
 		}
 	}
-
-
 }
